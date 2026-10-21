@@ -90,6 +90,39 @@ fn formatter_does_not_expose_lint_or_semantic_fix_workflows() {
 }
 
 #[test]
+fn help_and_argument_errors_ignore_launcher_filename() {
+    let temp = tempfile::tempdir().unwrap();
+    for args in [
+        vec!["--help"],
+        vec!["--version"],
+        vec!["check", "--help"],
+        vec!["--unknown"],
+    ] {
+        let expected = run(&args, temp.path(), b"");
+        for launcher in ["gdfmt.exe", "renamed-gdfmt", "/tmp/gdfmt.exe"] {
+            let mut stdout = Vec::new();
+            let mut stderr = Vec::new();
+            let code = gdfmt_cli::run(
+                std::iter::once(launcher).chain(args.iter().copied()),
+                temp.path(),
+                &mut &b""[..],
+                &mut stdout,
+                &mut stderr,
+            );
+            assert_eq!(
+                (
+                    code,
+                    String::from_utf8(stdout).unwrap(),
+                    String::from_utf8(stderr).unwrap(),
+                ),
+                expected,
+                "{launcher} {args:?}"
+            );
+        }
+    }
+}
+
+#[test]
 fn help_version_and_argument_errors_have_stable_exit_codes() {
     let temp = tempfile::tempdir().unwrap();
     for arg in ["--help", "--version"] {

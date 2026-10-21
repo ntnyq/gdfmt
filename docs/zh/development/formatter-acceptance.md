@@ -162,4 +162,4 @@ Node 测试使用 **Vitest 5 与 TypeScript**，仓库脚本使用 **TypeScript/
 
 下载的 CI 证据保存在本地 `target/p7-ci/main-matrix/`，失败步骤日志为 `target/p7-ci/main-failed.log`。八组成功回执对应的实际 JSON 报告均有 8 项通过测试，根包 tarball 的 SHA-512 全部相同：`047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec`。这些证据覆盖上述四个目标安装后的同步/异步 API、ESM/CJS、声明和 CLI 一致性，尚不能证明 Windows 一致性。
 
-Windows 两个运行时均执行到 Vitest 后以退出码 1 失败。仅 JSON 的 reporter 没有把失败断言显示到控制台，失败后上传步骤又被跳过，Windows JSON 报告因此未保留。聚合 `parity` job 按预期跳过，没有完整矩阵回执。本地后续修改增加默认控制台 reporter，同时保留 JSON，并在失败时上传产物。该修改尚未在 Windows 运行；具体失败断言及修复仍需要新一轮 CI 验证。本次没有发布包。
+Windows 两个运行时均执行到 Vitest 后以退出码 1 失败。仅 JSON 的 reporter 没有把失败断言显示到控制台，失败后上传步骤又被跳过，Windows JSON 报告因此未保留。聚合 `parity` job 按预期跳过，没有完整矩阵回执。[诊断运行](https://github.com/ntnyq/gdfmt/actions/runs/39591746034) 增加默认控制台 reporter，同时保留 JSON，并在失败时上传产物。Windows Node 24 的报告确认 7 项通过、1 项 CLI 一致性失败：独立 CLI 的 `--help` 显示 `Usage: gdfmt.exe`，npm shim 显示 `Usage: gdfmt`。新增 CLI 回归通过改变 argv[0] 在任意宿主复现；显式指定 Clap 的 binary name 为 `gdfmt` 后，帮助、版本和参数错误输出均不再受启动文件名影响。本地 20 项 CLI 测试通过，修复仍待完整 hosted 产物矩阵验证。Action 依赖已在 2026-10-21 根据官方版本检查并升级，Rust 工具链和 Node 测试版本继续固定。本次没有发布包。

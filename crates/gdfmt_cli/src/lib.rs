@@ -27,6 +27,7 @@ enum Reporter {
 #[derive(Debug, Parser)]
 #[command(
     name = "gdfmt",
+    bin_name = "gdfmt",
     version,
     about = "Experimental Rust GDScript syntax checks and script formatting",
     after_help = "Formats GDScript with paired formatter-off/on regions, reparse, structure and idempotence validation. Lint rules and semantic fixes are outside the project scope."
