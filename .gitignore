@@ -1,0 +1,10 @@
+/target/
+/packages/gdfmt/dist/
+/packages/gdfmt/LICENSE
+/packages/gdfmt/LICENSE-THIRD-PARTY
+/node_modules/
+**/node_modules/
+.DS_Store
+
+/docs/.vitepress/cache/
+/docs/.vitepress/dist/

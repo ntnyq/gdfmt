@@ -1,0 +1,29 @@
+[package]
+name = "gdfmt_cli"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+gdfmt.workspace = true
+gdfmt_text.workspace = true
+gdfmt_config.workspace = true
+gdfmt_workspace.workspace = true
+gdfmt_parser.workspace = true
+gdfmt_syntax.workspace = true
+clap.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+
+[[bin]]
+name = "gdfmt"
+path = "src/main.rs"
+
+[dev-dependencies]
+tempfile.workspace = true

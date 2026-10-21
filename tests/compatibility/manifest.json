@@ -1,0 +1,4567 @@
+{
+  "schemaVersion": 1,
+  "verifiedAt": "2026-10-21",
+  "baseline": {
+    "godotTag": "4.7.2-stable",
+    "godotCommit": "ed1daf0bf001b61586d9930840f2f1394092c079",
+    "previewTag": "4.8-beta1",
+    "previewCommit": null,
+    "previewStatus": "archive listed; tag not resolved, unsupported"
+  },
+  "references": [
+    {
+      "repository": "https://github.com/godotengine/godot",
+      "commit": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "role": "lexical and expression behavior reference; Unicode XID tables derived with MIT attribution in LICENSE-THIRD-PARTY"
+    },
+    {
+      "repository": "https://github.com/Scony/godot-gdscript-toolkit",
+      "commit": "f61a1f3a9f2f757813bd5176a28903502bd44959",
+      "role": "grammar reference; no fixtures copied"
+    },
+    {
+      "repository": "https://github.com/oxc-project/oxc",
+      "commit": "e97a8b121811c6fdb915ece70c2de3890bc7897f",
+      "role": "workspace architecture reference only"
+    }
+  ],
+  "fixtures": [
+    {
+      "file": "fixtures/empty.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["empty source"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/comments.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["documentation comments", "regions"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/bom-crlf.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["BOM", "CRLF"],
+      "lexicalErrors": [],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/no-final-newline.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["EOF dedent", "no final newline"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/nested-blocks.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["nested indentation", "control flow"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/comment-indentation.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["comment-only indentation"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/containers.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["typed containers", "implicit continuation"],
+      "lexicalErrors": [],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/continuation.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["explicit continuation"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/unicode.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["Unicode identifiers", "combining marks", "emoji literals"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/strings.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "multiline strings",
+        "raw strings",
+        "StringName",
+        "NodePath"
+      ],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/numbers.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["numeric spellings"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/operators.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["operators", "longest match"],
+      "lexicalErrors": [],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/annotations.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["annotations", "abstract methods"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/lambda.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["lambda indentation"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/match.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["match patterns", "guards"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/properties.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["property suites"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/mixed-indent.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["invalid mixed indentation"],
+      "lexicalErrors": ["LEX004"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/invalid-dedent.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["invalid dedent"],
+      "lexicalErrors": ["LEX005"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/unterminated-string.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["string recovery"],
+      "lexicalErrors": ["LEX006"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/mismatched-delimiter.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["delimiter recovery"],
+      "lexicalErrors": ["LEX007"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/unclosed-delimiter.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["unclosed delimiter"],
+      "lexicalErrors": ["LEX008"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/invalid-character.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["unexpected character"],
+      "lexicalErrors": ["LEX003"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/invalid-number.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["invalid exponent"],
+      "lexicalErrors": ["LEX011"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/invalid-escape.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["invalid escape"],
+      "lexicalErrors": ["LEX012"],
+      "parserStatus": "not implemented"
+    },
+    {
+      "file": "fixtures/signed-numbers.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["signed numeric token boundaries"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/multiline-single-quotes.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["physical newlines in ordinary and raw strings"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/unicode-escapes.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["UTF-16 surrogate pair", "six digit scalar escape"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/invalid-unicode-escapes.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["unpaired surrogates", "out of range scalar"],
+      "lexicalErrors": ["LEX012"],
+      "parserStatus": "full script parser not implemented"
+    },
+    {
+      "file": "fixtures/reserved-punctuation.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["underscore", "parser error improvement tokens"],
+      "lexicalErrors": [],
+      "parserStatus": "full script parser not implemented"
+    },
+    {
+      "file": "fixtures/comment-continuation.gd",
+      "stage": "lexer",
+      "provenance": "original",
+      "features": ["continuation across empty and comment lines"],
+      "lexicalErrors": [],
+      "parserStatus": "full script parser not implemented"
+    },
+    {
+      "file": "fixtures/expression-precedence.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["arithmetic precedence", "left associative power"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-logic.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["logical precedence", "not in"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-ternary-cast.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["right associative ternary", "low precedence cast"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-type-test.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["type test precedence", "is not"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-call-chain.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["await", "call", "member", "subscript", "trailing comma"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-node-paths.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["node names", "unique nodes", "quoted paths"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-typed-cast.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["collection type arguments"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-dictionary.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["both dictionary styles", "nested containers"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-special-forms.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["super call", "preload"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-missing-operand.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["missing operand", "list recovery"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR001"],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-mixed-dictionary.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["mixed separators"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR007"],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-invalid-call.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["callable call restriction"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR006"],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-assignment.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["assignment is a statement"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR003"],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/expression-nested-collection.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["unsupported nested typed collection"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR008"],
+      "parserStatus": "standalone expression tested; no engine verification"
+    },
+    {
+      "file": "fixtures/script-declarations.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["declarations", "parameters", "static", "annotations"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-control-flow.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["control flow", "assignments", "inline suites"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-lambda-call.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["lambda suite context", "outer indentation restoration"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-lambda-indent-error.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["lambda indentation diagnostics"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "parserLexicalErrors": ["LEX004"],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-context-errors.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "return context",
+        "lambda loop isolation",
+        "assignment targets"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR010"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/script-parameter-errors.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "parameter defaults",
+        "rest position",
+        "signal parameter defaults"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR011"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011", "PAR017"],
+        "4.4": ["PAR011", "PAR017"],
+        "4.5": ["PAR011"],
+        "4.6": ["PAR011"],
+        "4.7": ["PAR011"]
+      }
+    },
+    {
+      "file": "fixtures/script-recovery.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "missing initializer",
+        "missing suite",
+        "declaration recovery"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR001", "PAR004"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004"],
+        "4.4": ["PAR001", "PAR004"],
+        "4.5": ["PAR001", "PAR004"],
+        "4.6": ["PAR001", "PAR004"],
+        "4.7": ["PAR001", "PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "valid"]
+    },
+    {
+      "file": "fixtures/script-match-patterns.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["match patterns", "guard", "alternatives"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-properties.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "untyped properties",
+        "accessor bodies",
+        "delegated accessors"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-invalid-pattern.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["rest pattern must be last"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR013"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR013"],
+        "4.4": ["PAR013"],
+        "4.5": ["PAR013"],
+        "4.6": ["PAR013"],
+        "4.7": ["PAR013"]
+      }
+    },
+    {
+      "file": "fixtures/script-abstract.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "abstract script",
+        "abstract nested class",
+        "bodyless method"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-abstract-errors.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "abstract body restrictions",
+        "static abstract",
+        "bodyless recovery"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR004", "PAR016"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR016", "PAR017"],
+        "4.4": ["PAR004", "PAR016", "PAR017"],
+        "4.5": ["PAR004", "PAR016"],
+        "4.6": ["PAR004", "PAR016"],
+        "4.7": ["PAR004", "PAR016"]
+      }
+    },
+    {
+      "file": "fixtures/script-declaration-constraints.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "duplicate names",
+        "declaration order",
+        "annotation targets"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR011", "PAR014", "PAR015"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011", "PAR014", "PAR015"],
+        "4.4": ["PAR011", "PAR014", "PAR015"],
+        "4.5": ["PAR011", "PAR014", "PAR015"],
+        "4.6": ["PAR011", "PAR014", "PAR015"],
+        "4.7": ["PAR011", "PAR014", "PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/script-typed-dictionary.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["typed dictionary", "parameter and return types"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/expression-typed-constructor.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": [
+        "invalid generic-style dictionary constructor",
+        "value subscript grammar"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR003", "PAR004"],
+      "parserStatus": "expression regression; script equivalents verified by pinned engine",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR003", "PAR004"],
+        "4.4": ["PAR003", "PAR004"],
+        "4.5": ["PAR003", "PAR004"],
+        "4.6": ["PAR003", "PAR004"],
+        "4.7": ["PAR003", "PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/expression-variadic-lambda.gd",
+      "stage": "expression",
+      "provenance": "original",
+      "features": ["variadic lambda"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "expression tested; no engine verification",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-versioned-annotations.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["export tool button", "warning regions"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-export-file-path.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["export file path"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/script-export-multiline-hints.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["multiline export hints"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": ["PAR017"],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-array-constructor.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "array-constructor"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR006"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR006"],
+        "4.4": ["PAR006"],
+        "4.5": ["PAR006"],
+        "4.6": ["PAR006"],
+        "4.7": ["PAR006"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-dictionary-constructor.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "dictionary-constructor"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-enum-float.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "enum-float"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-enum-expression.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "enum-expression"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-signal-default.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "signal-default"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR011"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011"],
+        "4.4": ["PAR011"],
+        "4.5": ["PAR011"],
+        "4.6": ["PAR011"],
+        "4.7": ["PAR011"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-signal-rest.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "signal-rest"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR011"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011", "PAR017"],
+        "4.4": ["PAR011", "PAR017"],
+        "4.5": ["PAR011"],
+        "4.6": ["PAR011"],
+        "4.7": ["PAR011"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-abstract-header.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "abstract-header"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR016"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR016", "PAR017"],
+        "4.4": ["PAR016", "PAR017"],
+        "4.5": ["PAR016"],
+        "4.6": ["PAR016"],
+        "4.7": ["PAR016"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-abstract-only.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "abstract-only"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-extends-order.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "extends-order"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-duplicate-for.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "duplicate-for"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR015"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-nested-shadow.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "nested-shadow"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR015"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-static-self.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "static-self"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR016"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR016"],
+        "4.4": ["PAR016"],
+        "4.5": ["PAR016"],
+        "4.6": ["PAR016"],
+        "4.7": ["PAR016"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-static-lambda-self.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "static-lambda-self"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR016"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR016"],
+        "4.4": ["PAR016"],
+        "4.5": ["PAR016"],
+        "4.6": ["PAR016"],
+        "4.7": ["PAR016"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-type-trailing-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "type-trailing-comma"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR004", "PAR008"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR008", "PAR017"],
+        "4.4": ["PAR004", "PAR008"],
+        "4.5": ["PAR004", "PAR008"],
+        "4.6": ["PAR004", "PAR008"],
+        "4.7": ["PAR004", "PAR008"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-array-trailing-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "array-trailing-comma"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR004", "PAR008"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR008"],
+        "4.4": ["PAR004", "PAR008"],
+        "4.5": ["PAR004", "PAR008"],
+        "4.6": ["PAR004", "PAR008"],
+        "4.7": ["PAR004", "PAR008"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-empty-enum.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "empty-enum"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-annotation-parens.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "annotation-parens"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-cast-void.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "cast-void"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/conformance-string-statement.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "string-statement"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-abstract-after-extends.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "abstract-after-extends"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-getter-return-void.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["engine differential", "getter-return-void"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/conformance-collection-subscripts.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["typed collections", "value subscripts"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/gate-typed-dictionary.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["typed dictionary"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-typed-dictionary-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["typed dictionary invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR008"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR008", "PAR017"],
+        "4.4": ["PAR008"],
+        "4.5": ["PAR008"],
+        "4.6": ["PAR008"],
+        "4.7": ["PAR008"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-tool-button.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["tool button"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-tool-button-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["tool button invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014", "PAR017"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-warning-regions.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["warning regions"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-warning-regions-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["warning regions invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014", "PAR017"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-abstract.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["abstract"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-abstract-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["abstract invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR016"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR016", "PAR017"],
+        "4.4": ["PAR016", "PAR017"],
+        "4.5": ["PAR016"],
+        "4.6": ["PAR016"],
+        "4.7": ["PAR016"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-variadic.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["variadic"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-variadic-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["variadic invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR011"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011", "PAR017"],
+        "4.4": ["PAR011", "PAR017"],
+        "4.5": ["PAR011"],
+        "4.6": ["PAR011"],
+        "4.7": ["PAR011"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-file-path.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["file path"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-file-path-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["file path invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014", "PAR017"],
+        "4.4": ["PAR014", "PAR017"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-multiline-hints.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["multiline hints"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": ["PAR017"],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-multiline-hints-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["multiline hints invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014", "PAR017"],
+        "4.4": ["PAR014", "PAR017"],
+        "4.5": ["PAR014", "PAR017"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-multiline-legacy.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["multiline legacy"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-warning-restore.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["warning restore"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-warning-restore-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["warning restore invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014", "PAR017"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-abstract-inner.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["abstract inner"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-variadic-lambda-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["variadic lambda invalid"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR011"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011", "PAR017"],
+        "4.4": ["PAR011", "PAR017"],
+        "4.5": ["PAR011"],
+        "4.6": ["PAR011"],
+        "4.7": ["PAR011"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-warning-duplicate.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["warning duplicate"],
+      "lexicalErrors": [],
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-warning-cross-scope.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["warning cross scope"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-warning-escaped.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["warning escaped"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/gate-file-path-optional.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["file path optional"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/conformance-multiline-hint-type.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["multiline hint semantic type boundary"],
+      "lexicalErrors": [],
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": ["PAR017"],
+        "4.6": [],
+        "4.7": []
+      },
+      "parserStatus": "script tested; pinned engine matrix"
+    },
+    {
+      "file": "fixtures/audit-decl-forms.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-forms"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-anonymous-enum-collision.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-anonymous-enum-collision"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-named-enum-collision.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-named-enum-collision"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-enum-repeated-entry.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-enum-repeated-entry"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-enum-keyword.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-enum-keyword"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-contextual-identifiers.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-contextual-identifiers"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-reserved-identifier.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-reserved-identifier"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-extending-collection.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-extending-collection"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-extending-collection.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inner-extending-collection"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004", "PAR009", "PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.4": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.5": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.6": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.7": ["PAR001", "PAR004", "PAR009", "PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-empty-class-inline.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-empty-class-inline"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-header.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inner-header"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-header-duplicate.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inner-header-duplicate"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-class-name.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inner-class-name"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-init.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-static-init"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-init-instance.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-static-init-instance"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR016"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR016"],
+        "4.4": ["PAR016"],
+        "4.5": ["PAR016"],
+        "4.6": ["PAR016"],
+        "4.7": ["PAR016"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-init-parameters.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-static-init-parameters"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR016"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR016"],
+        "4.4": ["PAR016"],
+        "4.5": ["PAR016"],
+        "4.6": ["PAR016"],
+        "4.7": ["PAR016"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-constant.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-static-constant"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-property.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-static-property"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-getter-parens.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-getter-parens"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-delegated-trailing-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-delegated-trailing-comma"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-mixed.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-mixed"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR012"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR012"],
+        "4.4": ["PAR012"],
+        "4.5": ["PAR012"],
+        "4.6": ["PAR012"],
+        "4.7": ["PAR012"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-setter-typed.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-setter-typed"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-function-signature-inference.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-function-signature-inference"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-signal-inference.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-signal-inference"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR011"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011"],
+        "4.4": ["PAR011"],
+        "4.5": ["PAR011"],
+        "4.6": ["PAR011"],
+        "4.7": ["PAR011"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-function-duplicate-parameters.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-function-duplicate-parameters"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR011"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR011"],
+        "4.4": ["PAR011"],
+        "4.5": ["PAR011"],
+        "4.6": ["PAR011"],
+        "4.7": ["PAR011"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-function-bodyless.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-function-bodyless"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotations-inline.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-annotations-inline"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotations-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-annotations-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009", "PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009", "PAR014"],
+        "4.4": ["PAR009", "PAR014"],
+        "4.5": ["PAR009", "PAR014"],
+        "4.6": ["PAR009", "PAR014"],
+        "4.7": ["PAR009", "PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotation-empty-parens.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-annotation-empty-parens"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-export-target-constant.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-export-target-constant"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotation-argument-assignment.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-annotation-argument-assignment"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-class-pass-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-class-pass-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inferred-without-value.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inferred-without-value"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-empty-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-empty-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-inline-compounds.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-inline-compounds"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-branch-scopes.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-branch-scopes"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-elif-after-inline.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-elif-after-inline"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-elif-orphan.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-elif-orphan"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR009"],
+        "4.4": ["PAR001", "PAR009"],
+        "4.5": ["PAR001", "PAR009"],
+        "4.6": ["PAR001", "PAR009"],
+        "4.7": ["PAR001", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-else-duplicate.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-else-duplicate"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR009"],
+        "4.4": ["PAR001", "PAR009"],
+        "4.5": ["PAR001", "PAR009"],
+        "4.6": ["PAR001", "PAR009"],
+        "4.7": ["PAR001", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-outside-break.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-loop-outside-break"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-nested-lambda-break.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-loop-nested-lambda-break"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-typed-inferred.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-loop-typed-inferred"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-trailing-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assert-trailing-comma"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-message-trailing-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assert-message-trailing-comma"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-empty.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assert-empty"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-too-many.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assert-too-many"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-target-parenthesized.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assignment-target-parenthesized"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-target-call.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assignment-target-call"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-chain.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assignment-chain"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-operators.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assignment-operators"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-return-with-lambda.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-return-with-lambda"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-lambda.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-standalone-lambda"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-named-lambda.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-standalone-named-lambda"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-parenthesized-lambda.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-standalone-parenthesized-lambda"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-string-and-expression.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-string-and-expression"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-local-class.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-standalone-local-class"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-local-enum.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-standalone-local-enum"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-local-property.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-local-property"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR009"],
+        "4.4": ["PAR001", "PAR009"],
+        "4.5": ["PAR001", "PAR009"],
+        "4.6": ["PAR001", "PAR009"],
+        "4.7": ["PAR001", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-forms.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-forms"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-rest-top-level.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-rest-top-level"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-rest-dictionary-value.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-rest-dictionary-value"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-rest-nonfinal-key.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-rest-nonfinal-key"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-duplicate-bind.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-duplicate-bind"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR013"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR013"],
+        "4.4": ["PAR013"],
+        "4.5": ["PAR013"],
+        "4.6": ["PAR013"],
+        "4.7": ["PAR013"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-bind-alternatives.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-bind-alternatives"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR013"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR013"],
+        "4.4": ["PAR013"],
+        "4.5": ["PAR013"],
+        "4.6": ["PAR013"],
+        "4.7": ["PAR013"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-duplicate-keys.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-duplicate-keys"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-trailing-pattern-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-trailing-pattern-comma"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-continue.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-continue"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-loop-continue.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-loop-continue"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-contextual-names.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-contextual-names"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-guard-binding.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-guard-binding"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-variable-name.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-variable-name"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-initializer.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-initializer"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-operand.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-operand"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-parameter.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-parameter"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-colon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-colon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004", "PAR009", "PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.4": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.5": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.6": ["PAR001", "PAR004", "PAR009", "PAR010"],
+        "4.7": ["PAR001", "PAR004", "PAR009", "PAR010"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-indent.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-indent"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-condition.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-condition"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-orphan-clause.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-orphan-clause"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR009"],
+        "4.4": ["PAR001", "PAR009"],
+        "4.5": ["PAR001", "PAR009"],
+        "4.6": ["PAR001", "PAR009"],
+        "4.7": ["PAR001", "PAR009"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-property-accessor.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-property-accessor"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-match-pattern.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-match-pattern"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-close.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-missing-close"],
+      "lexicalErrors": ["LEX008"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004", "PAR009"],
+        "4.4": ["PAR001", "PAR004", "PAR009"],
+        "4.5": ["PAR001", "PAR004", "PAR009"],
+        "4.6": ["PAR001", "PAR004", "PAR009"],
+        "4.7": ["PAR001", "PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-comment-header.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-comment-header"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-signal.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-static-signal"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR010"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR010"],
+        "4.4": ["PAR010"],
+        "4.5": ["PAR010"],
+        "4.6": ["PAR010"],
+        "4.7": ["PAR010"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-enum-entry-constant.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-enum-entry-constant"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-signal-types.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-signal-types"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-signal-return.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-signal-return"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-empty-function.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-empty-function"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-setter-return.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-setter-return"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-lambda-return.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-lambda-return"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-getter-parameters.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-getter-parameters"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-blank-lines.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-blank-lines"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-delegated-newlines.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-delegated-newlines"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-accessor-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-property-accessor-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-no-final-newline-inline.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-no-final-newline-inline"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inline-inner-functions.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inline-inner-functions"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inline-inner-extends.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inline-inner-extends"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-extends-after-doc.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inner-extends-after-doc"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-top-warning-target-pass.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-top-warning-target-pass"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-abstract-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-abstract-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR017"],
+        "4.4": ["PAR017"],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-contextual-match-assignment.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-contextual-match-assignment"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004"],
+        "4.4": ["PAR001", "PAR004"],
+        "4.5": ["PAR001", "PAR004"],
+        "4.6": ["PAR001", "PAR004"],
+        "4.7": ["PAR001", "PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-contextual-match-call.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-contextual-match-call"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004"],
+        "4.4": ["PAR001", "PAR004"],
+        "4.5": ["PAR001", "PAR004"],
+        "4.6": ["PAR001", "PAR004"],
+        "4.7": ["PAR001", "PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-lambda-call.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-standalone-lambda-call"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-annotation-standalone-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-annotation-standalone-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009", "PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009", "PAR014", "PAR017"],
+        "4.4": ["PAR009", "PAR014"],
+        "4.5": ["PAR009", "PAR014"],
+        "4.6": ["PAR009", "PAR014"],
+        "4.7": ["PAR009", "PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-annotation-on-expression.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-annotation-on-expression"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-annotation-unbound.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-annotation-unbound"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-for-missing-in.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-for-missing-in"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-for-void.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-for-void"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004"],
+        "4.4": ["PAR001", "PAR004"],
+        "4.5": ["PAR001", "PAR004"],
+        "4.6": ["PAR001", "PAR004"],
+        "4.7": ["PAR001", "PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-for-untyped-inference.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-for-untyped-inference"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004", "PAR009"],
+        "4.4": ["PAR001", "PAR004", "PAR009"],
+        "4.5": ["PAR001", "PAR004", "PAR009"],
+        "4.6": ["PAR001", "PAR004", "PAR009"],
+        "4.7": ["PAR001", "PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-double-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-assert-double-comma"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-return-void-value.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-return-void-value"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-inline.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-inline"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004", "PAR009"],
+        "4.4": ["PAR001", "PAR004", "PAR009"],
+        "4.5": ["PAR001", "PAR004", "PAR009"],
+        "4.6": ["PAR001", "PAR004", "PAR009"],
+        "4.7": ["PAR001", "PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-guard-empty.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-guard-empty"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-wildcard-array.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-wildcard-array"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-dictionary-rest-value-after.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-dictionary-rest-value-after"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR013"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR013"],
+        "4.4": ["PAR013"],
+        "4.5": ["PAR013"],
+        "4.6": ["PAR013"],
+        "4.7": ["PAR013"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-dictionary-repeat-rest.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-dictionary-repeat-rest"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR013"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR013"],
+        "4.4": ["PAR013"],
+        "4.5": ["PAR013"],
+        "4.6": ["PAR013"],
+        "4.7": ["PAR013"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-array-repeat-rest.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-array-repeat-rest"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR013"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR013"],
+        "4.4": ["PAR013"],
+        "4.5": ["PAR013"],
+        "4.6": ["PAR013"],
+        "4.7": ["PAR013"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-bind-shadow-parameter.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-bind-shadow-parameter"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR013"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR013"],
+        "4.4": ["PAR013"],
+        "4.5": ["PAR013"],
+        "4.6": ["PAR013"],
+        "4.7": ["PAR013"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-bind-reuse-branches.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-bind-reuse-branches"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-guard-lambda.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-match-guard-lambda"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-local-forward-shadow.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-local-forward-shadow"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-shadow.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-shadow"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-capture-redeclare.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-capture-redeclare"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-match-context.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-loop-match-context"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-property-sibling.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-property-sibling"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-local-missing-expression.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-local-missing-expression"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-stray-close.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-stray-close"],
+      "lexicalErrors": ["LEX007"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR009"],
+        "4.4": ["PAR001", "PAR009"],
+        "4.5": ["PAR001", "PAR009"],
+        "4.6": ["PAR001", "PAR009"],
+        "4.7": ["PAR001", "PAR009"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-unclosed-string.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-unclosed-string"],
+      "lexicalErrors": ["LEX006"],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-enum-entry.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-enum-entry"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-nested-suite.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-nested-suite"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-function-name.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-function-name"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-class-name.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-class-name"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-recovery-annotation-target.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["recovery-annotation-target"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      },
+      "recoveredDeclarations": ["sentinel", "after"]
+    },
+    {
+      "file": "fixtures/audit-decl-inline-class-member-scope.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inline-class-member-scope"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inline-class-functions-scope.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inline-class-functions-scope"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-export-across-pass.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-export-across-pass"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-export-across-comment.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-export-across-comment"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-warning-across-pass.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-warning-across-pass"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-comment-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-comment-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-comment-same-line.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-comment-same-line"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-extends-after-pass.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-inner-extends-after-pass"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-own-variable.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-own-variable"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-forward-variable.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-forward-variable"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-outer-parameter.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-outer-parameter"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-parameter-shadow.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-parameter-shadow"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-parameter-shadow-redeclare.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-parameter-shadow-redeclare"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-nested-capture.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-nested-capture"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-loop-initializer.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-loop-initializer"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-loop-body.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-loop-body"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-guard-binding-shadow.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-guard-binding-shadow"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-array.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-lambda-array"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-lambda-default-scope.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-lambda-default-scope"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-lambda-property-setter-scope.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-lambda-property-setter-scope"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR015"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR015"],
+        "4.4": ["PAR015"],
+        "4.5": ["PAR015"],
+        "4.6": ["PAR015"],
+        "4.7": ["PAR015"]
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-repeated-separators.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-repeated-separators"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-repeated-separators.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-repeated-separators"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-leading-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["decl-leading-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-leading-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["stmt-leading-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-builtin-identifiers.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "builtin-identifiers"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-keyword-attributes.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "keyword-attributes"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-pass.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "match-pass"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-pass-semicolon.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "match-pass-semicolon"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004"],
+        "4.4": ["PAR001", "PAR004"],
+        "4.5": ["PAR001", "PAR004"],
+        "4.6": ["PAR001", "PAR004"],
+        "4.7": ["PAR001", "PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-branch-annotation.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "match-branch-annotation"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-member-missing.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "member-missing"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004"],
+        "4.4": ["PAR004"],
+        "4.5": ["PAR004"],
+        "4.6": ["PAR004"],
+        "4.7": ["PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-array-double-comma.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "array-double-comma"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-node-nonstring.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "node-nonstring"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-preload-missing-argument.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "preload-missing-argument"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-await-missing-operand.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "await-missing-operand"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001"],
+        "4.4": ["PAR001"],
+        "4.5": ["PAR001"],
+        "4.6": ["PAR001"],
+        "4.7": ["PAR001"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-ternary-missing-else.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "ternary-missing-else"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR004"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR004"],
+        "4.4": ["PAR001", "PAR004"],
+        "4.5": ["PAR001", "PAR004"],
+        "4.6": ["PAR001", "PAR004"],
+        "4.7": ["PAR001", "PAR004"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-yield-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "yield-invalid"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR001", "PAR006"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR001", "PAR006"],
+        "4.4": ["PAR001", "PAR006"],
+        "4.5": ["PAR001", "PAR006"],
+        "4.6": ["PAR001", "PAR006"],
+        "4.7": ["PAR001", "PAR006"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-question-mark-invalid.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "question-mark-invalid"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR009"],
+        "4.4": ["PAR009"],
+        "4.5": ["PAR009"],
+        "4.6": ["PAR009"],
+        "4.7": ["PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-positive.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "icon-positive"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-nonliteral.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "icon-nonliteral"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-nonstring.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "icon-nonstring"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-empty.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "icon-empty"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-annotation-unbound.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "match-annotation-unbound"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-annotation-target.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "match-annotation-target"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR014"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR014"],
+        "4.4": ["PAR014"],
+        "4.5": ["PAR014"],
+        "4.6": ["PAR014"],
+        "4.7": ["PAR014"]
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-attribute-literal.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["official syntax audit", "attribute-literal"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": ["PAR004", "PAR009"],
+      "syntaxErrorsByVersion": {
+        "4.3": ["PAR004", "PAR009"],
+        "4.4": ["PAR004", "PAR009"],
+        "4.5": ["PAR004", "PAR009"],
+        "4.6": ["PAR004", "PAR009"],
+        "4.7": ["PAR004", "PAR009"]
+      }
+    },
+    {
+      "file": "fixtures/formatter-comments.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["formatter-comments"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/formatter-lambdas.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["formatter-lambdas"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/formatter-declarations.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["formatter-declarations"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/formatter-suites.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["formatter-suites"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/formatter-multiline-literals.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": ["formatter-multiline-literals"],
+      "lexicalErrors": [],
+      "parserStatus": "script tested; pinned engine matrix",
+      "syntaxErrors": [],
+      "syntaxErrorsByVersion": {
+        "4.3": [],
+        "4.4": [],
+        "4.5": [],
+        "4.6": [],
+        "4.7": []
+      }
+    },
+    {
+      "file": "fixtures/formatter-project-regressions.gd",
+      "stage": "script",
+      "lexicalErrors": [],
+      "syntaxErrors": []
+    },
+    {
+      "file": "fixtures/project-invalid-lambda-dedent.gd",
+      "stage": "script",
+      "lexicalErrors": [],
+      "parserLexicalErrors": ["LEX005"],
+      "syntaxErrors": []
+    }
+  ],
+  "languageProfiles": ["4.3", "4.4", "4.5", "4.6", "4.7"],
+  "features": [
+    {
+      "feature": "typed dictionary",
+      "since": "4.4",
+      "source": "https://godotengine.org/releases/4.4/index.html"
+    },
+    {
+      "feature": "export tool button",
+      "since": "4.4",
+      "source": "https://godotengine.org/article/dev-snapshot-godot-4-4-beta-1/"
+    },
+    {
+      "feature": "warning regions",
+      "since": "4.4",
+      "source": "https://godotengine.org/article/dev-snapshot-godot-4-4-beta-1/"
+    },
+    {
+      "feature": "abstract declarations",
+      "since": "4.5",
+      "source": "https://docs.godotengine.org/en/4.5/tutorials/scripting/gdscript/gdscript_basics.html#abstract-classes-and-methods"
+    },
+    {
+      "feature": "variadic functions",
+      "since": "4.5",
+      "source": "https://docs.godotengine.org/en/4.5/tutorials/scripting/gdscript/gdscript_basics.html#variadic-functions"
+    },
+    {
+      "feature": "export file path",
+      "since": "4.5",
+      "source": "https://github.com/godotengine/godot/blob/4.5-stable/modules/gdscript/gdscript_parser.cpp"
+    },
+    {
+      "feature": "multiline export hints",
+      "since": "4.6",
+      "source": "https://github.com/godotengine/godot/blob/4.6-stable/modules/gdscript/gdscript_parser.cpp"
+    }
+  ]
+}

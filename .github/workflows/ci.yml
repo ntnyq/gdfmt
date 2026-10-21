@@ -1,0 +1,103 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master
+        with:
+          toolchain: '1.98.0'
+          components: clippy, rustfmt
+      - run: cargo fmt --all -- --check
+      - run: cargo clippy --workspace --all-targets --all-features --locked -- -D warnings
+      - run: cargo xtask schema --check
+      - run: cargo xtask compatibility
+      - run: cargo xtask syntax-coverage
+      - run: cargo tree -p gdfmt_parser --edges normal
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master
+        with:
+          toolchain: '1.98.0'
+      - run: cargo test --workspace --all-features --locked
+      - run: cargo test --workspace --no-default-features --locked
+      - run: cargo xtask compatibility
+
+  msrv:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master
+        with:
+          toolchain: '1.88.0'
+      - run: cargo check --workspace --all-targets --all-features --locked
+
+  engine-conformance:
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ['4.3', '4.4', '4.5', '4.6', '4.7']
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: dtolnay/rust-toolchain@683b588c487a69d01f6c6ddf40f036ff682cc2c8 # master
+        with:
+          toolchain: '1.98.0'
+      - name: Read engine pin
+        id: pin
+        env:
+          GDFMT_LANGUAGE: ${{ matrix.language }}
+        run: |
+          python3 - <<'PYTHON'
+          import json, os
+          with open("tests/compatibility/engine.json") as source:
+              manifest = json.load(source)
+          pin = next(pin for pin in manifest["engines"] if pin["languageVersion"] == os.environ["GDFMT_LANGUAGE"])
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write(f"tag={pin['tag']}\nsha512={pin['linuxSha512']}\n")
+          PYTHON
+      - name: Download pinned Godot editor
+        shell: bash
+        env:
+          GODOT_TAG: ${{ steps.pin.outputs.tag }}
+          GODOT_SHA512: ${{ steps.pin.outputs.sha512 }}
+        run: |
+          curl --fail --location --retry 3 --max-time 180 \
+            "https://github.com/godotengine/godot/releases/download/$GODOT_TAG/Godot_v${GODOT_TAG}_linux.x86_64.zip" \
+            --output "$RUNNER_TEMP/godot.zip"
+          echo "$GODOT_SHA512  $RUNNER_TEMP/godot.zip" | sha512sum --check
+          unzip -q "$RUNNER_TEMP/godot.zip" -d "$RUNNER_TEMP/godot"
+      - name: Compare parser with pinned engine
+        env:
+          GODOT_TAG: ${{ steps.pin.outputs.tag }}
+          GDFMT_LANGUAGE: ${{ matrix.language }}
+        run: cargo xtask conformance --language "$GDFMT_LANGUAGE" --godot "$RUNNER_TEMP/godot/Godot_v${GODOT_TAG}_linux.x86_64" --report "target/conformance/report-$GDFMT_LANGUAGE.json"
+      - name: Check formatted accepted scripts with pinned engine
+        env:
+          GODOT_TAG: ${{ steps.pin.outputs.tag }}
+          GDFMT_LANGUAGE: ${{ matrix.language }}
+        run: cargo xtask formatter-conformance --language "$GDFMT_LANGUAGE" --godot "$RUNNER_TEMP/godot/Godot_v${GODOT_TAG}_linux.x86_64" --report "target/conformance/formatter-$GDFMT_LANGUAGE.json"
+      - uses: actions/upload-artifact@v7.0.2
+        if: always()
+        with:
+          name: godot-conformance-${{ matrix.language }}
+          path: |
+            target/conformance/report-${{ matrix.language }}.json
+            target/conformance/formatter-${{ matrix.language }}.json
+          if-no-files-found: ignore

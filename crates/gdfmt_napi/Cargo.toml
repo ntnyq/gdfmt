@@ -1,0 +1,38 @@
+[package]
+name = "gdfmt_napi"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+
+[lib]
+crate-type = ["cdylib"]
+test = false
+doctest = false
+
+# napi's generated constructor explicitly allows its FFI. Keep handwritten
+# unsafe denied here; all core crates retain workspace forbid(unsafe_code).
+[lints.rust]
+unsafe_code = "deny"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }
+dbg_macro = "warn"
+todo = "warn"
+unimplemented = "warn"
+
+[dependencies]
+gdfmt.workspace = true
+gdfmt_cli = { path = "../gdfmt_cli" }
+gdfmt_config.workspace = true
+gdfmt_text.workspace = true
+gdfmt_workspace.workspace = true
+napi = { version = "=3.14.2", default-features = false, features = ["napi4", "dyn-symbols"] }
+napi-derive = { version = "=3.6.12", default-features = false, features = ["strict"] }
+serde.workspace = true
+serde_json.workspace = true
+
+[build-dependencies]
+napi-build = "=2.6.0"

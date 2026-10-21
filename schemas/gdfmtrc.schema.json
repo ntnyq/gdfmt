@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "PartialConfig",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "description": "Editor metadata only; gdfmt never fetches this URL.",
+      "type": "string"
+    },
+    "extends": {
+      "description": "Local JSON files, applied in order before this file. No package or URL resolution.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "format": {
+      "description": "Script layout, indentation, line endings, blank lines and final newline.",
+      "$ref": "#/$defs/PartialFormatOptions"
+    },
+    "ignore": {
+      "description": "Gitignore-style patterns, relative to this file. Replaces an inherited list.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "language": {
+      "$ref": "#/$defs/PartialLanguageOptions"
+    },
+    "overrides": {
+      "description": "Ordered overrides append across inheritance layers and run after all base fields.",
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/ConfigOverride"
+      }
+    },
+    "root": {
+      "description": "Stop parent directory configuration discovery at this file. Default: false.",
+      "type": "boolean"
+    },
+    "schemaVersion": {
+      "description": "Configuration format version. Currently 1.",
+      "type": "integer",
+      "format": "uint32",
+      "maximum": 1,
+      "minimum": 1
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "ConfigOverride": {
+      "description": "Ordered, path-scoped layout/language changes. Paths are relative to the declaring JSON file.",
+      "type": "object",
+      "properties": {
+        "exclude": {
+          "description": "Exclude globs using the same path rules.",
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "description": "Include globs, matched against the full relative path; an empty list matches nothing.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "format": {
+          "$ref": "#/$defs/PartialFormatOptions"
+        },
+        "language": {
+          "$ref": "#/$defs/PartialLanguageOptions"
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "files"
+      ]
+    },
+    "IndentStyle": {
+      "type": "string",
+      "enum": [
+        "tab",
+        "space"
+      ]
+    },
+    "LanguageVersion": {
+      "description": "Explicit grammar profiles, not a claim of complete engine conformance.",
+      "type": "string",
+      "enum": [
+        "4.3",
+        "4.4",
+        "4.5",
+        "4.6",
+        "4.7"
+      ]
+    },
+    "LineEnding": {
+      "type": "string",
+      "enum": [
+        "lf",
+        "crlf",
+        "preserve"
+      ]
+    },
+    "PartialFormatOptions": {
+      "type": "object",
+      "properties": {
+        "finalNewline": {
+          "description": "End formatted files with one newline. Default: true.",
+          "type": "boolean"
+        },
+        "indentStyle": {
+          "description": "Indentation characters. Default: tab.",
+          "$ref": "#/$defs/IndentStyle"
+        },
+        "indentWidth": {
+          "description": "Visual tab width or number of spaces per indentation level. Default: 4.",
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 8,
+          "minimum": 1
+        },
+        "lineEnding": {
+          "description": "Physical line endings. Default: lf; preserve uses the first newline, or lf.",
+          "$ref": "#/$defs/LineEnding"
+        },
+        "lineWidth": {
+          "description": "Target print width; long indivisible tokens may exceed this value. Default: 100.",
+          "type": "integer",
+          "format": "uint16",
+          "maximum": 320,
+          "minimum": 40
+        },
+        "maxBlankLines": {
+          "description": "Maximum retained blank lines. Default: 2.",
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 5,
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "PartialLanguageOptions": {
+      "type": "object",
+      "properties": {
+        "godotVersion": {
+          "description": "Explicit grammar profile. Default: 4.7. Does not imply engine conformance.",
+          "$ref": "#/$defs/LanguageVersion"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

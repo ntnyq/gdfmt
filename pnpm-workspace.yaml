@@ -1,0 +1,11 @@
+packages:
+  - docs
+  - packages/*
+
+allowBuilds:
+  esbuild: true
+
+minimumReleaseAge: 0
+pmOnFail: warn
+shellEmulator: true
+ignoreWorkspaceRootCheck: true

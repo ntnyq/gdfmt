@@ -1,0 +1,17 @@
+{
+  "name": "@gdfmt/docs",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "vitepress build .",
+    "dev": "vitepress dev .",
+    "preview": "vitepress preview ."
+  },
+  "devDependencies": {
+    "vitepress": "2.0.0-alpha.20"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

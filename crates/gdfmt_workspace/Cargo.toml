@@ -1,0 +1,27 @@
+[package]
+name = "gdfmt_workspace"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+repository.workspace = true
+publish = false
+
+[lints]
+workspace = true
+
+[dependencies]
+gdfmt.workspace = true
+gdfmt_text.workspace = true
+gdfmt_parser.workspace = true
+gdfmt_config.workspace = true
+serde.workspace = true
+thiserror.workspace = true
+tempfile.workspace = true
+ignore.workspace = true
+globset.workspace = true
+ec4rs.workspace = true
+
+
+[dev-dependencies]
+serde_json.workspace = true

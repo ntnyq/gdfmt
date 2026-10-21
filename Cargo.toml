@@ -1,0 +1,44 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "xtask"]
+
+[workspace.package]
+version = "0.1.0-alpha.0"
+edition = "2024"
+rust-version = "1.88"
+license = "MIT"
+repository = "https://github.com/ntnyq/gdfmt"
+
+[workspace.dependencies]
+gdfmt_text = { path = "crates/gdfmt_text" }
+gdfmt_syntax = { path = "crates/gdfmt_syntax" }
+gdfmt_parser = { path = "crates/gdfmt_parser" }
+gdfmt_formatter = { path = "crates/gdfmt_formatter" }
+gdfmt = { path = "crates/gdfmt" }
+gdfmt_config = { path = "crates/gdfmt_config" }
+gdfmt_workspace = { path = "crates/gdfmt_workspace" }
+clap = { version = "4.5", features = ["derive"] }
+ignore = "0.4"
+globset = "0.4"
+ec4rs = { version = "1.2", features = ["track-source"] }
+jsonschema = { version = "0.33", default-features = false }
+rowan = "0.16"
+schemars = "1.2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_path_to_error = "0.1"
+tempfile = "3"
+thiserror = "2"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+dbg_macro = "warn"
+todo = "warn"
+unimplemented = "warn"
+
+[profile.release]
+lto = "thin"
+strip = true

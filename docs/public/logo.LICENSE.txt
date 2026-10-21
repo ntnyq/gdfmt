@@ -1,0 +1,13 @@
+gdfmt logo (logo.svg)
+
+Includes the Godot Engine icon:
+Copyright (c) 2017 Andrea Calabró
+Source: https://godotengine.org/assets/press/icon_color.svg
+License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+https://creativecommons.org/licenses/by/4.0/
+
+Changes for gdfmt: composed the icon with code brackets, indented lines, and
+an indentation guide. The original icon's proportions and colors are retained.
+The resulting logo is distributed under CC BY 4.0.
+
+gdfmt is an independent project and is not endorsed by the Godot Engine project.

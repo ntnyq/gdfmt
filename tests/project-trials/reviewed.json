@@ -1,0 +1,2339 @@
+{
+  "schemaVersion": 1,
+  "manifestSha256": "93c94714aa120205662bc63595f3406df36b04e3f8f6faab9b9b3aaeb6224e83",
+  "cases": {
+    "godot-demos/2d/bullet_shower/bullets.gd": {
+      "gdfmtSha256": "f43d62d64dd4034c6d1736c9de478eac7e0c04a730e35cae85986710c6201c7a",
+      "gdtoolkitSha256": "f685e2106d0ad580b912231dec5c1b4d17feb7ce8914ce278ee285bbfcc58cff",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/bullet_shower/player.gd": {
+      "gdfmtSha256": "d9a6730c1bf7edbd5e67fd2a0e82e9fe1c06b1825d183ce5dc027c2aeefa40a5",
+      "gdtoolkitSha256": "17f45b7c960222ddd85cd1a1fd2fa502c98dcc76e050bf2c94d21d40d3a81f43",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/custom_drawing/animation.gd": {
+      "gdfmtSha256": "99e8637e8b35fb28f7b793ce4f0ab868b3734ba9f40c64c76c24856912209e95",
+      "gdtoolkitSha256": "c86202a6dc944bfdfd21926391a5161204206c344111df07c98699118a05efa8",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/custom_drawing/animation_slice.gd": {
+      "gdfmtSha256": "8a0be722a223b6457a70d07f6925214d0b5c8bf1aec06621b0819b5c6278e563",
+      "gdtoolkitSha256": "31e784be8cb9c9d1f315543bc710ef5694f0af07b6f3c1a13b7ab9123ef8668d",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/custom_drawing/custom_drawing.gd": {
+      "gdfmtSha256": "9ace2c0a3ae1b17a76146aebeb779f0ffd34ae8bc5765aafa5308e7c90340144",
+      "gdtoolkitSha256": "9ace2c0a3ae1b17a76146aebeb779f0ffd34ae8bc5765aafa5308e7c90340144",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/custom_drawing/lines.gd": {
+      "gdfmtSha256": "82c9ef8c7764eec14351790d661aa00f0a00a3e8bdd4e5d6cddd23404eed43d7",
+      "gdtoolkitSha256": "18aee57d84161af5329216aa788b6163b04eea60a7d7579afdb89d061b6dc532",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/custom_drawing/meshes.gd": {
+      "gdfmtSha256": "836bc25babf7ca8918b1c52d22d7a30ea18e21fe924d975f5082d479172412fd",
+      "gdtoolkitSha256": "910f156d02394f76be7caecac41f84b4588ff2fa9f862530798b42218e6f9de0",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/custom_drawing/polygons.gd": {
+      "gdfmtSha256": "76c23b737a6ccecd731ad111461dd7e8046790ddacd65bb2bd6947c9ecadfff3",
+      "gdtoolkitSha256": "69c943da9647b5d11cd70ee35ca5192093b8b1e8293e50de4cef2671e5d459c6",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/custom_drawing/rectangles.gd": {
+      "gdfmtSha256": "52f000dfc6c655ec0f1afc8e755518c7a0ddade693faa520dd7e876817a08d87",
+      "gdtoolkitSha256": "09537a56bf401beffacb98c90508d3e871a4ca66acc4080dd9f53fa4c4df6093",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/custom_drawing/text.gd": {
+      "gdfmtSha256": "ea6e9ae01fa1b4fb3677c92fef64c57fe5ed159d1853a02e96dc34c46e14ba0c",
+      "gdtoolkitSha256": "e9b441ab4106ff1a73653e10499b6398ff2f9320fc03439fd65ba3c1a5cf3a65",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/custom_drawing/textures.gd": {
+      "gdfmtSha256": "829d02069356195789a925338936af682c35d3bf6d03f62c327177a0b8678781",
+      "gdtoolkitSha256": "253abef7b309271ac75002eb104942ff08ff772dd71177040d871ec88276189d",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/dodge_the_creeps/hud.gd": {
+      "gdfmtSha256": "e5796dd3e756850e8251e5d3d81174d4c043cf223802edf90afba81363a3d50d",
+      "gdtoolkitSha256": "04f54add26fccb004ad1a7861ad6b75fff9e53f7832db8664cd02c82a438305d",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/dodge_the_creeps/main.gd": {
+      "gdfmtSha256": "059eabb6b5b03d126e4ecff5ed984a5ded8f3f1a509cb3aa79b4eeec5cab3296",
+      "gdtoolkitSha256": "40cd239d1ec5d9d441646fde83af9f18a99345437df9b163a92ceed0d73cd784",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/dodge_the_creeps/mob.gd": {
+      "gdfmtSha256": "bcf3fe2b8fa41dcc33a05aad38bd709cffe095750408c44d97553c1cec64282c",
+      "gdtoolkitSha256": "1cc79da769c9df54977b15a8119da39512f44332dfba93ee10351af2732dd550",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/dodge_the_creeps/player.gd": {
+      "gdfmtSha256": "4504dc469ca775ef7ed9a0477c6b8dd4a4b4d6bfd5fdbc261eff0abb7183b547",
+      "gdtoolkitSha256": "472492ddfc703c8c39d7dc5afd23a64feea43c8942b66a0356dda4750372b3ba",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/drawable_textures/main.gd": {
+      "gdfmtSha256": "cc89ad9309934035f40fafd301f1078b36290da0cb42b715ebcad5bd6274fe6a",
+      "gdtoolkitSha256": "1e03ab848560775886cfc399eced7978c986ce1e08e04fe49073bfe1fc14554d",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/dynamic_tilemap_layers/level/tile_map.gd": {
+      "gdfmtSha256": "df3dd3404bbc35fae2d6aa8fe95cf9c62e8937e2eac017f15591640ebeebfe77",
+      "gdtoolkitSha256": "df3dd3404bbc35fae2d6aa8fe95cf9c62e8937e2eac017f15591640ebeebfe77",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/dynamic_tilemap_layers/player/player.gd": {
+      "gdfmtSha256": "72bc7fc190226971ae074fae2a7873aa87f29d66ca59fba20049c877d832a325",
+      "gdtoolkitSha256": "77d4821f7ccfb076898fa60fd29bbfb279c0cafdfa467340ac4652423e5571c2",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/debug/states_stack_displayer.gd": {
+      "gdfmtSha256": "d6717d11d2125678cd41d551add61017290dac6ebea520d3a4169bcf49009adf",
+      "gdtoolkitSha256": "7711cd9f038932b35b0046ae49a7438a516755192704d3be53ce41197e5e57a1",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/bullet/bullet.gd": {
+      "gdfmtSha256": "5d1b7fd07c9b411442637042731e6958b514776dbb8253b34e84becb8fcc535a",
+      "gdtoolkitSha256": "9c56614255abf30f8a36c3f220d4b842bf6cdd61204170f450240a446dd324ce",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/bullet/bullet_spawner.gd": {
+      "gdfmtSha256": "0982cd6fe4b3eaa97e942b5a852ebc2354336f1e69fe212b0a7296ae184c56f5",
+      "gdtoolkitSha256": "8c4b6dd48d8ae8c910c1391d1a11f877930f915b6261890355b5bab67d501415",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/player_controller.gd": {
+      "gdfmtSha256": "a670b4c8bbbf04f213cd6d57434cce120b842c96b9d191bb16a321555ea4e462",
+      "gdtoolkitSha256": "a670b4c8bbbf04f213cd6d57434cce120b842c96b9d191bb16a321555ea4e462",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/finite_state_machine/player/player_state.gd": {
+      "gdfmtSha256": "79d9ed61989eaf526b189a69ebc68a7b19e4c15e0e8c31ee2a807a45e0042a84",
+      "gdtoolkitSha256": "79d9ed61989eaf526b189a69ebc68a7b19e4c15e0e8c31ee2a807a45e0042a84",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/finite_state_machine/player/player_state_machine.gd": {
+      "gdfmtSha256": "76ed05925e77153ab3e8cc004719d4ff79998299acd7127180fbd226330b3b92",
+      "gdtoolkitSha256": "d23dc3268d8afd64d828454811906170b4c473ae98eb4f641a90e281a320eb22",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/combat/attack.gd": {
+      "gdfmtSha256": "e6ba198fb5f1631a4898337fe009f9142a212032bdf68fc41e583a1966792190",
+      "gdtoolkitSha256": "918536eae2f477c08b3de0339ca3b13ed64f3a187cf568b4f209c787b9ae0a36",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/combat/stagger.gd": {
+      "gdfmtSha256": "719311604996f65c3e4a19f8b5060454afa59b3600f100ecce4ab7a8cad06ed4",
+      "gdtoolkitSha256": "de165aa36716d750c7528ffbbb5aca9b840f5ed53349fdf9290e66599ee84f8b",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/debug/state_name_displayer.gd": {
+      "gdfmtSha256": "61443a829912cd034b79f0df824e20faadd383e939d7f277b15a744fc4aea6ee",
+      "gdtoolkitSha256": "bce2fbf1b9241f7d2ff4f833b66cf9595433eaf52af699795ce5badf66ffefe7",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/die.gd": {
+      "gdfmtSha256": "f4e3790d702d62381916818863b57a1376e8658d9741355c2969dec4486c3dde",
+      "gdtoolkitSha256": "ace08e1c2f76c81a878f2967f7b1dd8eabad368793211682b59a74a91508b516",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/motion/in_air/jump.gd": {
+      "gdfmtSha256": "df2f177ebb671d2ec9809adcb760eab3930f7b338b01f1ba85060222fe600743",
+      "gdtoolkitSha256": "dd5d9cd4f10874751ec2b4ecdcb4e114d6215c4784c4d8902d0480aae0e0eae1",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/motion/motion.gd": {
+      "gdfmtSha256": "d172d5896e07cf3f3f4de71952ae227449e4b26c52c1db5ab0e227350f462302",
+      "gdtoolkitSha256": "793a5e43006ddda9b27e2379a0a4b9d008cd5aaa022ddbc83be3a52ead0186fc",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/motion/on_ground/idle.gd": {
+      "gdfmtSha256": "92c91883a9b02311ad20098506fb19f5347243ef900da7394aafa265eac39394",
+      "gdtoolkitSha256": "7d19d450e7686f67d3808c67310434d4a302f354fa2594e859784eeb5a083139",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/motion/on_ground/move.gd": {
+      "gdfmtSha256": "e56fc1923fe9fa50f2391943a35158aeeae7dfbbdcccd711d40cced89f6d6348",
+      "gdtoolkitSha256": "9051f175af0c35d6a3534546d258c59019449dc58751af2ca1cd481364052b9e",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/states/motion/on_ground/on_ground.gd": {
+      "gdfmtSha256": "ea80f792f6d02f9ad003ed84b81f89f56620ec5b900a277962846469e6bb4ce5",
+      "gdtoolkitSha256": "3656110472ce1fd016c7df74806e4060aa886a0bd3980f390d40b88ad33a9b0c",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/weapon/sword.gd": {
+      "gdfmtSha256": "8d3b2a875b24476f9fd0f8e844e861fae2429f6a50136866fc1e58bf909ad6bb",
+      "gdtoolkitSha256": "08dc1041c47bbec720aaf81d4cb2d9886dbf14ed0e53bc8747a0cb03faecb83a",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/player/weapon/weapon_pivot.gd": {
+      "gdfmtSha256": "4ffe4e8c050b751734997eea84a58021e0ba94bd24f6380634efa71ab0cb6afb",
+      "gdtoolkitSha256": "2cdb25b5f4204a761d50ea5522bb2907f61e1c073d7f474df3387ad7fe71d05d",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/state_machine/state.gd": {
+      "gdfmtSha256": "2f38f30e9344d7111b005b180d75cbda225f2fc44bbef082232eb896ca9eadc5",
+      "gdtoolkitSha256": "7ad1a99b2d73f26ff8e1a9b177d39e65cfca2b3d4a3af29187486fc11cacb2a2",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/finite_state_machine/state_machine/state_machine.gd": {
+      "gdfmtSha256": "51d041a473fa84a4807f5dcc4359726d291ce19269d0883211d93ac2f9f98e23",
+      "gdtoolkitSha256": "ecbcd7968b3b2e0fbae33156d0a66b9aed5e0af711dd9fad50e2b2d771dadfb9",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/glow/beach_cave.gd": {
+      "gdfmtSha256": "245b474d13473095dc9724c903bb8f0b3f239dc46661bd90d348a89a5efedab6",
+      "gdtoolkitSha256": "cc940255a93bf1af29373e0b3133e5d13d683288cb02b1291814e7561c45c1e2",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/hexagonal_map/troll.gd": {
+      "gdfmtSha256": "44f01c1b853bb1d8fa5c593751f4ca0cc32649d4dd82f46e29627cede7c31e65",
+      "gdtoolkitSha256": "561025f53f848c6bb23b4a92ab139cd704586defdd90c91fd2a6dce93ac37156",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/instancing/ball_factory.gd": {
+      "gdfmtSha256": "e0b6359017cb50ef80e00842be70b75b379aada56b9dd9a322611e75dc8dd94d",
+      "gdtoolkitSha256": "0a2331154785a529b31fe593c9dc6f6883c6eee0fba6a4d68a4fd16cb3aa084c",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/isometric/player/goblin.gd": {
+      "gdfmtSha256": "c634c7f6e7f293625414ff329bb4756aa008c3e712d298ab62db9e42cd5ec521",
+      "gdtoolkitSha256": "3d2b9580e3f472d28c9f5e37efa596299a284af70a5e70d5021fdd06dd2655c2",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/kinematic_character/level/princess.gd": {
+      "gdfmtSha256": "2a5ffa5aa728838f7d044f2202c374bf5089acafad3270037211e1b1bb61ecf5",
+      "gdtoolkitSha256": "2479cb9fa6939d9ed70c6018ef2e0309e19e8a5ef59ccf1b2d31c036819b07cd",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/kinematic_character/player/player.gd": {
+      "gdfmtSha256": "93df9096798b50aa9f4895d34d230edd87ff7b8853f243d1f272b0b188dffbfc",
+      "gdtoolkitSha256": "2c35e8a69c57e9cfa613e4e2a7e262610271292cfb3662d9243bbc13a31516cf",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/lights_and_shadows/light_shadows.gd": {
+      "gdfmtSha256": "0bb9a89d6d9cda864a7cc6636daab377595525bb35133654291f722bc49635c4",
+      "gdtoolkitSha256": "0bb9a89d6d9cda864a7cc6636daab377595525bb35133654291f722bc49635c4",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/navigation/character.gd": {
+      "gdfmtSha256": "69d29e3f35f56ed2d071da065e37d509c3ca871c8e347dbb75388451ea2e7cfd",
+      "gdtoolkitSha256": "211627b4e639fbbca09c07e811338d0bdf8526dcfae67b5a077bd3f976a1f528",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/navigation_astar/character.gd": {
+      "gdfmtSha256": "d3a0a8341c43b07ab875851510eeebca940183486b6aefbeb953d6fec8204d6e",
+      "gdtoolkitSha256": "34307746229edfe598ffa7adce2eb95f3b92ce88bb82e49c4ad8560799c271c9",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/navigation_astar/pathfind_astar.gd": {
+      "gdfmtSha256": "5a0a52dbadf602c4dbe1dbf3089b6cd0bf4783d133cbf13556dca2bc6d12fdf6",
+      "gdtoolkitSha256": "27259bc36918ce47e46802a69b7c7321e2a83f8f05f94a326262ea62a5e92e83",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/navigation_mesh_chunks/navmesh_chunks_demo_2d.gd": {
+      "gdfmtSha256": "b77669f47095c84f1a9e16586c6f31e91d44afc681ad3b4f65ebf00720a36959",
+      "gdtoolkitSha256": "f5954f874b1c3a8d724895f86bacac6f6e420a531eb936e5889f1d44cd0d9d07",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/particles/pause.gd": {
+      "gdfmtSha256": "6c04de2881b22da7267dc4b4baa4aa003969a0ba3598839fd4313faffefd6b5f",
+      "gdtoolkitSha256": "59acf6ec0066c1e4a88d0249b780e4a1efc9c53e4e2d2530bdf6a5a29f1f9938",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/physics_platformer/coin/coin.gd": {
+      "gdfmtSha256": "bcc90757b26b73c32626f37f2b5bdaf35aca7b7aae6c7ef6edb10d6f7261b1dd",
+      "gdtoolkitSha256": "e26601d5343c4016cdb573f2f9cb30b58dcaf039ecc57e8756f671ea9d04939e",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_platformer/enemy/enemy.gd": {
+      "gdfmtSha256": "8fa573a9c596756bdfed6a36303a3d28fff77573327335148fdfc2c786c62dc2",
+      "gdtoolkitSha256": "c388d2694cdea7fc8f4fdda589a841ee45387b82ab73654cdb49e88d4e32c5aa",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_platformer/player/bullet.gd": {
+      "gdfmtSha256": "6b353163f2ee44e72428d0420b34850659080a625ea247d4a20cb827da6b8f7d",
+      "gdtoolkitSha256": "adc11be29d68f7fab9d3b43ca1eeba3dbd729a356a4c0c9dd3c7cb8494e4ca40",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_platformer/player/player.gd": {
+      "gdfmtSha256": "ee058ad9a34681eead429e21fa5208d5e9eb213ce78fe8de3da4480862ca248f",
+      "gdtoolkitSha256": "1624c9c23139582ebd9dfe996372cd4c2faafb17cf6619936695acaffcd2d28b",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/test.gd": {
+      "gdfmtSha256": "e566fa2333412389973ee86fe6f2462aad40c2439686d81fe9ffe53da2ed93d0",
+      "gdtoolkitSha256": "c95075f45c061e07937ebc9b8f44402aa94f56dec23c40574b73fccada1c01d9",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/physics_tests/tests.gd": {
+      "gdfmtSha256": "e9be50641d9cf65edb8d918d99c5836e60219fecc4ba9d8dc1db731a3b02b6dc",
+      "gdtoolkitSha256": "1a07b6b9560430ea6ac2eb5be4722ad504ae42c589074a57995f2d72c757284b",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/solver/body_spawner.gd": {
+      "gdfmtSha256": "76869c8f25c340acdb2f3b06a57d16bb25629af2ec62ecb40cb2ad385f33a952",
+      "gdtoolkitSha256": "5d6273b70ce3c6c55dd114aa157531de3170edb876ade36512c5fc1f994a746f",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/solver/rain_spawner.gd": {
+      "gdfmtSha256": "3c3bdd52ab45a6432710a19d870ff578bcf243c8d1e19c5cd738b0be374b4161",
+      "gdtoolkitSha256": "bb50fbc1c21f60860e1a6c68c535dcd7db15c104e128edbe4fa41a153281a44d",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_character.gd": {
+      "gdfmtSha256": "390bd5cca48de965fddb7aec013e42894ff1ad7dc13ded72cb154d6cb470d77e",
+      "gdtoolkitSha256": "89ede5a4b4d24f7684d18010555017c015ccc5a6e30dc79c6e4c78307dcacad2",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_character_pixels.gd": {
+      "gdfmtSha256": "8253db3997f8d7dc0f2361e3c8b3971295bb0385a7bdc860f049586fb26648ca",
+      "gdtoolkitSha256": "8253db3997f8d7dc0f2361e3c8b3971295bb0385a7bdc860f049586fb26648ca",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_character_tilemap.gd": {
+      "gdfmtSha256": "b20061fde0288b3e5a831c551d8a2607df7681ef51babf5d0c8a8412f329a078",
+      "gdtoolkitSha256": "40036e5f5a7abe31606e1a124e6d9750e16bc076c1db17f9d706a084b1c3b48a",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_collision_pairs.gd": {
+      "gdfmtSha256": "2639e62b8b95ac4c3f71ff7d246c1f04bd2c7930fc6f7c96ea3dcbe9f273e264",
+      "gdtoolkitSha256": "8f53498bd142c90605925eb8a630e0d0e7ca21635baad783547780a94fb4e3c1",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_joints.gd": {
+      "gdfmtSha256": "436f510cd107f8f9c5e230082738fd57f3800bfe6c41a8f2de50573b3aee29bb",
+      "gdtoolkitSha256": "8cd2c79080c37aa9b6bd087e9189ca04f11a34fc948ad96d680050ae1a155e96",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_one_way_collision.gd": {
+      "gdfmtSha256": "c44227be55dbc47400404cacdb70ea0332422f66d2da7d04b87bd8e25bb060dd",
+      "gdtoolkitSha256": "76921c10800b347a0459713103dbba460600b31d29b3266c574467703d3e6215",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_pyramid.gd": {
+      "gdfmtSha256": "30eecacacbe5b1623125ec3975dc59d31b42154bb7c85081d84374fc1c99ec89",
+      "gdtoolkitSha256": "d5aa8ea2dbdf82f2a4587cf1911e6860b469d9534bb46e7ccf9ae3351eb8a320",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_raycasting.gd": {
+      "gdfmtSha256": "8a9e5270f8732ea26de389ed0666d88a92fa7d5f537e98f9337d2bdce5c8915b",
+      "gdtoolkitSha256": "5ddae2425ad7b87aae7c9deb953f96f1ff374149e27ea1565531a6a224101d0c",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/functional/test_stack.gd": {
+      "gdfmtSha256": "aabdd3265d368d94fba87b0beb4b9c140a5fe1155c3f9a91d6d620b22cdb759c",
+      "gdtoolkitSha256": "6dd9d388d9312d93e8d7518fb88a68fc09bc5ece420b19c98c595fb0e212a854",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/performance/test_perf_broadphase.gd": {
+      "gdfmtSha256": "c9884ee8dcb3440a4b34b1204adfeb700bd2f3dbe4a81cab2b3dc501a1167eca",
+      "gdtoolkitSha256": "60c8250bba9d2ded4bf553123343238c548c33620a074f90660bdb097c251375",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests/performance/test_perf_contacts.gd": {
+      "gdfmtSha256": "f52d621e83f0a7e136be63671049bb268dcb1f5888170125b54f86d9870017bc",
+      "gdtoolkitSha256": "8e4e5586d757b9f968e98cfed75d0d16e0ebff92a695b9c80cfca3d6a3fbe119",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/tests_menu.gd": {
+      "gdfmtSha256": "4e97131ccf32539a703b77b8dee07baec92d7b8250a83d2a57b657860fd6a293",
+      "gdtoolkitSha256": "ffa9230317365c2ee17f202a8ab49f1127025af250bf43606f72440f75060d7f",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/characterbody_controller.gd": {
+      "gdfmtSha256": "52a9711766feb37c906ec98b75e17da8e7c82c2bd95d4fb61cd35cb493bda9fb",
+      "gdtoolkitSha256": "52a9711766feb37c906ec98b75e17da8e7c82c2bd95d4fb61cd35cb493bda9fb",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/physics_tests/utils/container_log.gd": {
+      "gdfmtSha256": "732acfd4a4900e747c0ce9c01e0e474874ac43777d5e7dd8840ddf8887465a0a",
+      "gdtoolkitSha256": "962c0a0120580940407e6db1c30418786b84cc3f14b92d5a358028d9e8c5a496",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/label_engine.gd": {
+      "gdfmtSha256": "bc10bf0d97b86c88259478186d80c1dc67d1021a7dc07108a7e4221bb89ad3ee",
+      "gdtoolkitSha256": "f36fd8991d7fa465af3e09011901b5b6773a198da339c9c3cd91813205852f0f",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/label_fps.gd": {
+      "gdfmtSha256": "903e9e7250a3b977afb138388b7bc4c90b4eb4602ceabf0375125b0fa17f0c70",
+      "gdtoolkitSha256": "0868b7b64b6e6f78c697537b872e1e76c3850048d0500012ae41a36cde313eec",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/physics_tests/utils/label_frames.gd": {
+      "gdfmtSha256": "2469d646aa12de5c731c22dc3228a060460774857aba9f41b973bd43e52f08d0",
+      "gdtoolkitSha256": "2469d646aa12de5c731c22dc3228a060460774857aba9f41b973bd43e52f08d0",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/physics_tests/utils/label_pause.gd": {
+      "gdfmtSha256": "b8b606a2df7d0c996ac37362b8fd45d9ca88489fb168fec203de24b9a87fe349",
+      "gdtoolkitSha256": "b8b606a2df7d0c996ac37362b8fd45d9ca88489fb168fec203de24b9a87fe349",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/physics_tests/utils/label_slider_value.gd": {
+      "gdfmtSha256": "595997d8c2557d95e94996171cf4d22ca6503a9e42f244dfecf2430eaba06b96",
+      "gdtoolkitSha256": "595997d8c2557d95e94996171cf4d22ca6503a9e42f244dfecf2430eaba06b96",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/physics_tests/utils/label_test.gd": {
+      "gdfmtSha256": "433eb62f711bac257666438d9b8fd9c4a28b65caa91cbbbf1298290b88adfe4e",
+      "gdtoolkitSha256": "428b0d12812dc100b888fedf3c4788519bf71dc3a54455a4db4059ab23dbdf03",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/physics_tests/utils/label_version.gd": {
+      "gdfmtSha256": "93e701c53379fa53ffa7bf027ce50f3b237393617608240f2a5db7d9ad37bda3",
+      "gdtoolkitSha256": "475d544600c486a3fefe2c9f1068af1fea3b87499a8c2e9667d44dffa8b8dd58",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/option_menu.gd": {
+      "gdfmtSha256": "eba5e792ba5020f638939258f2a1059ed77c3f98031f05baa076f699c9b09f25",
+      "gdtoolkitSha256": "6ea024ac7cfd16df0b802064e63586854783235bf007af6a84e575d7e26a097f",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/rigidbody_controller.gd": {
+      "gdfmtSha256": "ae16bf3e145887d3baa312efe1d61a36ee9b7bec445d8227c6ff7453775d11c8",
+      "gdtoolkitSha256": "cde18bfeebb93a3bee18797fdd818f5e49ba54fb94909254f368071d6fc0827e",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/rigidbody_pick.gd": {
+      "gdfmtSha256": "a0e2d9935eaf2367cc211899165fb56bc5a039cb8e42963da7c57435e42e1acc",
+      "gdtoolkitSha256": "a0e2d9935eaf2367cc211899165fb56bc5a039cb8e42963da7c57435e42e1acc",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/physics_tests/utils/scroll_log.gd": {
+      "gdfmtSha256": "1e76f41b794ceb16d8320abeb72ec74f129462f50fdbdb48aaa51f6329030f68",
+      "gdtoolkitSha256": "39f425a8ad5216dd6904b11be5045782ff58bd1cc472a2b65f2beb7fd570c5e0",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/slider.gd": {
+      "gdfmtSha256": "ba49d5b3600f99ea5e1b8df4b889e1b7965dd4a1feefe8d9155e27ec63e6406a",
+      "gdtoolkitSha256": "cff2236e472248b4f2f9c465de1abd27a360f2276e64a77c85d4796826a140af",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/system.gd": {
+      "gdfmtSha256": "f71c09b1ec53ca06b8e9fcf956b402eca981a3374ba7f80af1507a13a3199e87",
+      "gdtoolkitSha256": "524c680b1613305585b6657cbdecaacb01ef4e1de758ae265246395851329140",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/physics_tests/utils/system_log.gd": {
+      "gdfmtSha256": "b76b1ef4b036419cc4f909bba76d3493b076f2f7434bf51e4626bdc92b7afafa",
+      "gdtoolkitSha256": "cae7c4f8660c78151f84bd0192bebfd441bc32eb422cade8bf0df292ad8f9a5c",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/platformer/enemy/enemy.gd": {
+      "gdfmtSha256": "513d01606b41ff8d95e04c0929dbe9a70ff78baa411a43f920f6f99f69d2fd17",
+      "gdtoolkitSha256": "afb8a3e9f3a551d10f65fcbe6958fb83f853e83898354fe08f3c1bbdc26736a2",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/platformer/game.gd": {
+      "gdfmtSha256": "d074a32726b812d7e604ac7fcb34d58193178645c465dd7ed9681913527b7c11",
+      "gdtoolkitSha256": "4dfb742d70d402ffd800956238b1a4451e26ae35a758d8139cc12f3cc4ab5be2",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/platformer/game_splitscreen.gd": {
+      "gdfmtSha256": "96ba8f550b11c4ec1c042e0229cd6c255bed1816e913e2d887c0166afe631b01",
+      "gdtoolkitSha256": "96ba8f550b11c4ec1c042e0229cd6c255bed1816e913e2d887c0166afe631b01",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/platformer/gui/coins_counter.gd": {
+      "gdfmtSha256": "a414888c59e2b08fe217e352831298b0b35b4adfc3393ab1b306b1d58698c345",
+      "gdtoolkitSha256": "4e42669a345998313274178852425637eeaa88bd04bb87f6834802f5beea0b14",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/platformer/gui/pause_menu.gd": {
+      "gdfmtSha256": "137fce7aae7b97474177a0c1af211095248d9a8ec5a9710c51bd103d5ec08b07",
+      "gdtoolkitSha256": "1f43fe7655a862a01d5a0753bd754e386935acb8f0d133592d2b2ab60b43fa7b",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/platformer/level/coin.gd": {
+      "gdfmtSha256": "beebe70a9046f620a8f206a426dd03899946c6cc6366d6eefd387bfff2ceb169",
+      "gdtoolkitSha256": "3486223f726a4bcf17ae8cec9a4efbce0b3a148762ff4c47c647638ce2761b02",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/platformer/level/level.gd": {
+      "gdfmtSha256": "2a06dad18f9af166e781cd20d797a4de40485bb36941ae3a366e9d4283267631",
+      "gdtoolkitSha256": "2a06dad18f9af166e781cd20d797a4de40485bb36941ae3a366e9d4283267631",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/platformer/player/bullet.gd": {
+      "gdfmtSha256": "66bb7535438cdb95471faaf43d707ed1a7c7eaacec79c987d3b7cbed6609cc84",
+      "gdtoolkitSha256": "e99807c8265d7a4883335b5099943f1760ee12592cd12b10c80a45386d38fa2f",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/platformer/player/gun.gd": {
+      "gdfmtSha256": "be713ff366f910d7ad8f2c535be4dd67e5626f630434a56cb72eba752965c4e9",
+      "gdtoolkitSha256": "358034b967cad64093217a1f0e54c13ee5085f62736dfd4ee1732748427958aa",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/platformer/player/player.gd": {
+      "gdfmtSha256": "0067c52e984e5b937fa9ca6228beb28f9a3c58655410139efd77268d45449580",
+      "gdtoolkitSha256": "92e12c224df30f2f0baf9aa6668638f5e85a115803dcd79c2f72b47b5af4f3c9",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/polygons_lines/polygons_lines.gd": {
+      "gdfmtSha256": "0aa99ec57b0eb1e1863254874803c506770e9e195429b9d48f6b95214ff70ff0",
+      "gdtoolkitSha256": "0aa99ec57b0eb1e1863254874803c506770e9e195429b9d48f6b95214ff70ff0",
+      "categories": ["identical"]
+    },
+    "godot-demos/2d/pong/logic/ball.gd": {
+      "gdfmtSha256": "9bc4d1ff5cc491a6a41cd482e8f6b6a65b6b0a3f711d37b81d0e8a61a04f220d",
+      "gdtoolkitSha256": "aa31b8ad14ba9d9aec88b480e7f93df36269cfd1925fa863cb266bc04507b816",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/pong/logic/ceiling_floor.gd": {
+      "gdfmtSha256": "14b3a7c6da2ce0a889564be3c58e3cabdaf237798aa29b17e2d90011572e4be1",
+      "gdtoolkitSha256": "3ef32b45d7b2bb38edbd4c37fec0a9f50c6dcfe220d97a97ae3ee7617ed15a72",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/pong/logic/paddle.gd": {
+      "gdfmtSha256": "8f3457fd03cbe460aba5e86438bef10b0d2ac61800f8579af2f806b8b8395c57",
+      "gdtoolkitSha256": "06a84e009f97ad568d666dbc166a4c21a7bf70c8a85668a6470878d5120dd025",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/pong/logic/wall.gd": {
+      "gdfmtSha256": "a847193f770058755a2c283b1ab1b93bd2dce9f719ee32d61852a784f39614bd",
+      "gdtoolkitSha256": "4b7272ffd1bb6a473b9b19fea0f032c67d3519316d65960d9fccb1a9bd5d039f",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/combat/combat.gd": {
+      "gdfmtSha256": "2975c7091ea49604baa1d2b3ce865361b576ffbb3283189958af5fd8209057a2",
+      "gdtoolkitSha256": "586138d44c0422f27557a294ee63d6183a6f00d94b09b5291abb7c71d559ea8c",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/combat/combatants/combatant.gd": {
+      "gdfmtSha256": "5580891c9b8cc5d8351276a9212f41b2e01d0ddfce4dfb69614fa93e8f772e3e",
+      "gdtoolkitSha256": "329ae61b2b862edba2010d3ce40dae0ad42125feb51edfd594d658c1eb3ac476",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/combat/combatants/health.gd": {
+      "gdfmtSha256": "c2256a6f132e4371046e31fd064429b9b3d2f642af6ec4e65c5ba3ef854d1ec2",
+      "gdtoolkitSha256": "ac6cb4a6394b9330610dd77c82b2ccd75f33eec25e71ae4f75c868b0c82d54d7",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/combat/combatants/opponent.gd": {
+      "gdfmtSha256": "fdefd9817d754ab20a37ac1be9e9fdf2f3e9cbd9b997430fe66ca1d941588e34",
+      "gdtoolkitSha256": "e90f249bb92e476d486ff16837f93b95da61bc1c91f920321482c96c41153bbe",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/combat/interface/ui.gd": {
+      "gdfmtSha256": "a740b69ec52167d5d2b442ae784036912d97d0f5ab13d0ac4ca4a9d891b21c68",
+      "gdtoolkitSha256": "dfb78c7b603ac3ec59e4ea856e581a226a38eb2ac0eed3061cded53d0a2584f6",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/combat/turn_queue.gd": {
+      "gdfmtSha256": "2ae9b843ab40397c7e3aad561c51ab56dcf1c0da6da65c0291b00673ebf7b2f3",
+      "gdtoolkitSha256": "ec96b7fef3c0e537c507d26e0760c7210aed2f9111b12d0d7bbfbf4f8ed7b562",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/dialogue/dialogue_player/dialogue_player.gd": {
+      "gdfmtSha256": "829de968a8e0be0d1ca47f4eeba149b01e46b5465672251bf4133aa2c5d1a2ba",
+      "gdtoolkitSha256": "92444173ebddcb7a3d8d26b368f1ca5594f2a37f81298cd6dd60801fec14f98b",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/dialogue/interface/interface.gd": {
+      "gdfmtSha256": "6bdf4ea1d407b8ad9de7e50cbaf605b7d5ecac623588f0dbdaf8a1cdfb0da251",
+      "gdtoolkitSha256": "f2fe38cadc825ce05b70edbca2266c08d29deb0a864065b946c01a3451e3f571",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/game.gd": {
+      "gdfmtSha256": "368f261b3c5c6b1a316807fa69b9fca239ce96345597092653fa3ad766e0920c",
+      "gdtoolkitSha256": "461c8f5b59aae3a2acbdc9125751245b3cf85799855799307042a836fd48bcd2",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/grid_movement/grid/grid.gd": {
+      "gdfmtSha256": "6d0d5afb406e19e2814ab4cc77a94688d2d1306a01d81c10a6fcfa95b0fc69db",
+      "gdtoolkitSha256": "87c0a31585080e0a44b6896c02e49c9633d660cddaf796714a50620b576a9b96",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/grid_movement/pawns/opponent.gd": {
+      "gdfmtSha256": "b046a081b043a775e8ef6ab0a0ab77f911f66e080da441491aeca418f08abee4",
+      "gdtoolkitSha256": "a27aa04a42a881e2392171956c498f345052962ff5415df350fb69dbfa321b3f",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/grid_movement/pawns/pawn.gd": {
+      "gdfmtSha256": "31ab673f90b335425aa3635106f35b7397fc36a41f70b3fba07a2b3956f782c4",
+      "gdtoolkitSha256": "b2da07b83c6b9ecb02b928d37fb6f9deff048feb49c82147f70f246df8cb7cfe",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/grid_movement/pawns/player.gd": {
+      "gdfmtSha256": "e672b710e9575fe9bce19f6fda139ea25a43df9f1efda0b08fb2a3ca19e95bd0",
+      "gdtoolkitSha256": "db8976bf3946b962d90cc8556a6ebfcb2693cbbcdf20493139bede7811f91f03",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/role_playing_game/grid_movement/pawns/walker.gd": {
+      "gdfmtSha256": "c510f9f4c98bf3f7042f99753a90e89fb75522cb006159863ded119d03252e5e",
+      "gdtoolkitSha256": "5e021787831c23d783fc24dc537fbc0c990aa82aa381770922ab6db27a83d196",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/screen_space_shaders/screen_shaders.gd": {
+      "gdfmtSha256": "4ee64fbf95c2cf542eded7bbe8ff5b15d686e6105aaf06ee87df8da70b2e5373",
+      "gdtoolkitSha256": "9715a21cfc944ea98b75a67d52d4991c7d2b0dceb433721c3be89c4e994caae8",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/skeleton/level/level.gd": {
+      "gdfmtSha256": "0404f208a37bebe678eafa8d83b8c9747912d50d1b3915ed37e9379da363a4cc",
+      "gdtoolkitSha256": "89b3ffa6aee136aba0d1f1d75fd965f69208cbaf563c676b61beedbe0ed49305",
+      "categories": ["layout"]
+    },
+    "godot-demos/2d/skeleton/player/player.gd": {
+      "gdfmtSha256": "db51e1dd273d80025c48ea20433469ec43f5e9bd71e567c6e1da8acad556fc30",
+      "gdtoolkitSha256": "5e73048eb8062bc24a0319cf0e28a732ca3762dd68290cdfe40bbca44d87f094",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/2d/tween/main.gd": {
+      "gdfmtSha256": null,
+      "gdtoolkitSha256": "5bd4e2cce788ba7420b2ae74e68dd10261bf5e8b2b330877456fad7549f0573d",
+      "categories": ["source-rejected-gdtoolkit-accepted"]
+    },
+    "godot-demos/3d/antialiasing/anti_aliasing.gd": {
+      "gdfmtSha256": "11dbec5888d610321c26a0ea38ed0f8487cb60c46041a3622c1153750c82d05b",
+      "gdtoolkitSha256": "f03752059b4222d9b946dab3ce8e8ff8f127e7f0ec4df32c130cba6c84745ae7",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/csg/csg.gd": {
+      "gdfmtSha256": "adc54184a822dd07117435688d603114674233403ba607f089a02ab12e694a87",
+      "gdtoolkitSha256": "1db89a11b8fe6861d116889f4d87ee27cb2adbf908f578943fdf876200b5b2d7",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/decals/tester.gd": {
+      "gdfmtSha256": "cf55b1f247d0e6754f95ca97c492570db8a5a387ee8dfe4f221ff419cac7fa59",
+      "gdtoolkitSha256": "a2fe5eac7390d996215ad8195b15ab9e340b06edbb29df7e6293d8450dfb1137",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/global_illumination/camera.gd": {
+      "gdfmtSha256": "2040aafc0e14b957add13bcab18b6fe7ece6200ae62a2d13fd31fd9e873d1758",
+      "gdtoolkitSha256": "2510b947fb4499702027a2f7429b86840c605e8383b6b72ce9ffa10a394f38d6",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/global_illumination/test.gd": {
+      "gdfmtSha256": "be1e8098faf880f6973fc36c215427a108f9c2900d60f0b0bb75342217e373d6",
+      "gdtoolkitSha256": "d597fbdbbededeb6813e8ddd7f552d3e2275bd37a6dcf933562414c2eaaaa694",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-demos/3d/graphics_settings/settings.gd": {
+      "gdfmtSha256": "655806f083aa0c7947111b73ab484049560c55c191cd2947b455bdc5a575bec4",
+      "gdtoolkitSha256": "ea122b211462a6aaff6aa811e0dcf8c552bf3cfc136c36bc4fb77e108e97ed87",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/ik/addons/sade/ik_fabrik.gd": {
+      "gdfmtSha256": "748f5931bac7f55aabfccc82dd8d8afa8ed049bec14343642a9f4d6debbc9371",
+      "gdtoolkitSha256": "1cc1a9bd9d7ea315dc25154743134e280816014d9ce42857797e06df142760b4",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/ik/addons/sade/ik_look_at.gd": {
+      "gdfmtSha256": "bb531975f7484c505da9da15aef1cb3770b1630151d249e7c10636dda59bc6b2",
+      "gdtoolkitSha256": "e4bd85933a1a9a741d7c28710957a939b907d1583895bedec5e3e6100f922f3b",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/ik/addons/sade/plugin_main.gd": {
+      "gdfmtSha256": "26b3c8b99d0e5b2b40bf23910293eb8b577df166c817e3072e9356d71558a054",
+      "gdtoolkitSha256": "fffdf264ce14e60561f45d1fd4c4acc5b85d1227e8eda648c0f20669414d370f",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/ik/button_change_scene.gd": {
+      "gdfmtSha256": "b42109f3ec50c19e70ba64ad55d775c6c97a16f0bfbeb1a0cc86eb031052e126",
+      "gdtoolkitSha256": "6ac4ef0bd08315b1809cf00b25f419c246aff3151ed2092de8623bb7711b2564",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/ik/fps/example_player.gd": {
+      "gdfmtSha256": "852e2afbaddf1b26e24b9030b7bf92c65fa5ce3661f850ea4c40f3079898bc84",
+      "gdtoolkitSha256": "1ddfc2b5cbb10b628a53e31ccbac7ded74879086c8eb05aa767c3b09eeddc489",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/ik/fps/simple_bullet.gd": {
+      "gdfmtSha256": "3f1a69c5ad64cf18ca3f2fc054c5a4aa8b470b882a6d76eae9f9dd638c450fc9",
+      "gdtoolkitSha256": "ee56ecdec7030214ec725e7dcbac948757e04b850386829dd5bec09418446362",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/ik/skeleton_ik_runner.gd": {
+      "gdfmtSha256": "7a06f08256fd2b77de1819fa1b5ff7e262afa1483a99d0ba2240e81bdf2b1859",
+      "gdtoolkitSha256": "f9ee3b6b0309d37445384dae8c4f9ad69a22c58c8e6fe80a9b100d38a4afcc1a",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/ik/target_from_mousepos.gd": {
+      "gdfmtSha256": "8b2ac97adc6a1ab2a98574cd75c2aa7c1bb1c214add837c9063bd56d3e4e72d5",
+      "gdtoolkitSha256": "1ec42ee6d40a647d693a1ffa7bf2b14af6c77e81eb67f1c4f2acf6d6f91e66b7",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/kinematic_character/player/cubio.gd": {
+      "gdfmtSha256": "70e37eddf18500c6219518f7bcd26bd22caf15437f2b1da33aafcf33de9f36e4",
+      "gdtoolkitSha256": "dfda0bc36b5cfb719af3d9d104b274aff3b5387ec2c47e882178be02301bcb25",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/kinematic_character/player/follow_camera.gd": {
+      "gdfmtSha256": "58e0ceec6deeb89239acd596d719a305d6c63a2b39724084498ee4bf80f10d90",
+      "gdtoolkitSha256": "09b8999c9a4341b698838145bf859cffaf3f826779ea8287aec30701848c5daa",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/labels_and_texts/3d_labels_and_texts.gd": {
+      "gdfmtSha256": "98b0c4c2fc534ed8ed40fb5cce8917d28c4f5283840952e6b6e4cf3a4dd86b09",
+      "gdtoolkitSha256": "2a11d4aa784e67afdb2baac5694c16c0d33c724a46a534626cc5b88eb43af7aa",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/labels_and_texts/label_3d_layout.gd": {
+      "gdfmtSha256": "c90c9f9417b36d17ba43a7b30ff9c0228b414ea129c81a5564a1af4c6744a962",
+      "gdtoolkitSha256": "e86cec302909d6c2ba42bb4156d2343f600968404b2b0ea51a11cc105e2351fc",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/lights_and_shadows/day_night_cycle.gd": {
+      "gdfmtSha256": "f07ea882aa5c575b3d4feb3b9c8fed70fc8cd63def427f0fd531032fc360bc08",
+      "gdtoolkitSha256": "f07ea882aa5c575b3d4feb3b9c8fed70fc8cd63def427f0fd531032fc360bc08",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/lights_and_shadows/spin.gd": {
+      "gdfmtSha256": "b5d298c03ea43fc147a4bc2572d271a4a6e162bb37f3c4b7c7443dfd661d344c",
+      "gdtoolkitSha256": "02f4ccd167984888e783606a6eba9b0cf6558c9b3b926671e358411f39d53765",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/lights_and_shadows/tester.gd": {
+      "gdfmtSha256": "ebf30b1b43ebb1333177a906ec7248788aa01f2b50aa34b7c7e68562f2f9e528",
+      "gdtoolkitSha256": "5a2e1d5d3568115b882a6f327fc7b1843c2f62073666462284e0b5c022be0bf7",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/material_testers/tester.gd": {
+      "gdfmtSha256": "907af55a819244551b90625b8b91c15c35e7e553383f22b6190f23b942d5f79d",
+      "gdtoolkitSha256": "2c9697c1a9f427a61da72c74e5149d6fa7e8592a20c76789adc7c2ed8b90bb44",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/navigation/character.gd": {
+      "gdfmtSha256": "4246d91e21a3eccb1ccc735e5ce449ee53e3aa1077e41bb5a6d995e00e0fd4bd",
+      "gdtoolkitSha256": "51537d06f764eb2be7281e67e1cf18d76547c7a3301bdf792a561a132e0d3d3f",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/navigation/line3d.gd": {
+      "gdfmtSha256": "f345c35da9b4b75e77b1793fb277922b058d9a0b291eab5ff5a610d08c55a0f9",
+      "gdtoolkitSha256": "f345c35da9b4b75e77b1793fb277922b058d9a0b291eab5ff5a610d08c55a0f9",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/navigation/navmesh.gd": {
+      "gdfmtSha256": "4dbea804779299c52c7c5da8921595b9fab41f65e7071ade0dc8b2f98bd1ea39",
+      "gdtoolkitSha256": "0e36d00718d463a144c64b118b045c255cee88b58c87ec48925dbfb1e8060bf8",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/navigation_mesh_chunks/navmesh_chhunks_demo_3d.gd": {
+      "gdfmtSha256": "a23105f717c3ed9e7103f90fd8e6b723aebaddae05aaeed8c30550526d64bb6f",
+      "gdtoolkitSha256": "57fdcc99233ec574e6a98d5294a8a7e2b2ba10d871375a9ea68262e446e91b5f",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/occlusion_culling_mesh_lod/camera.gd": {
+      "gdfmtSha256": "83681032b5ef1dacb2d5c51b91a6f47a13290b72023ee9254f34007d9dbb1597",
+      "gdtoolkitSha256": "5e5debaf0204f55d3e9d10120f5cf37caed40a02ae3172e7aee290b12819dc52",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/occlusion_culling_mesh_lod/door.gd": {
+      "gdfmtSha256": "29e7ddf802f26e3b88720a7085d015e60c0e5e94cfcb85b3baacee39112c76ae",
+      "gdtoolkitSha256": "f20712b3526d8f69ca7ed194bfc14e4fa66ab117a166cdc0fc206b32bce7a31b",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/occlusion_culling_mesh_lod/node_3d.gd": {
+      "gdfmtSha256": "5780eef9eca31483e97a5689f6039c7b2f97ddc710736e86dbe2225c681c7134",
+      "gdtoolkitSha256": "3e9f62017bd3d042b4b996f93aea407443c40f9ddab88757a6796a88ef8d6b18",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/particles/tester.gd": {
+      "gdfmtSha256": "d95b1d92d02b42b9b1ac6188ed7b7dae5ae559b747ff52c93d52be9df332a1cc",
+      "gdtoolkitSha256": "255614bdcf3b54f3a47ef2ec989b87afcdf51364403d97777a89f982a20e1bd4",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physical_light_camera_units/options.gd": {
+      "gdfmtSha256": "bec3aedf5987bbc79a6c152e5d1079704aadb1d1d9d6acfd279ce844fa43aae8",
+      "gdtoolkitSha256": "3909ae2f9cd932e739203dbaa39ba3a95d956b7b01a1d2562a6abadee38b9669",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_interpolation/bullet.gd": {
+      "gdfmtSha256": "7a157847c4f4f5a44565ab3131d51f3a4d3ad013e3f022e296ca9d7f3bfb5134",
+      "gdtoolkitSha256": "7db1970adade798b15bcfa19610756b7c99b6e397ab0371572a3540b3c716452",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_interpolation/player.gd": {
+      "gdfmtSha256": "95dafc4e05e1f812bcdf6da04731fc119e88dac469276cc7492a291eb2ada0da",
+      "gdtoolkitSha256": "5dc212a5d19c09060eafbbf725a516863b5977f6b6c5ff6ebf0a15b3c0e8e52d",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/physics_tests/test.gd": {
+      "gdfmtSha256": "d1b0aef355b7515fb3bbce013125533ce6a155a6c2e82750620314d55fd75fe5",
+      "gdtoolkitSha256": "ad2156b19970039c56a2243e03c39b39c05f8a4f8b555b8ec3c4240e156a9488",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/physics_tests/tests.gd": {
+      "gdfmtSha256": "64b9aa5d6483529b5c8ef17f52cb4072ea0cac3036d7dd022209c04aee0532ce",
+      "gdtoolkitSha256": "63faa70474a32b4f08670dca60a5e61fcd39591c910e903617e12a4a8d7f1bf1",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests/functional/test_collision_pairs.gd": {
+      "gdfmtSha256": "c64433cfc147157bc26f51ca9d7938d43c4636623b65fbb2ba2d74e87f8d90d5",
+      "gdtoolkitSha256": "31b48fcefeb918c87fa17e117ba102bc27feb787b9c957db5f2b0d954ce8409c",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests/functional/test_joints.gd": {
+      "gdfmtSha256": "c22062a52dc1a40c291923b0dae7294084e0bba039274c3ae184b02148674ca7",
+      "gdtoolkitSha256": "26dd6bb4d20481bf55f00425ee26e12890a5c5e1d003bf8c782bcecff735c1ac",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests/functional/test_moving_platform.gd": {
+      "gdfmtSha256": "b88a50e30d83c993f9e8b65622925f04e35e085a555feaed40d065a25cb8de9c",
+      "gdtoolkitSha256": "4e196ba6023964e305decd56fa3b53cc9470f546bb6593f661ebf9fcc0c6f664",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/physics_tests/tests/functional/test_pyramid.gd": {
+      "gdfmtSha256": "939019f42a5802b01d8e3dc8a11e54a45d2eb3c1e213b45c47fe16dda465eced",
+      "gdtoolkitSha256": "43d97cdfa985cb2e87db507f89152d13f1471a8fa2e317bb8f6f18ab3d6f4773",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests/functional/test_raycasting.gd": {
+      "gdfmtSha256": "c74cf4de4a765e398c7fe0a25d3e30b3619a799da4a9674fba48fd4e99039aa9",
+      "gdtoolkitSha256": "a3a7e5b60c57548ffafe9f00290c7b1b385717679fb2cb0366ca5bd32b04b848",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests/functional/test_rigidbody_ground_check.gd": {
+      "gdfmtSha256": "418b05d87a470944a85a7ff5f1d2825a9286cd5deac8aceff73ca3266ab5e306",
+      "gdtoolkitSha256": "fb5a8d3f9de246540b837f6c4d7a8e9be49b7e7327e3aaccee9128a99e075a10",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/physics_tests/tests/functional/test_stack.gd": {
+      "gdfmtSha256": "288d2f60b40a0d60eec2e203103ebcf79a2234884811bcde97ca45195b5d787a",
+      "gdtoolkitSha256": "a0a4c88ff3e3244209e9435a19b3a688a08033cb7445e4dac094854206d927e4",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests/performance/test_perf_broadphase.gd": {
+      "gdfmtSha256": "9f87621375c5759e4073fafbc2e7fd91b463243bdcc3196336002da1d035f6e8",
+      "gdtoolkitSha256": "976053cc8541e69050ad9659c7b0e529f87036b147a4a86d7ce408936ef0c82f",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests/performance/test_perf_contacts.gd": {
+      "gdfmtSha256": "e977b9d69fd91b44c9d670c3328a8a3a2c2273e829e8ce0c1370cf30d67df234",
+      "gdtoolkitSha256": "c6a14f8356c210bb8f85af3474c4566609103757144523701ab988e46f4b12e0",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/tests_menu.gd": {
+      "gdfmtSha256": "4e97131ccf32539a703b77b8dee07baec92d7b8250a83d2a57b657860fd6a293",
+      "gdtoolkitSha256": "ffa9230317365c2ee17f202a8ab49f1127025af250bf43606f72440f75060d7f",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/camera_orbit.gd": {
+      "gdfmtSha256": "88172a8309667884739349ff102ec446da15439c6df0ad9dde83d20281c412c3",
+      "gdtoolkitSha256": "f3da53512a84bca0ecaaf2121f76b0dab68c0b9c17673290a7339a667f413d57",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/characterbody_physics.gd": {
+      "gdfmtSha256": "1143e27130042ed33bbdabe396cad8ca9703aab7c97ac20c6a7662cb080e65ad",
+      "gdtoolkitSha256": "af1f2be02f8c2c2a4fac4652dbdcd97b7a2d9c16b9227987268ae9706bf0c189",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/container_log.gd": {
+      "gdfmtSha256": "b2f4bee1b77c16b9a0dc2dc8252e8b0f8cb598296b8f827bb43c5a8ea7beb76b",
+      "gdtoolkitSha256": "08179faafccdbf77c9f6dbd68b2a55844a9842df22de638831526dec1913cbe2",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/control3d.gd": {
+      "gdfmtSha256": "21a3d0c76eb3f6ecbfe4d39f1774511ac1a4ff66eaaf81d71b4b93e41971b74c",
+      "gdtoolkitSha256": "58d95895c560c1f3427ca576159c89e32dd5af74674744a662d320acd8dbea2a",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/label_engine.gd": {
+      "gdfmtSha256": "5b32fe74c3bb1a24701851a7864b6d71b33a9c08d560a1ac534b7e3403cce494",
+      "gdtoolkitSha256": "5b32fe74c3bb1a24701851a7864b6d71b33a9c08d560a1ac534b7e3403cce494",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/physics_tests/utils/label_fps.gd": {
+      "gdfmtSha256": "edcf9f400d7d1f9728b7bc57d278ec72efe3e8c76aa8e339944a66e809ec395f",
+      "gdtoolkitSha256": "0868b7b64b6e6f78c697537b872e1e76c3850048d0500012ae41a36cde313eec",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/physics_tests/utils/label_frames.gd": {
+      "gdfmtSha256": "2469d646aa12de5c731c22dc3228a060460774857aba9f41b973bd43e52f08d0",
+      "gdtoolkitSha256": "2469d646aa12de5c731c22dc3228a060460774857aba9f41b973bd43e52f08d0",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/physics_tests/utils/label_pause.gd": {
+      "gdfmtSha256": "b8b606a2df7d0c996ac37362b8fd45d9ca88489fb168fec203de24b9a87fe349",
+      "gdtoolkitSha256": "b8b606a2df7d0c996ac37362b8fd45d9ca88489fb168fec203de24b9a87fe349",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/physics_tests/utils/label_test.gd": {
+      "gdfmtSha256": "ccf13429c482c20cae7c575bf7f00bfcb2aa13d3f4f66ef202faabc52be4a541",
+      "gdtoolkitSha256": "60f9854faf93f99dab9ed19da11b53858b04bdea1bc31f962c9dac42342e194b",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/physics_tests/utils/label_version.gd": {
+      "gdfmtSha256": "0be69b0110ef685e70ec33c7eed6fd9a164cdae34f0e0674df756f481fd2352c",
+      "gdtoolkitSha256": "0be69b0110ef685e70ec33c7eed6fd9a164cdae34f0e0674df756f481fd2352c",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/physics_tests/utils/max_steps_per_frame.gd": {
+      "gdfmtSha256": "0d9fa8153c9aa8f8dc779de613da31e66fe4c4c4b615527dddcc8abde04dac0d",
+      "gdtoolkitSha256": "0d9fa8153c9aa8f8dc779de613da31e66fe4c4c4b615527dddcc8abde04dac0d",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/physics_tests/utils/option_menu.gd": {
+      "gdfmtSha256": "929de702c470d8489b167c0b368263eb36a9c27d1587ae53e66cceeb2912ecfe",
+      "gdtoolkitSha256": "112fd88e3916ee49a897e9dde03236f0fe15b3a9de12c6b48bac4448571b9257",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/physics_interpolation.gd": {
+      "gdfmtSha256": "a49eb4146314a8df3e5a2092b187dadad300a6f7b0e709dd1c2f5c05854e8d22",
+      "gdtoolkitSha256": "a49eb4146314a8df3e5a2092b187dadad300a6f7b0e709dd1c2f5c05854e8d22",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/physics_tests/utils/rigidbody_ground_check.gd": {
+      "gdfmtSha256": "81ccfbcdbb67383ae3b49d14ebd15434a68163890d92fc1e941fc30a9bac93c9",
+      "gdtoolkitSha256": "15c0c2a8e41a38ee73b9606eee9bf5c0cd1e90eea1cef00380c0456d57822bdf",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/rigidbody_pick.gd": {
+      "gdfmtSha256": "2c6ad4a0f79ce5d11529d24ab499f27f06bf582ca8bb9c9d41651c81fa355146",
+      "gdtoolkitSha256": "a65b7177c1538f66aff46781b9a59f385625a49dc85122c99d21b1c7653dd6c8",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/scroll_log.gd": {
+      "gdfmtSha256": "251bf3ca50ee8da54dc5a5e91b83ec69d08efd35b5721b017c4f7460c126b5d3",
+      "gdtoolkitSha256": "42c1838ba447e4a7fc38f5d4f640f424d827876884030c58bc756b12cce4cfd5",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/system.gd": {
+      "gdfmtSha256": "6856fee5ccb4af40b9180aba7c76e1ecf865a8b8cc7e32dbbc62aad5d65d2971",
+      "gdtoolkitSha256": "6a653850ce467ee3f732add7d1112a86d4c850beeeca966f310ac87fe8917bf9",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/system_log.gd": {
+      "gdfmtSha256": "f0a4c533a7df9a29d7eaf81cd207582aa4682f5b7760fb095513a9f4c9303d98",
+      "gdtoolkitSha256": "cae7c4f8660c78151f84bd0192bebfd441bc32eb422cade8bf0df292ad8f9a5c",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/physics_tests/utils/ticks_per_second.gd": {
+      "gdfmtSha256": "8b2873f3261707a33bae341c4165bf528df10ced23bafb249831737c9347705c",
+      "gdtoolkitSha256": "8b2873f3261707a33bae341c4165bf528df10ced23bafb249831737c9347705c",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/physics_tests/utils/time_scale.gd": {
+      "gdfmtSha256": "35f06ad1ab32a7b5f790ab6b3f553067d4edadd946a83898a06d00e8e5f79e22",
+      "gdtoolkitSha256": "35f06ad1ab32a7b5f790ab6b3f553067d4edadd946a83898a06d00e8e5f79e22",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/platformer/coin/coin.gd": {
+      "gdfmtSha256": "ad4f110e0f111314862c677e279dabbf7a4cf2357499886202134016de5bed55",
+      "gdtoolkitSha256": "47564aef6f50d6fb65137391d3a12fa29c8246eddcf008d4e7ba4a6bd1ab99f4",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/platformer/enemy/enemy.gd": {
+      "gdfmtSha256": "3a5f98264209b45425eb64409eec9cbc7de266682c19dfa197ed6eecf313a52b",
+      "gdtoolkitSha256": "c6e3fcb22fcac06be05ff3c7ddb5a8ce31b2d22e0b8fd452e550da56b3474067",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/platformer/player/bullet/bullet.gd": {
+      "gdfmtSha256": "7e6aab975176f204c6b1500542f747c77ad02f75867c863c62b8b6df934cdd6c",
+      "gdtoolkitSha256": "7e6aab975176f204c6b1500542f747c77ad02f75867c863c62b8b6df934cdd6c",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/platformer/player/follow_camera.gd": {
+      "gdfmtSha256": "fae55f8887039648ae90a047a330a41de997083062dfe01105854826ce75f59a",
+      "gdtoolkitSha256": "b7aef4b37c69c89cd481cb501d57d8dfa378224e5b27f7434d24552aefbe91b7",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/platformer/player/player.gd": {
+      "gdfmtSha256": "5c5c90032cc226de2f873583e456f6eaf0cd0a262d9bd0b9cd59ee8d03df64b4",
+      "gdtoolkitSha256": "b9741ef135787c7392325766e1e4a15bf528330599827f8d52f2e6ae08ea602a",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/platformer/stage/stage.gd": {
+      "gdfmtSha256": "be676bbee50c95eaceb7d70ea18b2825d0737f79eea195caaadb12cfbd8d56a4",
+      "gdtoolkitSha256": "be676bbee50c95eaceb7d70ea18b2825d0737f79eea195caaadb12cfbd8d56a4",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/platformer/touch_screen_ui.gd": {
+      "gdfmtSha256": "58af88d0ef1b3aa55d0328bf3eadec5259d1756487c2b786853603e87e9e856c",
+      "gdtoolkitSha256": "58af88d0ef1b3aa55d0328bf3eadec5259d1756487c2b786853603e87e9e856c",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/platformer/touch_screen_ui/virtual_joystick/virtual_joystick.gd": {
+      "gdfmtSha256": "4787940e3434755d1577c9664b8c29a05a59e7723ec1949f9aa2a3b72095fd7c",
+      "gdtoolkitSha256": "3882252a223019d2418b4b7f329e6f1ff28bdc684495b7c2260af094ed4f6643",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/procedural_materials/loading.gd": {
+      "gdfmtSha256": "c475d5774e88b33d04a84284c47cfb9f560c3c7303e7ff111ab137874925a054",
+      "gdtoolkitSha256": "c475d5774e88b33d04a84284c47cfb9f560c3c7303e7ff111ab137874925a054",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/procedural_materials/scripts/grid.gd": {
+      "gdfmtSha256": "75c098118e556fe1697634bd6fb4e450135cf6769929fc8e4815e82ccbb88afc",
+      "gdtoolkitSha256": "e08fe18da2fe7e0254241bf40817093d768635f75be6e7ca0c5fa2d6aa093084",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/procedural_materials/tester.gd": {
+      "gdfmtSha256": "b3b1208acf79db171eff1f849c025cc5a9a2a0da30f800973c53b0f3ac253b83",
+      "gdtoolkitSha256": "6798b0339003d054ce8cd52d77dfe578eb2a8f434f2d2adc9367d2760e5f731a",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/ragdoll_physics/characters/mannequiny_ragdoll.gd": {
+      "gdfmtSha256": "5dccf93aa97a61167f518e29a03afa8371e80400473178d8dafc9f2edbbc1edf",
+      "gdtoolkitSha256": "35f319d88789bfec6e69b469e9b93b8030e82e217ede3b77aa66954b3ad48c39",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/ragdoll_physics/ragdoll_physics.gd": {
+      "gdfmtSha256": "cc0334f89cca9cfb7b16dd5f9113b97036e49611364b7bbe3dc70eef54824b3d",
+      "gdtoolkitSha256": "a12a88b91dd8ec1abed31538df9ca9c7d6729e6977d3f25897d5d61eb3684867",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/rigidbody_character/level.gd": {
+      "gdfmtSha256": "1846ae06ee0fe7d5df0c4cc9a356710cb24d4ed7f843f3cf5ce5406679256f10",
+      "gdtoolkitSha256": "6abaa390d9320637c32c6f3ecef9cb0524cd6afc7502c4fb9c12b5a9fecbf71e",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/rigidbody_character/player/cubio.gd": {
+      "gdfmtSha256": "57ac0ca7ac43f67325ab86b606bc44723d906ca53a0b0b12dab26dd7432f29d0",
+      "gdtoolkitSha256": "d9f894082690445f8c61854ea446077f773e24246af8cd506e1e486de1cba241",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/rigidbody_character/player/follow_camera.gd": {
+      "gdfmtSha256": "ff074c9fb0a1b5e5b562dff72fe3f540ae4326af919fa6fc5b5b3f876b2dc624",
+      "gdtoolkitSha256": "0e4c3da11cddae4d0e220d658428e3c6b0116618ba2533de44c6cdaaef43895b",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/sky_shaders/main.gd": {
+      "gdfmtSha256": "0d3e26f97a4999eadbbe15c3ac15f553ec86ecff7388ddb00fa478c3f9350454",
+      "gdtoolkitSha256": "dfc23ff5a61883cb5310541babd7438c18d2debb89dcd1812357c347e83a112f",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/sky_shaders/spheres.gd": {
+      "gdfmtSha256": "b0fdb2effd9127062333e89679cd198deddceba60df81e1432e20d406dd3be32",
+      "gdtoolkitSha256": "b0fdb2effd9127062333e89679cd198deddceba60df81e1432e20d406dd3be32",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/soft_body_physics/tester.gd": {
+      "gdfmtSha256": "e2472a69ab4a6a091bb3342c66f0bdddd2bc07e5e245b99f4e92472f154f94f5",
+      "gdtoolkitSha256": "e4310a592a4ebe4316ec6092cbc369509ceba60a3203e4d073e8dd81e12e6d65",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/sprites/scripts/3d_sprites.gd": {
+      "gdfmtSha256": "073f1f6ccf64a9ef5e019b0063f14bacc32a0a4e157e1180f326ac8e2ea7ead2",
+      "gdtoolkitSha256": "e82d97857295ef3620d14904b5be2443645d634c702d95af1257ca61d55a4b3d",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/sprites/scripts/player.gd": {
+      "gdfmtSha256": "8cea744cdde2e963eb656c61bae5d78e025f9d052a6273a60ffd64f39f9e052f",
+      "gdtoolkitSha256": "953504b73fb191613082c37fc475202363fbc2690d4941a79ad07b5a7a1c2c95",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/sprites/scripts/sprite_rotate.gd": {
+      "gdfmtSha256": "0a73baa93801d94a17d607f099ccb456999db8dd91d5349d1d5c3ad237e379a8",
+      "gdtoolkitSha256": "312cb637a515069294c00b271337e1aa41a8f9d3b00d415ac28bcae282371edf",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/squash_the_creeps/Main.gd": {
+      "gdfmtSha256": "b686872878464e1aa998206387f7a9662da69913e572cd4ad808d13c80fb0593",
+      "gdtoolkitSha256": "3116c622d9ab17fc21c711d6da1fa82405209cd80a05a4bb87bfabb16ce3ba3d",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/squash_the_creeps/Mob.gd": {
+      "gdfmtSha256": "6c460edd465ced08ceaa882f836bf7d5a86cb39ba5cb51c2b69c7a4cb6b607aa",
+      "gdtoolkitSha256": "12bc135f704ed11bfc3dce2acafbd795502e615679bd49e1de92a895f87e33e4",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/squash_the_creeps/Player.gd": {
+      "gdfmtSha256": "cff3fc5e35fd8d0bb94da81e146537f99b03ab5aa3a16596be4f9ffbfa32abdb",
+      "gdtoolkitSha256": "e138ba5f4ded1cd2ef2360457a8a00755b6125a8369d89f478044cd0013ab90b",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/squash_the_creeps/ScoreLabel.gd": {
+      "gdfmtSha256": "b4e10f3b95a80c34b67d5e8873501ab3d7733abfd4ca91f5570143290e44e9c9",
+      "gdtoolkitSha256": "b12e74e27372d3a2971d8e9e7e486c4bfee3543180febfc8a31f4dcc73e68481",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/tonemap_color_correction/gradients/gradient_bars.gd": {
+      "gdfmtSha256": "1e120491a0e0c1132a12b7d706057b7288e0087dce63628b50f0146e1a40b7e5",
+      "gdtoolkitSha256": "344b5b1811d0fda2503592895d25b46927afc990817459639bb03eb375909371",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/tonemap_color_correction/gradients/gradients_controls.gd": {
+      "gdfmtSha256": "39f0c79e048204e2d0b39672283feaa4f1405a018e97a5418d353385647e9668",
+      "gdtoolkitSha256": "ac3c93a4fa22284d39a497f07b455ff9df9bae32b423cc145d3bcb806c540cda",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/tonemap_color_correction/neutral_luts/3d/create_neutral_3d_luts.gd": {
+      "gdfmtSha256": "3318386e3354b1ccccc01f9e254012fb02f97b808b02303b0167436d45e12853",
+      "gdtoolkitSha256": "b723ddc161652de9ce8f57d907f875a6d926a206a8778db183ff5fc877bb66e6",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/tonemap_color_correction/options.gd": {
+      "gdfmtSha256": "90c49ea0d47728737a70b6e6f633d74a06aa8b63d1ad2e7dbf5fa1d5e40eedb0",
+      "gdtoolkitSha256": "a94a4a92d9e6f5081976c2e778e325db263f5b41693704989cc79646c3bf53be",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/tonemap_color_correction/test_scene.gd": {
+      "gdfmtSha256": "d04b80bc60ed5d062a7c5341e14c4d24f411f9230bbe413652ca5c1502b7d4e2",
+      "gdtoolkitSha256": "c33452b451fff620d42128a163e02fcf169962af0aed2629552ac21a9fd68201",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/truck_town/car_select/car_select.gd": {
+      "gdfmtSha256": "95024c469cd8be906253e0ab9b52c129c9be84ada4cbc24ddba9818a51f71f7c",
+      "gdtoolkitSha256": "b9f218a5a436382e40a6cee26e4a2a6f9b8bd6e633c383fdef81ab6795e3fece",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/truck_town/speedometer.gd": {
+      "gdfmtSha256": "f6f697e20d666824e416656d48c32c758229a9366def851dcd26920176ea7f8f",
+      "gdtoolkitSha256": "7a203c13f8403056d8b1f9959e908b73ae120baab647f139c8c2d27b3dc5acf2",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/truck_town/town/town_scene.gd": {
+      "gdfmtSha256": "d13595f4a165009be06db8826c539109299152869ad6b6de0e2d98217a646416",
+      "gdtoolkitSha256": "bd63e4eddb19b2a16df3ead4968a8249f6bc156ab94cd90b352b760ccd9dc500",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/truck_town/vehicles/follow_camera.gd": {
+      "gdfmtSha256": "a1fbb778f5a367c80558ca808ecf2b56e89533237b06f329c27262fa0fa1d22d",
+      "gdtoolkitSha256": "d2938545fe280a5c7fd3833cc2821eae58658059cc12ac91c345e73692fe9d8a",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/truck_town/vehicles/vehicle.gd": {
+      "gdfmtSha256": "c96d6c3eb61a51eb17ce8256192f96a14fa341eaecfc7fb8b8d4f3497f518508",
+      "gdtoolkitSha256": "72207d39aad0eb5dc1bbd2fcf5e0ea01a4aeb781abb4d3a565edd2ec886b6e94",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/variable_rate_shading/information.gd": {
+      "gdfmtSha256": "0ce50d26f79cd842d0053186ca5eeebe4cf36c3013a302f70b444d43001bfe6b",
+      "gdtoolkitSha256": "08cf29ed1ea9028f8e3364e5f5ad16982a7c649715681c83450bb8a799a02331",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/variable_rate_shading/vrs.gd": {
+      "gdfmtSha256": "f6c107004b54a5ee1b48c221f2bbeb2b66b931ee725a2aedaaca7d87d1f0d4d1",
+      "gdtoolkitSha256": "a960de88d5692decf75175549c4ff1d44620931acf2fc6797e96f008aaf66f1b",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/visibility_ranges/camera.gd": {
+      "gdfmtSha256": "273ffeb7aeceef17f4b479703c0acb1a45cab211f813a7ad2e7c1111435db9d5",
+      "gdtoolkitSha256": "e9c7dd1f001ab0e6376f4a3c582a4b9ed8edfd39d411b1d5b74161c6ccef3497",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/visibility_ranges/fps_label.gd": {
+      "gdfmtSha256": "2c61ce7c09bdf63d27f7ced0b3c1d5449c593dbc96b7b41d7a33cd90cbd68563",
+      "gdtoolkitSha256": "2c61ce7c09bdf63d27f7ced0b3c1d5449c593dbc96b7b41d7a33cd90cbd68563",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/visibility_ranges/tree_clusters.gd": {
+      "gdfmtSha256": "c27062494f092c2847b4ff5acc630afd85972f770ff2d4c60f11bd21b6a79d2f",
+      "gdtoolkitSha256": "fda1dafb74ec00635fccce6c4124e323ac3c7d440b6f2d63451f276ade4a17bd",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/volumetric_fog/camera.gd": {
+      "gdfmtSha256": "06c3bfbc6a9b72aa03c73d3c7da44816488cb25adb64baa36c5c8481fc6a5870",
+      "gdtoolkitSha256": "ba2612c90466b77be430c05e18a4f0ce5623ee58bae4859f148b4f8eb1148209",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/voxel/menu/debug.gd": {
+      "gdfmtSha256": "dcf9bd36e8a153384b1997c7e781c62bf0b306853558b64392ec647379221570",
+      "gdtoolkitSha256": "bacc2ac4539bd91797d1f6ce2202d83cbae5f8a969407313acae7e11c8e218f8",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/voxel/menu/ingame/pause_menu.gd": {
+      "gdfmtSha256": "add1e5b7d61af12ab1d37ad912c5aac2c142306dc1bbf03d6f06b8452ac1a1b8",
+      "gdtoolkitSha256": "5b5177bbd691de353c6cc1a649d9b646ddf6ebd4e089046e93556238c8f0d432",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/menu/main/main_menu.gd": {
+      "gdfmtSha256": "a68557444588ab83694544fe3c4a58912ba5ee06af4d6c1d241c77603da92b6a",
+      "gdtoolkitSha256": "d65fab7909e312bbc45a97d5e38f2fbe98870ca13f04a2c96fd1ebbaa4015614",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/menu/main/splash_text.gd": {
+      "gdfmtSha256": "f00d5c9344c8035fcaad7a3c6ab31785ff6f2f542259215be65dca5dbeb0e145",
+      "gdtoolkitSha256": "56cee1ed3f40944a62bf08512356b482d99829b3e8d2935533d46613de30e5c3",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/menu/options/option_buttons.gd": {
+      "gdfmtSha256": "1769ee6c60c5c898e7ad67e9ff2b818bce8057fd4b5b3b040417b4d21930c770",
+      "gdtoolkitSha256": "34260384e2f4f3dc20169111f9813596b294b597acd9287ebebd336df03f13a8",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/menu/options/options.gd": {
+      "gdfmtSha256": "375ce72a2d93ae29cc2afafb495efba8ce58be38229e4b4fa5f4022037dc9c78",
+      "gdtoolkitSha256": "b9e60e279e1bc1e0ecfb5dd66ccba6f14dd820e0e4f4c1a7099ac4eec172092d",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/player/player.gd": {
+      "gdfmtSha256": "aedccb5d012e1978927bcba6056164c1b1335dbed4a2f1c8738d52963a95d0a9",
+      "gdtoolkitSha256": "99758683315ca4e2cb1ff9de1eb9ad75982627f7f5011190e6b5be20cba8574b",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/settings.gd": {
+      "gdfmtSha256": "b190de2e16343b8e37b81da2a16b04d31d6481b7b6358762caedee73b0ccad35",
+      "gdtoolkitSha256": "f0552c041d34cd14d8d6b2c9ec5098f5d629059d8ebad61578f6e304f2615ef1",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/world/chunk.gd": {
+      "gdfmtSha256": "88af4107d93864a113d1b32c5492a57bcb8755b93a137dab4708a78488b3439c",
+      "gdtoolkitSha256": "7bad298efeca29331263ff46452299036ad2e74c8179cd41c3b06944f81f39f3",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/voxel/world/environment.gd": {
+      "gdfmtSha256": "fa484a99ad193042bfefc2e741b05692f161a0752bacaffb270768605637371d",
+      "gdtoolkitSha256": "6912895e1ecf15bdf19da7c61d1729fe0783d1f2456a4e53b1f1e2e6e22ef34a",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/3d/voxel/world/terrain_generator.gd": {
+      "gdfmtSha256": "f15eaa5eaaeb020eae766e3e94fec20b8d9f5b3d4e31c4bc63362724d2f9f157",
+      "gdtoolkitSha256": "76b7704758f0788649a48fc9b1c5e5615fa10fc27007272cd52f89aaa2818760",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/voxel/world/voxel_world.gd": {
+      "gdfmtSha256": "55fa3eee3d99607921ebe008fecabce2a6eea16893283837dc751f51f7e88170",
+      "gdtoolkitSha256": "f20cc5b92ad40898779e4c5e4001431587c585df562203f29c7a66094b987457",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/waypoints/camera.gd": {
+      "gdfmtSha256": "9a4fd7db4f915427931a11170d9e19e34d552fa2ca1436442448c291d9914606",
+      "gdtoolkitSha256": "d1aa5f9074fae4fcb04f19c2eee5b308a802fe9ddc8b3b007a2b8ff4681f23e6",
+      "categories": ["layout"]
+    },
+    "godot-demos/3d/waypoints/main.gd": {
+      "gdfmtSha256": "0d7e2afac484efa910bf2a1de76c1135bc3385afa7b1c6cd20fe01bc84a4df27",
+      "gdtoolkitSha256": "0d7e2afac484efa910bf2a1de76c1135bc3385afa7b1c6cd20fe01bc84a4df27",
+      "categories": ["identical"]
+    },
+    "godot-demos/3d/waypoints/waypoint.gd": {
+      "gdfmtSha256": "640a5365e1e6c5b8049492202dcfa5debe9b63065b6614574d7c37a461728eed",
+      "gdtoolkitSha256": "9ce4d52d83e286968cd55f1f430086e2061b1f78b4103812126992cd31263040",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/audio/audio_effects/audio_effects.gd": {
+      "gdfmtSha256": "f15623d32bd888805fc3dd0481d450d63a5b3458576c3afbf8f75c4580ed5563",
+      "gdtoolkitSha256": "f15623d32bd888805fc3dd0481d450d63a5b3458576c3afbf8f75c4580ed5563",
+      "categories": ["identical"]
+    },
+    "godot-demos/audio/bpm_sync/bpm_sync.gd": {
+      "gdfmtSha256": "d01faecc79dd3a1ae6628fd877817b39699fa92fc3796b96c5d7721451a94494",
+      "gdtoolkitSha256": "188bfa1c764c8676824c5901a938db4234a73f8e65de6e2aa6af3e53f344e9cd",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/audio/device_changer/Changer.gd": {
+      "gdfmtSha256": "ac5f6454b614c1824faa51a36e918250747a9b2e88ea8eee67791ce943bc04eb",
+      "gdtoolkitSha256": "26f25edc4fc1a0f477204541b13b0b22887257b2cb1698754fb6e33587d13d06",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/generator/generator_demo.gd": {
+      "gdfmtSha256": "a1f33e25366b0f6cd6d9e9834ea52ed40f4c2d27ba950471ede71ccaf2c1f4d2",
+      "gdtoolkitSha256": "147a5c44c093c9f027cabff6350c53c88a0048129edef5bdb396dc36fe1be28e",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/mic_record/MicRecord.gd": {
+      "gdfmtSha256": "13033d3d8630849a68e40ce7de3d9548bf727d3d6525786c8e17357daab0fab5",
+      "gdtoolkitSha256": "86346c3e7b908d62291fcf80bcfc70f79722340404a03aeec60b1b1eb3a3acf7",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/audio/midi_piano/piano.gd": {
+      "gdfmtSha256": "52b3ade12512ab13f92ca05009b2ef8adc4243b6fa514f92aa582d318a64bdcd",
+      "gdtoolkitSha256": "e06e0a719703820d4a890dfe39e15aa2cbdd402481020563029a03d67827a3b1",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/midi_piano/piano_keys/piano_key.gd": {
+      "gdfmtSha256": "f3eecdd22f14d9fe8c045b0f95e4b3d119559b05ca8a831a0fc2f8f6831d6d51",
+      "gdtoolkitSha256": "ca4da8e6e4057bce6fcb2487efd7baa029d7cf95978a1e604f5d6c24f335e92b",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/midi_piano/piano_keys/piano_key_color.gd": {
+      "gdfmtSha256": "525a3e476b917c62a6e35570468f8b82e1e00de6973d8f597b41de8fb310a88f",
+      "gdtoolkitSha256": "c0d8d0d7e1d611dbad0ff12373bc9d53a0824c6642fb4350443243d1bc1e3220",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/game_state/conductor.gd": {
+      "gdfmtSha256": "f01d35373966b4b97e42f21d9a6316c62af77febc90ac9afeb0a09753f114614",
+      "gdtoolkitSha256": "dc1bea6768ddceb1bf0602bbd00f04c7fc93217aa2fa1bdbed4c7c06dbf4d85b",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/game_state/metronome.gd": {
+      "gdfmtSha256": "62e9974a3971af2f720d8855c18f5c4e777ef094671a84c86f057fe3fcfe6ba5",
+      "gdtoolkitSha256": "3fd2ac067470ba83ed59e6ac83c33fb8ff1f8b2b3bea439ca5d65a71737afe44",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/game_state/note_manager.gd": {
+      "gdfmtSha256": "c2097e0d361481084b1b3ea7381c2e2b20b3042b68d652b9ee2390bd0ecf069f",
+      "gdtoolkitSha256": "6a482cd28b9484d1a1a2d8b3c968c21ca64deeebf2914a6a83a81f76b971984f",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/game_state/play_stats.gd": {
+      "gdfmtSha256": "59e0ae6d1afc46b7bc9f2c9778c74398d5d45c6fa8601c3609bdb8e71850654f",
+      "gdtoolkitSha256": "620ba0c955523eab51e76ef76b0e22f7a75b6feff616aa93524735b0435a9e1d",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/globals/chart_data.gd": {
+      "gdfmtSha256": "3f60d2dfd1a3ce7fa91bca90e0431847de5fdd8da98704a860a7e659c44c590e",
+      "gdtoolkitSha256": "8844546c8fe9a06766b39f78664d36ae6aa7b9ecaab7bf2ec082b5621c027208",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/globals/enums.gd": {
+      "gdfmtSha256": "51a09e0b6aed8111b6317b0e0ff58e80a261f3561c4b78c36eaf805638280634",
+      "gdtoolkitSha256": "5254c745a71ce40bba7d9bd00702783a3c9f90c8958494cbabb8a034cc14ea80",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/globals/global_settings.gd": {
+      "gdfmtSha256": "07abe2828521e3730b2e326aa5c908d76ebdeb0f73e0864c402e7dcab84a7e1b",
+      "gdtoolkitSha256": "a3b6080fd469462e1c45b61016fc93de86cbd4ace66d892a830f54a40ec452a1",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/globals/one_euro_filter.gd": {
+      "gdfmtSha256": "55af8c9eed700d3245c3f52e1e7961a4a0319dcefa2294f488706743712a5fd6",
+      "gdtoolkitSha256": "3d43fc1fd34070eb566387daf50f6e2a09957da67233ff0658a01f5bf6c3f3bf",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/objects/guide/guide.gd": {
+      "gdfmtSha256": "34d281622f780cd5ec2838b170081be0e0deda4ff2789dd1f1ce2efe74f7fa93",
+      "gdtoolkitSha256": "34d281622f780cd5ec2838b170081be0e0deda4ff2789dd1f1ce2efe74f7fa93",
+      "categories": ["identical"]
+    },
+    "godot-demos/audio/rhythm_game/objects/note/note.gd": {
+      "gdfmtSha256": "8fc05a5108b6c9cba1619b034813a27d27907a7a2f4e72657030cdc00ad4ffb1",
+      "gdtoolkitSha256": "dc73ae47dcbc5faf6fbe02cf037bf347c37b2bb41cb7ecbad19a6fe650935e29",
+      "categories": ["layout"]
+    },
+    "godot-demos/audio/rhythm_game/scenes/main/main.gd": {
+      "gdfmtSha256": "947a54e734d0e84e1b0bf44baad1e78feb019e45bbd29b41e65311c9b4b5120c",
+      "gdtoolkitSha256": "0fb2176d16f87396f99763de6668019492dce93bf5f14abb2185e2cf18b1246b",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/audio/rhythm_game/scenes/main/pause_handler.gd": {
+      "gdfmtSha256": "59ee4cc4060a2563a9001fd76d4c86387873f25420a1f33e7ba4c7ff3d587caa",
+      "gdtoolkitSha256": "59ee4cc4060a2563a9001fd76d4c86387873f25420a1f33e7ba4c7ff3d587caa",
+      "categories": ["identical"]
+    },
+    "godot-demos/audio/spectrum/show_spectrum.gd": {
+      "gdfmtSha256": "dd3f812da8c3f6394c3d000de2788966339d7c5377c2becc3527aa0120ed4b85",
+      "gdtoolkitSha256": "028ad2a91bf7902e24158eb58f2c0a9d22f70982224eb05d929911e8243f8352",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/audio/text_to_speech/voice_list.gd": {
+      "gdfmtSha256": "49164167c4afe932ecffd575f4ce583cf0bda8abbcaf6af5802d036cdc3a0c5e",
+      "gdtoolkitSha256": "939a3361cfe2231a482dbc64b97bbc2afc482618dd94b4671388119cf1f5b0f3",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/compute/heightmap/main.gd": {
+      "gdfmtSha256": "36ccc016e2e470a7e5049d66ae209dff25b14b72c6a5a442f43a93dd9813ee6d",
+      "gdtoolkitSha256": "756bcf9e07c7d064b2b4db11aa426ca5fd3cb70c5dc6eeb2ad5d1753cf2513bb",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/compute/post_shader/main.gd": {
+      "gdfmtSha256": "f8a5365d407c10d697b3309889f9b146a455eb8f9b1096e83e26e254019139b0",
+      "gdtoolkitSha256": "f5543121ff7d55b4dfc2d02e4c51b28726232623db9786e0796559a2f7aa5598",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/compute/post_shader/post_process_grayscale.gd": {
+      "gdfmtSha256": "267445a73bebc113794a9fde82c63bccfcd8816c0f848957d149472f781de443",
+      "gdtoolkitSha256": "b635bb965626a3e3b7f98dc4f7a3dd72cd71ee5b977903468d8d03e37d7e939b",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/compute/post_shader/post_process_shader.gd": {
+      "gdfmtSha256": "f34c0eea0f270d73ba5cef0fffe14922e2a4d8e5cd9e7f28b3cd7030e54c816a",
+      "gdtoolkitSha256": "e4d5df388ab0c5f03f3f903ed7912c7215a5234f2beea85d5e98da0bb061d77f",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/compute/texture/main.gd": {
+      "gdfmtSha256": "3add40465e1daba34dd3faccc36c60641507f66b542066522cf9968dd94bf845",
+      "gdtoolkitSha256": "428d5e6a8e1738f3d1251e5cbe45f05e1971454a69689e8c25e939b52a0cb4da",
+      "categories": ["layout"]
+    },
+    "godot-demos/compute/texture/water_plane/water_plane.gd": {
+      "gdfmtSha256": "6ab7e207575f4d592aad1c7eccb6c9818ab99022701d8ad96e101b0fdac34c04",
+      "gdtoolkitSha256": "467e21f28d144b7b2f88f84730d8c917b3c6c71c0fa7cd6b9d3c89f84938bc8a",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/accessibility/controls.gd": {
+      "gdfmtSha256": "5aa41530f68599761d6c38a37f02181ca738f27a90eab98eb09be507bec55464",
+      "gdtoolkitSha256": "b67b84728a41f1f225b432ac462ce501b3f69e65fd34c2c2d331261fa958e091",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/accessibility/custom_control.gd": {
+      "gdfmtSha256": "8e9f489fcc8a972128bed0ad6c1c6937de38b28ef6d8f56008c4918dbefff671",
+      "gdtoolkitSha256": "510d396c0e4c3093e333c8a90b8653965362f44ca096e8edcaf30d436567100f",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/bidi_and_font_features/bidi.gd": {
+      "gdfmtSha256": "953c1986090b34050fd769664afa118c8010d958d0feb703a59fdc0171de6b0e",
+      "gdtoolkitSha256": "e6bbefcc641614fba5e7fb4c98f48337102444d4150a4026da3f14370547abc4",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/bidi_and_font_features/custom_st_parser.gd": {
+      "gdfmtSha256": "3dd51ea9e85a2055cec28e89b4da79aedbf49f74e4d0eefdd1fecdfbc80a103a",
+      "gdtoolkitSha256": "25c154f5dcf0679af43b270b5aa1fb17b02b979761ed78d94e0bf4469e7478d2",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/control_gallery/tree.gd": {
+      "gdfmtSha256": "8269bf5b1d6841b523886b47cf334d47d9bae6091117f9c3f03ec4d201986971",
+      "gdtoolkitSha256": "25e611c154bfc9c60f834c011a27ebb1dc363a7a61a081b470f221e182b8c7d1",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/drag_and_drop/drag_drop_script.gd": {
+      "gdfmtSha256": "e979dd5e49e75c4fee71a9a993374fed5b0858d201b526151ace9cb8c90e2164",
+      "gdtoolkitSha256": "f30c52c7d7292602182e4c9d7247eac6ea781f378666714eb782cd9c7d11a7ea",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/gd_paint/paint_control.gd": {
+      "gdfmtSha256": "5e885eafd886322a750929200440b043f6d495d5bf86f0b955913cee54b655e8",
+      "gdtoolkitSha256": "42c5285dbcb1270ba51a67c9c661d563684dc4ac27abab6e260a2b5c6e3ee693",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/gd_paint/tools_panel.gd": {
+      "gdfmtSha256": "1ba1443fdfece04ac5aeb68906c5ef9acabdfde10f53794ee66ba98c5ce65ca9",
+      "gdtoolkitSha256": "67cce3314992bfd8f2605710b6a19b816e36f89df3a2ffbd1010a2d348d36233",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/input_mapping/ActionRemapButton.gd": {
+      "gdfmtSha256": "56bd365f24a5d437f396272a9022f479fa724f12bf3df8fcd82ca4b9720490be",
+      "gdtoolkitSha256": "0da2d81ed5bb814897f57a32db51cdbde9c389ddf97cc2f40df87d34c956acb1",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/input_mapping/KeyPersistence.gd": {
+      "gdfmtSha256": "0cee9769b2806f2d676ae4bfb19ab3e211bfc08c5c4fb30b35f8e743813f639c",
+      "gdtoolkitSha256": "0cee9769b2806f2d676ae4bfb19ab3e211bfc08c5c4fb30b35f8e743813f639c",
+      "categories": ["identical"]
+    },
+    "godot-demos/gui/msdf_font/sdf_font_demo.gd": {
+      "gdfmtSha256": "bfa7f82723f14d1261b1dc5e6f1f1449c59c2f8dfc96368fe3d69c689bd6aea9",
+      "gdtoolkitSha256": "472fb189fc5564865c35a0a6dfa1c7ca70ec1faafd4b26543175ffceac14f9b1",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/multiple_resolutions/main.gd": {
+      "gdfmtSha256": "0583eff63fd073836f80b640547006d37688796edf6b9202480d82c3aee4f07d",
+      "gdtoolkitSha256": "ea19bf04ff7525275d14d4c4d6eaf7dcc3f124c5d5426d5672aad133606f6c2c",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/pseudolocalization/Pseudolocalization.gd": {
+      "gdfmtSha256": "ea92f6f267b7171384dcacd56fba419268cab3ffe291748ae9e1a5b952968939",
+      "gdtoolkitSha256": "be059ecce60ef08a03e6ed731928d8ef80bb721c906f95cc8f2127e0a1420409",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/regex/regex.gd": {
+      "gdfmtSha256": "14630098344211e9edbf4454e15f2f87781ebffe0c3a8219ede683e8df0ba6cb",
+      "gdtoolkitSha256": "d9d7e9fa4cb3a9ee66b9e0f8fff50d0f5130ac184cc89ac90921bcff06d8af3c",
+      "categories": ["layout", "quotes"]
+    },
+    "godot-demos/gui/rich_text_bbcode/rich_text_bbcode.gd": {
+      "gdfmtSha256": "4047a1c788a937444725708662981734e46b1f1eed03d9afa83ef1e4f6ca7299",
+      "gdtoolkitSha256": "fc1cd330fad833dbab7a89700f5ebef75525391db6dcd6995277d9527000fcaf",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/theming_override/test.gd": {
+      "gdfmtSha256": "b33c01b3f6df5956817ec5449f0f6166b5ff9542355a3486b0e04a57e10caff1",
+      "gdtoolkitSha256": "dce732b50ce3724866c45516a92f7f3a5649e49e1cb52ceecf9007a9e1669381",
+      "categories": ["layout"]
+    },
+    "godot-demos/gui/translation/translation_csv.gd": {
+      "gdfmtSha256": "0964b63d0b1bc2e0a67701e7f89a2157c39ee907551e188ea169edaac2fa9e6d",
+      "gdtoolkitSha256": "74ce9b83be52d83646021e6d52bbb78d3209c2f15527c3af01384971d253e761",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/translation/translation_po.gd": {
+      "gdfmtSha256": "bc9430c4c238cf0052a17c0cc233415ed3d6c2351caacebe78c5eb73dd9c5a9b",
+      "gdtoolkitSha256": "ed247d9d2a8bfaf88376571fead1cfb42f541ffaee83a43afe09eff7ec33c196",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/gui/ui_mirroring/ui_mirroring.gd": {
+      "gdfmtSha256": "4206bc2c902ba524d0ab1fb52af04c9cf0004e69b3981614da0077e207d9d59e",
+      "gdtoolkitSha256": "687412c29d72a4f18000b5bdb8542104e1f11b96f50c2a1771c42bcaa391899f",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/autoload/global.gd": {
+      "gdfmtSha256": "6488f284ee5ccc4a88b2731c45fc6e2c67d9c3da39685c1b54dfe038056d0b1f",
+      "gdtoolkitSha256": "6488f284ee5ccc4a88b2731c45fc6e2c67d9c3da39685c1b54dfe038056d0b1f",
+      "categories": ["identical"]
+    },
+    "godot-demos/loading/autoload/scene_a.gd": {
+      "gdfmtSha256": "8bff82d8016e1b8cddaa520eadacfbe7551b02237b0ff082749b4eaec8b61800",
+      "gdtoolkitSha256": "9734b6ccb54f4121c5c6f03c0f19036dc1ec55e4f2aad7534ed4cd4dc12c16ec",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/autoload/scene_b.gd": {
+      "gdfmtSha256": "a5ddc7afd8cd6eab73a77dbced4d2c5f548a9b3e434da1688ea9ce6d424de9eb",
+      "gdtoolkitSha256": "30afb078337fb028e6acd2b3e201e24c6293e00d3a65e94c9060d86a7b071e57",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/load_threaded/load_threaded.gd": {
+      "gdfmtSha256": "256982ba1b827573132ba587181d3aa44ca3004eee9f39fa2a058f46418833db",
+      "gdtoolkitSha256": "a0abaadf446dbed9cd955054794d6cb6ad5231282b5319b08dc1ca4ea8b25e69",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/runtime_save_load/runtime_save_load.gd": {
+      "gdfmtSha256": "621da2d7f27ad736b0cc0a187c975a39b09f95f73f1bd228c10bcf71aa266809",
+      "gdtoolkitSha256": "b025e1b4a11b24e95ce31c8aaeb9cba26ea767c9edf4d71afc90d2cdf42bed65",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/loading/scene_changer/scene_a.gd": {
+      "gdfmtSha256": "5160cf9e99dc36a8e9109f91713911c7fa0e70b7730c8f3966da840d1946949c",
+      "gdtoolkitSha256": "aa1eb4758a4e29c498e2477a73129e5e79fdc2b62522f6f49afb93c04c64741a",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/scene_changer/scene_b.gd": {
+      "gdfmtSha256": "6b58e12f6cbe6338c749f7d87b9a40c04fdcfb1c5d89a5d3668b589a04d852d6",
+      "gdtoolkitSha256": "7adcc51ee23deb829e75bd64fcb4e7d04e657ea4563db5bd206daa4705a70043",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/serialization/enemy.gd": {
+      "gdfmtSha256": "de8b6451045d13e4326a86c952702621eaef2babef1b8adf3b77ddc8c18f09ba",
+      "gdtoolkitSha256": "962f2a4239a43447afe5cbb861b51dafce289e21616144e22c13e1f564d74201",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/serialization/gui.gd": {
+      "gdfmtSha256": "0bb5310fb02adc5300c3ac96266e0eba57db56200cb45312e313847e8b0d0e72",
+      "gdtoolkitSha256": "12276cc04fc209f7b1a85c6c2ff8dfdd34e7fe216a5b8672ea0c2b368e60cc6e",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/serialization/player.gd": {
+      "gdfmtSha256": "1c867453bb17ec72726552ace20abd99be81b6c21e6363fc4bad437adaeb7c30",
+      "gdtoolkitSha256": "c410f33f5825bbfd39fffd7e633b22465c65b7bb0e3cc890a445dea3f8003535",
+      "categories": ["layout"]
+    },
+    "godot-demos/loading/serialization/save_load_config_file.gd": {
+      "gdfmtSha256": "0170269ad472a210f029ac3e3c2693f4e743df46956abd6ed530d589c9ab7965",
+      "gdtoolkitSha256": "955a7056236b8e767cb97cae4e6a3b08d399e5d3e2e68ecff6098a6b1d5e96f3",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/loading/serialization/save_load_json.gd": {
+      "gdfmtSha256": "038dbc16fdfe7c21155b8a65d8bc7d859ecb90521711e93db056f550c7899f28",
+      "gdtoolkitSha256": "1f6b36a9997104e5bf1bf6a2734d541440a8e1768345919c734b08da16070408",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/loading/threads/thread.gd": {
+      "gdfmtSha256": "f3b164fdfa6e48806a6660f25b45401d24085efe03084332b25af10be1374f3c",
+      "gdtoolkitSha256": "c0f5145043352279103982da9e5a21b01dda465bfbe4a4ad451f574c7f1dfdcb",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/.broken-gdscripts/Basis25D.gd": {
+      "gdfmtSha256": "95fb378d104db0778edf0c69121835ffa78247d346d4827160b0982311e464f5",
+      "gdtoolkitSha256": "a87a4eeeaa227429cb46946c47894ed5f59f8a28ea06c1c7c72236466c3dc070",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/.broken-gdscripts/Transform25D.gd": {
+      "gdfmtSha256": "6f1783fb2fef29e54c14b1aaa5b3f69ca07c759ca3d5b1d9c641424572557466",
+      "gdtoolkitSha256": "ca5e9acd87f45b0f7bcf851405a430321a205e6fde7dfea58c254ecf307f96a1",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/main_screen/gizmo_25d.gd": {
+      "gdfmtSha256": "a6544ed63c58b7fc5dae2599cea4a67ab4344b408a160592754d685c74e4687e",
+      "gdtoolkitSha256": "a1d0b7fd64d1d0f093e1ab167db09becd31c9058dc96b1e85ac0afe7fd5141bc",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/main_screen/viewport_25d.gd": {
+      "gdfmtSha256": "80c1aaf3b70a5efe97c202680d62d70d96abfd94fe32685c1e9d06b8dce2d284",
+      "gdtoolkitSha256": "a88b8d2dba551f4f3fdcddb6209ea1026d1012a715867f13515beb050d7900a1",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/node25d_plugin.gd": {
+      "gdfmtSha256": "a1835912f0556c77002f25e70b655a1b587008dd2a5a3089d976fdf452b2bb68",
+      "gdtoolkitSha256": "748934181ea6f25769d4e381c7d8ce9c56ef5029a382eaa230b0f7285248e26e",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/node_25d.gd": {
+      "gdfmtSha256": "e41dc1ff6a52622868d542cf10ed65d3dd20b5992ef07551147ae7bf141b93c8",
+      "gdtoolkitSha256": "6edd05f6b79b61a152e17dc67b3db9ae0be69df8548108376e9ba7e475d939c7",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/shadow_math_25d.gd": {
+      "gdfmtSha256": "7b953fd84d0ca1ef41d735d09524a22465a2171a598ea4cdc8f6d9c2b3fc4430",
+      "gdtoolkitSha256": "3d21f447bbacbb4284808f53aaa4bf60cdea64b074c5cc3e93f296f9a8726702",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/addons/node25d/y_sort_25d.gd": {
+      "gdfmtSha256": "6fedeb62afd395d5217c17aaabf68e63e9231efc3d41f1129535c94189b660d9",
+      "gdtoolkitSha256": "c3f9b6f9d56199ad45d509f7da3c2b0ee83d42274e48822a7ddabf69a94aea6f",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/assets/cube/cube_math.gd": {
+      "gdfmtSha256": "a81234cd3cf8fc6718327884cb354ffecec14da7888f25c3a07e3d9eaf831f9b",
+      "gdtoolkitSha256": "1322400bc66e5fa760ae7b330cf64e7393d30f9ceb802aa618f6ec956b68d005",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/2.5d/assets/platform/platform_sprite.gd": {
+      "gdfmtSha256": "8b8d1a4134c686c51ebb5a1adceaea7f9b40eeeea2158e5dbc1152342319dc20",
+      "gdtoolkitSha256": "afecaf8f6f7f92305f28edfdb07f40cd55c897c3cd1658b4092fafd9915f3d91",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/assets/player/player_math_25d.gd": {
+      "gdfmtSha256": "6e5d85239e36ed43efbada7643e5ef7875b86d67a7a9391ccde8a8ff0e44c096",
+      "gdtoolkitSha256": "796fecbbc2f4f1b7c3dc13daa8f90d230c200e2cf15d32964f9e67c4ae21b434",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/2.5d/assets/player/player_sprite.gd": {
+      "gdfmtSha256": "8d498215b83dcd35500f8acbf1d8cf7aeccc274a1774c6d7afb47930a604a5ed",
+      "gdtoolkitSha256": "3f02ee3cff686f0f7578e580ec5d3f964458d89af63e4c51c4f579ae4a0c67a3",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/2.5d/assets/shadow/shadow_sprite.gd": {
+      "gdfmtSha256": "30fe46b7f87de5c33c867cbd8b408c3389a3808f6efbb666b8f031d7d29f528b",
+      "gdtoolkitSha256": "c5a5c699fd14032b391bf49ead6e32740d7352e55770ecf81378eef5506d00b1",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/2.5d/assets/ui/control_hints.gd": {
+      "gdfmtSha256": "d9442795a938cd1bbde6d939cd4820eeabf4c394940807430c901fa35dd081f8",
+      "gdtoolkitSha256": "d9442795a938cd1bbde6d939cd4820eeabf4c394940807430c901fa35dd081f8",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/custom_logging/custom_logger_ui.gd": {
+      "gdfmtSha256": "ce7bba578a71da2374b98d0805ecfb32c239e523f42f2b6af675417e57032338",
+      "gdtoolkitSha256": "18fdcd402b643036146bbc7c98245517343c19668806d882a12d6b78268156ac",
+      "categories": [
+        "inner-class-extends",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-demos/misc/custom_logging/main.gd": {
+      "gdfmtSha256": "7ba2ee46356471565e8ddd20296953f742b501123c6cf8c57c6fba1d4ba98bab",
+      "gdtoolkitSha256": "250cf52e96d6cca829d6fc0e23ffa662601a7bd3beffe81d1a4a0e6aa23b3a74",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/graphics_tablet_input/graphics_tablet_input.gd": {
+      "gdfmtSha256": "175db7cffff46f6032072c1dfbbea3aea719107ca5a122af1660f7b1801499c3",
+      "gdtoolkitSha256": "0a9c4207b7e81ddaa8289fabce4aee8ee99d4de82359be480b486c599f95b358",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/hdr_output/color_sweep/color_sweep.gd": {
+      "gdfmtSha256": "199bf9447a96b8c44c49fcbad98ca402cecb647b4947af49348a6197ddcf417f",
+      "gdtoolkitSha256": "36c6349686634a71277a86548716d8fb9a9a7ce685a7d9452b94a108fdd2a3a4",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/hdr_output/in_game_hdr_settings/in_game_hdr_settings.gd": {
+      "gdfmtSha256": "7fb230360a1cc2f26f21707c422be450c725d85f1fee05bbf6c6c4bf738fd7ec",
+      "gdtoolkitSha256": "edc653c1f005ed8526d6ffffd975729e40ad5ccd44eb1ae8e76e0c6de7098761",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/hdr_output/main/debug_info.gd": {
+      "gdfmtSha256": "96ecccf76b0db477858a82b3cce8aa15d7a2554ea5bf54a1b32167005330e530",
+      "gdtoolkitSha256": "e1b4e216e2a697acde4062f933dcbd20d69fb491c1cc977cb04ebdc6dd355713",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/hdr_output/main/demo_scenes.gd": {
+      "gdfmtSha256": "6ee093f6857f47a1c038f7344464e5a6a54db0cd7ebb34e5812df934ebaa82ea",
+      "gdtoolkitSha256": "4c6b1855f7c027424ee47b7628632a231fd33d7a6ba35728e60f1c8421cfbc14",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/hdr_output/main/developer_settings.gd": {
+      "gdfmtSha256": "b3cd68bd1937a85ad4c5e8ca9bacc3acd0e96996de6c9fc0d09ad5cc1f9a21ad",
+      "gdtoolkitSha256": "4c3d958b4dc53739f013fabd9f0e7956ab18a4fd173aaef98df8d2304ee48d88",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/hdr_output/main/max_val_label.gd": {
+      "gdfmtSha256": "afb5f7ba3fe2616b634358940d8a84f390966b91fcc0d16be1e2f783a801605c",
+      "gdtoolkitSha256": "afb5f7ba3fe2616b634358940d8a84f390966b91fcc0d16be1e2f783a801605c",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/hdr_output/max_color.gd": {
+      "gdfmtSha256": "8cf7c44793a1efd3084e29743b293704f63f083dad4ea5c3991703e6c0d6c005",
+      "gdtoolkitSha256": "d3722e8df68a9fe6c92cf4d3a8e912afa16dbc9109bfead6db5d600840453c6a",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/hdr_output/max_self_modulate.gd": {
+      "gdfmtSha256": "29d885289e54b4119b3585776f0ec4fdadc1ac087d4de190834f9eb4c7a44699",
+      "gdtoolkitSha256": "779b16384d5ff90333dac996009288c99c0834cd869f8bbe6fbbe8fd44289f97",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/hdr_output/output_max_linear_value/color_flash.gd": {
+      "gdfmtSha256": "471e5966247b9f441d6a9c7acc3bb81baf4e919eafd7ebc826159aba3b77163d",
+      "gdtoolkitSha256": "8249544661bbff8e68afb3ebd7808eda5d206ab5d302e3aa3e5b03661813f8e4",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/hdr_output/output_max_linear_value/flash_orchestrator.gd": {
+      "gdfmtSha256": "6608dbc78abcc5cf60bb1454e9cf2e6e30235188e5f590eb900cedad7c7f9a5f",
+      "gdtoolkitSha256": "acf2f9039b5cbcdb9b4adb816486d3a9bda10215abe6a4b1905ecc808808c8df",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/hdr_output/output_max_linear_value/rotate.gd": {
+      "gdfmtSha256": "1e706a0428d47341a3023819c9ee0b0c3075d3cd0bf090c122597f7c58650c06",
+      "gdtoolkitSha256": "59d43e801d06f9a133bade3958aece888f76374aee4e5ae64fa76092aa634a7d",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/hdr_output/setup_instructions/setup_instructions.gd": {
+      "gdfmtSha256": "91c3b539a666786db10866151054e9f1a7f4f205a051f37d65b60207c01499e8",
+      "gdtoolkitSha256": "91c3b539a666786db10866151054e9f1a7f4f205a051f37d65b60207c01499e8",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/hdr_output/tonemap/sphere_and_light.gd": {
+      "gdfmtSha256": "f2aa0e647e3e7cb9a55bc44723be1bbc394aca178a1db6e895e90af69d7aabad",
+      "gdtoolkitSha256": "46f55c4be5c612d036bb8cf9264ffff673bfe6e0dbd08a925836725cda87bd9a",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/hdr_output/tonemap/subviewport_scale.gd": {
+      "gdfmtSha256": "0325cc7265be1ffc3bb9893efe5e5009ea560d2ed1bb8df02bb6c285c2bcb6d9",
+      "gdtoolkitSha256": "ba3a26e9414d77d281d180ab85a974206ba298597878b27aa884e55411a139c1",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/joypads/joypads.gd": {
+      "gdfmtSha256": "71717e2e6208500cdd185bea3768d9fc57248634cadebc9b042693d76ab1758f",
+      "gdtoolkitSha256": "cc9c9518a093d1ae5c76030e25b3e2acac2703b1d6362dcf46e131a4c1760a4a",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/joypads/remap/joy_mapping.gd": {
+      "gdfmtSha256": "cd78a4f5eb5347106575557063e6d6c7b501070e45486d4cd7f70beb6c5d782b",
+      "gdtoolkitSha256": "a478912e433728f3af3f1882fee6cb6e929548e76688d815231822f7814924a3",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/joypads/remap/remap_wizard.gd": {
+      "gdfmtSha256": "1c70f5f3ce1c386cf1c3643a78620086ab006ec102efba4595fb2c9c2ef356c4",
+      "gdtoolkitSha256": "519b6a3f139b7ce70cfaa5b98697f50bd5ea7e94c462e8a36c8904632319c7a9",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/large_world_coordinates/controls.gd": {
+      "gdfmtSha256": "032f9e6c1ab2a5bf37e13ad867c574d7edb02acd95d0183d785f83df0bec1ed7",
+      "gdtoolkitSha256": "65d8dcc3788dbbc994c794d1567568161e8cefb106a576e4415121c83fd30bc4",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/matrix_transform/marker/AxisMarker2D.gd": {
+      "gdfmtSha256": "c3c166ba60e6067c08dc7e5f5186acb86b92bd7948e3e1d69b7a366115f89885",
+      "gdtoolkitSha256": "c3c166ba60e6067c08dc7e5f5186acb86b92bd7948e3e1d69b7a366115f89885",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/matrix_transform/marker/AxisMarker3D.gd": {
+      "gdfmtSha256": "aafd13767f9698e983f5f25c5ece44aef384283a023b77077d87279e844aa895",
+      "gdtoolkitSha256": "aafd13767f9698e983f5f25c5ece44aef384283a023b77077d87279e844aa895",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/disable_other.gd": {
+      "gdfmtSha256": "005340603d6c1afcdb6a1492838f7f7e34a25d6e12557876e7f0246eadec5261",
+      "gdtoolkitSha256": "7a5daf9435b7e806598f3c36a46e25fc6ded85f8fa88e1be0224d3fb4dd52b84",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/draggable_window/draggable_region.gd": {
+      "gdfmtSha256": "a84b0e645116cd9f7f317128aa971e1dda92ebf442e44846cd40edcccdadfb8a",
+      "gdtoolkitSha256": "a84b0e645116cd9f7f317128aa971e1dda92ebf442e44846cd40edcccdadfb8a",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/draggable_window/sprite_polygon_passthrough.gd": {
+      "gdfmtSha256": "4a59b004440eb01575a417f74913cd9b4de4d6f49b54c44949298205f440198a",
+      "gdtoolkitSha256": "e0c69a2ff7bea91ee41339eb75bac7039c2b29f3dfb136d3a61657242f0f21ff",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/main_scene.gd": {
+      "gdfmtSha256": "82a2d5da423469e0d03eba0f93a48220a15308ddf724f809059df0a577b22459",
+      "gdtoolkitSha256": "46225b0d8b7578976b266de72dbea6319cf7140033d1f05a9c0b6d1179a4ba40",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/popup/hide_on_mouse_exit.gd": {
+      "gdfmtSha256": "36e35a037c14d7dac85926737b52ffecfb572b89f0815bc06af27fdee0ff4fbe",
+      "gdtoolkitSha256": "36e35a037c14d7dac85926737b52ffecfb572b89f0815bc06af27fdee0ff4fbe",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/popup_menu/popup_menu.gd": {
+      "gdfmtSha256": "5de44916344d6ffd52dc943d01ed98f2a9ef5e45be0418b966665e7df5a2f410",
+      "gdtoolkitSha256": "ad119ba10ba6d6ce219ad1b6da7d7831af7255d589c79153730cc1cccfd676b3",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/status_indicator/status_indicator.gd": {
+      "gdfmtSha256": "a930a3085afc47bc578e6554ded6aca73f8fc55791d1c9483af48b2eef024fac",
+      "gdtoolkitSha256": "c4ed790a545595cdc55013847bbf3b49bdcfdacd1d3812c12223409103290c91",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/text_field.gd": {
+      "gdfmtSha256": "1c485a6a791b02bb9bfa89658931b65a7f4907a9f27bbf5e14ba9ccf3ba26f15",
+      "gdtoolkitSha256": "4fcb43c717f44f56b49a122383286b97b82923ee309db658ad83c68a9cad950d",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/window/url_opener.gd": {
+      "gdfmtSha256": "493e839eb14b157a555e8fa03db586cad31a8fc046ef55a5ee1ac64308571172",
+      "gdtoolkitSha256": "493e839eb14b157a555e8fa03db586cad31a8fc046ef55a5ee1ac64308571172",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/multiple_windows/scenes/window/window.gd": {
+      "gdfmtSha256": "886eeb337504249322fd479125ab85d8ff8926775040006b8b8610410ec0da56",
+      "gdtoolkitSha256": "886eeb337504249322fd479125ab85d8ff8926775040006b8b8610410ec0da56",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/noise_viewer/noise_viewer.gd": {
+      "gdfmtSha256": "729d7f609c8c13fcc0444fe119f8fd0f05c27a156c86ad6413296d1d21ae8615",
+      "gdtoolkitSha256": "827ff2e9d97c8b47a384b12a2da50a59bca76c0c9dd4052fa246772e6f1ddd1f",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/os_test/actions.gd": {
+      "gdfmtSha256": "647509927bd8ad37034886becc983bdb6285d2155f6d2eb2cd3a44cc8714be78",
+      "gdtoolkitSha256": "0a6b47d47226a23050b15b1d69a4d6562a6b8cabaeb91da3c3b11f50be2e74b8",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/os_test/os_test.gd": {
+      "gdfmtSha256": "883b349973ba9f682ce6006a2dd676efeceee8c3739cc9f79bef4cddbbb14b94",
+      "gdtoolkitSha256": "1789c431cdc1d20ef656d97b03b7d764afad5c2ade9582fdd3be6140b55f6638",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-demos/misc/pause/pause_button.gd": {
+      "gdfmtSha256": "1de223c74b16057ecc12edfaacbeb890936489fa63be168218433b7486ecdd89",
+      "gdtoolkitSha256": "1de223c74b16057ecc12edfaacbeb890936489fa63be168218433b7486ecdd89",
+      "categories": ["identical"]
+    },
+    "godot-demos/misc/pause/process_mode.gd": {
+      "gdfmtSha256": "9b87f179fac256a95e8332c353ae823bf49733fe570e7c94c40f9cdaa051bfb2",
+      "gdtoolkitSha256": "0a06f651ccb949a959e9f173c924b0effc8b97e7bae11fe5103661ce4ddcb0a5",
+      "categories": ["layout"]
+    },
+    "godot-demos/misc/window_management/control.gd": {
+      "gdfmtSha256": "b390eedd220438525cf0fa4ae1838a0bbdcb8cb3ca8099951271037b258331e1",
+      "gdtoolkitSha256": "9ec4b8998085d6abe2bfedefedd751679b17e59bb54f6223027022ce62147b83",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/misc/window_management/observer/observer.gd": {
+      "gdfmtSha256": "6163adeadecfc05158bfe2520d82ffe81b39db81a5960a56b3d062e870cb809b",
+      "gdtoolkitSha256": "7670a0ccc1c02a2fbd03c78ecd59372a1892414de3c26eefab802de7b033d260",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/mobile/android_iap/iap_demo.gd": {
+      "gdfmtSha256": "88da95efb5593eaf6f74f3988e5ee93a202ed6596c412904ae97c659b483c1ff",
+      "gdtoolkitSha256": "91eb2da6244885fdd5948ec90ca444ca6646396ecb59952ab1b1fad7e19ed772",
+      "categories": ["layout"]
+    },
+    "godot-demos/mobile/multitouch_cubes/gesture_area.gd": {
+      "gdfmtSha256": "8897ed91e22bf180fa00087916631c7eab3075fe7aff5358f3a11a60df86b6d2",
+      "gdtoolkitSha256": "49627a9ca0d3fd03861d69c5d33d27c4be87f503f2aa54e4f2135cfcfd52baf0",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/mobile/multitouch_view/main.gd": {
+      "gdfmtSha256": "6dbde842ef77d9b1de7451b56d7a2fe7e2ddbe7e03e4e52e27e5831e154479e2",
+      "gdtoolkitSha256": "6dbde842ef77d9b1de7451b56d7a2fe7e2ddbe7e03e4e52e27e5831e154479e2",
+      "categories": ["identical"]
+    },
+    "godot-demos/mobile/multitouch_view/touch_helper.gd": {
+      "gdfmtSha256": "a9117a4ac469a50da8a09c30fb9d9e10d7ad808503c873919f812f6a3bac3a2c",
+      "gdtoolkitSha256": "9027851a0abdebfdd4509cefe786812e4b22758a1f1b680de0adadaf084a866f",
+      "categories": ["layout"]
+    },
+    "godot-demos/mobile/sensors/main.gd": {
+      "gdfmtSha256": "4f119476e435ff262a9dc4f522209810c9dbfa0fb4e4a69302eb0e0a8e33ae0e",
+      "gdtoolkitSha256": "4228f9e59dfcdbf266327fb329e20a17ebc57d8a780375cbec86df9f89aa9718",
+      "categories": ["layout"]
+    },
+    "godot-demos/mono/2.5d/addons/node25d-cs/main_screen/viewport_25d.gd": {
+      "gdfmtSha256": "5349aa469acdc6c0a09241d78d249fd979374019f4f2951437d6e5e332ca5ab0",
+      "gdtoolkitSha256": "9f0b539a50d774c7dc95b5e1654f22d0136d8e92adb1354827b29f48c93a918c",
+      "categories": ["layout"]
+    },
+    "godot-demos/mono/2.5d/addons/node25d-cs/node25d_plugin.gd": {
+      "gdfmtSha256": "0d9e560472a04de62ba2db2710a061552267ea9ad817ec462f0606166cc3e6de",
+      "gdtoolkitSha256": "682c7438aa282fca8d946bd6e85c02459e2808642678533444ba07824344c738",
+      "categories": ["layout"]
+    },
+    "godot-demos/mono/2.5d/assets/platform/platform_sprite.gd": {
+      "gdfmtSha256": "77024ddbbb2e84164d684674dbb86845455c923eaf0a88d885447ffaddb13c91",
+      "gdtoolkitSha256": "868572dec229b562d3a83ad0312dc6c04febeb71cf5489d158db83f73a33a883",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/mono/2.5d/assets/shadow/shadow_sprite.gd": {
+      "gdfmtSha256": "4a4233a5ac5438586904fb7fb68cb54de46ca26d953397548cc0de965a5089b0",
+      "gdtoolkitSha256": "fdaf02d54477be41a775fda30a42f5017f3d1ffd78602ef67692d590f5415689",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/mono/2.5d/assets/ui/control_hints.gd": {
+      "gdfmtSha256": "061ba17e089bf21568a891c9988c9cfdeacccbeb782615c995a84eef5d1bd0a3",
+      "gdtoolkitSha256": "26c22f96ce740f3b04c7f186dca00ba4b83f4ad5348f46a915b57ac1f76e01a5",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_bomber/bomb.gd": {
+      "gdfmtSha256": "3c1fafcf84e59d16cd65677bc5fcbb499fe923d07f62b52cd0990fb5cb507a06",
+      "gdtoolkitSha256": "a9a9e618c890792db2da7d4735a1a932230d7c8c2b8dca1e91c1ea15619a0a5b",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_bomber/bomb_spawner.gd": {
+      "gdfmtSha256": "76945ceb70dd14ca90910df85a963ba963a2008e07d09aeb806c5de9c4ef6d02",
+      "gdtoolkitSha256": "0cd300aae0ee9d35eecce4fa984dcd9417e643557b4b1ab0cbc208007c3fb239",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_bomber/gamestate.gd": {
+      "gdfmtSha256": "d2ad9e2a8b22b0055d220c7c605e020f7198de468735dbc9f2b7465c26c6a472",
+      "gdtoolkitSha256": "1be07c2a270158f9f423e0d40c7de66134c9f3ea97217694125def28d45b35b7",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/multiplayer_bomber/lobby.gd": {
+      "gdfmtSha256": "d93869f957ea6c6d27344cef3b00cde4aafe21ea484e7f7e14fadcec533b83c6",
+      "gdtoolkitSha256": "0db54592f27f54974b03fe83d1b14b4efe0b898e9c9084abd604f0092832ec60",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/multiplayer_bomber/player.gd": {
+      "gdfmtSha256": "3595e67c8eb8f4299f7b61d0e1e134c170bbc839b074116abd7d05047a32e084",
+      "gdtoolkitSha256": "87565232401f976f55fb1478a91d697d9c0a61f0a4e3be33d285266efb3182cd",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/multiplayer_bomber/player_controls.gd": {
+      "gdfmtSha256": "68324ca371b18fbff206cfed603b913d325fd57c19ca4a0c9dac398dcf5bf866",
+      "gdtoolkitSha256": "be0cf5000ab62710bb46fa95e01b096842f0f21b20b15f6af31ace5a37a76538",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_bomber/rock.gd": {
+      "gdfmtSha256": "16ad85530961f65594db54578da891bd927f07ddb88a6ff2d2931a7826c324be",
+      "gdtoolkitSha256": "16ad85530961f65594db54578da891bd927f07ddb88a6ff2d2931a7826c324be",
+      "categories": ["identical"]
+    },
+    "godot-demos/networking/multiplayer_bomber/score.gd": {
+      "gdfmtSha256": "2ee0a8b56e1e78f5edd2b2928fa367bc13f8bd516763bc0acf5cc632a91a7e19",
+      "gdtoolkitSha256": "96cef026c3c919341bf82a354c9350109456710792c0710bfd89aa390ba25122",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_pong/logic/ball.gd": {
+      "gdfmtSha256": "2eba0fb02db76963e0fc67778dc8b9409093385a01726e96c2795467d4c204ac",
+      "gdtoolkitSha256": "d3ab53112a506a8fdc59e2939398da055083a56796b04a664c437265b918b88c",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_pong/logic/lobby.gd": {
+      "gdfmtSha256": "35579fb93c53d1e1dde569a6a10fa7cd4936fb362e72c2f8b4d9ff9f62964dfe",
+      "gdtoolkitSha256": "c3e5a7bb6e9c384a538acb55adf77018735c7fe15159f781e30c61ad17785073",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_pong/logic/paddle.gd": {
+      "gdfmtSha256": "78410c0696c5a317eb349c55fa7f92d32cad69fbdd1db5eb85142957cf0b8220",
+      "gdtoolkitSha256": "8b1a88e61272664ce316329ec33e5c1f2c0113e6b6f4bd8e59ec40bdf81abc7a",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/multiplayer_pong/logic/pong.gd": {
+      "gdfmtSha256": "84284b67f273a5b72ad4c59d3273e249be41ee2787d4f205421a2166c7496638",
+      "gdtoolkitSha256": "df0c7acb755362135c1f085353fdc8bc817be3d6ff2098bfb43cd2b4afc90102",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/webrtc_minimal/Signaling.gd": {
+      "gdfmtSha256": "91d6c596da076d4d3f448d5a768d462e51fc60891a88821846f7d445ad94842e",
+      "gdtoolkitSha256": "1f2c81228863fa0cfb1786303e2839f34a795e09414ccf95a2e37abff6eb086e",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_minimal/chat.gd": {
+      "gdfmtSha256": "d1357239e897eb5b5e1a387d081941f4b9d1361c62e09dafbc4c19f770a1f7fa",
+      "gdtoolkitSha256": "e8023046167672d69ea45e3b7a449c8eb271290534d989a8fc9cc876f1cf259e",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_minimal/link_button.gd": {
+      "gdfmtSha256": "e4faeabf3b11ea21153de1cd72b29d7f4370245c06ab2a18f3c2bd810a978523",
+      "gdtoolkitSha256": "7d866d0179c2b850cffc03b2aea27bd95254eb21eaf6de8ac020518392aa5afa",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_minimal/main.gd": {
+      "gdfmtSha256": "106745dc28c13dcde40a40dea7d5118a58cbfd77b68d56d2f4c758b90e02f4c3",
+      "gdtoolkitSha256": "c7ba7eced55b396ccb2ed1b42b1f7b906e84ee09bb7fbb3fbdc1d2db7bd2f0f4",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_minimal/minimal.gd": {
+      "gdfmtSha256": "b8014ccaa11d9b495440e6262dbb4abf1a0b963c2a754567cfe12f5ecb46b87f",
+      "gdtoolkitSha256": "008399d6e331663b29816efc77bd5c6c26217a10ad287bfdc8e8acb0b23e37e1",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_signaling/client/multiplayer_client.gd": {
+      "gdfmtSha256": "61cba1aa7382f9a57f97bad2baf460375c8ad80eba746b5b477a5ebea6eedaaa",
+      "gdtoolkitSha256": "95102d639c8cc9139fe6b99a6b4147221282d6a41dbc5f7325714ca6f50a8bd8",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_signaling/client/ws_webrtc_client.gd": {
+      "gdfmtSha256": "e684b47bc51ce6226259fc4391c36d7e8959ad4e2a3bb206b9b081c3b99a6f74",
+      "gdtoolkitSha256": "a3d9ebe024261eb2e3c9f480a05703bc1609b4575e6a8231b32e6d409f3c6dcb",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/webrtc_signaling/demo/client_ui.gd": {
+      "gdfmtSha256": "60620bd76693d185c93e7c83ac5148da48bd9108ff800562a805dfb09e478b55",
+      "gdtoolkitSha256": "808020140a771553a01f259f4696e3d274dc170284bd2f2a298d9d3ac0149eb3",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_signaling/demo/main.gd": {
+      "gdfmtSha256": "7777b4c2d81821d8fbf85eda5c2a2235684ed6db28c9a2e470610d0bb61bb477",
+      "gdtoolkitSha256": "26b4e2c36e99491187c2e0cc84e705b5adf7f66f757a0fc72427c1db298fdfbb",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/webrtc_signaling/server/ws_webrtc_server.gd": {
+      "gdfmtSha256": "c4701d6e612bb5ac19861509e8dcc91a1cb63617187e08cac30bd01f8c3300be",
+      "gdtoolkitSha256": "7c892b9589024f625a3d26016ce9786b25cf7ef85715c335a0f19d7b5dea5114",
+      "categories": [
+        "inner-class-extends",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-demos/networking/websocket_chat/client.gd": {
+      "gdfmtSha256": "b69e8f296154149223b6a5140135856798ed125bf0a17f3cebeed6310b9f9e19",
+      "gdtoolkitSha256": "c08177daff34a98a8fd23a3fff17d71bd748f56e41341754152778dc13d2b00b",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/websocket_chat/server.gd": {
+      "gdfmtSha256": "e7bc6964b47d38d020d2ae05757bf52e31ac349dba58a5b6f7521f9f77f3ae21",
+      "gdtoolkitSha256": "e06f7b88deaadf93478f401ec1f9c18f542f780249ca0f4d4ad81f7d5b55a5a3",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/websocket_chat/websocket/WebSocketClient.gd": {
+      "gdfmtSha256": "145f76859cacd7673970150898cea3de48ce7ab68c1a2ce0b0e9029c7d6d4f34",
+      "gdtoolkitSha256": "1087a7be701eb28d138350db5e6deaddc4dabeffe3fa26deef77c0cfb5121930",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/networking/websocket_chat/websocket/WebSocketServer.gd": {
+      "gdfmtSha256": "71948432cd1c4d6a52f9644792ac95e8bdb7afd03c92ccb44544e5a13f35031a",
+      "gdtoolkitSha256": "4a263ca2024dd5722532f36d27f799c9bb796691cc3ad8feb6a300fb2cf0fcd3",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/websocket_minimal/client.gd": {
+      "gdfmtSha256": "0f874cd3328b9f06bb0901e3e638d5f08917dfbf2f3e8bcef2d05894458e81c3",
+      "gdtoolkitSha256": "a167e08d432fe9c1a62a8a28eda07d2854d8a242d454cc4b277daf74b8805257",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/websocket_minimal/server.gd": {
+      "gdfmtSha256": "ef8cf0aeac7131d49d487f9f8a86399807401671cc37b4e2268916fa776eec0c",
+      "gdtoolkitSha256": "7c815bbb8334df14908388129a9c8477c002cdd0c43cfbd743431cfc1527f238",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/websocket_multiplayer/script/combo.gd": {
+      "gdfmtSha256": "89e228e65a70c73b14c212d656647ab7197e270833a502f019b8cdb0cb37b913",
+      "gdtoolkitSha256": "89e228e65a70c73b14c212d656647ab7197e270833a502f019b8cdb0cb37b913",
+      "categories": ["identical"]
+    },
+    "godot-demos/networking/websocket_multiplayer/script/game.gd": {
+      "gdfmtSha256": "e64752fe3f8685e0bcfa09a5feabf9c251b93aa9457e5dec2f597b4fb662cb85",
+      "gdtoolkitSha256": "8bac1ae691ad3bf7d46aa84bc629c35e1b5d64d283aeedafc136a4f97db8f719",
+      "categories": ["layout"]
+    },
+    "godot-demos/networking/websocket_multiplayer/script/main.gd": {
+      "gdfmtSha256": "821a8605bb44d0d3cd52751dc81a0279cebda303292dddd2f796d848efa4e800",
+      "gdtoolkitSha256": "2d85e7c643e64f4ab83815ef538165aaa02f67b4c070b579c19fb7bdc1cd095d",
+      "categories": ["layout"]
+    },
+    "godot-demos/plugins/addons/custom_node/heart.gd": {
+      "gdfmtSha256": "5a9f363d22d5b70b466f3b358a0fc260e35e53aee2a81c2366c7ee3aa79de862",
+      "gdtoolkitSha256": "5a9f363d22d5b70b466f3b358a0fc260e35e53aee2a81c2366c7ee3aa79de862",
+      "categories": ["identical"]
+    },
+    "godot-demos/plugins/addons/custom_node/heart_plugin.gd": {
+      "gdfmtSha256": "a194ce7b425e37df2506ebd6fbedcf1dfffc0ccf1ccb531b6f54e86fb872e6b3",
+      "gdtoolkitSha256": "a194ce7b425e37df2506ebd6fbedcf1dfffc0ccf1ccb531b6f54e86fb872e6b3",
+      "categories": ["identical"]
+    },
+    "godot-demos/plugins/addons/main_screen/handled_by_main_screen.gd": {
+      "gdfmtSha256": "006c373933f8e49903c974a70b81864df932f34b72076a11916696e4577e804a",
+      "gdtoolkitSha256": "006c373933f8e49903c974a70b81864df932f34b72076a11916696e4577e804a",
+      "categories": ["identical"]
+    },
+    "godot-demos/plugins/addons/main_screen/main_screen_plugin.gd": {
+      "gdfmtSha256": "0a18e25d022ac33e6b8fb7023b837c2abd6928a037fe99a04116c1ad60f555a0",
+      "gdtoolkitSha256": "0a18e25d022ac33e6b8fb7023b837c2abd6928a037fe99a04116c1ad60f555a0",
+      "categories": ["identical"]
+    },
+    "godot-demos/plugins/addons/main_screen/print_hello.gd": {
+      "gdfmtSha256": "f75c01854951e7e8f5bac03b9e17e27880e85291dc14e1cd007825267c563703",
+      "gdtoolkitSha256": "f75c01854951e7e8f5bac03b9e17e27880e85291dc14e1cd007825267c563703",
+      "categories": ["identical"]
+    },
+    "godot-demos/plugins/addons/material_creator/editor/importers/import_silly_material.gd": {
+      "gdfmtSha256": "a58a8331ecbfd1c30ecfc54fa476bc2faa7214d0818ce005ac850d3b423493a6",
+      "gdtoolkitSha256": "e03cd4ab55e07a45ebb86721d8317a24870b9f5f5b283e8c1d4105a5a65011a4",
+      "categories": ["layout"]
+    },
+    "godot-demos/plugins/addons/material_creator/editor/importers/import_standard_material_3d.gd": {
+      "gdfmtSha256": "21507514eb932d5a98501a8fb1aa43e099473206e23e3d240ee186fef8412e9f",
+      "gdtoolkitSha256": "535ddc3826b4b30b67c369c3beb60519ecf37b6c3e320135afb9fd23811c36dc",
+      "categories": ["layout"]
+    },
+    "godot-demos/plugins/addons/material_creator/editor/load_and_save/material_format_loader.gd": {
+      "gdfmtSha256": "4ee83a4eed7674e908cd8a7f13d9f4dc7b42f406dd861cb005d7b830c5cf3156",
+      "gdtoolkitSha256": "4ee83a4eed7674e908cd8a7f13d9f4dc7b42f406dd861cb005d7b830c5cf3156",
+      "categories": ["identical"]
+    },
+    "godot-demos/plugins/addons/material_creator/editor/load_and_save/material_format_saver.gd": {
+      "gdfmtSha256": "520a1ed1f8e75597de3746a352de8feef98fdabb2e7643a0938a782ff845acc2",
+      "gdtoolkitSha256": "520a1ed1f8e75597de3746a352de8feef98fdabb2e7643a0938a782ff845acc2",
+      "categories": ["identical"]
+    },
+    "godot-demos/plugins/addons/material_creator/editor/material_creator.gd": {
+      "gdfmtSha256": "c583a5e995894379f130048239adc70f2cad7f38b28be9d98cb4cc0338178e04",
+      "gdtoolkitSha256": "413c24f1134d69f891d705f44d1f17936882966e56a9c1dc705f3d2d72f1fe5a",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/plugins/addons/material_creator/material_plugin.gd": {
+      "gdfmtSha256": "95a436d09131244550d9ec30bba550704b7fd600c408e3c93bec6b9d62a16591",
+      "gdtoolkitSha256": "077cd2acc98b898de43ff49883fec545a5bd61065a44b53a017eebf8cde90b4f",
+      "categories": ["layout"]
+    },
+    "godot-demos/plugins/addons/material_creator/silly_material_resource.gd": {
+      "gdfmtSha256": "ee207140824fdd83df5755f59fa19de3305c02c2abc2edf308fe7c41b7fcc359",
+      "gdtoolkitSha256": "c7a64c88d0d1dc82e0f3495c8a40ccdafb9c6ddcc4e5b2fdef810ef70e958e80",
+      "categories": ["layout"]
+    },
+    "godot-demos/plugins/addons/simple_import_plugin/import.gd": {
+      "gdfmtSha256": "ce18e6f2d2b874c275e7cb4e55dfe50bcbeea7a0a08cbc15b8e5d59e8abf4aa7",
+      "gdtoolkitSha256": "c82cbaf686921579dbb4ddbafd9d8df11337ce638aeab7cb2be369354a78aa00",
+      "categories": ["layout"]
+    },
+    "godot-demos/plugins/addons/simple_import_plugin/plugin.gd": {
+      "gdfmtSha256": "d0b39c50baab6918879e9edbd2de063b61127e0b2cdcdffd6c6cdf74368f360d",
+      "gdtoolkitSha256": "d0b39c50baab6918879e9edbd2de063b61127e0b2cdcdffd6c6cdf74368f360d",
+      "categories": ["identical"]
+    },
+    "godot-demos/viewport/2d_in_3d/2d_in_3d.gd": {
+      "gdfmtSha256": "9e4ca9587d27dc302e1c43bff2db95d0d92b921425bce9f8ad6d66bf7ca3765c",
+      "gdtoolkitSha256": "7a3040ee11fa3d3337f92e497a59bde14c343bf895bf0da17ab13fd8969ba79c",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/2d_in_3d/pong.gd": {
+      "gdfmtSha256": "23002650edc462e34f06ad03e301936133c462465fae9b1514017b738b6bd18b",
+      "gdtoolkitSha256": "7b40f206f9beb22ca5c12eb1d7284350c30910b7d1ff04894cfdf040cb1b2bd6",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/viewport/3d_in_2d/3d_in_2d.gd": {
+      "gdfmtSha256": "8eefa284394454fd07359f1611c687475c7486aadfbdf67ba14eda348cf4bc1c",
+      "gdtoolkitSha256": "659ff3f62ed0049c261c8d84ec3a2b3fed013a25ba58e96260a2a820890f0913",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/3d_in_2d/robot_3d.gd": {
+      "gdfmtSha256": "bd3a1e0a5a817763e3cfc4dcb7c55c58806f519105c7a5631b66f5076196c4e7",
+      "gdtoolkitSha256": "3285898db70a827fb212f9631e6a749e8f4410ecc43e92b72fb689a70c8ffe6d",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/3d_scaling/hud.gd": {
+      "gdfmtSha256": "dea50afd4a1488225b9e8fdd5569b0ca459e5813eddb6983f4ed56f6538e265e",
+      "gdtoolkitSha256": "d7147b19834e52c02737f2b0631918333443c864a427488a7337c8600bbca9ba",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/viewport/dynamic_split_screen/camera_controller.gd": {
+      "gdfmtSha256": "e36a056d85479a4683a6ecb4b8e2522dca3971deb227f90ebdefa1053f370b8c",
+      "gdtoolkitSha256": "970f61c4a429f3bffbf2b9737ba0786dbbdd438d85ef1be82421d60c50172027",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/dynamic_split_screen/player.gd": {
+      "gdfmtSha256": "760cefe56d24fbdcbe48260a8c5ba6e2c66f01c9aaa6a578015eb35479f4acce",
+      "gdtoolkitSha256": "241e85a7c08b140e387ad0a097f2d1154822fa4e27ac399cd98718c7cc303f2f",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/viewport/dynamic_split_screen/wall_coloring.gd": {
+      "gdfmtSha256": "bdf7f5f00ee17f0900fab37d0896ee85b123f09453fc09889a3e4be1cbb131ae",
+      "gdtoolkitSha256": "bdf7f5f00ee17f0900fab37d0896ee85b123f09453fc09889a3e4be1cbb131ae",
+      "categories": ["identical"]
+    },
+    "godot-demos/viewport/gui_in_3d/gui_3d.gd": {
+      "gdfmtSha256": "576219e92e4c26b2c69dfc93ad12202acdc0b40869c9c2cf9422dbea69386446",
+      "gdtoolkitSha256": "424dda763b8455e03d48421db9dc63202c80ea780bb418ee5a1d5c92ab7178fc",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/viewport/screen_capture/screen_capture.gd": {
+      "gdfmtSha256": "ffb8bd8c0a21f2e917e8ec49116c139f2b79805699854e314b01efa7bdf9aee8",
+      "gdtoolkitSha256": "e65b0fdf35bb069da1d8318f97aa9fd57dc7032250a88db5843c6456beacc04f",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/split_screen_input/player.gd": {
+      "gdfmtSha256": "ffcb849a20d7c627ebe42be634cd02c64f736b4287b0033b25e63d815d317eb1",
+      "gdtoolkitSha256": "1c0e20167c3a1e385d8756542f6904fa09a85bb04490d9ce62886a6371dbca4b",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/split_screen_input/root.gd": {
+      "gdfmtSha256": "a52b1983cfc5f37305fce307be033bcca76a24a22e87a9b0784ebf4e9894da75",
+      "gdtoolkitSha256": "7d20b97b6d8b5e9adbcaaa813fedc14db75456bd4f9be738f0ff2bbc1cc0047c",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/split_screen_input/split_screen.gd": {
+      "gdfmtSha256": "0ab6a3a6f0cce58cb37b202e1656ed1ee9f1dd16e2c4334d6444c4035dc8ec4a",
+      "gdtoolkitSha256": "d19e9c01654ac0eb71580e867605a9a979fa43b421114e29f2d1e73f4786f15b",
+      "categories": ["layout"]
+    },
+    "godot-demos/viewport/split_screen_input/sub_viewport_container.gd": {
+      "gdfmtSha256": "ff9c6d4379e33c416e082763cfe25ad153c0ca84de49be3f5a0c2d9267cc34f8",
+      "gdtoolkitSha256": "83a67a17b2b500bedd5ba4aeb01a0794261b622cdcbca9f3766543c313d1b16d",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/mobile_vr_interface_demo/main.gd": {
+      "gdfmtSha256": "8e6f619bdb82009a18ef8e4337d180f2f905e9e606683cc3dae6b1e112b40923",
+      "gdtoolkitSha256": "3cafd8190737bcdee87dbfe1b3b16a301785492fd843cd629bc3124c1631b658",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_binding_modifier_demo/controller_state.gd": {
+      "gdfmtSha256": "513c84090539d34d1aba58a0e9753990f6f62131e0a7f2411ad7c9e0bfcd056d",
+      "gdtoolkitSha256": "086d79a40d219fcdd391aef9c77910d8547bc8f3fc08e09b19b795a15b11488a",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_binding_modifier_demo/start_vr.gd": {
+      "gdfmtSha256": "5602b4c868b3f1f53ae37e3c3b22809ae8c7fcda96593c89827d223fb1f249e2",
+      "gdtoolkitSha256": "91acc4c6328f150309bff03383698125f57841d261e13d8d2c064c3a8ef63ed4",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_character_centric_movement/objects/black_out.gd": {
+      "gdfmtSha256": "fcbdb655ce5f851a8f8cfd67f918a0c9f70bf883d93b5a8ab41c07b6f32100df",
+      "gdtoolkitSha256": "f07fad5ee8efbb0e563a226305730f42edd8fcc4e7f9c1dfc0a333583c450cc4",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_character_centric_movement/player.gd": {
+      "gdfmtSha256": "31734cbbf8c8a9f8ac255ac36c372c2e1ca02a1dd7a3ecda0de4881ade7182f0",
+      "gdtoolkitSha256": "c970a8439c578cdf0b34361f0f328a8e94ead1216629183d2aa24903831da303",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/xr/openxr_character_centric_movement/start_vr.gd": {
+      "gdfmtSha256": "c6010ed73f85ff1221bf6efeb7e6df74fa6ecc803f82690e10d5e9536986fc2b",
+      "gdtoolkitSha256": "55c539d7fb715249ae77a4466f64ccfbd40678eb223b496d5d060b78b0e0fa27",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_composition_layers/handle_pointers.gd": {
+      "gdfmtSha256": "3ac2dde98d3b085f07e9c120e4cdac5c46986f2d11fe90922bd585312aa18c2f",
+      "gdtoolkitSha256": "ae362fe4d97b733451dd2f530edc57169096a3845f6de2bea77b86e696c94221",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_composition_layers/main.gd": {
+      "gdfmtSha256": "b89cf31999df097d209a1cc9bd8ac1e2a75d336fe5b26c1ec0c0efea35ac6b0b",
+      "gdtoolkitSha256": "b89cf31999df097d209a1cc9bd8ac1e2a75d336fe5b26c1ec0c0efea35ac6b0b",
+      "categories": ["identical"]
+    },
+    "godot-demos/xr/openxr_composition_layers/start_vr.gd": {
+      "gdfmtSha256": "c6010ed73f85ff1221bf6efeb7e6df74fa6ecc803f82690e10d5e9536986fc2b",
+      "gdtoolkitSha256": "55c539d7fb715249ae77a4466f64ccfbd40678eb223b496d5d060b78b0e0fa27",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_composition_layers/ui.gd": {
+      "gdfmtSha256": "343dabb065751a4b00d3c6e6cf8cd1cc656a1d8ce9f249a679ed5074cf9c4e1e",
+      "gdtoolkitSha256": "343dabb065751a4b00d3c6e6cf8cd1cc656a1d8ce9f249a679ed5074cf9c4e1e",
+      "categories": ["identical"]
+    },
+    "godot-demos/xr/openxr_hand_tracking_demo/hand_controller.gd": {
+      "gdfmtSha256": "720e7305f48bd814ccff4204e2692fa04d1b81a527403c36f3f2c03250381e19",
+      "gdtoolkitSha256": "720e7305f48bd814ccff4204e2692fa04d1b81a527403c36f3f2c03250381e19",
+      "categories": ["identical"]
+    },
+    "godot-demos/xr/openxr_hand_tracking_demo/hand_info.gd": {
+      "gdfmtSha256": "299e0fc82f8b5ad28bb628b0ab177375285c1eb13beca4513254ef99cfdbebf4",
+      "gdtoolkitSha256": "0220ac2716e3a4164ed6c5e94ad125534ca352c98b2cacc867fcf5de372a749a",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_hand_tracking_demo/hand_mesh.gd": {
+      "gdfmtSha256": "321cf7a128fc7d4508f2a37bc77120d3ed5e027fa8b87faf8b73e9ea4adfe9ca",
+      "gdtoolkitSha256": "df2b5c8233a8a995d4186a3fecaefc27b9561a2a41f12100f016ad396720d5c1",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/xr/openxr_hand_tracking_demo/pickup/pickup_able_body.gd": {
+      "gdfmtSha256": "f587cbfec4b79f16fc3748cbf52275cb8a37c5ca2655fad4f841c3bc04c9bafa",
+      "gdtoolkitSha256": "f587cbfec4b79f16fc3748cbf52275cb8a37c5ca2655fad4f841c3bc04c9bafa",
+      "categories": ["identical"]
+    },
+    "godot-demos/xr/openxr_hand_tracking_demo/pickup/pickup_handler.gd": {
+      "gdfmtSha256": "e7a84e171eca2003150c12df4f45b581072c45fa5b044a70a77ad21fe86d0c09",
+      "gdtoolkitSha256": "58033b00d6f4aa7b7e0818f0a961983db84bc02e457d76e03877a8dbd6368207",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_hand_tracking_demo/start_vr.gd": {
+      "gdfmtSha256": "c6010ed73f85ff1221bf6efeb7e6df74fa6ecc803f82690e10d5e9536986fc2b",
+      "gdtoolkitSha256": "55c539d7fb715249ae77a4466f64ccfbd40678eb223b496d5d060b78b0e0fa27",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_hand_tracking_demo/xr_hand_fallback_modifier_3d.gd": {
+      "gdfmtSha256": "7b1920246b9322e4f3c2c1b2bff606ecf73eb1ef4c36fd3464c28fa2d56c1f24",
+      "gdtoolkitSha256": "f94f42e48e1e6cca2382c0a7554e19614b4a40f444a360d9a9c729cb8fb7edf6",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/xr/openxr_origin_centric_movement/objects/black_out.gd": {
+      "gdfmtSha256": "daa6e9c8fd80a55e7907f6cc2f84edcd9fddd476a8a7b44beefe3aeb109c2739",
+      "gdtoolkitSha256": "f07fad5ee8efbb0e563a226305730f42edd8fcc4e7f9c1dfc0a333583c450cc4",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_origin_centric_movement/player.gd": {
+      "gdfmtSha256": "a624c294777e284dbc4e22aac951649b1bf959b75c67e49817d57cf7268ca668",
+      "gdtoolkitSha256": "436e7ff129fe6bbc80057c6861dea71ab822ab8638616ea32e81799ae65dc5fe",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-demos/xr/openxr_origin_centric_movement/start_vr.gd": {
+      "gdfmtSha256": "c6010ed73f85ff1221bf6efeb7e6df74fa6ecc803f82690e10d5e9536986fc2b",
+      "gdtoolkitSha256": "55c539d7fb715249ae77a4466f64ccfbd40678eb223b496d5d060b78b0e0fa27",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_passthrough/fade_message.gd": {
+      "gdfmtSha256": "14be937620778735c260f480cf5198b2e9502687101d115fa175eedf722b33db",
+      "gdtoolkitSha256": "7d5a2a0cf5aa62fb2a6b187c6ea13c9630c06d8ef48a06172d08e511809fb8d8",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_passthrough/main.gd": {
+      "gdfmtSha256": "0913b7eb5cf42ba1be0ab171bb988a3dbd4495acd94ae319b947ace9be03e164",
+      "gdtoolkitSha256": "cc89de61e132cb3e7d29cf2598c5b2e42174d640ef014163eb874670178243af",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_passthrough/start_vr.gd": {
+      "gdfmtSha256": "c6010ed73f85ff1221bf6efeb7e6df74fa6ecc803f82690e10d5e9536986fc2b",
+      "gdtoolkitSha256": "55c539d7fb715249ae77a4466f64ccfbd40678eb223b496d5d060b78b0e0fa27",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_render_models/collision_hands.gd": {
+      "gdfmtSha256": "94af3954738050add6fa1955f68ac6f0d79b23a03dda1138187dbe846e9322ad",
+      "gdtoolkitSha256": "1c14edd528c0e0c7be5541905e36a0e663771e91fb70d4b054b767127365c105",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_render_models/start_vr.gd": {
+      "gdfmtSha256": "c6010ed73f85ff1221bf6efeb7e6df74fa6ecc803f82690e10d5e9536986fc2b",
+      "gdtoolkitSha256": "55c539d7fb715249ae77a4466f64ccfbd40678eb223b496d5d060b78b0e0fa27",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_spectator_view/cameras/spectator_camera.gd": {
+      "gdfmtSha256": "50dff4cc951abf2fee254e0e27575c03fb261ad7975c90693f927ddb46bd6ed4",
+      "gdtoolkitSha256": "ce78f137a01a6b9f902c544b00a25e4c33cd5c3a116e62c0c9c5d29316ef30a1",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_spectator_view/cameras/spectator_camera_area.gd": {
+      "gdfmtSha256": "f24b58c8f91f70e90df859b1549366c594ad27edc4dd8a041de2ef4fb35c8463",
+      "gdtoolkitSha256": "a394614aa4c8dc73b5192536bd47783137f5379bf9a4467799df6120bcb58280",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_spectator_view/cameras/stabilized_camera.gd": {
+      "gdfmtSha256": "3c126d7bddd08784710bf2b123596bd0d135c04d70d1f61971eac9f28cd8dcff",
+      "gdtoolkitSha256": "37c5f83b86d237a8da6c71a47aec6e9d2983939b7fc61e97e570e734e9a5f268",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_spectator_view/main.gd": {
+      "gdfmtSha256": "bdc456143096196bca82b6479b3d0f6fabf5edc30907d15db2dbad22725b57bb",
+      "gdtoolkitSha256": "38937e5b825a4ee53c6aa71f3038028cf2a911f06fa0b895778e49d850a3128a",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_spectator_view/spectator.gd": {
+      "gdfmtSha256": "58c36d5f75d01b8591432935d132ddba5a640848105b4b4fa25a6a7da94ef20b",
+      "gdtoolkitSha256": "6f7ecabc618479c4613b455f190efa2cd90d0c01e65d9bf9e04d5b426d21be6d",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_spectator_view/start_vr.gd": {
+      "gdfmtSha256": "3ca5786fdafe5cf67901814a803e704bc42c99b9e8233d506c005fe35acd0edf",
+      "gdtoolkitSha256": "11a12f5338b17b2fbcfaa081bdb6ada5ae7ffc3b2894dba6b6f12c17fe5f4abe",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/openxr_spectator_view/xr_pointer.gd": {
+      "gdfmtSha256": "90c1bf220769665a54b84d0ec5c75f9b4ac0f706895ffdf9d8d57e89662136e8",
+      "gdtoolkitSha256": "0c3bba10743b73b2b3000d6bdf613a6c295c4b51c4923f1dd87f37cbef5a0c57",
+      "categories": ["layout"]
+    },
+    "godot-demos/xr/webxr/main.gd": {
+      "gdfmtSha256": "d8269678f4af1bad1599df8e405f0e13474deb7c15f283a8449b53e2adc95452",
+      "gdtoolkitSha256": "ad3aba2493dba355a5df42fc778adb6d0dd6f7a4f84e772336fdcf508831b482",
+      "categories": ["layout"]
+    },
+    "kenney-platformer/objects/brick.gd": {
+      "gdfmtSha256": "998edb463e02d955475ef9f1e55a439fa25e7f1f3b9de7f1d1915ad7965fbbe4",
+      "gdtoolkitSha256": "5a0619bb29436a2103b4e55a4c16651286081b386ad643d5606b092fb5e54745",
+      "categories": ["layout"]
+    },
+    "kenney-platformer/objects/cloud.gd": {
+      "gdfmtSha256": "73d48e7aa74adb92f383b86d95a60758bc9d656b456dae8e51fb06e580d2a714",
+      "gdtoolkitSha256": "576f41d4fd3919ecdbc6da40c284ec89397d9332e04ee0ba50c859ba304ec823",
+      "categories": ["layout"]
+    },
+    "kenney-platformer/objects/coin.gd": {
+      "gdfmtSha256": "4eba35179c19483d0d3ec9770d9ba5ba5f10fd7be64e56e69a36211dfb35d82c",
+      "gdtoolkitSha256": "dd53249e2094db7221bcd36996de16387fc8f9d3feb64ca115474378b22c0ea5",
+      "categories": ["layout"]
+    },
+    "kenney-platformer/objects/platform_falling.gd": {
+      "gdfmtSha256": "58c896156deebb1747b6ddaf87e6f67f91c24d39f60c918cc35d08a9c3f229dc",
+      "gdtoolkitSha256": "668c1826662a23c941242256a40ae9958b6fe5681c8c821054cf953ad0816b2b",
+      "categories": ["layout"]
+    },
+    "kenney-platformer/scripts/audio.gd": {
+      "gdfmtSha256": "949f06d5a55ddf37361a732ee94558533f8beee369b9b5e4a175ba8492488d40",
+      "gdtoolkitSha256": "c1409b067c381c69ff4bd056ea32fcd193ea50c8a0626a1d07251c5018b93253",
+      "categories": ["layout"]
+    },
+    "kenney-platformer/scripts/hud.gd": {
+      "gdfmtSha256": "02bc329708bec3a1c736afbac6eced3c655cfb41f4de8cbe1d0e840d64b5ddda",
+      "gdtoolkitSha256": "23ca52d7b93d04806c3fce0354204d8b1cb5269b83966d9ebb31103d8a8a3af4",
+      "categories": ["layout"]
+    },
+    "kenney-platformer/scripts/main.gd": {
+      "gdfmtSha256": "eef797d13a90e9def9e56057b323801ea9f33abd3ff857b18943698ce4d5d564",
+      "gdtoolkitSha256": "eef797d13a90e9def9e56057b323801ea9f33abd3ff857b18943698ce4d5d564",
+      "categories": ["identical"]
+    },
+    "kenney-platformer/scripts/player.gd": {
+      "gdfmtSha256": "2cd11c005fcf750e6343718ad6448b6bd1ca3759073e894bb01d53586254ae7f",
+      "gdtoolkitSha256": "63b2f621ba70a0a6c82ce2f619face57c767ddf87a73d21a16ca46e8dec64ef3",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "kenney-platformer/scripts/view.gd": {
+      "gdfmtSha256": "66d4540a170f74089abfc475b076d7bc9b35e9e9968fc908f1fc15a1d316c630",
+      "gdtoolkitSha256": "441cef3013ca38417be0850c6b0a4f4488585624fd55296040c6e0d2b5ed5cc8",
+      "categories": ["layout"]
+    }
+  }
+}

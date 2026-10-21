@@ -1,0 +1,1 @@
+enum State { A, A }

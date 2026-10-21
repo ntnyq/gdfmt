@@ -1,0 +1,3 @@
+* text=auto eol=lf
+# Preserve intentional CRLF, BOM, missing final newlines, and malformed source bytes.
+tests/compatibility/fixtures/*.gd -text

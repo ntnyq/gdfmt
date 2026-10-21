@@ -1,0 +1,6129 @@
+{
+  "schemaVersion": 2,
+  "engines": [
+    {
+      "languageVersion": "4.3",
+      "tag": "4.3-stable",
+      "commit": "77dcf97d82cbfe4e4615475fa52ca03da645dbd8",
+      "engineVersion": "4.3.stable.official.77dcf97d8",
+      "linuxSha512": "fd52bb4ba8acc30ca5accd1c566d470ad7282f891ccc0995dfafabcf92bcf76280ce182bf9d80ebd885f3ed2165d01e1fc3f2928436b15498dfbd98656c2a45a"
+    },
+    {
+      "languageVersion": "4.4",
+      "tag": "4.4-stable",
+      "commit": "4c311cbee68c0b66ff8ebb8b0defdd9979dd2a41",
+      "engineVersion": "4.4.stable.official.4c311cbee",
+      "linuxSha512": "3d56a7698bdf7027e41e5e0a930b6b93f89a204eb95b9cd0b8ae25180231994029e211984863a5ebb59759b3e602ae1d042e745ab1b7cbbfeda62652c3936f60"
+    },
+    {
+      "languageVersion": "4.5",
+      "tag": "4.5-stable",
+      "commit": "876b290332ec6f2e6d173d08162a02aa7e6ca46d",
+      "engineVersion": "4.5.stable.official.876b29033",
+      "linuxSha512": "b5bd5d8a4dd3f44de1d123361beabaafa4825dd05b5e20fd2bfa540f32594f81d82e7c4e86fae420f4faee77d9def573b570f8b156e9c84a4dc2d5123d09e852"
+    },
+    {
+      "languageVersion": "4.6",
+      "tag": "4.6-stable",
+      "commit": "89cea143987d564363e15d207438530651d943ac",
+      "engineVersion": "4.6.stable.official.89cea1439",
+      "linuxSha512": "0c1bc5e8dca8f892a9a5fd0628b742f399fbd520e5f0051ecac021c0aa4ea5a8f0d237c8ed6b767b2afda7f7a4b32001118f1b04a82e335a5e35b947a1217940"
+    },
+    {
+      "languageVersion": "4.7",
+      "tag": "4.7.2-stable",
+      "commit": "ed1daf0bf001b61586d9930840f2f1394092c079",
+      "engineVersion": "4.7.2.stable.official.ed1daf0bf",
+      "linuxSha512": "9aa00f7a605200940bce3027a567b782f49bd8e940dd06ae9e987bd65aee1b1467edd56ed84fcdcbdd44354bf613bdbb4e5d2913e925850368e150c59ed54c65"
+    }
+  ],
+  "gates": [
+    {
+      "feature": "TypedDictionary",
+      "positive": "fixtures/gate-typed-dictionary.gd",
+      "negative": "fixtures/gate-typed-dictionary-invalid.gd"
+    },
+    {
+      "feature": "ExportToolButton",
+      "positive": "fixtures/gate-tool-button.gd",
+      "negative": "fixtures/gate-tool-button-invalid.gd"
+    },
+    {
+      "feature": "WarningRegions",
+      "positive": "fixtures/gate-warning-regions.gd",
+      "negative": "fixtures/gate-warning-regions-invalid.gd"
+    },
+    {
+      "feature": "Abstract",
+      "positive": "fixtures/gate-abstract.gd",
+      "negative": "fixtures/gate-abstract-invalid.gd"
+    },
+    {
+      "feature": "VariadicFunction",
+      "positive": "fixtures/gate-variadic.gd",
+      "negative": "fixtures/gate-variadic-invalid.gd"
+    },
+    {
+      "feature": "ExportFilePath",
+      "positive": "fixtures/gate-file-path.gd",
+      "negative": "fixtures/gate-file-path-invalid.gd"
+    },
+    {
+      "feature": "MultilineExportHints",
+      "positive": "fixtures/gate-multiline-hints.gd",
+      "negative": "fixtures/gate-multiline-hints-invalid.gd"
+    }
+  ],
+  "cases": [
+    {
+      "file": "fixtures/empty.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/comments.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/no-final-newline.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/nested-blocks.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/comment-indentation.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/continuation.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/unicode.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/strings.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/numbers.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/annotations.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/lambda.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/match.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/properties.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/signed-numbers.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/multiline-single-quotes.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/unicode-escapes.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-declarations.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-control-flow.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-lambda-call.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "analyzer",
+          "engineError": "Function \"consume()\" not found in base self.",
+          "note": "Fixture intentionally omits the called helper; name resolution is outside parser scope."
+        },
+        "4.4": {
+          "kind": "analyzer",
+          "engineError": "Function \"consume()\" not found in base self.",
+          "note": "Fixture intentionally omits the called helper; name resolution is outside parser scope."
+        },
+        "4.5": {
+          "kind": "analyzer",
+          "engineError": "Function \"consume()\" not found in base self.",
+          "note": "Fixture intentionally omits the called helper; name resolution is outside parser scope."
+        },
+        "4.6": {
+          "kind": "analyzer",
+          "engineError": "Function \"consume()\" not found in base self.",
+          "note": "Fixture intentionally omits the called helper; name resolution is outside parser scope."
+        },
+        "4.7": {
+          "kind": "analyzer",
+          "engineError": "Function \"consume()\" not found in base self.",
+          "note": "Fixture intentionally omits the called helper; name resolution is outside parser scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-lambda-indent-error.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Mixed use of tabs and spaces for indentation."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Mixed use of tabs and spaces for indentation."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Mixed use of tabs and spaces for indentation."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Mixed use of tabs and spaces for indentation."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Mixed use of tabs and spaces for indentation."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-context-errors.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"return\" in class body."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"return\" in class body."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"return\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"return\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"return\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-parameter-errors.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot have mandatory parameters after optional parameters."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot have mandatory parameters after optional parameters."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot have mandatory parameters after optional parameters."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot have mandatory parameters after optional parameters."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot have mandatory parameters after optional parameters."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-recovery.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-match-patterns.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-properties.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "analyzer",
+          "engineError": "Getter \"read_value\" not found.",
+          "note": "Fixture intentionally omits delegated accessor functions; resolving them requires an analyzer."
+        },
+        "4.4": {
+          "kind": "analyzer",
+          "engineError": "Getter \"read_value\" not found.",
+          "note": "Fixture intentionally omits delegated accessor functions; resolving them requires an analyzer."
+        },
+        "4.5": {
+          "kind": "analyzer",
+          "engineError": "Getter \"read_value\" not found.",
+          "note": "Fixture intentionally omits delegated accessor functions; resolving them requires an analyzer."
+        },
+        "4.6": {
+          "kind": "analyzer",
+          "engineError": "Getter \"read_value\" not found.",
+          "note": "Fixture intentionally omits delegated accessor functions; resolving them requires an analyzer."
+        },
+        "4.7": {
+          "kind": "analyzer",
+          "engineError": "Getter \"read_value\" not found.",
+          "note": "Fixture intentionally omits delegated accessor functions; resolving them requires an analyzer."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-invalid-pattern.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-abstract.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-abstract-errors.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "\"@abstract\" annotation cannot be applied to static functions."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "\"@abstract\" annotation cannot be applied to static functions."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "\"@abstract\" annotation cannot be applied to static functions."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-declaration-constraints.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-typed-dictionary.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Only arrays can specify collection element types."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-versioned-annotations.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-export-file-path.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_file_path\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@export_file_path\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/script-export-multiline-hints.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-array-constructor.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot call on an expression. Use \".call()\" if it's a Callable."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot call on an expression. Use \".call()\" if it's a Callable."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot call on an expression. Use \".call()\" if it's a Callable."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot call on an expression. Use \".call()\" if it's a Callable."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot call on an expression. Use \".call()\" if it's a Callable."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-dictionary-constructor.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"]\" after subscription index."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"]\" after subscription index."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"]\" after subscription index."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"]\" after subscription index."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"]\" after subscription index."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-enum-float.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "analyzer",
+          "engineError": "Enum values must be integers.",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.4": {
+          "kind": "analyzer",
+          "engineError": "Enum values must be integers.",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.5": {
+          "kind": "analyzer",
+          "engineError": "Enum values must be integers.",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.6": {
+          "kind": "analyzer",
+          "engineError": "Enum values must be integers.",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.7": {
+          "kind": "analyzer",
+          "engineError": "Enum values must be integers.",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-enum-expression.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-signal-default.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-signal-rest.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-abstract-header.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Class \"case.gd\" is not abstract but contains abstract methods. Mark the class as \"@abstract\" or remove \"@abstract\" from all methods in this class."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Class \"case.gd\" is not abstract but contains abstract methods. Mark the class as \"@abstract\" or remove \"@abstract\" from all methods in this class."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Class \"case.gd\" is not abstract but contains abstract methods. Mark the class as \"@abstract\" or remove \"@abstract\" from all methods in this class."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-abstract-only.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-extends-order.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-duplicate-for.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-nested-shadow.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-static-self.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-static-lambda-self.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"self\" inside a static function."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-type-trailing-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-array-trailing-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected type for collection after \",\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-empty-enum.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-annotation-parens.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-cast-void.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-string-statement.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-abstract-after-extends.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-getter-return-void.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "analyzer",
+          "engineError": "Cannot return value of type \"null\" because the function return type is \"int\".",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.4": {
+          "kind": "analyzer",
+          "engineError": "Cannot return value of type \"null\" because the function return type is \"int\".",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.5": {
+          "kind": "analyzer",
+          "engineError": "Cannot return value of type \"null\" because the function return type is \"int\".",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.6": {
+          "kind": "analyzer",
+          "engineError": "Cannot return value of type \"null\" because the function return type is \"int\".",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        },
+        "4.7": {
+          "kind": "analyzer",
+          "engineError": "Cannot return value of type \"null\" because the function return type is \"int\".",
+          "note": "Constant evaluation and return type compatibility require semantic analysis; parser intentionally accepts this grammar."
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-collection-subscripts.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Only arrays can specify collection element types."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-typed-dictionary.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Only arrays can specify collection element types."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-typed-dictionary-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Only arrays can specify collection element types."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Typed dictionaries require exactly two collection element types."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Typed dictionaries require exactly two collection element types."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Typed dictionaries require exactly two collection element types."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Typed dictionaries require exactly two collection element types."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-tool-button.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_tool_button\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-tool-button-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_tool_button\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_tool_button\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_tool_button\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_tool_button\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_tool_button\" requires at least 1 arguments, but 0 were given."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-warning-regions.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-warning-regions-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" requires at least 1 arguments, but 0 were given."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-abstract.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-abstract-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "An abstract function cannot have a body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "An abstract function cannot have a body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "An abstract function cannot have a body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-variadic.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-variadic-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Typed arrays are currently not supported for the rest parameter."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Typed arrays are currently not supported for the rest parameter."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Typed arrays are currently not supported for the rest parameter."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-file-path.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_file_path\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@export_file_path\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-file-path-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_file_path\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@export_file_path\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_file_path\" cannot be applied to a function."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_file_path\" cannot be applied to a function."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_file_path\" cannot be applied to a function."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-multiline-hints.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 2 were given."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 2 were given."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 2 were given."
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-multiline-hints-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" cannot be applied to a function."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" cannot be applied to a function."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-multiline-legacy.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-warning-restore.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_restore\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is not being ignored by \"@warning_ignore_start\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is not being ignored by \"@warning_ignore_start\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is not being ignored by \"@warning_ignore_start\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is not being ignored by \"@warning_ignore_start\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-warning-restore-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_restore\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_restore\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_restore\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_restore\" requires at least 1 arguments, but 0 were given."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_restore\" requires at least 1 arguments, but 0 were given."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-abstract-inner.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-variadic-lambda-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot have parameters after the rest parameter."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot have parameters after the rest parameter."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot have parameters after the rest parameter."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-warning-duplicate.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is already being ignored by \"@warning_ignore_start\" at line 1."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is already being ignored by \"@warning_ignore_start\" at line 1."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is already being ignored by \"@warning_ignore_start\" at line 1."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Warning \"UNUSED_VARIABLE\" is already being ignored by \"@warning_ignore_start\" at line 1."
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-warning-cross-scope.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-warning-escaped.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/gate-file-path-optional.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_file_path\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@export_file_path\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/conformance-multiline-hint-type.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export_multiline\" requires at most 0 arguments, but 1 were given."
+        },
+        "4.6": {
+          "kind": "analyzer",
+          "engineError": "Invalid argument for annotation \"@export_multiline\": argument 1 should be \"String\" but is \"int\".",
+          "note": "Annotation argument type evaluation belongs to the analyzer; the grammar is accepted."
+        },
+        "4.7": {
+          "kind": "analyzer",
+          "engineError": "Invalid argument for annotation \"@export_multiline\": argument 1 should be \"String\" but is \"int\".",
+          "note": "Annotation argument type evaluation belongs to the analyzer; the grammar is accepted."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-forms.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-anonymous-enum-collision.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Variable \"VALUE\" has the same name as a previously declared enum value."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Variable \"VALUE\" has the same name as a previously declared enum value."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Variable \"VALUE\" has the same name as a previously declared enum value."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Variable \"VALUE\" has the same name as a previously declared enum value."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Variable \"VALUE\" has the same name as a previously declared enum value."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-named-enum-collision.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Variable \"State\" has the same name as a previously declared enum."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Variable \"State\" has the same name as a previously declared enum."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Variable \"State\" has the same name as a previously declared enum."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Variable \"State\" has the same name as a previously declared enum."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Variable \"State\" has the same name as a previously declared enum."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-enum-repeated-entry.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Name \"A\" was already in this enum (at line 1)."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Name \"A\" was already in this enum (at line 1)."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Name \"A\" was already in this enum (at line 1)."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Name \"A\" was already in this enum (at line 1)."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Name \"A\" was already in this enum (at line 1)."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-enum-keyword.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-contextual-identifiers.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-reserved-identifier.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-extending-collection.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after superclass, found \"[\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after superclass, found \"[\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after superclass, found \"[\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after superclass, found \"[\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after superclass, found \"[\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-extending-collection.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after class declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after class declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after class declaration."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after class declaration."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after class declaration."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-empty-class-inline.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after class declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after class declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after class declaration."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after class declaration."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after class declaration."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-header.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-header-duplicate.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"extends\" more than once in the same class."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"extends\" more than once in the same class."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"extends\" more than once in the same class."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"extends\" more than once in the same class."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"extends\" more than once in the same class."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-class-name.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"class_name\" in class body."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"class_name\" in class body."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"class_name\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"class_name\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"class_name\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-init.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-init-instance.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Static constructor must be declared static."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Static constructor must be declared static."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Static constructor must be declared static."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Static constructor must be declared static."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Static constructor must be declared static."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-init-parameters.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Static constructor cannot have parameters."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Static constructor cannot have parameters."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Static constructor cannot have parameters."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Static constructor cannot have parameters."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Static constructor cannot have parameters."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-constant.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-property.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-getter-parens.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-delegated-trailing-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Inline setter/getter setting cannot span across multiple lines (use \"\\\\\"\" if needed)."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Inline setter/getter setting cannot span across multiple lines (use \"\\\\\"\" if needed)."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Inline setter/getter setting cannot span across multiple lines (use \"\\\\\"\" if needed)."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Inline setter/getter setting cannot span across multiple lines (use \"\\\\\"\" if needed)."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Inline setter/getter setting cannot span across multiple lines (use \"\\\\\"\" if needed)."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-mixed.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"=\" after \"set\""
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"=\" after \"set\""
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"=\" after \"set\""
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"=\" after \"set\""
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"=\" after \"set\""
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-setter-typed.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after parameter name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after parameter name."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after parameter name."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after parameter name."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after parameter name."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-function-signature-inference.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-signal-inference.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Signal parameters cannot have a default value."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-function-duplicate-parameters.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Parameter with name \"value\" was already declared for this function."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-function-bodyless.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after function declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after function declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "A function must either have a \":\" followed by a body, or be marked as \"@abstract\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "A function must either have a \":\" followed by a body, or be marked as \"@abstract\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "A function must either have a \":\" followed by a body, or be marked as \"@abstract\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotations-inline.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotations-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotation-empty-parens.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-export-target-constant.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-annotation-argument-assignment.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-class-pass-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inferred-without-value.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-empty-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-inline-compounds.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-branch-scopes.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-elif-after-inline.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-elif-orphan.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"elif\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"elif\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"elif\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"elif\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"elif\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-else-duplicate.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-outside-break.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-nested-lambda-break.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"break\" outside of a loop."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-typed-inferred.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-trailing-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-message-trailing-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-empty.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression to assert."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression to assert."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression to assert."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression to assert."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression to assert."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-too-many.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after assert expression."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after assert expression."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after assert expression."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after assert expression."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after assert expression."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-target-parenthesized.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-target-call.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Only identifier, attribute access, and subscription access can be used as assignment target."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Only identifier, attribute access, and subscription access can be used as assignment target."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Only identifier, attribute access, and subscription access can be used as assignment target."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Only identifier, attribute access, and subscription access can be used as assignment target."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Only identifier, attribute access, and subscription access can be used as assignment target."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-chain.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Assignment is not allowed inside an expression."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assignment-operators.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-return-with-lambda.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-lambda.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-named-lambda.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-parenthesized-lambda.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Standalone lambdas cannot be accessed. Consider assigning it to a variable."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-string-and-expression.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-local-class.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"class\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"class\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"class\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"class\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"class\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-local-enum.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"enum\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"enum\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"enum\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"enum\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"enum\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-local-property.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after variable declaration, found \":\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after variable declaration, found \":\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after variable declaration, found \":\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after variable declaration, found \":\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after variable declaration, found \":\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-forms.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-rest-top-level.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Rest pattern can only be used inside array and dictionary patterns."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Rest pattern can only be used inside array and dictionary patterns."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Rest pattern can only be used inside array and dictionary patterns."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Rest pattern can only be used inside array and dictionary patterns."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Rest pattern can only be used inside array and dictionary patterns."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-rest-dictionary-value.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern cannot be used as a value."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern cannot be used as a value."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern cannot be used as a value."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern cannot be used as a value."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern cannot be used as a value."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-rest-nonfinal-key.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-duplicate-bind.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Bind variable name \"entry\" was already used in this pattern."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Bind variable name \"entry\" was already used in this pattern."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Bind variable name \"entry\" was already used in this pattern."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Bind variable name \"entry\" was already used in this pattern."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Bind variable name \"entry\" was already used in this pattern."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-bind-alternatives.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot use a variable bind with multiple patterns."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot use a variable bind with multiple patterns."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot use a variable bind with multiple patterns."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot use a variable bind with multiple patterns."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot use a variable bind with multiple patterns."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-duplicate-keys.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-trailing-pattern-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression for match pattern."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression for match pattern."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression for match pattern."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression for match pattern."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression for match pattern."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-continue.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"continue\" outside of a loop."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"continue\" outside of a loop."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"continue\" outside of a loop."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"continue\" outside of a loop."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Cannot use \"continue\" outside of a loop."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-loop-continue.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-contextual-names.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-guard-binding.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-variable-name.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected variable name after \"var\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-initializer.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-operand.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression after \"+\" operator."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression after \"+\" operator."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression after \"+\" operator."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression after \"+\" operator."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression after \"+\" operator."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-parameter.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected parameter name."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-colon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after function declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \":\" after function declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"Indent\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"Indent\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"Indent\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-indent.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-condition.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-orphan-clause.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \"else\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-property-accessor.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-match-pattern.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected bind name after \"var\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected bind name after \"var\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected bind name after \"var\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected bind name after \"var\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected bind name after \"var\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-missing-close.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-comment-header.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-static-signal.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"func\" or \"var\" after \"static\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-enum-entry-constant.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Name \"VALUE\" is already used as a class constant."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Name \"VALUE\" is already used as a class constant."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Name \"VALUE\" is already used as a class constant."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Name \"VALUE\" is already used as a class constant."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Name \"VALUE\" is already used as a class constant."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-signal-types.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-signal-return.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after signal declaration, found \"->\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after signal declaration, found \"->\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after signal declaration, found \"->\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after signal declaration, found \"->\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected end of statement after signal declaration, found \"->\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-empty-function.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected indented block after function declaration."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-setter-return.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-lambda-return.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-getter-parameters.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after \"get(\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after \"get(\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after \"get(\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after \"get(\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \")\" after \"get(\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-blank-lines.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-delegated-newlines.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-property-accessor-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-no-final-newline-inline.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inline-inner-functions.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inline-inner-extends.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-extends-after-doc.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-top-warning-target-pass.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-abstract-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@abstract\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unrecognized annotation: \"@abstract\"."
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-contextual-match-assignment.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-contextual-match-call.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression to test after \"match\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-standalone-lambda-call.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-annotation-standalone-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore_start\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected newline after a standalone annotation."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected newline after a standalone annotation."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected newline after a standalone annotation."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected newline after a standalone annotation."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-annotation-on-expression.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-annotation-unbound.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-for-missing-in.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"in\" or \":\" after \"for\" variable name."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"in\" or \":\" after \"for\" variable name."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"in\" or \":\" after \"for\" variable name."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"in\" or \":\" after \"for\" variable name."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"in\" or \":\" after \"for\" variable name."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-for-void.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "\"void\" is only allowed for a function return type."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-for-untyped-inference.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected type specifier after \":\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected type specifier after \":\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected type specifier after \":\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected type specifier after \":\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected type specifier after \":\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-assert-double-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected error message for assert after \",\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected error message for assert after \",\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected error message for assert after \",\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected error message for assert after \",\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected error message for assert after \",\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-return-void-value.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-inline.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected a newline after \"match\" statement."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected a newline after \"match\" statement."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected a newline after \"match\" statement."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected a newline after \"match\" statement."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected a newline after \"match\" statement."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-guard-empty.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression for pattern guard after \"when\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression for pattern guard after \"when\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression for pattern guard after \"when\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression for pattern guard after \"when\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression for pattern guard after \"when\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-wildcard-array.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-dictionary-rest-value-after.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-dictionary-repeat-rest.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern dictionary."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-array-repeat-rest.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "The \"..\" pattern must be the last element in the pattern array."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-bind-shadow-parameter.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There's already a parameter named \"value\" in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There's already a parameter named \"value\" in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There's already a parameter named \"value\" in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There's already a parameter named \"value\" in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There's already a parameter named \"value\" in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-bind-reuse-branches.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-match-guard-lambda.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-local-forward-shadow.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-shadow.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-capture-redeclare.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"local\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"local\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"local\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"local\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"local\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-loop-match-context.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-property-sibling.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"get\" or \"set\" for property declaration."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-local-missing-expression.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression for variable initial value after \"=\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-stray-close.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Closing \")\" doesn't have an opening counterpart."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Closing \")\" doesn't have an opening counterpart."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Closing \")\" doesn't have an opening counterpart."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Closing \")\" doesn't have an opening counterpart."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Closing \")\" doesn't have an opening counterpart."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-unclosed-string.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unterminated string."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unterminated string."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unterminated string."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unterminated string."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unterminated string."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-enum-entry.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression value after \"=\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression value after \"=\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression value after \"=\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression value after \"=\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression value after \"=\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-nested-suite.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected conditional expression after \"if\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-function-name.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected function name after \"func\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected function name after \"func\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected function name after \"func\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected function name after \"func\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected function name after \"func\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-class-name.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected identifier for the class name after \"class\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected identifier for the class name after \"class\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected identifier for the class name after \"class\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected identifier for the class name after \"class\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected identifier for the class name after \"class\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-recovery-annotation-target.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" cannot be applied to a constant."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inline-class-member-scope.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inline-class-functions-scope.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-export-across-pass.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-export-across-comment.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-warning-across-pass.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-comment-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-comment-same-line.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected newline after comment string."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-inner-extends-after-pass.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"extends\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-own-variable.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-forward-variable.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-outer-parameter.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-parameter-shadow.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-parameter-shadow-redeclare.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"local\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"local\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"local\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"local\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"local\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-nested-capture.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"captured\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"captured\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"captured\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"captured\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"captured\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-loop-initializer.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-loop-body.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a for loop iterator named \"item\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a for loop iterator named \"item\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a for loop iterator named \"item\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a for loop iterator named \"item\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a for loop iterator named \"item\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-guard-binding-shadow.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a pattern bind named \"entry\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a pattern bind named \"entry\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a pattern bind named \"entry\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a pattern bind named \"entry\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a pattern bind named \"entry\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-lambda-array.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"outer\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"outer\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"outer\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"outer\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a variable named \"outer\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-lambda-default-scope.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-lambda-property-setter-scope.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "There is already a parameter named \"value\" declared in this scope."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-repeated-separators.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-repeated-separators.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-decl-leading-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \";\" in class body."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-stmt-leading-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected statement, found \";\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-builtin-identifiers.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-keyword-attributes.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-pass.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-pass-semicolon.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected newline after \"pass\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected newline after \"pass\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected newline after \"pass\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected newline after \"pass\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected newline after \"pass\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-branch-annotation.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-member-missing.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-array-double-comma.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected expression as array element."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-node-nonstring.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected node path as string or identifier after \"$\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected node path as string or identifier after \"$\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected node path as string or identifier after \"$\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected node path as string or identifier after \"$\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected node path as string or identifier after \"$\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-preload-missing-argument.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected resource path after \"(\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected resource path after \"(\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected resource path after \"(\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected resource path after \"(\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected resource path after \"(\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-await-missing-operand.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected signal or coroutine after \"await\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected signal or coroutine after \"await\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected signal or coroutine after \"await\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected signal or coroutine after \"await\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected signal or coroutine after \"await\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-ternary-missing-else.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected \"else\" after ternary operator condition."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected \"else\" after ternary operator condition."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected \"else\" after ternary operator condition."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected \"else\" after ternary operator condition."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected \"else\" after ternary operator condition."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-yield-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "\"yield\" was removed in Godot 4. Use \"await\" instead."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "\"yield\" was removed in Godot 4. Use \"await\" instead."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "\"yield\" was removed in Godot 4. Use \"await\" instead."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "\"yield\" was removed in Godot 4. Use \"await\" instead."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "\"yield\" was removed in Godot 4. Use \"await\" instead."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-question-mark-invalid.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"?\" in source. If you want a ternary operator, use \"truthy_value if true_condition else falsy_value\"."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"?\" in source. If you want a ternary operator, use \"truthy_value if true_condition else falsy_value\"."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"?\" in source. If you want a ternary operator, use \"truthy_value if true_condition else falsy_value\"."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"?\" in source. If you want a ternary operator, use \"truthy_value if true_condition else falsy_value\"."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unexpected \"?\" in source. If you want a ternary operator, use \"truthy_value if true_condition else falsy_value\"."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-positive.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-nonliteral.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-nonstring.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Argument 1 of annotation \"@icon\" must be a string literal."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-icon-empty.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "\"@icon\" annotation argument must contain the path to the icon."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "\"@icon\" annotation argument must contain the path to the icon."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "\"@icon\" annotation argument must contain the path to the icon."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "\"@icon\" annotation argument must contain the path to the icon."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "\"@icon\" annotation argument must contain the path to the icon."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-annotation-unbound.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@warning_ignore\" does not precede a valid target, so it will have no effect."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-match-annotation-target.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" is not allowed in this level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" is not allowed in this level."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" is not allowed in this level."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" is not allowed in this level."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Annotation \"@export\" is not allowed in this level."
+        }
+      }
+    },
+    {
+      "file": "fixtures/audit-syntax-attribute-literal.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Expected identifier after \".\" for attribute access."
+        }
+      }
+    },
+    {
+      "file": "fixtures/formatter-comments.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/formatter-lambdas.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/formatter-declarations.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/formatter-suites.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/formatter-multiline-literals.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/formatter-project-regressions.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
+    },
+    {
+      "file": "fixtures/project-invalid-lambda-dedent.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "syntax",
+          "engineError": "Unindent doesn't match the previous indentation level."
+        },
+        "4.4": {
+          "kind": "syntax",
+          "engineError": "Unindent doesn't match the previous indentation level."
+        },
+        "4.5": {
+          "kind": "syntax",
+          "engineError": "Unindent doesn't match the previous indentation level."
+        },
+        "4.6": {
+          "kind": "syntax",
+          "engineError": "Unindent doesn't match the previous indentation level."
+        },
+        "4.7": {
+          "kind": "syntax",
+          "engineError": "Unindent doesn't match the previous indentation level."
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "oxc.enable": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "oxc.oxc-vscode",
+  "editor.codeActionsOnSave": {
+    "source.format.oxc": "explicit"
+  },
+  "cSpell.words": [
+    "assymetric",
+    "bidi",
+    "bumpp",
+    "Calabró",
+    "cdylib",
+    "clippy",
+    "dedenting",
+    "dedents",
+    "dont",
+    "dtolnay",
+    "elif",
+    "esbuild",
+    "exceedance",
+    "feff",
+    "gdfmt",
+    "gdfmtignore",
+    "gdfmtrc",
+    "gdtoolkit",
+    "isnt",
+    "libc",
+    "libgdfmt",
+    "libuv",
+    "MSRV",
+    "MSVC",
+    "napi",
+    "nocapture",
+    "onready",
+    "pycache",
+    "retokenizing",
+    "rsplit",
+    "rustc",
+    "schemars",
+    "serde",
+    "tlsv",
+    "variadics",
+    "venv",
+    "vitepress",
+    "WASI",
+    "webrtc",
+    "xtask"
+  ],
+  "[rust]": {
+    "editor.defaultFormatter": "rust-lang.rust-analyzer"
+  }
+}
