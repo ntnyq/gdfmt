@@ -165,7 +165,7 @@ The Rust CLI is installed back from crates.io with an exact `=VERSION` requireme
 
 ## Dry runs and recovery
 
-Run **Actions → Release → Run workflow** with `publish` unchecked to validate any selected ref and freeze artifacts. To resume publication by dispatch, select the version **tag** as the ref, check `publish`, and ensure the repository variable is enabled. Branch refs cannot publish.
+Run **Actions → Release → Run workflow** with `publish` unchecked to validate any selected ref and freeze artifacts. Before any uploads, dispatch can start publication by selecting the version **tag** as the ref, checking `publish`, and enabling the repository variable. Branch refs cannot publish. After an upload, resume the original run instead of dispatching a rebuild.
 
 For a partial publication, prefer **Re-run failed jobs** on the original run. This retains the successful freeze job's artifact ID, even when the run attempt increases. Matching existing versions are skipped and only missing versions are uploaded; completed channel promotions are skipped, and missing promotions resume after the complete set and consumer checks pass. All six channels are checked before uploads and again before promotion. Neither a newer platform channel nor a newer root channel can be moved backwards. The root channel is promoted last, after each platform promotion is confirmed.
 

@@ -166,7 +166,7 @@ Rust CLI 发布后会以精确的 `=VERSION` 要求从 crates.io 重新安装并
 
 ## 演练与失败恢复
 
-在 **Actions → Release → Run workflow** 中保持 `publish` 不勾选，可验证选定 ref 并冻结产物。手动恢复发布时必须选择版本 tag、开启 `publish` 并确保仓库开关已开启；分支 ref 不能发布。
+在 **Actions → Release → Run workflow** 中保持 `publish` 不勾选，可验证选定 ref 并冻结产物。尚未上传任何包时，可以手动选择版本 tag、开启 `publish` 并确保仓库开关已开启来开始发布；分支 ref 不能发布。已有上传后应恢复原运行，不要通过 dispatch 重建产物。
 
 发生部分发布失败时，优先在原运行中选择 **Re-run failed jobs**，即使运行次数增加，也继续使用成功冻结 job 返回的 artifact ID。已存在且 hash 相同的版本会跳过，只补发缺失版本；已完成的渠道更新也会跳过，只在整套版本和消费者测试通过后补做剩余更新。上传前和更新渠道前都会检查全部 6 个渠道，禁止回退较新的平台包或主包渠道。各平台渠道确认更新成功后，才更新主包渠道。
 
