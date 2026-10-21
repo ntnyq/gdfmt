@@ -332,10 +332,9 @@ fn compiled_binary_uses_the_shared_runner() {
         .output()
         .unwrap();
     assert!(output.status.success());
-    assert!(
-        String::from_utf8(output.stdout)
-            .unwrap()
-            .starts_with("gdfmt 0.1.0-alpha.0")
+    assert_eq!(
+        String::from_utf8(output.stdout).unwrap().trim(),
+        concat!("gdfmt ", env!("CARGO_PKG_VERSION"))
     );
 }
 
