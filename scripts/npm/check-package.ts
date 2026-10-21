@@ -31,6 +31,10 @@ const nativeTarball = join(
   `gdfmt-${target.id}-${metadata.version}.tgz`,
 )
 const nativeBytes = await readFile(nativeTarball)
+const rootSha512 = createHash('sha512')
+  .update(await readFile(rootTarball))
+  .digest('hex')
+const nativeSha512 = createHash('sha512').update(nativeBytes).digest('hex')
 const nativeMetadata = JSON.parse(
   await readFile(join(nativeRoot, 'package.json'), 'utf8'),
 )
@@ -142,6 +146,9 @@ try {
         new URL('../../node_modules/vitest/vitest.mjs', import.meta.url),
       ),
       'run',
+      '--reporter=json',
+      '--outputFile',
+      join(artifacts, 'vitest.json'),
       '--config',
       fileURLToPath(new URL('../../vitest.config.ts', import.meta.url)),
     ],
@@ -154,6 +161,16 @@ try {
       cwd: consumer,
     },
   )
+  const testReport: {
+    success: boolean
+    numTotalTests: number
+    numPassedTests: number
+    numFailedTests: number
+  } = JSON.parse(await readFile(join(artifacts, 'vitest.json'), 'utf8'))
+  assert.equal(testReport.success, true)
+  assert.equal(testReport.numTotalTests, 8)
+  assert.equal(testReport.numPassedTests, 8)
+  assert.equal(testReport.numFailedTests, 0)
   // Resolve both declaration branches through the installed export map.
   await cp(
     fileURLToPath(new URL('../../tests/npm/types', import.meta.url)),
@@ -177,10 +194,27 @@ try {
     version: metadata.version,
     rootTarball,
     nativeTarball,
+    rootSha512,
+    nativeSha512,
+    tests: testReport.numPassedTests,
     registryRequests: requests,
     passed: true,
     published: false,
   }
+  assert.equal(
+    createHash('sha512')
+      .update(await readFile(rootTarball))
+      .digest('hex'),
+    rootSha512,
+    'root artifact changed during testing',
+  )
+  assert.equal(
+    createHash('sha512')
+      .update(await readFile(nativeTarball))
+      .digest('hex'),
+    nativeSha512,
+    'native artifact changed during testing',
+  )
   await writeFile(
     join(artifacts, 'acceptance.json'),
     `${JSON.stringify(summary, null, 2)}\n`,

@@ -71,6 +71,7 @@ for (const entry of entries) {
   assert.equal(receipt.triple, entry.target.triple)
   assert.equal(receipt.version, metadata.version)
   assert.equal(receipt.node, entry.node)
+  assert.equal(receipt.tests, 8)
   const rootTarball = join(entry.directory, `gdfmt-${metadata.version}.tgz`)
   const nativeTarball = join(
     entry.directory,
@@ -91,6 +92,19 @@ for (const entry of entries) {
     .digest('hex')
   rootHash ??= hash
   assert.equal(
+    receipt.rootSha512,
+    hash,
+    'root tarball must match the tested bytes',
+  )
+  const nativeHash = createHash('sha512')
+    .update(await readFile(nativeTarball))
+    .digest('hex')
+  assert.equal(
+    receipt.nativeSha512,
+    nativeHash,
+    'native tarball must match the tested bytes',
+  )
+  assert.equal(
     hash,
     rootHash,
     'every platform must test the identical root tarball',
@@ -99,9 +113,7 @@ for (const entry of entries) {
     target: entry.target.id,
     node: entry.node,
     rootSha512: hash,
-    nativeSha512: createHash('sha512')
-      .update(await readFile(nativeTarball))
-      .digest('hex'),
+    nativeSha512: nativeHash,
   })
 }
 await writeFile(

@@ -67,8 +67,7 @@ jobs:
               apk add --no-cache build-base curl bash git libgcc
               curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.98.0 --profile minimal
               export PATH="$HOME/.cargo/bin:$PATH"
-              corepack enable
-              corepack prepare pnpm@12.14.0 --activate
+              npm install --global pnpm@12.14.0 --ignore-scripts
               pnpm install --frozen-lockfile
               pnpm typecheck
               pnpm test:npm x86_64-unknown-linux-musl

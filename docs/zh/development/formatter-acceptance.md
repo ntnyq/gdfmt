@@ -128,3 +128,22 @@ P6 已实现本地 JSON 继承、以声明目录为基准的 overrides、EditorC
 本地 Rust/宿主验证：workspace 两种特性配置均为 **131 项测试通过**，另有 **2 个由父测试启动的忽略 worker**（mutation 与写入中断），比 P5 增加 25 项通过回归。Rustfmt、Clippy、生成 Schema 漂移、兼容性（292 词法 / 16 表达式 / 262 脚本 fixtures，1310 次 profile 检查）、语法覆盖（50 行清单）、Rust 1.88 全 target/feature 检查和双语文档构建均通过。固定项目试用及 3 项 harness 回归再次通过：**1856 组有效布局**、一个预期上游源码拒绝，401 份已审查 gdtoolkit 差异中 **零未解释差异**。
 
 五个固定 macOS 引擎的 **1310 次源码对照、522 份格式化输出**全部通过；另有 **20 份保护区域输出**通过引擎 check-only 与精确字节保留。本地报告位于 `target/conformance/p6-summary.json`、`p6-report-<profile>.json`、`p6-formatter-<profile>.json`、`p6-regions.json`，项目证据仍在 `target/project-trials/`。P6 按上述本地源码构建范围与明确限制验收；跨平台执行继续作为 CI 门禁，不记为本地已完成。
+
+## P7：Node/npm 本地验收 {#p7-node-acceptance}
+
+验收日期 **2026-10-21**，环境为 macOS arm64、Rust 1.98.0、Node **22.13.0、24.0.0、24.21.0**。绑定、npm facade 和本地分发流程已实现。**尚未发布；完整跨平台产物验收待 CI**，名称归属和发布权限也未核验。
+
+| 契约                 | 证据                                                                                                                                                                                                |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 纯文本 facade 与 DTO | `formatSync`/`format` 返回相同的已验证输出、changed 和诊断；明确 schema version 1 与半开 UTF-8 字节编码，覆盖 Unicode/BOM/CRLF 和 u32 最大 source ID                                                |
+| 异步与模块一致性     | 异步解析/格式化/配置工作通过持有独立输入的 libuv task 执行；占满 libuv 队列证明格式化延后执行，并发请求与同步一致；实际安装的 ESM/CJS 共享命名函数                                                  |
+| 配置与 CLI           | 独立同步/异步配置解析与 Rust `explain-config` 一致；覆盖 extends、overrides、EditorConfig 和忽略；npm CLI 复用 Rust runner，验证 stdout/stderr、0/1/2、stdin、人类/JSON、check/diff、写入和宿主错误 |
+| 打包消费契约         | 空缓存、本地 registry 安装实际解析 optional native 包，消费者 PATH 只包含 Node；`.mts` / `.cts` 消费者通过声明解析，包含生成 Schema 与 MIT/Godot notices                                            |
+| 严格失败行为         | 未知/null/范围/类型/非 JSON 选项和未配对 surrogate 一致失败；无效语法不返回可写输出；缺失/版本错误/损坏/不支持二进制明确失败，不回退编译或下载                                                      |
+| 最终产物身份         | 回执记录运行时、target、精确版本、8 项 Vitest 通过结果和已测试 tarball 的 SHA-512；聚合门禁要求十组回执齐全且根包字节一致                                                                           |
+
+Node 测试使用 **Vitest 5 与 TypeScript**，仓库脚本使用 **TypeScript/tsx**，通过严格类型检查。每个实测 Node 运行时均通过 **8 项集成测试**，其中包含 **262 个脚本 × 五个语言 profile = 1310 次 Rust/Node 对照**、独立 Rust 最终输出一致性和幂等性。Rust workspace 两种特性配置各保留 **131 项通过测试及 2 个由父测试启动的忽略 worker**。Rustfmt、Clippy、Rust 1.88 全 target/feature 检查、Schema 漂移、兼容语料（292 词法 / 16 表达式 / 262 脚本）、语法覆盖（50 行清单）、依赖边界及双语文档构建通过。固定项目试用和 3 项 harness 回归再次通过：**1856 组有效布局**、一个预期源码拒绝，401 份已审查 gdtoolkit 差异中 **零未解释差异**。
+
+五个固定引擎再次通过 **1310 次源码对照和 522 份格式化输出**；另有 **20 份保护区域输出**保留 P6 预期字节并通过引擎 check-only。本地引擎报告为 `target/conformance/p7-summary.json`、`p7-report-<profile>.json`、`p7-formatter-<profile>.json`、`p7-regions.json`。运行时回执和 tarball 保存在 `target/npm/local-evidence/`，当前宿主运行产物在 `target/npm/artifacts/`；`pnpm verify:npm --local` 生成明确标注矩阵未完成的回执。
+
+拟定矩阵为 macOS arm64/x64、Windows x64 MSVC、Linux x64 glibc/musl，分别运行 Node 22.13.0 和 24.0.0。`.github/workflows/npm.yml` 在各平台构建、安装最终 tarball，再验证根包/平台包精确一致。**本地只执行了 macOS arm64**；不宣称 Linux/macOS x64/Windows 或 registry 发布/恢复已通过。Linux glibc 构建目标为 Ubuntu 24.04，更旧 glibc 和更多系统版本未验证。命令和可审查的部分发布恢复流程见 [Node/npm 契约](/zh/reference/node)。napi 宿主 crate 禁止手写 unsafe，同时允许 napi 生成的 FFI constructor；核心 crate 继续 forbid unsafe。P4 源码/项目排除项和 P5/P6 保护字节、写入限制继续适用。
