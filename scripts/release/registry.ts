@@ -135,3 +135,27 @@ export async function waitForNpmChannel(
     `${name} channel promotion was not confirmed; rerun the failed job`,
   )
 }
+
+/**
+ * npm's install index can lag behind its immutable version endpoint.
+ * Retry only missing-version reads; never retry publication or consumer assertions.
+ */
+export async function waitForNpmInstall(
+  install: () => void,
+  pause: (milliseconds: number) => Promise<void> = setTimeout,
+): Promise<void> {
+  for (let attempt = 0; attempt < 120; attempt++) {
+    try {
+      install()
+      return
+    } catch (error) {
+      const stderr =
+        error instanceof Error && 'stderr' in error ? String(error.stderr) : ''
+      if (!/npm error code (?:ETARGET|E404)\b/.test(stderr) || attempt === 119)
+        throw error
+      if (attempt === 0)
+        console.log('Waiting for npm install metadata to become visible...')
+      await pause(5_000)
+    }
+  }
+}

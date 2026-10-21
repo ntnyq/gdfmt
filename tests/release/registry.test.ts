@@ -3,6 +3,7 @@ import { test } from 'node:test'
 import {
   confirmRegistryWrite,
   registryJson,
+  waitForNpmInstall,
 } from '../../scripts/release/registry.ts'
 
 test('registry reads back off on transient failures, then validate the successful response', async () => {
@@ -84,4 +85,61 @@ test('ambiguous writes are reconciled without ever repeating the write', async (
     /integrity conflict/,
   )
   assert.equal(writes, 3)
+})
+
+test('npm install tolerates delayed metadata but fails immediately on authentication and other errors', async () => {
+  let attempts = 0
+  const delays: number[] = []
+  await waitForNpmInstall(
+    () => {
+      attempts++
+      if (attempts < 3)
+        throw Object.assign(new Error('install index has not caught up'), {
+          stderr: Buffer.from(
+            `npm error code ${attempts === 1 ? 'ETARGET' : 'E404'}\n`,
+          ),
+        })
+    },
+    async delay => {
+      delays.push(delay)
+    },
+  )
+  assert.equal(attempts, 3)
+  assert.deepEqual(delays, [5_000, 5_000])
+  for (const code of ['E401', 'E403', 'EINTEGRITY', 'ECONNRESET']) {
+    let reads = 0
+    const original = Object.assign(new Error(code), {
+      stderr: `npm error code ${code}\n`,
+    })
+    await assert.rejects(
+      () =>
+        waitForNpmInstall(
+          () => {
+            reads++
+            throw original
+          },
+          async () => {
+            assert.fail('unexpected retry')
+          },
+        ),
+      error => error === original,
+    )
+    assert.equal(reads, 1)
+  }
+  let exhausted = 0
+  const original = Object.assign(new Error('still missing'), {
+    stderr: 'npm error code ETARGET\n',
+  })
+  await assert.rejects(
+    () =>
+      waitForNpmInstall(
+        () => {
+          exhausted++
+          throw original
+        },
+        async () => {},
+      ),
+    error => error === original,
+  )
+  assert.equal(exhausted, 120)
 })

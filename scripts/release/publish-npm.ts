@@ -21,6 +21,7 @@ import {
   npmVersion,
   registryJson,
   waitForNpm,
+  waitForNpmInstall,
   waitForNpmChannel,
 } from './registry.ts'
 
@@ -31,7 +32,7 @@ export interface NpmOperations {
   promote: (name: string, version: string, channel: string) => void
   wait: typeof waitForNpm
   waitChannel: typeof waitForNpmChannel
-  verifyConsumer: (version: string) => void
+  verifyConsumer: (version: string) => void | Promise<void>
 }
 
 const npmOperations: NpmOperations = {
@@ -68,27 +69,30 @@ const npmOperations: NpmOperations = {
   },
   wait: waitForNpm,
   waitChannel: waitForNpmChannel,
-  verifyConsumer: version => {
+  verifyConsumer: async version => {
     const directory = mkdtempSync(join(tmpdir(), 'gdfmt-registry-consumer-'))
     try {
       writeFileSync(
         join(directory, 'package.json'),
         '{"private":true,"type":"module"}\n',
       )
-      runNpm(
-        [
-          'install',
-          `${publicNpmPackage}@${version}`,
-          '--ignore-scripts',
-          '--no-audit',
-          '--no-fund',
-          '--cache',
-          join(directory, '.cache'),
-          '--registry',
-          npmRegistry,
-        ],
-        { cwd: directory, stdio: 'inherit' },
-      )
+      await waitForNpmInstall(() => {
+        runNpm(
+          [
+            'install',
+            `${publicNpmPackage}@${version}`,
+            '--prefer-online',
+            '--ignore-scripts',
+            '--no-audit',
+            '--no-fund',
+            '--cache',
+            join(directory, '.cache'),
+            '--registry',
+            npmRegistry,
+          ],
+          { cwd: directory, stdio: 'pipe' },
+        )
+      })
       execFileSync(
         process.execPath,
         [
@@ -177,7 +181,7 @@ export async function publishNpm(
     await operations.wait(entry.name, release.version, entry.integrity)
   await upload(root)
   await operations.wait(root.name, release.version, root.integrity)
-  operations.verifyConsumer(release.version)
+  await operations.verifyConsumer(release.version)
   // Recheck every platform after uploads, before the first channel write.
   for (const entry of release.packages) await currentChannel(entry.name)
   // Promotion starts only after all six immutable versions have been verified.

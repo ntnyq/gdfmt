@@ -223,7 +223,7 @@ test('npm integrity conflicts, newer channels and platform failures prevent root
       () =>
         publishNpm(files.frozen, true, {
           ...fake.operations,
-          verifyConsumer: () => {
+          verifyConsumer: async () => {
             throw new Error('consumer failed')
           },
         }),

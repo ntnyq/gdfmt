@@ -122,7 +122,7 @@ crates.io 首次创建新包允许连续发布 5 个，之后每 10 分钟恢复
 
 本机 npm 首次发布和 Trusted Publisher 设置可能分别要求浏览器二次认证；`npm login` 成功不代表后续写入无需验证。手动发布请使用交互式终端，并按 npm 提示完成认证。
 
-6. 完成 Trusted Publisher 配置后开启 `RELEASE_ENABLED=true`，并在 npm 的两天验证窗口内通过 CI 发布下一个新版本。也可以在首次发布的 tag 上手动运行工作流并开启 `publish`，验证已发布包并补建 GitHub Release；由于不会上传新的 npm 版本，这一步不能验证尚未使用过的 npm Trusted Publisher。
+6. 完成 Trusted Publisher 配置后开启 `RELEASE_ENABLED=true`，并在 npm 的两天验证窗口内通过 CI 发布下一个新版本。两个注册表的安装检查通过后，使用原冻结产物完成首次 GitHub Release。上传后不要完整重跑首次发布工作流：重建原生包可能改变字节内容。跳过已发布版本也不能验证尚未使用过的 npm Trusted Publisher。
 
 ## 后续版本更新
 
@@ -162,7 +162,7 @@ git push origin v0.1.0-alpha.1
 
 Rust 发布前核对源码清单、归档内的 VCS 信息及已存在版本的 SHA-256，Cargo 重新打包的字节也必须与冻结产物一致。npm 发布前比较 SHA-512 并检查冻结的完整矩阵。网络中断、429 和 5xx 使用有次数上限的退避重试；401/403 立即失败，只有 404 才表示不存在。已存在版本字节不同则需要排查并使用新版本。上传命令报错时，会先查询 registry 是否已提交预期字节；不会自动重复写入。
 
-Rust CLI 发布后会以精确的 `=VERSION` 要求从 crates.io 重新安装并验证版本。npm 在更新发布渠道前，通过空缓存安装精确版本，检查 API 输出和 CLI 版本。执行前会核对 Node/npm 版本；在 GitHub Actions 中还检查 `id-token: write` 提供的 OIDC 请求环境。不使用 `npm whoami` 验证 OIDC 权限，平台信任是否正确仍以成功上传新版本为准。两侧发布成功后才创建 GitHub Release 并附加产物。发布不会由 `workflow_run` 或 `pull_request_target` 触发。
+Rust CLI 发布后会以精确的 `=VERSION` 要求从 crates.io 重新安装并验证版本。npm 在更新发布渠道前，通过空缓存安装精确版本，并优先获取新元数据。安装索引可能落后于不可变版本查询，因此 `ETARGET`/404 最多重试十分钟；认证及其他安装错误立即停止。安装后检查 API 输出和 CLI 版本。执行前会核对 Node/npm 版本；在 GitHub Actions 中还检查 `id-token: write` 提供的 OIDC 请求环境。不使用 `npm whoami` 验证 OIDC 权限，平台信任是否正确仍以成功上传新版本为准。两侧发布成功后才创建 GitHub Release 并附加产物。发布不会由 `workflow_run` 或 `pull_request_target` 触发。
 
 ## 演练与失败恢复
 
