@@ -1,6 +1,6 @@
-# Script formatting (P4–P5)
+# Script formatting
 
-P3 is [accepted with explicit exclusions](/development/syntax-audit). The formatter now lays out comments, lambdas, declarations and suites as well as expressions. See the [P4 acceptance record](/development/formatter-acceptance) for source-build alpha acceptance, pinned project trials and explicit exclusions.
+gdfmt formats complete scripts, including expressions, comments, lambdas, declarations and suites. Use the defaults or adjust [project configuration](/guide/configuration). See [language support](/reference/compatibility) for known boundaries.
 
 ## Current behavior
 
@@ -42,23 +42,9 @@ The whole file, including protected contents, must parse. Regions do not disable
 
 Lint suppression directives, lint rules and semantic auto-fixes are outside the formatter scope. `check` remains a syntax/formatting check; use `format` to apply layout changes.
 
-## CLI
+## Command line
 
-```sh
-cargo run -p gdfmt_cli -- format src addons
-cargo run -p gdfmt_cli -- src/player.gd
-cargo run -p gdfmt_cli -- check .
-cargo run -p gdfmt_cli -- --check .
-cargo run -p gdfmt_cli -- check . --syntax-only
-cargo run -p gdfmt_cli -- --diff src/player.gd
-cargo run -p gdfmt_cli -- --stdin-filepath src/player.gd < input.gd
-```
-
-`format` and the default command write valid changed files. `check` compares syntax and script formatting; it does not run lint rules. `--syntax-only` skips formatting. `--diff` prints whole-file unified replacement hunks without writing. `format -` reads stdin; `--stdin-filepath` also resolves configuration by the virtual path's nearest existing parent. Successful stdin formatting emits only source to stdout, or an `output` field with the JSON reporter. Invalid stdin emits no formatted source.
-
-Exit codes are 0 for success, 1 for source errors or read-only formatting differences, and 2 for arguments/configuration/I/O/internal failures. JSON file reports include `changed` and structured diagnostics; syntax-only reports omit `changed`. File paths are sorted and deduplicated using the existing discovery rules.
-
-All configurations and input reads are preflighted before writes. Replacements use a same-directory temporary file, retain permissions and compare current content to the source read before replacement. Invalid files remain unchanged; other valid files in a batch may be formatted. Atomic replacement is per file.
+Use `gdfmt .` to write changes, `gdfmt --check .` to check without writing, or `gdfmt --diff .` to preview changes. See the [CLI reference](/reference/cli) for stdin, reporters and exit codes.
 
 ## Rust and correctness gates
 
@@ -66,11 +52,4 @@ All configurations and input reads are preflighted before writes. Replacements u
 
 The facade returns writable output only if the input has no parser errors, the output reparses with the same profile/limits, normalized node topology and significant token spellings agree, comment text/adjacent tokens/own-line roles/dangling block ownership agree, and a second formatting pass is identical. Failure returns no output and an internal diagnostic. Recovery nodes and error diagnostics are refused independently by the formatter.
 
-The Doc printer supports text, concatenation, groups, indentation, soft/hard/conditional lines and line suffixes. Tests cover fit boundaries, following text, nested groups, suffixes, CRLF, long tokens, comment insertion at expression-token boundaries, and reviewed whole-script snapshots at widths 40/100. Every parser-accepted script/profile is checked under four layout configurations (tab and space indents, LF/CRLF/preserve, blank-line limits and final-newline choices). Invalid corpus inputs produce no writable output.
-
-```sh
-cargo test -p gdfmt_formatter -p gdfmt -p gdfmt_cli -p gdfmt_workspace
-cargo xtask formatter-conformance --language 4.7 --godot /path/to/pinned/godot --report target/conformance/formatter-4.7.json
-```
-
-The smoke command uses the five exact engine pins and width 40. It runs check-only, recording formatted source and logs. It does not execute scripts or establish runtime equivalence. Verification on 2026-10-21: 522 accepted script/profile outputs passed all five pinned macOS engines (90/98/110/112/112 for 4.3–4.7), with zero failures. The Rust corpus covers 2176 valid script/profile/layout combinations, including 22 parser-accepted analyzer boundaries under all four layouts. Those boundaries are excluded from engine acceptance. Pinned project trials pass 1856 layouts for 464 scripts; one upstream-invalid source is explicitly rejected. The 401 gdtoolkit style differences are reviewed and fingerprinted. P4 source-build alpha acceptance is complete with exclusions; sustained fuzzing remains follow-up work and production CLI extensions belong to P6.
+Reproduction commands, fixture organization and engine comparisons are documented in [contributing](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md).

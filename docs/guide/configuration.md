@@ -1,10 +1,10 @@
 # Configuration
 
-The current implementation covers formatting options and language version profiles. All listed options affect [script formatting](/reference/formatting), including suite/continuation indentation, layout line endings, retained blank lines and the final newline. Literal contents and protected formatter-off/on regions retain their original bytes.
+Use `.gdfmtrc.json` to share formatting options and select a language profile. All listed options affect [script formatting](/reference/formatting), including suite/continuation indentation, layout line endings, retained blank lines and the final newline. Literal contents and protected formatter-off/on regions retain their original bytes.
 
 ```json
 {
-  "$schema": "./schemas/gdfmtrc.schema.json",
+  "$schema": "./gdfmtrc.schema.json",
   "schemaVersion": 1,
   "root": true,
   "language": { "godotVersion": "4.7" },
@@ -19,7 +19,7 @@ The current implementation covers formatting options and language version profil
 }
 ```
 
-The `$schema` path above applies at the repository root. Other projects should point to their own saved schema. `$schema` is editor metadata; the runtime does not fetch it over the network.
+Save the schema beside your configuration with `gdfmt schema > gdfmtrc.schema.json` to use the `$schema` path above. `$schema` is editor metadata; the runtime does not fetch it over the network.
 
 ## Options
 
@@ -60,19 +60,17 @@ Objects merge field by field. Missing values inherit, including through empty ob
 
 `extends` paths, override globs and JSON ignore patterns use the directory of the file that declares them, including inherited files. Overrides match the complete relative path, are case sensitive, and use `/` on every platform: `*.gd` matches direct children, `**/*.gd` also matches descendants. `*`, `?`, character classes and brace alternatives are supported. Absolute paths, `..` segments, backslashes, empty globs and malformed globs are errors. Each override requires `files`; `files: []` matches nothing, and any matching `exclude` vetoes that entry. Matching entries apply in order, with later fields winning. Overrides may contain only `files`, `exclude`, `language` and `format`.
 
-Unknown fields, `null`, incorrect types, out-of-range values, unknown enum variants, and future schema versions are rejected. Errors identify the configuration file and field path. The core model generates JSON Schema draft 2020-12; the same positive and negative cases run through runtime and JSON Schema validation. Filesystem graph/path/glob errors are additionally checked by the workspace layer.
+Unknown fields, `null`, incorrect types, out-of-range values, unknown enum variants, and future schema versions are rejected. Errors identify the configuration file and field path.
 
 ```sh
-cargo xtask schema
-cargo xtask schema --check
-cargo run -p gdfmt_cli -- explain-config path/to/script.gd
+gdfmt explain-config path/to/script.gd
 ```
 
 `explain-config` accepts existing and virtual paths. It reports JSON `files` in application order, `editorconfigFiles`, merged values, `ignored`, and the effective `sources` of each field. Defaults use `default`, JSON overrides use `file#overrides[index]`, and EditorConfig uses `file:line (property)`. An explicit JSON ignore list adds its declaring source as `ignore`.
 
 ## EditorConfig
 
-EditorConfig discovery is independent of JSON `root` and stops at its own `root = true`. Ancestor files and matching sections apply in order, including standard EditorConfig globs, case-insensitive property names/values and `unset`. The host uses the `ec4rs` parser; supported mappings are:
+EditorConfig discovery is independent of JSON `root` and stops at its own `root = true`. Ancestor files and matching sections apply in order, including standard EditorConfig globs, case-insensitive property names/values and `unset`. Supported mappings are:
 
 | EditorConfig property      | Formatter field       | Supported values                          |
 | -------------------------- | --------------------- | ----------------------------------------- |
@@ -96,7 +94,7 @@ Explicit ignored files are skipped. Empty discovery, including when every input 
 
 All selected configurations and source reads are preflighted before the first file replacement. A source syntax/layout failure prevents writing that source; other valid files can still be formatted. Exit codes are 0 for success, 1 for syntax/format differences, and 2 for arguments/configuration/I/O/internal failures; a multi-file run chooses the highest code. `check` and `--diff` never write. Human errors go to stderr; JSON reports use stdout and keep stderr empty when reporting succeeds.
 
-Writes prepare and sync a temporary file in the source directory, preserve permissions, and recheck original bytes, file metadata and Unix file identity before atomic replacement. Read-only files and symlink targets are refused; Unix hardlinks are also refused. Ordinary failures clean up temporary files on drop. Forced process termination can leave an orphan temporary file while the original remains intact before replacement; subsequent formatting can proceed. Replacement is atomic per file, with best-effort concurrent-change detection, not a multi-file transaction or a power-loss durability guarantee. A race after the final check remains possible with portable filesystem APIs. Windows execution remains covered by the CI matrix, not claimed from macOS-only verification.
+Writes use a temporary file in the source directory, preserve permissions and recheck the original file before atomic replacement. Read-only files and symlinks are refused, as are Unix hardlinks. Replacement is atomic per file, with best-effort concurrent-change detection; it is not a multi-file transaction. Forced termination may leave a temporary file behind.
 
 Quote conversion and trailing comma options are not implemented. `lint`, `rules` and rule-plugin configuration remain outside formatter scope and produce unknown-field errors.
 

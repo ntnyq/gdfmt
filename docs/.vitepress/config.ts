@@ -7,30 +7,25 @@ const englishSidebar: DefaultTheme.SidebarItem[] = [
     items: [
       { text: 'Getting started', link: '/guide/' },
       { text: 'Configuration', link: '/guide/configuration' },
+      { text: 'CI and editors', link: '/guide/integrations' },
     ],
   },
   {
     text: 'Reference',
     items: [
-      { text: 'Script parsing', link: '/reference/parsing' },
-      { text: 'Expressions', link: '/reference/expressions' },
-      { text: 'Script formatting', link: '/reference/formatting' },
+      { text: 'CLI', link: '/reference/cli' },
+      { text: 'Formatting', link: '/reference/formatting' },
+      { text: 'Language support', link: '/reference/compatibility' },
       { text: 'Language versions', link: '/reference/language-versions' },
-      { text: 'Node.js and npm', link: '/reference/node' },
+      { text: 'Node.js API', link: '/reference/node' },
     ],
   },
   {
-    text: 'Development',
+    text: 'Rust APIs',
+    collapsed: true,
     items: [
-      { text: 'Architecture', link: '/development/' },
-      { text: 'Compatibility', link: '/development/compatibility' },
-      { text: 'Engine conformance', link: '/development/engine-conformance' },
-      { text: 'Syntax audit', link: '/development/syntax-audit' },
-      {
-        text: 'Formatter acceptance',
-        link: '/development/formatter-acceptance',
-      },
-      { text: 'Implementation plan', link: '/development/implementation-plan' },
+      { text: 'Script parsing', link: '/reference/parsing' },
+      { text: 'Expressions', link: '/reference/expressions' },
     ],
   },
 ]
@@ -41,34 +36,32 @@ const chineseSidebar: DefaultTheme.SidebarItem[] = [
     items: [
       { text: '快速开始', link: '/zh/guide/' },
       { text: '配置', link: '/zh/guide/configuration' },
+      { text: 'CI 与编辑器', link: '/zh/guide/integrations' },
     ],
   },
   {
     text: '参考',
     items: [
-      { text: '脚本解析', link: '/zh/reference/parsing' },
-      { text: '表达式解析', link: '/zh/reference/expressions' },
-      { text: '脚本格式化', link: '/zh/reference/formatting' },
+      { text: 'CLI', link: '/zh/reference/cli' },
+      { text: '格式化', link: '/zh/reference/formatting' },
+      { text: '语言支持', link: '/zh/reference/compatibility' },
       { text: '语言版本', link: '/zh/reference/language-versions' },
-      { text: 'Node.js 与 npm', link: '/zh/reference/node' },
+      { text: 'Node.js API', link: '/zh/reference/node' },
     ],
   },
   {
-    text: '开发',
+    text: 'Rust API',
+    collapsed: true,
     items: [
-      { text: '架构与契约', link: '/zh/development/' },
-      { text: '兼容性', link: '/zh/development/compatibility' },
-      { text: '引擎一致性', link: '/zh/development/engine-conformance' },
-      { text: '语法审计', link: '/zh/development/syntax-audit' },
-      { text: '格式化验收', link: '/zh/development/formatter-acceptance' },
-      { text: '实施计划', link: '/zh/development/implementation-plan' },
+      { text: '脚本解析', link: '/zh/reference/parsing' },
+      { text: '表达式解析', link: '/zh/reference/expressions' },
     ],
   },
 ]
 
 export default defineConfig({
   title: 'gdfmt',
-  description: 'A Rust-based GDScript toolchain built on lossless parsing.',
+  description: 'A GDScript formatter, built in Rust.',
   cleanUrls: true,
   head: [['meta', { name: 'theme-color', content: '#478cbf' }]],
   transformHead({ siteData }) {
@@ -90,27 +83,33 @@ export default defineConfig({
       themeConfig: {
         nav: [
           { text: 'Guide', link: '/guide/' },
-          { text: 'Reference', link: '/reference/parsing' },
-          { text: 'Development', link: '/development/' },
+          { text: 'Reference', link: '/reference/cli' },
+          {
+            text: 'Contributing',
+            link: 'https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md',
+          },
         ],
         sidebar: englishSidebar,
         outline: { label: 'On this page', level: [2, 3] },
         footer: {
           message:
             'Code released under the MIT License. <a href="https://github.com/ntnyq/gdfmt/blob/main/docs/public/logo.LICENSE.txt">Logo: CC BY 4.0</a>.',
-          copyright: 'An independent GDScript toolchain.',
+          copyright: 'An independent GDScript formatter.',
         },
       },
     },
     zh: {
       label: '简体中文',
       lang: 'zh-CN',
-      description: '基于 Rust 与无损解析的 GDScript 工具链。',
+      description: '以 Rust 构建的 GDScript 格式化工具。',
       themeConfig: {
         nav: [
           { text: '指南', link: '/zh/guide/' },
-          { text: '参考', link: '/zh/reference/parsing' },
-          { text: '开发', link: '/zh/development/' },
+          { text: '参考', link: '/zh/reference/cli' },
+          {
+            text: '参与贡献',
+            link: 'https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md',
+          },
         ],
         sidebar: chineseSidebar,
         outline: { label: '本页目录', level: [2, 3] },
@@ -139,7 +138,7 @@ export default defineConfig({
         footer: {
           message:
             '代码基于 MIT 许可发布。<a href="https://github.com/ntnyq/gdfmt/blob/main/docs/public/logo.LICENSE.txt">Logo：CC BY 4.0</a>。',
-          copyright: '独立的 GDScript 工具链。',
+          copyright: '独立的 GDScript 格式化工具。',
         },
       },
       markdown: {

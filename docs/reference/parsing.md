@@ -70,8 +70,8 @@ In addition to expression diagnostics `PAR001`–`PAR008`:
 
 Malformed property accessors recover inside their property block, retaining a later valid getter/setter. Simple statements recover at newlines, semicolons, and dedents; lambdas also recognize outer commas and closing brackets. Lists use expression recovery. Unclosed strings can span the remaining source, and unclosed delimiters may suppress later newlines, so recovery cannot guarantee every later declaration becomes an independent node.
 
-## Remaining work
+## Scope and limitations
 
 No Godot version has full syntax conformance declared. [Version gates](/reference/language-versions) cover verified differences across 4.3–4.7 profiles; namespace/trait remain unsupported. Complete annotation-value rules, inheritance and abstract overrides, type-name resolution, captured-value/type analysis, resource paths, and runtime behavior require further implementation or pinned-engine validation.
 
-Tests cover structure, abstract binding, declaration constraints, version boundaries, lexical context restoration, later-declaration recovery, truncation at every UTF-8 boundary, token byte offsets, random tokens, budgets, depth limits, and cross-thread reconstruction. `cargo xtask compatibility` checks 292 lexical fixtures, including 16 expression and 262 script fixtures, plus 1310 profile checks; all are original. [Pinned-engine conformance](/development/engine-conformance) covers all 262 scripts, with 4–5 semantic boundaries per version classified separately.
+Tests cover structure, abstract binding, declaration constraints, version boundaries, lexical context restoration, later-declaration recovery, truncation at every UTF-8 boundary, token byte offsets, random tokens, budgets, depth limits, and cross-thread reconstruction. `cargo xtask compatibility` checks 292 lexical fixtures, including 16 expression and 262 script fixtures, plus 1310 profile checks; all are original. [Pinned-engine conformance](/reference/compatibility) covers all 262 scripts, with 4–5 semantic boundaries per version classified separately.

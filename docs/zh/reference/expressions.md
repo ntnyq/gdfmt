@@ -1,6 +1,6 @@
 # 单表达式解析
 
-`gdfmt_parser::parse_expression` 解析一个独立表达式，返回分层 Rowan 无损 CST 和结构化诊断。支持 lambda 表达式及其 suite；表达式外的声明、赋值语句和完整 `.gd` 文件使用 [脚本入口 `parse`](/zh/reference/parsing.md)。当前 CLI 仍只开放 `lex` 等基础命令。
+`gdfmt_parser::parse_expression` 解析一个独立表达式，返回分层 Rowan 无损 CST 和结构化诊断。支持 lambda 表达式及其 suite；表达式外的声明、赋值语句和完整 `.gd` 文件使用 [脚本入口 `parse`](/zh/reference/parsing.md)。[CLI](/zh/reference/cli) 用于格式化与检查完整脚本。
 
 ```rust
 use gdfmt_parser::{ParseOptions, parse_expression};
@@ -36,17 +36,17 @@ assert_eq!(expression.operands().count(), 2);
 
 依据固定 [Godot parser](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/modules/gdscript/gdscript_parser.cpp) 和 [Precedence enum](https://github.com/godotengine/godot/blob/ed1daf0bf001b61586d9930840f2f1394092c079/modules/gdscript/gdscript_parser.h) 核对，以下从低到高排列。二元运算符均左结合，三元条件表达式右结合。
 
-| 层级  | 运算                                |
-| ----- | ----------------------------------- |
-| 1     | `as`                                |
-| 2     | `a if condition else b`             |
-| 3–5   | `or` / `                            |     | `、`and`/`&&`、前缀 `not`/`!` |
-| 6–7   | `in` / `not in`、全部比较与相等运算 |
-| 8–11  | `\|`、`^`、`&`、`<<` / `>>`         |
-| 12–13 | `+` / `-`、`*` / `/` / `%`          |
-| 14–16 | 前缀正负号、`~`、`**`               |
-| 17–18 | `is` / `is not`、`await`            |
-| 19–21 | 调用、成员、下标                    |
+| 层级  | 运算                                          |
+| ----- | --------------------------------------------- |
+| 1     | `as`                                          |
+| 2     | `a if condition else b`                       |
+| 3–5   | `or` / `\|\|`、`and` / `&&`、前缀 `not` / `!` |
+| 6–7   | `in` / `not in`、全部比较与相等运算           |
+| 8–11  | `\|`、`^`、`&`、`<<` / `>>`                   |
+| 12–13 | `+` / `-`、`*` / `/` / `%`                    |
+| 14–16 | 前缀正负号、`~`、`**`                         |
+| 17–18 | `is` / `is not`、`await`                      |
+| 19–21 | 调用、成员、下标                              |
 
 特别注意：`a ** b ** c` 是 `(a ** b) ** c`；`a ** b is int` 是 `a ** (b is int)`；`a if b else c as Node` 的转换包裹整个条件表达式。
 
@@ -65,4 +65,4 @@ cargo xtask compatibility
 
 测试断言树结构、所有二元优先级配对、原始 token 顺序与字节偏移、错误恢复、极端深度、诊断预算和随机 Unicode 输入。兼容性 corpus 中单表达式 fixtures 同时验证词法和语法诊断。引擎 harness 使用完整脚本，类型化构造器等差异另有等价脚本回归；独立表达式不会直接交给引擎执行。
 
-值表达式的 `[]` 始终是下标；`Array[int]([])` / `Dictionary[String, int]({})` 会报告语法错误。此行为由[固定引擎回归](/zh/development/engine-conformance.md)验证。
+值表达式的 `[]` 始终是下标；`Array[int]([])` / `Dictionary[String, int]({})` 会报告语法错误。此行为由[固定引擎回归](/zh/reference/compatibility)验证。

@@ -3,36 +3,45 @@ layout: home
 
 hero:
   name: gdfmt
-  text: Reliable GDScript formatting, built in Rust.
-  tagline: A Rust foundation for lossless parsing, structured diagnostics, and reliable formatting.
+  text: GDScript, consistently formatted.
+  tagline: A formatter built in Rust. Set your style, format your project, and keep it consistent in CI.
   image:
     src: /logo.svg
-    alt: Godot robot with code brackets and indented lines
+    alt: gdfmt logo
   actions:
     - theme: brand
       text: Get started
       link: /guide/
     - theme: alt
-      text: Explore the parser
-      link: /reference/parsing
+      text: View on GitHub
+      link: https://github.com/ntnyq/gdfmt
 
 features:
-  - title: Every byte accounted for
-    details: A lossless concrete syntax tree preserves whitespace, comments, and invalid input for the next stage of tooling.
-    link: /development/
-    linkText: Read the architecture
-  - title: Explicit language profiles
-    details: Godot 4.3–4.7 profiles gate verified syntax differences, with a pinned engine harness to track compatibility.
-    link: /reference/language-versions
-    linkText: See the supported scope
-  - title: One Rust core
-    details: Parsing, configuration, file discovery, and the CLI have separate responsibilities. Script formatting and protected regions use the same validation gates; production configuration and local Node/npm packaging are implemented, with complete artifact acceptance pending CI.
-    link: /development/implementation-plan
-    linkText: Follow the implementation plan
+  - title: Format with confidence
+    details: Output is reparsed and checked for syntax and comment preservation. A second pass must produce the same result.
+    link: /reference/formatting
+    linkText: How formatting works
+  - title: Your project's style
+    details: Set line width, indentation and newlines. Share settings with JSON configuration, EditorConfig and path overrides.
+    link: /guide/configuration
+    linkText: Configure gdfmt
+  - title: From local edits to CI
+    details: Format files, check for differences, preview a diff or send a buffer through stdin. Keep custom layouts with protected regions.
+    link: /guide/integrations
+    linkText: Set up your workflow
 ---
 
-## In development
+## Get started
 
-The lexer, expression and script parsers, configuration schema, and initial CLI are available from source. P3 is accepted with exclusions; script formatting and `check` are available in P4; crates are not published. No Godot version has full compatibility declared.
+Build and install from the repository with `cargo install --path crates/gdfmt_cli --locked`, then run in your Godot project:
 
-Start with the [current commands](/guide/), review [compatibility evidence](/development/compatibility), or read the [中文文档](/zh/).
+```sh
+gdfmt .
+gdfmt --check .
+```
+
+See the [quickstart](/guide/) for installation. The npm package is not yet published.
+
+## Explore the docs
+
+[Configuration](/guide/configuration) · [CLI reference](/reference/cli) · [Language support](/reference/compatibility) · [Node.js API](/reference/node)

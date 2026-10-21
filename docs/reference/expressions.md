@@ -1,6 +1,6 @@
 # Expression parsing
 
-`gdfmt_parser::parse_expression` parses one standalone expression and returns a hierarchical Rowan lossless CST with structured diagnostics. Lambdas and their suites are supported. For declarations outside expressions, assignment statements, and complete `.gd` files, use the [script entry point `parse`](/reference/parsing). The CLI currently exposes only basic commands such as `lex`.
+`gdfmt_parser::parse_expression` parses one standalone expression and returns a hierarchical Rowan lossless CST with structured diagnostics. Lambdas and their suites are supported. For declarations outside expressions, assignment statements, and complete `.gd` files, use the [script entry point `parse`](/reference/parsing). The [CLI](/reference/cli) formats and checks complete scripts.
 
 ```rust
 use gdfmt_parser::{ParseOptions, parse_expression};
@@ -40,7 +40,7 @@ The following table is ordered low to high, checked against the pinned [Godot pa
 | ----- | -------------------------------------------------------- |
 | 1     | `as`                                                     |
 | 2     | `a if condition else b`                                  |
-| 3–5   | `or` / `                                                 |     | `, `and`/`&&`, prefix `not`/`!` |
+| 3–5   | `or` / `\|\|`, `and` / `&&`, prefix `not` / `!`          |
 | 6–7   | `in` / `not in`, all comparisons and equality operations |
 | 8–11  | `\|`, `^`, `&`, `<<` / `>>`                              |
 | 12–13 | `+` / `-`, `*` / `/` / `%`                               |
@@ -65,4 +65,4 @@ cargo xtask compatibility
 
 Tests assert tree structure, every binary precedence pair, original token order and byte offsets, recovery, extreme depth, diagnostic budgets, and random Unicode input. Expression fixtures verify lexical and syntax diagnostics. The engine harness uses complete scripts; differences such as typed constructors have equivalent script regressions, and standalone expressions are never executed directly by the engine.
 
-In value expressions, `[]` always means subscript. `Array[int]([])` and `Dictionary[String, int]({})` produce syntax errors, verified by [pinned-engine regressions](/development/engine-conformance).
+In value expressions, `[]` always means subscript. `Array[int]([])` and `Dictionary[String, int]({})` produce syntax errors, verified by [pinned-engine regressions](/reference/compatibility).

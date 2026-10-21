@@ -1,6 +1,6 @@
 # 语言版本与特性 gates
 
-`gdfmt_syntax::LanguageVersion`（parser/config 同时重导出）提供 4.3、4.4、4.5、4.6、4.7 五个显式 grammar profiles，默认固定为 4.7。仅表示当前已实现语法的已核验版本差异；完整引擎 conformance 尚未验收。4.8 预览、patch 版本字符串、`latest` 和未知版本均不接受，不会静默回退或联网选择版本。
+`gdfmt_syntax::LanguageVersion`（parser/config 同时重导出）提供 4.3、4.4、4.5、4.6、4.7 五个显式 grammar profiles，默认固定为 4.7。仅表示当前已实现语法的已核验版本差异；不代表完整引擎兼容性。4.8 预览、patch 版本字符串、`latest` 和未知版本均不接受，不会静默回退或联网选择版本。
 
 ```rust
 use gdfmt_parser::{LanguageVersion, ParseOptions, parse};
@@ -32,4 +32,4 @@ assert_eq!(result.tree.unwrap().text(), "var data: Dictionary[String, int] = {}\
 
 测试遍历每个 profile，覆盖最早支持版本前后的正反例、脚本/表达式/lambda、低版本无损恢复、UTF-8 span 和共享诊断预算。manifest 的 `syntaxErrorsByVersion` 一旦出现，必须覆盖全部 profiles；`cargo xtask compatibility` 检查默认 profile 和完整矩阵。缺失或未知 profile 会使验证失败。
 
-类型名、annotation 参数值、继承/abstract 覆盖、运行时行为与完整 4.6/4.7 grammar 差异仍需 analyzer 和进一步引擎覆盖。4.3、4.4、4.5、4.6 stable 与 4.7.2 已接入[固定引擎矩阵](/zh/development/engine-conformance.md)，七个 gates 均有独立正反例。namespace/trait 继续保持不支持状态。
+类型名、annotation 参数值、继承/abstract 覆盖、运行时行为与完整 4.6/4.7 grammar 差异仍需 analyzer 和进一步引擎覆盖。4.3、4.4、4.5、4.6 stable 与 4.7.2 已接入[固定引擎矩阵](/zh/reference/compatibility)，七个 gates 均有独立正反例。namespace/trait 继续保持不支持状态。

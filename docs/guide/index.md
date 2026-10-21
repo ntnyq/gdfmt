@@ -1,68 +1,76 @@
-# Getting started
+# Quickstart
 
-gdfmt is a Rust-based GDScript formatter. The lexer, lossless script and expression parsers, configuration schema, and initial CLI work today. The P4 script formatter and verified CLI are available; source-build alpha acceptance is complete with documented exclusions; protected formatter-off/on regions are available. Node/npm APIs and local packaging are implemented; complete platform acceptance remains pending CI; lint and semantic fixes are outside scope; crates are not published yet.
+gdfmt formats GDScript files from the command line. Start with the defaults, then commit a configuration file when your project needs shared settings.
 
-::: warning Development status
-The default command formats scripts, including comments, lambdas, declarations and suites; `check` is read-only and `check --syntax-only` runs parser checks. Pinned/licensed project trials and reviewed style differences are recorded in [P4 acceptance](/development/formatter-acceptance). Read the [P4 formatting scope](/reference/formatting). Passing `lex` does not establish syntax validity.
-:::
+## Install from source
 
-## Build from source
-
-Clone the repository and use the Rust toolchain pinned in `rust-toolchain.toml`. The workspace uses edition 2024 and supports Rust 1.88 or newer.
+Use Rust 1.88 or newer. The repository's `rust-toolchain.toml` pins the development toolchain.
 
 ```sh
 git clone https://github.com/ntnyq/gdfmt.git
 cd gdfmt
-cargo build --workspace --locked
-cargo run -p gdfmt_cli -- --help
+cargo install --path crates/gdfmt_cli --locked
+gdfmt --version
 ```
 
-## Inspect tokens
+Make sure Cargo's binary directory is on your `PATH`. You can also run the CLI directly from the checkout with `cargo run -p gdfmt_cli -- <arguments>`.
+
+The npm package is not yet published. To build and use local npm artifacts, see [contributing](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#nodejs-packages).
+
+## Format a project
+
+Run in your Godot project directory:
 
 ```sh
-cargo run -p gdfmt_cli -- lex tests/compatibility/fixtures/containers.gd
-cargo run -p gdfmt_cli -- lex tests/compatibility/fixtures --reporter json
-cargo run -p gdfmt_cli -- lex - --reporter json < script.gd
+gdfmt .
 ```
 
-`lex` reads files without modifying them. It accepts `.gd` files, directories, multiple paths, or stdin on its own. Explicit files and directory traversal respect local Git/ignore files and JSON ignores; see [input selection](/guide/configuration#ignore-rules-and-input-selection). Built-in exclusions include `.git`, `.godot`, `node_modules`, and `target` by default.
-
-| Exit code | Meaning                               |
-| --------- | ------------------------------------- |
-| `0`       | No lexical errors                     |
-| `1`       | Lexical errors found                  |
-| `2`       | Argument, configuration, or I/O error |
-
-The JSON reporter uses `schemaVersion: 1` and `spanEncoding: "utf8Bytes"`. Spans are half-open UTF-8 byte ranges `[start, end)`; virtual tokens occupy no bytes.
-
-## Configure a project
+The default command writes formatting changes in place. You can pass individual files, directories or multiple paths:
 
 ```sh
-cargo run -p gdfmt_cli -- init
-cargo run -p gdfmt_cli -- schema
-cargo run -p gdfmt_cli -- explain-config .
+gdfmt src/player.gd
+gdfmt src addons
 ```
 
-`init` creates `.gdfmtrc.json` and refuses to overwrite an existing file. [Configuration](/guide/configuration) explains discovery, defaults, strict validation, and field provenance. Width, indentation and whole-file newline/blank-line settings are applied; see [formatting](/reference/formatting).
+Only `.gd` files are selected. gdfmt respects project ignore files and skips `.git`, `.godot`, `node_modules` and `target`. See [file selection](/guide/configuration#ignore-rules-and-input-selection).
 
-## Use the parser in Rust
+For example:
 
-Use [`parse`](/reference/parsing) for complete scripts and [`parse_expression`](/reference/expressions) for individual expressions. Both return a lossless CST and structured diagnostics. [Language profiles](/reference/language-versions) cover verified differences across Godot 4.3–4.7; they do not declare full compatibility.
+```gdscript
+func run( value : int=1 ): return [value,2] # result
+```
 
-## Work on the documentation
+becomes:
 
-Use Node.js 22 or newer and pnpm:
+```gdscript
+func run(value: int = 1):
+	return [value, 2] # result
+```
+
+## Check or preview changes
 
 ```sh
-cd docs
-pnpm install --frozen-lockfile
-pnpm dev
-pnpm build
-pnpm preview
+gdfmt --check .
+gdfmt --diff src/player.gd
 ```
 
-English pages live at the site root; Chinese pages mirror their paths under `zh/`. Use the language menu to switch the current topic. Shared assets live in `public/`, while site configuration and theme extensions live in `.vitepress/`.
+Both commands leave files unchanged. A check returns `0` when files are formatted, `1` for source errors or formatting differences, and `2` for configuration, argument or I/O failures.
 
-To host under a subpath, pass the same base to build and preview, for example `pnpm build --base /gdfmt/` and `pnpm preview --base /gdfmt/`.
+To check syntax alone, run `gdfmt check . --syntax-only`. This uses gdfmt's parser; it does not replace Godot's project analysis.
 
-See [architecture](/development/), [compatibility](/development/compatibility), and the [implementation plan](/development/implementation-plan) for contributor context.
+## Share configuration
+
+```sh
+gdfmt init
+```
+
+This creates `.gdfmtrc.json` in the current directory and refuses to overwrite an existing file. The defaults use a line width of 100, tabs, LF line endings and a final newline.
+
+See [configuration](/guide/configuration) for options, EditorConfig, inheritance and per-path overrides. Use `gdfmt explain-config src/player.gd` to inspect the settings applied to a file.
+
+## Next steps
+
+- [Set up CI or an editor command](/guide/integrations).
+- [Keep selected regions unchanged](/reference/formatting#protected-regions).
+- [Explore CLI commands](/reference/cli) or the [Node.js API](/reference/node).
+- [Check language support and limitations](/reference/compatibility).

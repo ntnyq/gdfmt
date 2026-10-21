@@ -1,29 +1,75 @@
-# Node.js and npm artifacts
+# Node.js API
 
-The P7 implementation provides locally prepared npm artifacts; nothing has been published. Names and publishing permissions remain unverified. See the [acceptance record](/development/formatter-acceptance#p7-node-acceptance) for actual execution evidence.
+The `gdfmt` package exposes validated text formatting and explicit project configuration resolution, with ESM, CommonJS and TypeScript declarations.
 
-## Text and configuration APIs
+The package is not yet published. To prepare local packages, follow [contributing](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#nodejs-packages). The examples below assume the root package and matching native package are installed.
 
-Both `import { format } from 'gdfmt'` and `const { format } = require('gdfmt')` expose the same four functions:
+## Format text
 
-| API                                 | Contract                                                   |
-| ----------------------------------- | ---------------------------------------------------------- |
-| `formatSync(source, options?)`      | Validated formatting in the calling thread                 |
-| `format(source, options?)`          | The same result through a Promise; core work runs on libuv |
-| `resolveConfigSync(path, options?)` | Explicit filesystem configuration resolution               |
-| `resolveConfig(path, options?)`     | Configuration resolution through a libuv worker            |
+```js
+import { format, formatSync } from 'gdfmt'
 
-Text options are `{ language: { godotVersion }, format: { ...layoutOptions }, sourceId }`. Defaults, language versions and layout ranges match Rust and the [configuration schema](/guide/configuration). Unknown fields, explicit null, non-JSON values and unpaired Unicode surrogates are rejected. Invalid options throw/reject; source errors and invariant failures return `{ schemaVersion: 1, spanEncoding: 'utf8Bytes', output: null, changed: false, diagnostics }`. Successful results include validated `output` and `changed`.
+const source = 'var count=1\n'
+const result = await format(source, {
+  language: { godotVersion: '4.5' },
+  format: { lineWidth: 100, indentStyle: 'tab' },
+})
 
-Diagnostic spans are half-open UTF-8 byte offsets, including BOM and physical CRLF bytes. They are not JavaScript string indices. Select the original bytes with `Buffer.from(source).subarray(span.start, span.end)`. Convert to UTF-16 explicitly when integrating with an editor.
+if (result.output === null) {
+  console.error(result.diagnostics)
+} else {
+  console.log(result.output)
+}
 
-Text APIs never discover configuration or write files. Resolver options are `{ cwd, config }`: `cwd` is absolute and defaults to the directory captured at call time; `config` is an optional explicit local JSON file. Results contain `config`, applied `files`, `editorconfigFiles`, field `sources` and `ignored`. Pass only `resolution.config.language` and `resolution.config.format` into text calls and inspect `ignored` yourself.
+const syncResult = formatSync(source)
+```
 
-The npm `gdfmt` executable invokes the same Rust runner as the standalone CLI, including stdout/stderr, stdin, reporters, discovery, ignore rules, guarded writes and exit-code priority. `gdfmt/schema.json` exports the generated schema.
+CommonJS exposes the same named functions through `require('gdfmt')`.
 
-## Proposed target matrix
+| API                                 | Behavior                                                             |
+| ----------------------------------- | -------------------------------------------------------------------- |
+| `formatSync(source, options?)`      | Validate and format text in the calling thread                       |
+| `format(source, options?)`          | Return the same result through a Promise, running core work on libuv |
+| `resolveConfigSync(path, options?)` | Resolve filesystem configuration synchronously                       |
+| `resolveConfig(path, options?)`     | Resolve configuration through a libuv worker                         |
 
-Node runtime ranges are `^22.13.0 || ^24.0.0`, using Node-API 4. CI pins **22.13.0** and **24.0.0** on each target. Other Node major versions and unlisted architectures are not declared.
+Text options accept `language`, `format` and `sourceId`. Layout defaults and ranges match [configuration](/guide/configuration). Text calls never discover project settings or write files.
+
+Invalid options throw or reject, including unknown fields, `null`, non-JSON values and unpaired Unicode surrogates. Source errors and invariant failures return `output: null`, `changed: false` and structured diagnostics. Successful results contain validated `output` and `changed`. Results use `schemaVersion: 1` and `spanEncoding: 'utf8Bytes'`.
+
+## Resolve project settings
+
+```js
+import { format, resolveConfig } from 'gdfmt'
+
+const resolution = await resolveConfig('src/player.gd')
+if (!resolution.ignored) {
+  const result = await format(source, {
+    language: resolution.config.language,
+    format: resolution.config.format,
+  })
+  // Use result.output only when it is non-null.
+}
+```
+
+Here `source` is the file or editor-buffer text you have already read. Resolver options are `{ cwd, config }`: `cwd` must be absolute and defaults to the working directory captured at call time; `config` is an optional explicit local JSON file. Results include `config`, applied `files`, `editorconfigFiles`, effective field `sources` and `ignored`.
+
+Inspect `ignored` yourself and pass only `config.language` and `config.format` to a text call. Filesystem selection and writing remain the caller's responsibility.
+
+## Diagnostic offsets
+
+Spans are half-open UTF-8 byte offsets, including BOM and physical CRLF bytes. They are not JavaScript string indices:
+
+```js
+const bytes = Buffer.from(source)
+const selected = bytes.subarray(span.start, span.end)
+```
+
+Here `span` is a diagnostic's source range. Convert offsets to UTF-16 explicitly when integrating with an editor.
+
+## Runtime and native packages
+
+The package declares Node **22.13+ on 22.x**, or **24.x**, using Node-API 4.
 
 | Platform package        | Rust target                 |
 | ----------------------- | --------------------------- |
@@ -33,21 +79,6 @@ Node runtime ranges are `^22.13.0 || ^24.0.0`, using Node-API 4. CI pins **22.13
 | `@gdfmt/linux-x64-gnu`  | `x86_64-unknown-linux-gnu`  |
 | `@gdfmt/linux-x64-musl` | `x86_64-unknown-linux-musl` |
 
-The root package pins all five optional dependencies to its exact version. The loader selects OS/CPU/libc and verifies the platform manifest plus the compiled version/target. Missing, wrong-version, unsupported or corrupt native packages fail clearly. Installation has no lifecycle scripts, compiler fallback or additional binary download. Keep optional dependencies enabled. Linux glibc artifacts are built on Ubuntu 24.04; older glibc systems are not validated. macOS/Windows compatibility is limited to the CI runners until broader OS testing exists.
+The [recorded artifact matrix](https://github.com/ntnyq/gdfmt/blob/main/tests/npm/acceptance.json) covers these five targets on Node 22.13.0 and 24.0.0. Each release must pass the complete matrix for its own artifacts. Keep optional dependencies enabled: the loader checks OS, CPU, libc, package version and compiled target. Missing, mismatched, corrupt or unsupported native packages produce an error. There is no install-time compilation or additional binary download. Linux glibc artifacts target Ubuntu 24.04; older glibc versions are not validated.
 
-## Local artifact gates and recovery
-
-Repository scripts are TypeScript executed by `tsx`:
-
-```sh
-pnpm install --frozen-lockfile
-pnpm typecheck
-pnpm test:npm
-pnpm verify:npm --local
-```
-
-`pnpm test:npm [rust-target]` builds release bindings and the standalone CLI, packs the root and platform packages, and installs the root tarball through an isolated local registry with an empty cache. The consumer PATH contains only Node. Vitest TypeScript tests compare all 262 script fixtures across five profiles, then verify Unicode/protected bytes, options, config, CLI, worker scheduling and loader errors. ESM/CJS `.mts`/`.cts` consumers typecheck against the installed export map. Native builds require Rust; consuming tarballs does not.
-
-`.github/workflows/npm.yml` runs the ten target/runtime combinations, including Alpine musl, and uploads tarballs and receipts. `pnpm verify:npm` requires all ten receipts and byte-identical root tarballs; it verifies exact platform versions and produces SHA-512 hashes. `--local` verifies only the current target/runtime and explicitly records an incomplete matrix. Reports and packages live under ignored `target/npm/`; CI matrix downloads live under `target/npm-ci/`.
-
-There is deliberately no publication job. Before any future release, verify name ownership/permissions, collect the complete matrix and freeze those exact tarballs and hashes. Publish platform packages first, verify their registry versions/integrities, then publish the root package and update its tag last. If interrupted, inspect the registry and retry only missing packages with the same immutable version/bytes; do not rebuild or overwrite an existing version. If an existing integrity differs, stop that release and use a new version. A published root with a missing selected platform fails clearly; finish the missing immutable platform upload or move the root tag back to the last complete release. Do not promote a partial matrix. Actual publication and registry recovery remain untested and require a separate release task.
+The package's `gdfmt` executable uses the same Rust runner as the standalone [CLI](/reference/cli). `gdfmt/schema.json` exports the configuration JSON Schema.

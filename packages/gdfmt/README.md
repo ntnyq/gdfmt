@@ -1,8 +1,7 @@
 # gdfmt
 
-Experimental Rust GDScript formatter with validated output, Node.js APIs and a CLI.
-This package is being prepared locally; **it has not been published**. Syntax and
-formatter limitations are documented in the repository's formatter acceptance record.
+Rust GDScript formatter with validated output, Node.js APIs and a CLI.
+This package is being prepared locally; **it has not been published**. See the [language support and limitations](https://github.com/ntnyq/gdfmt/blob/main/docs/reference/compatibility.md).
 
 ```js
 import { format, formatSync, resolveConfig } from 'gdfmt'
@@ -48,11 +47,9 @@ gdfmt --reporter=json check src
 Exit codes: 0 success, 1 source/format findings, 2 host/internal failures. The
 export `gdfmt/schema.json` is the configuration schema generated from Rust.
 
-The proposed distribution targets Node **22.13+ on 22.x and 24.x** with Node-API 4:
+The native packages target Node **22.13+ on 22.x and 24.x** with Node-API 4:
 macOS arm64/x64, Windows x64 MSVC, Linux x64 glibc/musl. Each root/platform package
 has the same exact version. Install with optional dependencies enabled. Loading
 fails clearly for missing, mismatched, corrupt or unsupported binaries; there is
-no install script, compiler fallback, binary download or WASM fallback. The local
-macOS acceptance and pending platform CI evidence are distinguished in
-`docs/development/formatter-acceptance.md`; target declarations are not a claim
-that every platform has already passed.
+no install script, compiler fallback, binary download or WASM fallback. The complete target/runtime matrix remains a release gate; see
+[contributing](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#nodejs-packages).

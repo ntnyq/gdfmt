@@ -1,6 +1,6 @@
-# 脚本格式化（P4–P5）
+# 脚本格式化
 
-P3 已[按明确排除项验收](/zh/development/syntax-audit)。格式化器现已覆盖注释、lambda、声明与 suite，保留既有的表达式布局和 CLI。源码构建 alpha 验收证据、固定项目试用与排除项见 [P4 验收记录](/zh/development/formatter-acceptance)。
+gdfmt 格式化完整脚本，覆盖表达式、注释、lambda、声明与语句块。可以直接使用默认设置，也可以调整[项目配置](/zh/guide/configuration)。已知边界见[语言支持](/zh/reference/compatibility)。
 
 ## 当前行为
 
@@ -23,7 +23,7 @@ func run(value: int = 1):
 	return [value, 2] # result
 ```
 
-## 保护区域
+## 保护区域 {#protected-regions}
 
 使用成对的独立行注释：
 
@@ -42,23 +42,9 @@ var other=4
 
 lint 禁用指令、lint 规则和语义自动修复不属于 formatter 范围。`check` 继续检查语法/格式，使用 `format` 应用布局变化。
 
-## CLI
+## 命令行
 
-```sh
-cargo run -p gdfmt_cli -- format src addons
-cargo run -p gdfmt_cli -- src/player.gd
-cargo run -p gdfmt_cli -- check .
-cargo run -p gdfmt_cli -- --check .
-cargo run -p gdfmt_cli -- check . --syntax-only
-cargo run -p gdfmt_cli -- --diff src/player.gd
-cargo run -p gdfmt_cli -- --stdin-filepath src/player.gd < input.gd
-```
-
-`format` 与默认命令写入有效且发生变化的文件；`check` 检查语法及脚本格式，不执行 lint。`--syntax-only` 跳过格式化；`--diff` 输出整文件替换的 unified diff，不写入。`format -` 读取 stdin；`--stdin-filepath` 还会按虚拟路径最近的已存在父目录解析配置。stdin 格式化成功时 stdout 仅输出源码，JSON reporter 则使用 `output` 字段；无效输入不输出格式化源码。
-
-退出码：0 为成功，1 为源码错误或只读模式发现格式差异，2 为参数/配置/I/O/内部失败。JSON 文件报告包含 `changed` 与结构化诊断；syntax-only 省略 `changed`。文件发现继续沿用排序、去重和忽略规则。
-
-所有配置与输入读取在写入前预检。每个文件通过同目录临时文件替换，保留权限，并在替换前比较当前内容与读取的源码。无效文件保持不变，同批其他有效文件可以格式化；原子性以单文件为单位。
+使用 `gdfmt .` 写入格式化结果，`gdfmt --check .` 只读检查，`gdfmt --diff .` 预览差异。stdin、输出格式与退出码见 [CLI 参考](/zh/reference/cli)。
 
 ## Rust API 与正确性门禁
 
@@ -66,11 +52,4 @@ cargo run -p gdfmt_cli -- --stdin-filepath src/player.gd < input.gd
 
 facade 仅在以下条件全部成立时返回可写输出：输入无 parser 错误；输出在相同版本和限制下重解析成功；规范化节点结构及有效 token 原文一致；注释原文、相邻 token、独立行角色及悬空块归属一致；第二次格式化输出完全相同。失败时返回内部诊断且不提供输出。formatter 自身也独立拒绝恢复节点和错误诊断。
 
-Doc 打印器支持 text、concat、group、indent、软/硬/条件换行和行尾后缀。测试覆盖宽度边界、后续文本、嵌套分组、后缀、CRLF、长 token、表达式 token 边界插入注释，以及 40/100 宽度下人工检查过的整脚本快照。每个 parser 可接受脚本/版本使用四组布局配置检查，包含 tab/空格缩进、LF/CRLF/preserve、空行上限和最终换行。无效语料不得产生可写输出。
-
-```sh
-cargo test -p gdfmt_formatter -p gdfmt -p gdfmt_cli -p gdfmt_workspace
-cargo xtask formatter-conformance --language 4.7 --godot /path/to/pinned/godot --report target/conformance/formatter-4.7.json
-```
-
-引擎命令沿用五个精确版本和宽度 40，仅运行 check-only，并记录格式化源码和日志，不执行脚本、不证明运行时等价。2026-10-21 核验：522 个有效脚本/版本输出全部通过五个固定 macOS 引擎（4.3–4.7 分别 90/98/110/112/112），零失败。Rust 语料检查共 2176 个有效脚本/版本/布局组合，包含 22 个 parser 接受的 analyzer 边界在四组布局下的检查；这些边界不计入引擎接受数。固定项目试用中 464 个脚本通过 1856 组布局，另有一个上游无效源码明确拒绝；401 份 gdtoolkit 风格差异已审查并记录指纹。P4 源码构建 alpha 已按排除项验收；长期 formatter fuzz 为后续工作，生产 CLI 扩展属于 P6。
+复现命令、用例组织与引擎比较见[贡献指南](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md)。

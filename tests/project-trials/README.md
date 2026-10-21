@@ -1,4 +1,4 @@
-# P4 project trials
+# Formatter project trials
 
 This optional gate formats pinned third-party GDScript sources in memory. Ordinary
 Rust tests need no network, Python or Godot installation. No project code is run.
@@ -49,4 +49,4 @@ equivalent, that projects import successfully, or that scripts behave identicall
 
 After inspecting changed diffs and investigating every unexplained change, use
 `--record-review` to replace the reviewed fingerprints, then rerun without that
-option. Update the bilingual formatter acceptance record with the results.
+option. Include the resulting validation summary in your pull request.

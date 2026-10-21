@@ -3,36 +3,45 @@ layout: home
 
 hero:
   name: gdfmt
-  text: 以 Rust 构建可靠的 GDScript 格式化器。
-  tagline: 以 Rust 构建无损解析、结构化诊断与可靠格式化的共同基础。
+  text: 让 GDScript 格式保持一致。
+  tagline: 以 Rust 构建的格式化工具。设定风格，格式化项目，在 CI 中保持一致。
   image:
     src: /logo.svg
-    alt: Godot 机器人与代码括号、缩进线条
+    alt: gdfmt 标志
   actions:
     - theme: brand
       text: 快速开始
       link: /zh/guide/
     - theme: alt
-      text: 了解解析器
-      link: /zh/reference/parsing
+      text: 在 GitHub 上查看
+      link: https://github.com/ntnyq/gdfmt
 
 features:
-  - title: 保留每一个字节
-    details: 无损具体语法树保留空白、注释与非法输入，为后续工具提供完整源码。
-    link: /zh/development/
-    linkText: 阅读架构说明
-  - title: 显式语言版本
-    details: Godot 4.3–4.7 profiles 对已核验的语法差异进行版本检查，固定引擎测试持续记录兼容性。
-    link: /zh/reference/language-versions
-    linkText: 查看支持范围
-  - title: 共享 Rust 核心
-    details: 解析、配置、文件发现与 CLI 各有明确职责。脚本格式化和保护区域使用相同验证门禁；生产配置与本地 Node/npm 打包已实现，完整产物验收待 CI。
-    link: /zh/development/implementation-plan
-    linkText: 查看实施计划
+  - title: 验证每次格式化
+    details: 重新解析输出并检查语法结构与注释保留情况，再次格式化必须产生完全一致的结果。
+    link: /zh/reference/formatting
+    linkText: 了解格式化行为
+  - title: 统一项目风格
+    details: 配置行宽、缩进与换行，通过 JSON 配置、EditorConfig 和路径覆盖共享项目设置。
+    link: /zh/guide/configuration
+    linkText: 配置 gdfmt
+  - title: 从本地编辑到 CI
+    details: 格式化文件、检查差异、预览改动，或通过 stdin 处理缓冲区。保护区域可保留自定义排版。
+    link: /zh/guide/integrations
+    linkText: 接入工作流
 ---
 
-## 开发状态
+## 开始使用
 
-目前可从源码使用词法分析、表达式与脚本解析、配置 Schema 和基础 CLI。P3 已按排除项验收，脚本格式化与 `check` 已进入 P4，crates 暂未发布，尚未声明任何 Godot 版本的完整兼容性。
+在仓库内运行 `cargo install --path crates/gdfmt_cli --locked` 完成构建与安装，然后在你的 Godot 项目中执行：
 
-从[当前命令](/zh/guide/)开始，查看[兼容性证据](/zh/development/compatibility)，或阅读 [English documentation](/)。
+```sh
+gdfmt .
+gdfmt --check .
+```
+
+完整安装步骤见[快速开始](/zh/guide/)。npm 包尚未发布。
+
+## 浏览文档
+
+[配置](/zh/guide/configuration) · [CLI 参考](/zh/reference/cli) · [语言支持](/zh/reference/compatibility) · [Node.js API](/zh/reference/node)

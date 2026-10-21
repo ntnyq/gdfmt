@@ -74,4 +74,4 @@ parser 按需读取 token，在消费 lambda body 的冒号前设置 suite 上�
 
 目前不声明任何 Godot 版本的完整语法一致性。[版本 gates](/zh/reference/language-versions.md)覆盖 4.3–4.7 profiles 的已核验差异；namespace/trait 仍不支持。完整 annotation 参数值规则、继承与 abstract 覆盖关系、类型名解析、捕获值和类型分析、资源路径检查与运行时行为仍需后续实现或固定引擎验证。
 
-测试覆盖结构、abstract 绑定、声明约束、版本边界、词法上下文恢复、后续声明恢复、全部 UTF-8 字符边界截断、token 字节偏移、随机 token 输入、诊断预算、深度限制和跨线程无损重建。`cargo xtask compatibility` 检查 292 个词法 fixture，其中 16 个也检查单表达式、262 个也检查脚本，并执行 1310 次 profile 检查；全部为原创用例。[固定引擎 conformance](/zh/development/engine-conformance.md) 已覆盖全部 262 个脚本，各版本的 4–5 个语义边界单独分类。
+测试覆盖结构、abstract 绑定、声明约束、版本边界、词法上下文恢复、后续声明恢复、全部 UTF-8 字符边界截断、token 字节偏移、随机 token 输入、诊断预算、深度限制和跨线程无损重建。`cargo xtask compatibility` 检查 292 个词法 fixture，其中 16 个也检查单表达式、262 个也检查脚本，并执行 1310 次 profile 检查；全部为原创用例。[固定引擎 conformance](/zh/reference/compatibility) 已覆盖全部 262 个脚本，各版本的 4–5 个语义边界单独分类。
