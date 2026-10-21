@@ -6,8 +6,11 @@ import { cp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { gitRevision, isCleanReleaseSource } from '../release/project.ts'
 import { build, metadata, outputRoot, run, targets } from './build.ts'
 
+const revision = gitRevision()
+const cleanSource = isCleanReleaseSource()
 const { target, nativeRoot, packageRoot, standalone } = await build()
 const artifacts = join(outputRoot, 'artifacts', target.id)
 await rm(artifacts, { recursive: true, force: true })
@@ -189,6 +192,8 @@ try {
   ])
   const summary = {
     schemaVersion: 1,
+    revision,
+    cleanSource: cleanSource && isCleanReleaseSource(),
     target: target.id,
     triple: target.triple,
     node: process.version,
@@ -202,6 +207,11 @@ try {
     passed: true,
     published: false,
   }
+  assert.equal(
+    gitRevision(),
+    revision,
+    'source commit changed while building the npm artifacts',
+  )
   assert.equal(
     createHash('sha512')
       .update(await readFile(rootTarball))

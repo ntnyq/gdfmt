@@ -87,7 +87,13 @@ pnpm verify:npm --local
 
 The packaging matrix is macOS arm64/x64, Windows x64 MSVC and Linux x64 glibc/musl, each tested on Node 22.13.0 and 24.0.0. `.github/workflows/npm.yml` collects the matrix. `pnpm verify:npm` requires all ten receipts and identical root tarballs; `--local` deliberately records an incomplete matrix. A local pass does not establish cross-platform readiness. The [recorded complete-matrix result](tests/npm/acceptance.json) identifies its tested revision and artifact hashes; rerun the matrix for new release artifacts.
 
-Packages are not published and there is no publication job. A release requires verified name ownership and publishing permissions, a complete passing artifact matrix, and frozen tarballs with verified hashes. Publish matching platform packages before the root package and update the release tag only after the set is complete. If interrupted, retry only missing packages with the same immutable version and bytes; mismatched registry integrity requires a new version. Never promote a partial matrix.
+`.github/workflows/release.yml` publishes version tags after the complete Rust CI and npm matrix pass. Actual publication is disabled until platform bootstrap is complete and the repository variable `RELEASE_ENABLED` is `true`. It freezes tested artifacts, publishes the platform packages before the root, verifies registry consumers, and only then advances the npm release channel. Repeated runs skip matching existing versions; conflicting bytes require a new version. See [publishing](RELEASING.md) ([简体中文](RELEASING.zh-CN.md)) for first-release authentication, OIDC setup, coordinated version updates and recovery.
+
+```sh
+pnpm release:version 0.1.0-alpha.1 --dry-run
+pnpm release:check
+pnpm test:release
+```
 
 ## Documentation
 

@@ -281,6 +281,79 @@ fn comments_at_expression_token_boundaries_keep_their_anchors() {
 }
 
 #[test]
+fn comments_in_explicit_continuations_keep_valid_line_breaks() {
+    let source =
+        "func run():\n\tif first() \\\n\t\t# condition\n\t\tand second():\n\t\t\treturn true\n";
+    assert_eq!(
+        script(source, &FormatOptions::default()),
+        "func run():\n\tif first() \\\n\t# condition\n\tand second():\n\t\treturn true\n"
+    );
+    let source =
+        include_str!("../../../tests/compatibility/fixtures/formatter-continuation-comments.gd");
+    for width in [20, 40, 80, 100, 120] {
+        for indent in ["\t", "  ", "    "] {
+            for line_ending in [
+                gdfmt_formatter::LineEnding::Lf,
+                gdfmt_formatter::LineEnding::Crlf,
+                gdfmt_formatter::LineEnding::Preserve,
+            ] {
+                for final_newline in [false, true] {
+                    let options = FormatOptions {
+                        line_width: width,
+                        indent: indent.into(),
+                        line_ending,
+                        final_newline,
+                        ..Default::default()
+                    };
+                    script(source, &options);
+                    script(&source.replace('\n', "\r\n"), &options);
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn explicit_continuation_comments_at_token_boundaries_remain_stable() {
+    let source = "func run(value):\n\treturn value.method(1, 2) + 3 if value is Node else -4\n";
+    let parsed = parse(source, &ParseOptions::default());
+    assert!(!parsed.has_errors());
+    let mut checked = 0;
+    for token in parsed
+        .tree
+        .unwrap()
+        .root()
+        .descendants_with_tokens()
+        .filter_map(|element| element.into_token())
+    {
+        if token.kind().is_trivia() || token.kind().is_virtual() {
+            continue;
+        }
+        let offset = u32::from(token.text_range().end()) as usize;
+        for comment in [
+            " \\\n\t# continuation\n\t",
+            " \\\n\t# first\n\t# second\n\t",
+        ] {
+            let candidate = format!("{}{comment}{}", &source[..offset], &source[offset..]);
+            if parse(&candidate, &ParseOptions::default()).has_errors() {
+                continue;
+            }
+            for width in [20, 40, 100] {
+                script(
+                    &candidate,
+                    &FormatOptions {
+                        line_width: width,
+                        ..Default::default()
+                    },
+                );
+                checked += 1;
+            }
+        }
+    }
+    assert!(checked > 100);
+}
+
+#[test]
 fn invalid_sources_and_recovery_trees_never_produce_output() {
     for source in [
         "var x = [1, )\n",

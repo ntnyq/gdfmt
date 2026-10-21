@@ -5,7 +5,12 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
-publish = false
+description = "Source spans and structured diagnostics for the gdfmt GDScript formatter"
+readme = "README.md"
+keywords = ["gdscript", "godot", "formatter"]
+categories = ["development-tools"]
+include = ["src/**", "Cargo.toml", "README.md", "LICENSE"]
+publish = ["crates-io"]
 
 [lints]
 workspace = true

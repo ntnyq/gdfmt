@@ -65,6 +65,7 @@ gdfmt 无需配置即可使用。需要共享项目设置时，创建 `.gdfmtrc.
 - [语言支持与限制](docs/zh/reference/compatibility.md)
 - [Node.js API](docs/zh/reference/node.md)
 - [参与贡献](CONTRIBUTING.md)
+- [发布与 CI 自动发布](RELEASING.zh-CN.md)
 
 提供 Godot 4.3–4.7 语法配置，尚未声明完整 Godot 兼容性；项目分析与运行时行为仍由引擎负责。gdfmt 使用自己的格式化风格，不保证与 gdtoolkit 的 `gdformat` 输出完全一致。
 

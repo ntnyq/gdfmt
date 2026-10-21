@@ -5,7 +5,12 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
-publish = false
+description = "File discovery, configuration resolution and guarded writes for gdfmt"
+readme = "README.md"
+keywords = ["gdscript", "godot", "formatter"]
+categories = ["development-tools", "filesystem"]
+include = ["src/**", "Cargo.toml", "README.md", "LICENSE"]
+publish = ["crates-io"]
 
 [lints]
 workspace = true

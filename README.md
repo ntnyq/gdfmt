@@ -65,6 +65,7 @@ See [configuration](docs/guide/configuration.md) for all options, inheritance, o
 - [Language support and limitations](docs/reference/compatibility.md)
 - [Node.js API](docs/reference/node.md)
 - [Contributing](CONTRIBUTING.md)
+- [Publishing and CI releases](RELEASING.md)
 
 Grammar profiles cover Godot 4.3–4.7. Full Godot compatibility is not declared; project analysis and runtime behavior remain the engine's responsibility. gdfmt uses its own formatting style and does not promise identical output to gdtoolkit's `gdformat`.
 

@@ -4524,6 +4524,17 @@
       "lexicalErrors": [],
       "parserLexicalErrors": ["LEX005"],
       "syntaxErrors": []
+    },
+    {
+      "file": "fixtures/formatter-continuation-comments.gd",
+      "stage": "script",
+      "provenance": "original",
+      "features": [
+        "explicit continuations with comments",
+        "project trial regression"
+      ],
+      "lexicalErrors": [],
+      "syntaxErrors": []
     }
   ],
   "languageProfiles": ["4.3", "4.4", "4.5", "4.6", "4.7"],

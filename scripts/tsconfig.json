@@ -8,5 +8,11 @@
     "resolveJsonModule": true,
     "types": ["node"]
   },
-  "include": ["**/*.ts", "../tests/npm/**/*.test.ts", "../vitest.config.ts"]
+  "include": [
+    "**/*.ts",
+    "../tests/npm/**/*.test.ts",
+    "../tests/release/**/*.test.ts",
+    "../tests/project-trials/**/*.test.ts",
+    "../vitest.config.ts"
+  ]
 }

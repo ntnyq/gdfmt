@@ -1844,7 +1844,9 @@
       "reference": "4.7-6ad6167",
       "sourceRejections": {
         "2d/tween/main.gd": {
-          "diagnostics": ["LEX005"],
+          "diagnostics": [
+            "LEX005"
+          ],
           "engineError": "Unindent doesn't match the previous indentation level.",
           "reason": "Pinned upstream source dedents a lambda to a continuation column absent from the indentation stack."
         }
@@ -1899,6 +1901,792 @@
       ],
       "reference": "3fa8a04b1c01ab23db43123d4ce814a34c3fc7f0",
       "sourceRejections": {}
+    },
+    {
+      "id": "godot-statecharts",
+      "repository": "https://github.com/derkork/godot-statecharts",
+      "commit": "76d226a3efac66a72aea825382b320c94808f409",
+      "license": "MIT",
+      "files": [
+        {
+          "path": "LICENSE",
+          "sha256": "ff750b7a35accad94d9548e5d040da6df9b328a6eaec2918d217022bcd8276d1"
+        },
+        {
+          "path": "addons/godot_state_charts/LICENSE",
+          "sha256": "ff750b7a35accad94d9548e5d040da6df9b328a6eaec2918d217022bcd8276d1"
+        },
+        {
+          "path": "addons/godot_state_charts/all_of_guard.gd",
+          "sha256": "56aa2e228df9c4231af5dc36076c8a1ceab5ee9e7e66574439f479156489ab9c"
+        },
+        {
+          "path": "addons/godot_state_charts/animation_player_state.gd",
+          "sha256": "0dad168250b270b4b05334da3138bafcbe4f5f7582d57d4d7ffba550b1363a37"
+        },
+        {
+          "path": "addons/godot_state_charts/animation_tree_state.gd",
+          "sha256": "4cc0d9a64c00a7848379836bfafc04b5aea07730c598259fb1282a19fe37acc4"
+        },
+        {
+          "path": "addons/godot_state_charts/any_of_guard.gd",
+          "sha256": "ec577bf96952adcdbb0b95e1c2140a9bb4c08ed7376f3bcca15dc36a6015771e"
+        },
+        {
+          "path": "addons/godot_state_charts/atomic_state.gd",
+          "sha256": "6593095bb092fe2d5722777f86dfdc36e2b1798d2fd1b14bf9d8d499d5438cf7"
+        },
+        {
+          "path": "addons/godot_state_charts/compound_state.gd",
+          "sha256": "fd90df70a3c5237805bd206e7a1056ee14327e0ab51bb1bc64d4de977a694b1f"
+        },
+        {
+          "path": "addons/godot_state_charts/debug_util.gd",
+          "sha256": "58156b5309a4f369d4430b9a9a7112614b071f4ab6dcddb0745cb544ac492d46"
+        },
+        {
+          "path": "addons/godot_state_charts/expression_guard.gd",
+          "sha256": "7f8d3a42d542c6decf14e0b7c63e9f7eea63fd7bdf7c4bdb89933746f4250647"
+        },
+        {
+          "path": "addons/godot_state_charts/expression_util.gd",
+          "sha256": "8e2e785fb5708ae52eebf0e356f762fd9a46502aff5e9d37245f8772b9e96098"
+        },
+        {
+          "path": "addons/godot_state_charts/godot_state_charts.gd",
+          "sha256": "c8318f994e337b17d0bf1880a7def20ae1bdec9a389464d26c5ec3ddba2d02b0"
+        },
+        {
+          "path": "addons/godot_state_charts/guard.gd",
+          "sha256": "c20fc007c7f60ec27825d548cc37f89ba44cfbf8592aa59c73522397a7bb077d"
+        },
+        {
+          "path": "addons/godot_state_charts/history_state.gd",
+          "sha256": "da4d77cf5d96493ebbcd48ff0b031cc67a7bd2cd48f58e81e7d391b90f7e4a56"
+        },
+        {
+          "path": "addons/godot_state_charts/not_guard.gd",
+          "sha256": "7751cd6bab0f246b5bace32faefe826e859b32c97e9794e563f17fe0f6298b8a"
+        },
+        {
+          "path": "addons/godot_state_charts/parallel_state.gd",
+          "sha256": "511e74419613205a55442fdf12a87b7a372b4229a396db0d3a773ee863255352"
+        },
+        {
+          "path": "addons/godot_state_charts/saved_state.gd",
+          "sha256": "ae56555bfb47f0f3262457f804685933f07878fa72d084904c14dc908f89b8ba"
+        },
+        {
+          "path": "addons/godot_state_charts/serialized_state_chart.gd",
+          "sha256": "f219e38f83ec9d78b7ec0d7d29d41df4036404227f86e073ea5f86c7f4f4912f"
+        },
+        {
+          "path": "addons/godot_state_charts/serialized_state_chart_state.gd",
+          "sha256": "8a016099ea2a00c1dd827f599068665a52c9bc134b11867c48a7fffb3095b09f"
+        },
+        {
+          "path": "addons/godot_state_charts/state_chart.gd",
+          "sha256": "68fe24135ab890e1988fd0341995e773d711745e487d6cdefaa388aeb200bc9f"
+        },
+        {
+          "path": "addons/godot_state_charts/state_chart_serializer.gd",
+          "sha256": "ecacca97a5642570b7105fd0830017e634e1324b530bef9408879cf605ff44f7"
+        },
+        {
+          "path": "addons/godot_state_charts/state_chart_state.gd",
+          "sha256": "de4df0b29e50e939069c3d46a9f94df5913db4e6e26d936c6594dbd360a86265"
+        },
+        {
+          "path": "addons/godot_state_charts/state_is_active_guard.gd",
+          "sha256": "ba5d97609434ae0b25b25c81a9dea81a03656959bd2b88429224b34247a8a56c"
+        },
+        {
+          "path": "addons/godot_state_charts/transition.gd",
+          "sha256": "0628773979f2a8c5fddca7277e916fcfc254b18b7cf2ab24dfae25d37aa0f89f"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/debugger_history.gd",
+          "sha256": "e9db96a8e2f612ebff12adc89d2a031a83c9f427f97dd0ceeb1b0bfc5e76b397"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/editor_debugger/editor_debugger.gd",
+          "sha256": "ee740f3c46b6df9be9e48613573cc47fa7e8dbfb720735c158ac74dd1c0663aa"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/editor_debugger/editor_debugger_message.gd",
+          "sha256": "130c62d58fe9f9adfb5ffc720776b3bc119f5cc67d01f087a1cd673a88d70f0f"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/editor_debugger/editor_debugger_plugin.gd",
+          "sha256": "043804c83319c5faea43a7d82854fd5cd19ebbbaa1a6a045850e7f200bc13caf"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/editor_debugger/editor_debugger_remote.gd",
+          "sha256": "1859c5fb1caebb585ba5f1bdb24d6b73d5e06bd30b5c76567e223fd453e78c9f"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/editor_debugger/editor_debugger_settings_propagator.gd",
+          "sha256": "133b5d1bb5b8e4113fe8c82c27efba76be9b14e9c66cb736dd6e838d6cfcc371"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/editor_debugger/editor_debugger_state_info.gd",
+          "sha256": "6f5037f1b51e3ebe813a1b53b225e99483158b4a6c5b72577874a38dd4eb96b5"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/editor_sidebar.gd",
+          "sha256": "07944825a55ded21793fa4d6901692195f95f4bb8beb132609606ccb84b920cd"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/event_editor/event_editor.gd",
+          "sha256": "86fade8cc02b75216dce8d45d28b6e2c10ddc9b45d863fa5a39ac1a773709a6b"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/event_editor/event_inspector_plugin.gd",
+          "sha256": "69f8348e3ff3ba7ccea7e4239b9a4cf29b6b549c0544585b1fae38a82d723761"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/event_refactor/event_refactor.gd",
+          "sha256": "7fc19414fbfbaab0180056b85bc799e45d408c263b575e435b5c04cc15443d8c"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/ring_buffer.gd",
+          "sha256": "bac56ccaf353b17677a7dc70ed8aae840cdcd65223892ac077b45fc969989b29"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/state_chart_debugger.gd",
+          "sha256": "eec99a1e67fadaada0ae11341e531d0cc9a1aed1035b96a94eace88f08498075"
+        },
+        {
+          "path": "addons/godot_state_charts/utilities/state_chart_util.gd",
+          "sha256": "af91f299549992549441217dbc93a87c8eefac150d5cf19a27bafd36c316ea56"
+        },
+        {
+          "path": "addons/gut/GutScene.gd",
+          "sha256": "d70c0c02eb6f5e57ef9a3cb38268014269d9ff993256bd0d87d2e33f7313b779"
+        },
+        {
+          "path": "addons/gut/LICENSE.md",
+          "sha256": "872fea6e72319f72e4ec0aa10bd7ec535ed3124bf2718bd8e0140e9adafef917"
+        },
+        {
+          "path": "addons/gut/UserFileViewer.gd",
+          "sha256": "9ac084952d8e45f29bfff77d485bf1ed03a95d324923f52314263968ee508047"
+        },
+        {
+          "path": "addons/gut/autofree.gd",
+          "sha256": "6b841f8352abf5477b99c29a43653fac633270c8e883132c8a4cb67660c9d43d"
+        },
+        {
+          "path": "addons/gut/awaiter.gd",
+          "sha256": "2e3f44fc4df0dbb8ea23ce7483320f0768062703492e41af84b7e02447863898"
+        },
+        {
+          "path": "addons/gut/comparator.gd",
+          "sha256": "4ba65c876f8f7223901d3ee37851eaae00c970ad907b171aada164f91d0ce38e"
+        },
+        {
+          "path": "addons/gut/compare_result.gd",
+          "sha256": "dd0a48a1d681bbe7277ccdedb2882265c8a6542c163d4dd86d56f1cda71438a9"
+        },
+        {
+          "path": "addons/gut/diff_formatter.gd",
+          "sha256": "28bbf85f97c2823093f38c60dca232f4653e410b372bdf87b41a535e396f4a4e"
+        },
+        {
+          "path": "addons/gut/diff_tool.gd",
+          "sha256": "8c8f392bde4b0899d926da44ecb5fd23db048017b6ec9e5cc6f24ca7017147cb"
+        },
+        {
+          "path": "addons/gut/double_tools.gd",
+          "sha256": "7cd13d07d53e4d6712cc9077ccd0e61bfeee268800fb3f88aea83fcefac6c65b"
+        },
+        {
+          "path": "addons/gut/doubler.gd",
+          "sha256": "c8cdb696fded19b3cb8fb1534f0a44f4bb0cb9a15fd87ccee5848f88d17b87b5"
+        },
+        {
+          "path": "addons/gut/gui/BottomPanelShortcuts.gd",
+          "sha256": "ecfd0a3986d2ebef19f1de961315ddce2466f53d9011356dec3a97bc95dec55c"
+        },
+        {
+          "path": "addons/gut/gui/GutBottomPanel.gd",
+          "sha256": "90f33e394a6aaaaa806928630f940c93b201019aed4e73f6341810741c6b5b96"
+        },
+        {
+          "path": "addons/gut/gui/GutRunner.gd",
+          "sha256": "76e01bcf87f5b5d2991660e7175ed2815082787ea4769c09c05137c8ff1dbcf9"
+        },
+        {
+          "path": "addons/gut/gui/OutputText.gd",
+          "sha256": "35b803681a2c56627182eabf073f1dad8cfa1d3567fb33a041851ce66ff21b8b"
+        },
+        {
+          "path": "addons/gut/gui/ResizeHandle.gd",
+          "sha256": "0e7a12d0dd86d72b9805e3c8d20aefc00d496cdd8fff944024d3fd98b59721e9"
+        },
+        {
+          "path": "addons/gut/gui/ResultsTree.gd",
+          "sha256": "41bb8b10c0cd566e19fd8f594f32244c0f34766aa6a3b232303e674787355ec7"
+        },
+        {
+          "path": "addons/gut/gui/RunAtCursor.gd",
+          "sha256": "dad266086644b0cc9e570e01f30a3c00f8b57706fac45f9aafc6eae230f0b29a"
+        },
+        {
+          "path": "addons/gut/gui/RunResults.gd",
+          "sha256": "28c83bd7a38be15d85ab79835b6bfadb60df2a4a1d6949dd2441c55153b1e555"
+        },
+        {
+          "path": "addons/gut/gui/ShortcutButton.gd",
+          "sha256": "6249023ebb8bdd811b5cd7f4d9f449df4893a242b4ae681ed33d81c48e9fe8ff"
+        },
+        {
+          "path": "addons/gut/gui/gut_config_gui.gd",
+          "sha256": "8435d3a2650d99950f0abd0d5be0a85132620edde5086adb9d13dcc0b0400626"
+        },
+        {
+          "path": "addons/gut/gui/gut_gui.gd",
+          "sha256": "b9db6c5cf9d3b05165db118aaa3e18faa80a11e0d700b64d391cc4a1eab3cdfa"
+        },
+        {
+          "path": "addons/gut/gui/script_text_editor_controls.gd",
+          "sha256": "58788d4f7604348d86ab13d3e83a4d69c234a96ee5e02d9a46478bd00ca0e62b"
+        },
+        {
+          "path": "addons/gut/gut.gd",
+          "sha256": "f4d6ca1fc2dafe911f04f581cf1395fb582a6469bdbb181c16ede0a1e9672123"
+        },
+        {
+          "path": "addons/gut/gut_cmdln.gd",
+          "sha256": "d9fe4848a01ac45048a2447f8088615569d12365cfbdbe1fde7b801101dd050d"
+        },
+        {
+          "path": "addons/gut/gut_config.gd",
+          "sha256": "5321960b85e16eac7558aed9826eccd1e040afcbc90ab834d898012106ad7b77"
+        },
+        {
+          "path": "addons/gut/gut_plugin.gd",
+          "sha256": "d2973be3372ef4dd80f0b20c64409d4603ba3d6f73af6f3e6901f9dad23b4c0c"
+        },
+        {
+          "path": "addons/gut/gut_to_move.gd",
+          "sha256": "f60c62ec9d13b086eab5b7bc1940db6fd35dab8dbb086bc1e5a7022804f83ad0"
+        },
+        {
+          "path": "addons/gut/hook_script.gd",
+          "sha256": "f4a344001793afa25f33ac0af2044e47052b96a5dd1e8e8d3474cf45fda04b87"
+        },
+        {
+          "path": "addons/gut/inner_class_registry.gd",
+          "sha256": "bd0ae4ff1cd9d63d6ef50417da6ba617f431056ccc5c4f40f0b51f70c6462196"
+        },
+        {
+          "path": "addons/gut/input_factory.gd",
+          "sha256": "457c17c98b1b8339e1a9523b1f1eb66399bac48a7ba07649e53bf515ab9f1424"
+        },
+        {
+          "path": "addons/gut/input_sender.gd",
+          "sha256": "7d32cf3649d9b14a96f34dcd7cfd5951b03b9fb59c5c2de47e91e53b9ce2b295"
+        },
+        {
+          "path": "addons/gut/junit_xml_export.gd",
+          "sha256": "cebeec8fc75cac3a8c7559fa4500415503b2fbc9093773cdad5cf7038a520ece"
+        },
+        {
+          "path": "addons/gut/logger.gd",
+          "sha256": "a649a56d93fa39edfaf895b97033883f39f99e5e70e22159728b22b3a3fbfe95"
+        },
+        {
+          "path": "addons/gut/method_maker.gd",
+          "sha256": "771f2d0db6f5aeac98f6cbedaa2f76cec272b89ec6ebc4decfef8ad91aeb24e4"
+        },
+        {
+          "path": "addons/gut/one_to_many.gd",
+          "sha256": "2dc4ef2805d2deb3ca8140a89e508166aca2a4819fa56cb2ff2b12bbf5a4ba2a"
+        },
+        {
+          "path": "addons/gut/optparse.gd",
+          "sha256": "0b338da128f3227ad5d433072af7fc84bc7fafaf71d5351a15f466556dd196d8"
+        },
+        {
+          "path": "addons/gut/orphan_counter.gd",
+          "sha256": "04b5bd2ae180bb344002d7ac02eb9ca12312af90bdeae82bc48f4f9ec4373dd0"
+        },
+        {
+          "path": "addons/gut/parameter_factory.gd",
+          "sha256": "4c7c9a3841cc0c3bb2d8474072d51e747e01592dd9108adede9f73970d06f41c"
+        },
+        {
+          "path": "addons/gut/parameter_handler.gd",
+          "sha256": "a78f4f20fae8976ecefe6e5aa535e9cedc6e7c14899f651601beced890c1a320"
+        },
+        {
+          "path": "addons/gut/printers.gd",
+          "sha256": "ead6cf276e0caa85a8108dc2cceb4a32a8bdade6010bc8c75e3f5d63ddd6382b"
+        },
+        {
+          "path": "addons/gut/result_exporter.gd",
+          "sha256": "c94b6966d4c2dee07cca7dd4393e855006bf72d60ce98795c641624d2a2c8eee"
+        },
+        {
+          "path": "addons/gut/script_parser.gd",
+          "sha256": "a272ebb900a7793fd4f45486b6e390a2cdbbc9da9957c372b1cc46e9882413bf"
+        },
+        {
+          "path": "addons/gut/signal_watcher.gd",
+          "sha256": "c4f75a07dfab0d6d7b5b6b742d625fcecc7aad084d41bbb48cd62bc60793365b"
+        },
+        {
+          "path": "addons/gut/spy.gd",
+          "sha256": "1b83063c2bbf0095ae7b5482c896514ce1858d34b85de666b833898a69339193"
+        },
+        {
+          "path": "addons/gut/strutils.gd",
+          "sha256": "1bb90fb8e9c7b15ded27256c33c2e8fceaddb8ca05167bb9921e9390ae1da8fe"
+        },
+        {
+          "path": "addons/gut/stub_params.gd",
+          "sha256": "27a993e27b121500eb3fef551eeb8cf76e8819052aff0e1579b55bf146cb667b"
+        },
+        {
+          "path": "addons/gut/stubber.gd",
+          "sha256": "16c67e2987946d71ee00422461917bc19632357ff11cc67a0147e3e80592d681"
+        },
+        {
+          "path": "addons/gut/summary.gd",
+          "sha256": "8bec0ba0d57bf6452af7d4ae9e3fd53871ba3e7970f6a33469ab72d98fcdc1b7"
+        },
+        {
+          "path": "addons/gut/test.gd",
+          "sha256": "d1b37197ffdaa2ed51d96fbe8c809097db91908367b3b8cf45d2b835fcc02bd5"
+        },
+        {
+          "path": "addons/gut/test_collector.gd",
+          "sha256": "1976bf9458726cf02237e75c016e3e69695d155e9641e1084ff5986d71accb17"
+        },
+        {
+          "path": "addons/gut/thing_counter.gd",
+          "sha256": "28a9f4917945846211b07f2935b84f5eab8157b62c734ce9c99b6b21ea29e3b3"
+        },
+        {
+          "path": "addons/gut/utils.gd",
+          "sha256": "a28b27c0b3d0a8d6075f16d84c5d244664dd251b968e7586b3c00701ce0fd4fa"
+        },
+        {
+          "path": "godot_state_charts_examples/ant_hill/ant/ant.gd",
+          "sha256": "7af141273be4f1612fd85f0d43fc31a40cfd7b8606ce86c5b152e7855b950c2d"
+        },
+        {
+          "path": "godot_state_charts_examples/ant_hill/ant_hill_demo.gd",
+          "sha256": "e88ee0f17d5ed3a4ef9dfec8d17d4ae97f9f2ae8b61e5bf47f5298a034a5e38b"
+        },
+        {
+          "path": "godot_state_charts_examples/ant_hill/marker/marker.gd",
+          "sha256": "379983bc935409a6a128163c49ee998d1155f40778ba76356fab1b260eab3612"
+        },
+        {
+          "path": "godot_state_charts_examples/ant_hill/pause_controller.gd",
+          "sha256": "6e69c270e7d59704395b8ce4578f0d1a5d0e7566cf9f7f55098ba791bff8c175"
+        },
+        {
+          "path": "godot_state_charts_examples/automatic_transitions/stamina_bar.gd",
+          "sha256": "b0fc1bad4a08475d02307d413b1604b32c6fbaa2146f7b5af531f5ed3dae740a"
+        },
+        {
+          "path": "godot_state_charts_examples/automatic_transitions/the_frog.gd",
+          "sha256": "0f1b35269d754f8194a3e646d2425034bf3f88ce37e480634e422d8629fdc213"
+        },
+        {
+          "path": "godot_state_charts_examples/cooldown/LICENSE.md",
+          "sha256": "ba36807f95e987874ed2bbb78f0aab484d2883542eb2e01bc69b6ea7d5dc8664"
+        },
+        {
+          "path": "godot_state_charts_examples/cooldown/skill_button/skill_button.gd",
+          "sha256": "ff1b0d551bd80113eae6ef0e80844f8038fbbf8e3e86875eeb958dbd67d60977"
+        },
+        {
+          "path": "godot_state_charts_examples/history_states/history_demo.gd",
+          "sha256": "fd77677dc4d156180120c731dcb7626fd2376b6f72181b4ffdd253a7b947f37b"
+        },
+        {
+          "path": "godot_state_charts_examples/performance_test/state_chart_receiver.gd",
+          "sha256": "1050ef31b827a665662f3942faa5a2b45cf0b05bf10210ffff28b884d3859159"
+        },
+        {
+          "path": "godot_state_charts_examples/platformer/breaking_box/breaking_box.gd",
+          "sha256": "87d3da0d9d2b1a2cccbc4016da046047a4a26a9a69d61d6561f83986aa694152"
+        },
+        {
+          "path": "godot_state_charts_examples/platformer/checkpoint/checkpoint.gd",
+          "sha256": "9963f12d2525a22d53ba7c93c95e5acd6ba30ffcb875ea3f6466a1a220061c1c"
+        },
+        {
+          "path": "godot_state_charts_examples/platformer/fireworks_box/fireworks_box.gd",
+          "sha256": "bbdfdabbad3f7872a890e1311966177f2ac40db9c87bdcd590e97e308fbac000"
+        },
+        {
+          "path": "godot_state_charts_examples/platformer/ninja_frog/ninja_frog.gd",
+          "sha256": "fbeffd26eef5b4fdedaa0dfbc78e2b32a31d353c8dea1ab201e43a4706adf74e"
+        },
+        {
+          "path": "godot_state_charts_examples/random_transitions/wandering_frog/wandering_frog.gd",
+          "sha256": "a508afcd6030650ae25a1c8b8f8730c81bacabd5b1b20757095b48809191c152"
+        },
+        {
+          "path": "godot_state_charts_examples/save_and_load/color_box/color_box.gd",
+          "sha256": "ed9835650a96d1b5eef7fd011445ab634971c0edcabdc1a1a25a9508a8012660"
+        },
+        {
+          "path": "godot_state_charts_examples/save_and_load/color_box/serialized_color_box.gd",
+          "sha256": "78b41265a553792d3665aff896299c660b0d58c04d945e1133408d9348acd927"
+        },
+        {
+          "path": "godot_state_charts_examples/save_and_load/save_and_load.gd",
+          "sha256": "be823747d31d5c8518581c8ba33458cf9b34afeb1386a54b11f51ad75fa586a3"
+        },
+        {
+          "path": "godot_state_charts_examples/save_and_load/save_resource.gd",
+          "sha256": "5b0d34a9f8de79b1ea7dbf423bc89921af7715034873dc48dfb19f6cb4092c14"
+        },
+        {
+          "path": "godot_state_charts_examples/stepping/stepping.gd",
+          "sha256": "410e6801bced6ceb3907d68a73f71dcae65b4f5f50332341c76c73da757c1344"
+        },
+        {
+          "path": "tests/framework/state_chart_test_base.gd",
+          "sha256": "0a31bd07b925f49efa075504a82941a8ba52862b2194adc50058951ea5f87461"
+        },
+        {
+          "path": "tests/framework/test_debugger.gd",
+          "sha256": "9cfae549815dafcd99895ead2002de0d1f0d608e59dc65c7c0d013ac65c827e7"
+        },
+        {
+          "path": "tests/test_all_of_guard.gd",
+          "sha256": "2a61e4e6770ac5781698189b276163778facbffea14b7fdc9d340f1459b632ac"
+        },
+        {
+          "path": "tests/test_any_of_guard.gd",
+          "sha256": "0e27f6cd320c5f161eccbe12b5b437bc81a97b14f29a7fe42fcf5bcd2f936542"
+        },
+        {
+          "path": "tests/test_automatic_transition_leaving_compound_state.gd",
+          "sha256": "e942c8b639457fc23c896dc52f313efbe7e36a3f2e1d5db9a41d12f274c7badb"
+        },
+        {
+          "path": "tests/test_automatic_transition_on_property_change.gd",
+          "sha256": "ea5c5a2e3478a304f484d8dc66cf38bea2ceedaae0282d00ea1c13cbe56290af"
+        },
+        {
+          "path": "tests/test_automatic_transition_on_state_enter.gd",
+          "sha256": "8176d0ca3e5d4026e984b53ba679130f4f3bce23368551a491e85cfe423c1479"
+        },
+        {
+          "path": "tests/test_automatic_transitions_on_state_change.gd",
+          "sha256": "20b0a28da60be120693a12637ed17a77e32090192b2b583a632880d738f1e3b2"
+        },
+        {
+          "path": "tests/test_delayed_transition.gd",
+          "sha256": "d0b18cc12181537233bea8c42fe1579283c0b6a9bbe6fc76e513f9ea3382408e"
+        },
+        {
+          "path": "tests/test_explicit_event_consumption.gd",
+          "sha256": "830f52c317cf958d2279aad165103f8b970f3729418319f536a3e456f106e2bb"
+        },
+        {
+          "path": "tests/test_expression_guard.gd",
+          "sha256": "8a54a7f66455c89154909790e194664ef7d97a680d5676cb420908cfa48bb8aa"
+        },
+        {
+          "path": "tests/test_expression_properties.gd",
+          "sha256": "7e618bc625631e123860dd8967e6fff9143330e6e595a6c3fa33655509fc7fd9"
+        },
+        {
+          "path": "tests/test_history_state.gd",
+          "sha256": "79f538dec50ef2ac13725979dc39db92f216e9d5cf5806238f6e7caf97829a0a"
+        },
+        {
+          "path": "tests/test_immediate_condition_state.gd",
+          "sha256": "15c902a3538ca30886ea72e27dc6081a7d4bf0752f5de3fbe979dde2a90e6147"
+        },
+        {
+          "path": "tests/test_infinite_loop_detection.gd",
+          "sha256": "dfe7ba19e08e730cbc70ede69084424cdf5277ba1e3287c75214b35d138fc7dd"
+        },
+        {
+          "path": "tests/test_initial_state_bypass_on_deep_transition.gd",
+          "sha256": "df57a52c8ec722dce42fe241068a6a3ceecb44691f922cc10283acc10f478a8c"
+        },
+        {
+          "path": "tests/test_manual_transaction_trigger.gd",
+          "sha256": "6eb219691e6c7b32cc9ffcabc5b4d99675392ea104f89a0f2eb3b45659f12576"
+        },
+        {
+          "path": "tests/test_multiple_delayed_transition.gd",
+          "sha256": "a1eb289db93c36622502e8303e8247118fde7a66076f96d1f212b6178b896385"
+        },
+        {
+          "path": "tests/test_not_guard.gd",
+          "sha256": "1a97f182272470ea0e7b8d1392461eb731d2c39649cfab643a270aac395ededf"
+        },
+        {
+          "path": "tests/test_parallel_state_deep_transition.gd",
+          "sha256": "bfd9a82d8c17aaa4a873598e21b2098e821c0606d4b5ca2054c233d72c4a7829"
+        },
+        {
+          "path": "tests/test_parallel_state_event_handling.gd",
+          "sha256": "43d8ad4aa01d4636d50a2d89fb7c7d8e6fb78446c6745b276d3953080cc362a6"
+        },
+        {
+          "path": "tests/test_parallel_state_initialization.gd",
+          "sha256": "71503bb56a9c2765fa683f60730004b7606e5008845121b4482913cc7a90804a"
+        },
+        {
+          "path": "tests/test_parallel_transition.gd",
+          "sha256": "3c92aa4d97cd165f2a4e556d8e1c5da72b730036b737ed345add61c0b1fb2ed2"
+        },
+        {
+          "path": "tests/test_pending_transition_cancellation.gd",
+          "sha256": "7b0ed6c1ea579586a94fac99e6f19a4b87a3ecaefce6b1bdc1d172104cb9bab0"
+        },
+        {
+          "path": "tests/test_processing.gd",
+          "sha256": "09b1e5bd4a13e0815f0193e393457658251ba855f950e29603c2572e5700722a"
+        },
+        {
+          "path": "tests/test_property_changes_immediately_visible.gd",
+          "sha256": "425f6646f79ea4bc7b1dced618fdf895c30d9d68bbc1dc9cb6d3a0c51e866291"
+        },
+        {
+          "path": "tests/test_save_and_load.gd",
+          "sha256": "edef325b2c60ccea7d9c9e95a04fe4abc3aa838a0412c523955fad8ddfe42a4b"
+        },
+        {
+          "path": "tests/test_simple_transition.gd",
+          "sha256": "5e9a9d9df1afdd7bb804697e4b3ec6596f078b27c365cd87347433abd6bcc401"
+        },
+        {
+          "path": "tests/test_state_is_active_guard.gd",
+          "sha256": "0f586f36f2fa8cac0fec664ae254e695c0aef4e2fb4348b90287d1fc9cafc8da"
+        },
+        {
+          "path": "tests/test_stepping.gd",
+          "sha256": "bb52954d092cf51cb1b3d77c52477d4592755b4e3c6a8afdecb0ffca2602d888"
+        },
+        {
+          "path": "tests/test_transition_delay_expression.gd",
+          "sha256": "fa4e245792032e05c17d3e9373f1da32dd25e7028f8753b363be962d2ee725a7"
+        },
+        {
+          "path": "tests/test_transition_pending_signal.gd",
+          "sha256": "4b9a9803e856091f35084c1c9bbad8645cf54497d38a43c7ccecb72dc7981f90"
+        },
+        {
+          "path": "tests/test_transition_taken_signal.gd",
+          "sha256": "3cf67b9ae9018fc56f4e5931e14f7e28e1e0af539a61a11a5d3f0dbbf5945dbd"
+        },
+        {
+          "path": "tests/test_warning_on_nonexisting_event.gd",
+          "sha256": "0dc4f2ed968bb8be5115737021556a8b4b451c137ca8a4811dff3d73ad120c32"
+        }
+      ],
+      "sourceRejections": {},
+      "reference": "76d226a3efac66a72aea825382b320c94808f409",
+      "gdtoolkitRejections": {
+        "addons/godot_state_charts/debug_util.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿## Returns the path of a node in the sc\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "addons/godot_state_charts/state_chart_state.gd": {
+          "exception": "UnexpectedToken",
+          "message": "Unexpected token Token('_NL', '# if the event is given it needs to match the event of the transition\\n\\t\\t\\t') at line 266, column 4.",
+          "line": 266,
+          "column": 4,
+          "context": "\t\t\t# if the event is given it needs to matc\n                        ^\n",
+          "expected": [
+            "COLON"
+          ]
+        },
+        "tests/test_automatic_transition_leaving_compound_state.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "tests/test_automatic_transition_on_state_enter.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "tests/test_explicit_event_consumption.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "tests/test_expression_properties.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "tests/test_not_guard.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "tests/test_parallel_state_deep_transition.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "tests/test_pending_transition_cancellation.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        }
+      }
     }
   ]
 }

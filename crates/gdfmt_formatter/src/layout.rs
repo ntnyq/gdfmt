@@ -1,6 +1,6 @@
 //! Layout follows CST boundaries; trivia ownership in Rowan is deliberately
 //! independent of comment attachment. Comments are anchored to adjacent tokens.
-use std::collections::BTreeMap;
+use std::collections::{BTreeMap, BTreeSet};
 
 use gdfmt_syntax::{SyntaxElement, SyntaxKind as K, SyntaxNode, SyntaxToken};
 
@@ -9,6 +9,7 @@ use crate::{FormatOptions, doc::Doc};
 pub(super) struct Layout {
     leading: BTreeMap<u32, Vec<SyntaxToken>>,
     trailing: BTreeMap<u32, String>,
+    continuations: BTreeSet<u32>,
     dangling: BTreeMap<u32, Vec<SyntaxToken>>,
     end: Vec<SyntaxToken>,
     bom: bool,
@@ -32,6 +33,7 @@ impl Layout {
         let mut layout = Self {
             leading: BTreeMap::new(),
             trailing: BTreeMap::new(),
+            continuations: BTreeSet::new(),
             dangling: BTreeMap::new(),
             end: Vec::new(),
             bom: source.starts_with('\u{feff}'),
@@ -58,6 +60,16 @@ impl Layout {
             if significant(token) {
                 previous = Some(token);
                 previous_owner = None;
+            } else if token.kind() == K::LineContinuation
+                && tokens[index + 1..]
+                    .iter()
+                    .find(|token| significant(token) || token.kind() == K::Comment)
+                    .is_some_and(|token| token.kind() == K::Comment)
+                && let Some(previous) = previous
+            {
+                // An own-line comment forces a break that still needs the
+                // original explicit continuation outside delimiters.
+                layout.continuations.insert(start(previous));
             } else if token.kind() == K::Comment {
                 let prefix = &source[..start(token) as usize];
                 let own_line = prefix
@@ -125,6 +137,9 @@ impl Layout {
     }
     fn suffix(&self, token: &SyntaxToken) -> Doc {
         let mut docs = Vec::new();
+        if self.continuations.contains(&start(token)) {
+            docs.push(Doc::LineSuffix(" \\".into()));
+        }
         if let Some(comment) = self.trailing.get(&start(token)) {
             docs.push(Doc::LineSuffix(format!(" {comment}")));
         }

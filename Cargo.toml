@@ -10,13 +10,13 @@ license = "MIT"
 repository = "https://github.com/ntnyq/gdfmt"
 
 [workspace.dependencies]
-gdfmt_text = { path = "crates/gdfmt_text" }
-gdfmt_syntax = { path = "crates/gdfmt_syntax" }
-gdfmt_parser = { path = "crates/gdfmt_parser" }
-gdfmt_formatter = { path = "crates/gdfmt_formatter" }
-gdfmt = { path = "crates/gdfmt" }
-gdfmt_config = { path = "crates/gdfmt_config" }
-gdfmt_workspace = { path = "crates/gdfmt_workspace" }
+gdfmt_text = { path = "crates/gdfmt_text", version = "=0.1.0-alpha.0" }
+gdfmt_syntax = { path = "crates/gdfmt_syntax", version = "=0.1.0-alpha.0" }
+gdfmt_parser = { path = "crates/gdfmt_parser", version = "=0.1.0-alpha.0" }
+gdfmt_formatter = { path = "crates/gdfmt_formatter", version = "=0.1.0-alpha.0" }
+gdfmt = { path = "crates/gdfmt", version = "=0.1.0-alpha.0" }
+gdfmt_config = { path = "crates/gdfmt_config", version = "=0.1.0-alpha.0" }
+gdfmt_workspace = { path = "crates/gdfmt_workspace", version = "=0.1.0-alpha.0" }
 clap = { version = "4.5", features = ["derive"] }
 ignore = "0.4"
 globset = "0.4"

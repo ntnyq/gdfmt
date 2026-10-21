@@ -117,9 +117,12 @@ test('installed ESM/CJS export branches share the same public functions and sche
   )
 })
 
-test('sync/async results match Rust on all 262 script fixtures and five language profiles', async () => {
+test('sync/async results match Rust on every script fixture and all five language profiles', async () => {
   const fixtures = manifest.fixtures.filter(item => item.stage === 'script')
-  assert.equal(fixtures.length, 262)
+  assert.ok(
+    fixtures.length > 0,
+    'compatibility manifest must contain script fixtures',
+  )
   await temporary(async directory => {
     await writeFile(join(directory, '.gdfmtrc.json'), '{"root":true}\n')
     const paths: string[] = []

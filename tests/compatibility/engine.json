@@ -6124,6 +6124,26 @@
           "engineError": "Unindent doesn't match the previous indentation level."
         }
       }
+    },
+    {
+      "file": "fixtures/formatter-continuation-comments.gd",
+      "expectations": {
+        "4.3": {
+          "kind": "accepted"
+        },
+        "4.4": {
+          "kind": "accepted"
+        },
+        "4.5": {
+          "kind": "accepted"
+        },
+        "4.6": {
+          "kind": "accepted"
+        },
+        "4.7": {
+          "kind": "accepted"
+        }
+      }
     }
   ]
 }

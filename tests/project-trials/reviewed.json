@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "manifestSha256": "93c94714aa120205662bc63595f3406df36b04e3f8f6faab9b9b3aaeb6224e83",
+  "manifestSha256": "43a4c2b99bb2c06e13422642db5c08f565c44515d13e3f6649e3b4e4edaac8c0",
   "cases": {
     "godot-demos/2d/bullet_shower/bullets.gd": {
       "gdfmtSha256": "f43d62d64dd4034c6d1736c9de478eac7e0c04a730e35cae85986710c6201c7a",
@@ -2333,6 +2333,768 @@
     "kenney-platformer/scripts/view.gd": {
       "gdfmtSha256": "66d4540a170f74089abfc475b076d7bc9b35e9e9968fc908f1fc15a1d316c630",
       "gdtoolkitSha256": "441cef3013ca38417be0850c6b0a4f4488585624fd55296040c6e0d2b5ed5cc8",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/all_of_guard.gd": {
+      "gdfmtSha256": "0a29337d16222358d188a59d0900100e12311995dafce901ceedc24af4827205",
+      "gdtoolkitSha256": "fdd356225d7392ff68c399f9cde4f3468b0a659a3d4a040c9ddba687497e2919",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/animation_player_state.gd": {
+      "gdfmtSha256": "fb77de1ceddf7cde958ba78e46d8f445c14ab3ab7b9c2c5cb5de749e3500a0d0",
+      "gdtoolkitSha256": "b8c41038d8ed49d97c22754b534cd530d03d6bfe0c18bf5285c9b134491127c6",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/animation_tree_state.gd": {
+      "gdfmtSha256": "8e8bd6e122322b3a9da260a3c06cb45a4f93c17b28c7c24d2ed7841d8bc75d07",
+      "gdtoolkitSha256": "713d07c8a5ed3968f7ee4cc172b60ac086c3620aeb35ab204387abe50f3c704b",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/any_of_guard.gd": {
+      "gdfmtSha256": "817874bae13bbd8b82b590c6452b861011e90eb011e6f84426dec76df9d77b6c",
+      "gdtoolkitSha256": "4ab077c0c6736e25a441c6997977eb94452308af7205459a815efcce593b3913",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/atomic_state.gd": {
+      "gdfmtSha256": "a2a563362ecb2139446af80575f3a61ea76e24d7fd6acd155273cf9f1919fd06",
+      "gdtoolkitSha256": "ea4f80825e6ac4e4a0201fd0cf347cac63d0e661ba580d654d54552efa13333c",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/compound_state.gd": {
+      "gdfmtSha256": "a0042950baa973595ede60917739e69aaad0d72f6a6781595004144739bf8601",
+      "gdtoolkitSha256": "9e6ded0b321a53bdc2ae61a16cb3bc4d7fc9606f7130b8cf6a4b76a4af783a52",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/debug_util.gd": {
+      "gdfmtSha256": "58156b5309a4f369d4430b9a9a7112614b071f4ab6dcddb0745cb544ac492d46",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/addons/godot_state_charts/expression_guard.gd": {
+      "gdfmtSha256": "c1f86a48f092f5bfefbb031ded00ef848eaa39129aa2dd4004dd2c6d2077deba",
+      "gdtoolkitSha256": "f80aae916db02f6e9140f17255be120057a3b3d4ef2f445f01eca813eb79c043",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/expression_util.gd": {
+      "gdfmtSha256": "032bdfecbb8e48d5d4404cfa3f1c972e38f56048acd74ace1f6a2a077d6100ea",
+      "gdtoolkitSha256": "2bf491128722763c4ec1692fe4cbfbdfa71ca3f3553a72066d4256de4d42448d",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/godot_state_charts.gd": {
+      "gdfmtSha256": "278b1f674b2e1b1b0804a9fa660a14111393280ff70de1ff345f0bf832ab57c1",
+      "gdtoolkitSha256": "7b2eec71b913af2529507bd82c59533666ed82d03ef295b5504b8f5b37f0b6a6",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/guard.gd": {
+      "gdfmtSha256": "6d31d665b174765c8435d0d866c1fa648df427c07d23ae9b59510071e219115b",
+      "gdtoolkitSha256": "8cfa8b6ac803336cb9c624455617e9eaf631ae4090307f4c819896afea972813",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/history_state.gd": {
+      "gdfmtSha256": "095587487a423024eaa4d9ffc7da0f180aef1bb8aaa97554eff0f7d466e56611",
+      "gdtoolkitSha256": "1abc1dd897c2f71f55b0d768ba826e0646212364e501db9e2fdc7419144a5884",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/not_guard.gd": {
+      "gdfmtSha256": "fd3506d31258e8848b54c2cc88f63e17117df275915e74457f4a2567169594d1",
+      "gdtoolkitSha256": "21ae6c41eb4eef20b93879e9726fd25cd9d9716b85307eb357365444a5fe4bf9",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/parallel_state.gd": {
+      "gdfmtSha256": "660208a8274aa3cab319721dad065d26434f1e03c0048f9e30ddccc706333d3c",
+      "gdtoolkitSha256": "76d8f898f2223412678b9488ddc4267e3913924284e3967984b59b7b0a43ac77",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/saved_state.gd": {
+      "gdfmtSha256": "3d0c7a987a8eed16bc8ad6007a4e4269c381df3287f90bd40de0f75aa67ee5d5",
+      "gdtoolkitSha256": "bc9b2be578a7da79842f816dee6771b304e88c561a242652df5cd7caa3a31ac6",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/serialized_state_chart.gd": {
+      "gdfmtSha256": "3a244bb1b2a31ebfe9e962748889c91a5fa4c3c6f307d6debc6e28ae1e8be5cc",
+      "gdtoolkitSha256": "22bcf4364e0577faeecba47846f0de113dda0b9c26840fb6839c54dc94eae6b3",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/addons/godot_state_charts/serialized_state_chart_state.gd": {
+      "gdfmtSha256": "4937537638fdbbf06cde255a657f8c190d18ded2288a6b2a17431322baa6a081",
+      "gdtoolkitSha256": "05d3b7a37e320ed7d7bbccdd428122abac15d68c1636600acbdf886538766a02",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/addons/godot_state_charts/state_chart.gd": {
+      "gdfmtSha256": "d3df80ab650dd67ceeac8487f687cebf4afe4bb56c35625f95c4b4ec016f35a7",
+      "gdtoolkitSha256": "3fabc3386ba7973b4343585c747e21fcc73cca1c04e0d6da9605ee0e3633bfc4",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/godot_state_charts/state_chart_serializer.gd": {
+      "gdfmtSha256": "cd05b9d175d6c20b955874140ec5568e2141341b323333c40a0a103ea1bee1e6",
+      "gdtoolkitSha256": "9d73ffaa74ff65547989e3544f4db1f598ae3bde3b75de4c042547a1706366bd",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/state_chart_state.gd": {
+      "gdfmtSha256": "de4fe3c26c788cc768fe85f1207e599a9a0f3b36a24c43875da9da6fdf2f9c48",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/addons/godot_state_charts/state_is_active_guard.gd": {
+      "gdfmtSha256": "2d8c3eeb6c4b58700e2301c1f07c1506cc87910503c565cc1e758716fdd8a131",
+      "gdtoolkitSha256": "4da027604020a5be3a340d99f36bcb6074a15f3d3b11d36d6b35283fb9464611",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/transition.gd": {
+      "gdfmtSha256": "f7d6cf2f9d2885f864e518562e9c2b6975d79389330a0a103f74d43dbea52385",
+      "gdtoolkitSha256": "84b157635f9972c84dc5faad6f0dcb82c3024af18415eb809e29e6097d2cd7c9",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/debugger_history.gd": {
+      "gdfmtSha256": "f15c3c4940f32eb14be23caf92321829d6c303c164a419899e162c6a3a510cd7",
+      "gdtoolkitSha256": "6a03d199ee88f685b8f4406bd19ee5166872edb4eaf995ed2480b88f6b013047",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/editor_debugger/editor_debugger.gd": {
+      "gdfmtSha256": "4ae69da071d51dd33cc975e8ec8c1653851a83c44c7cacc9b310c4b3f2bf06e8",
+      "gdtoolkitSha256": "cb7c4803dd8b488a4cf28b0a5ac48911a245358b3c73a310e7b5caf1827260b1",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/editor_debugger/editor_debugger_message.gd": {
+      "gdfmtSha256": "024701ccd7ce60fa89f08b9abb2f9de894a93edeb8fb27b68bc70e5e8a0ecd2a",
+      "gdtoolkitSha256": "ed8662606cafeb1c4ff64e0674ecc2b46adc60c885accd155174a30a947767ab",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/editor_debugger/editor_debugger_plugin.gd": {
+      "gdfmtSha256": "c38ec24ef892cc1ae23060d1bb9cb88a77dcceedd325e7136f535fddaba255a6",
+      "gdtoolkitSha256": "dcf406a96904f2ba958471e7d6fb650438c0d8f7e3f1ac1748f2fe1c723b630d",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/editor_debugger/editor_debugger_remote.gd": {
+      "gdfmtSha256": "da12a28398bfc8da9bc5d8e8a370fa32d32702dfe8fc5ae16d63c5c6d80db0ac",
+      "gdtoolkitSha256": "f15f6c0f9a46da97bd34f24e14f3f561e5984afc498acd0155845216b1c648c3",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/editor_debugger/editor_debugger_settings_propagator.gd": {
+      "gdfmtSha256": "9223284c364b9c8c8e60e9c355735b8037e890bbcf661495b7a30dad4986146d",
+      "gdtoolkitSha256": "b88d2ad1b89ced0217fa72a2b6f36004adc859215d8c81536250ed13805b8bd6",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/editor_debugger/editor_debugger_state_info.gd": {
+      "gdfmtSha256": "e1d5dea49251d9771c821f3e9d2a2233498b40be6930c78560e5dc40968bfa61",
+      "gdtoolkitSha256": "5711c89a07fac2b5e0af20f8e440ea8ee465b0e25faddaa97b79cd8490a5145e",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/editor_sidebar.gd": {
+      "gdfmtSha256": "8db98e32f3c672bb984ef5e8243dff63e0d5fa4c5256a5ff02a12b2106304db6",
+      "gdtoolkitSha256": "5921b3bfbf1db776fbaf5ce81b70cd81c526d603f2294d0ba243098f9ba3f16a",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/event_editor/event_editor.gd": {
+      "gdfmtSha256": "5923f14322ce7134613b6025ddd50f93e84864d7be76c290d63a901ac4021362",
+      "gdtoolkitSha256": "fc23600bcc24aba8cb80fe7351c073076f3cf68143ca97d209bb583b58218d89",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/event_editor/event_inspector_plugin.gd": {
+      "gdfmtSha256": "6099bf5583d4e7b60e6bfbaaafc08b14ef77199aaea8beeb85f035268d449377",
+      "gdtoolkitSha256": "6099bf5583d4e7b60e6bfbaaafc08b14ef77199aaea8beeb85f035268d449377",
+      "categories": ["identical"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/event_refactor/event_refactor.gd": {
+      "gdfmtSha256": "5127e37bc61dd4bd6b536712615331e669ce802c15128ae7ec4286bbfdd17da1",
+      "gdtoolkitSha256": "fc43ac730c8515bcb51270d4e7032c2a94a1ac3e909fb20a17309c2110bbb1a1",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/ring_buffer.gd": {
+      "gdfmtSha256": "fefe19f3a1ceb4928b9ab35ae342eb69472876730e38645c2919a32b1bfe1558",
+      "gdtoolkitSha256": "fdd55a068eb1369a1bb076dc8eda0ae02f4fe1888903249983dddb5ac72e8b76",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/state_chart_debugger.gd": {
+      "gdfmtSha256": "c28b163e0bd33751684b4d7bf49aec8af947d0b26f2045e9a821e9a157cea649",
+      "gdtoolkitSha256": "4d7e77eccdc7e49b130e309a7fdf59b2af69cffb9fed42b522fe07c786a7207b",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/addons/godot_state_charts/utilities/state_chart_util.gd": {
+      "gdfmtSha256": "4ad8bf90c70196d1ed70949a17d39148e69e99cf404de425b2c580c468022d99",
+      "gdtoolkitSha256": "318f0343083e2c214ddd4368589167bbe9f916612604b8ac3d1626f58b045c55",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/addons/gut/GutScene.gd": {
+      "gdfmtSha256": "658d6fa3c1fa01f2d56d4e7d1d56390cd18dd653153e9120000c013962c4ae11",
+      "gdtoolkitSha256": "7034060879aedb165b6452baf573f387954c386f8ea337001aa99d246a38f190",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/UserFileViewer.gd": {
+      "gdfmtSha256": "825ad3d514c2e0db4eea7aaa6d9e0586893d4f83f6912bc9dfabfadc2717114d",
+      "gdtoolkitSha256": "6e44704e88bdbfdde0f1f03c0f7f4af5da938a51a14eb9663e40854ddb5e71d0",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/autofree.gd": {
+      "gdfmtSha256": "6a5ce5dca3555af26d8d301f1062c81a979c1ff7dfc640bfe1cd6ed118ed6753",
+      "gdtoolkitSha256": "67edd47598a20992727bad4ebc829616ae24f0fe863878d9b2945787aa4e223b",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/gut/awaiter.gd": {
+      "gdfmtSha256": "d177ec0355e509ed4ac16eda3dc82b1dd6b20a832882e0035e0381c91e635710",
+      "gdtoolkitSha256": "c01efbb309d9a4700d5bd39802c67a8ab0a5c41cdb22fdf5b690caecba8076fd",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/comparator.gd": {
+      "gdfmtSha256": "056f2c458d077098057d7deb09fcb2999030287e3e92fec39ee3662a1dca4b41",
+      "gdtoolkitSha256": "eba5bf302e948507378fccbfd0db1dcc390d8992b252e91f8604766cd6b67a21",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/compare_result.gd": {
+      "gdfmtSha256": "34f0bac892bd76a6f8962c64d6ca4cfec2f8873eafe9c4a9b62ddbe1d1b69ead",
+      "gdtoolkitSha256": "38cfec6b9f4938b0d998e95584d682c4e069fa0b7b956ec22559e8d7ce7ce3f4",
+      "categories": ["layout", "quotes"]
+    },
+    "godot-statecharts/addons/gut/diff_formatter.gd": {
+      "gdfmtSha256": "cc669b460d11ca32a8cf33cfa2b893f6828fdbb45b0886d006c174018be38b79",
+      "gdtoolkitSha256": "2b257bf74125becbcb0e7238fddd56b949cafd174d0125797833fe67e69f302d",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/diff_tool.gd": {
+      "gdfmtSha256": "3ddab46fdccaa694a788b668893de027e0d1c3d5e4516f1bb7dae13053e8765d",
+      "gdtoolkitSha256": "ede6e3f0103b6bb889b966013097d9fb81b9d8965355b7db430201b0621e997d",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/double_tools.gd": {
+      "gdfmtSha256": "aa6a65d05be0236b43f9cf979b619075ac5a73635451bebd76843e5c68adc895",
+      "gdtoolkitSha256": "9f13502c4126be0486308a7bfbaf20960f39ac17e17ee19304e369ba769875b3",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/doubler.gd": {
+      "gdfmtSha256": "99bf04cb6e7a5729f79b655f45e9b919308c80d2c87b83f3e200ad6844a7ff30",
+      "gdtoolkitSha256": "35080cb9d993ad3a84dd296481356684a3d6c435b7778793e2430e1a29078430",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/BottomPanelShortcuts.gd": {
+      "gdfmtSha256": "3021a9bf60859b8f412e526a656e8f116a4783a0ce71dcdc71fdf89a83d780f4",
+      "gdtoolkitSha256": "5ef96eba297a312a14d449e1ce0e42319fc8ffea2c33b8694b3795e8ad82a618",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/GutBottomPanel.gd": {
+      "gdfmtSha256": "c492045b6a1404bc37bca15551dc28b59f93df9d76b549469c8ab3c72e8f9b19",
+      "gdtoolkitSha256": "988b37406617e26ae7751c21da20ecd3a5d6becfd66a3a275d3203245ea6f040",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/GutRunner.gd": {
+      "gdfmtSha256": "892a05058f99b557c8ca65a0f5f4e74c2de29b5fdf607674c6efa226629028e8",
+      "gdtoolkitSha256": "a225e200087caeb7af91643fb64254dc587d5dcd49802d7956eca30bdd3a665d",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/OutputText.gd": {
+      "gdfmtSha256": "fafc96d61d0367d38a4b5368191824d63880faeb7a724492b35e7995e1d75935",
+      "gdtoolkitSha256": "1e27fc7c04bc130852f353ae9482aab8d04c4595107204b5f549042772c83439",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/ResizeHandle.gd": {
+      "gdfmtSha256": "115d58f0e1672ecb6bc3cb339ec5293d7729f6065e504bb0948b78330f32d7ee",
+      "gdtoolkitSha256": "b3c6813b1406648a09c3dc6aa53069cb989e9d0858ed08463d61f7c6b3522cf8",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/addons/gut/gui/ResultsTree.gd": {
+      "gdfmtSha256": "324e1f9a4d768b1b678c1a78a79671c83ef1d1252e0c0eb1241674b15f16fccd",
+      "gdtoolkitSha256": "b4557339ef7f6bcdc9ef18176bfa6cd0a24867f77d5294dd755fe20a7c18084e",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/RunAtCursor.gd": {
+      "gdfmtSha256": "d3d2f895ff7721e3812f38b1d88ecca7f4d9cb9f4a4dd1954b029b3d02308d03",
+      "gdtoolkitSha256": "cfd81c770799c0afad95c990030c789df4095b58460e9bc8c31449d314336b76",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/RunResults.gd": {
+      "gdfmtSha256": "333526d0aa15b1f7fba38266067565c4788bf9f05afe3bea1505e1e1c2941f09",
+      "gdtoolkitSha256": "d07e1235e78a78e52b9db60c3bcea747de0d50d10e88f404fa8f0c10c1007c70",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/ShortcutButton.gd": {
+      "gdfmtSha256": "db50160352d945566c6ab60a96f15b0c0d2581ecc7cce011982b924884c63009",
+      "gdtoolkitSha256": "f9594af72cce3d2ee6bc03dc3cae43e693e7a6c23a8ee93267a239c1420dc7db",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/gut_config_gui.gd": {
+      "gdfmtSha256": "a956737c6f0b82dfd9bfaab053d7b0ceccc2cad62e82c5ee5976bd124e1d0261",
+      "gdtoolkitSha256": "95a79e217da5a2b20bd8455c96a7a949fa830cd31eabbf033b57a39d5ceecd62",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons",
+        "quotes"
+      ]
+    },
+    "godot-statecharts/addons/gut/gui/gut_gui.gd": {
+      "gdfmtSha256": "c983559ccfc3449e23b89a0c4947cba88257809560b04025c4eb41ec2d8be823",
+      "gdtoolkitSha256": "95e9c545c178e47ee0563c62b40b986d345b3e2ec449af5ff8d93415e2109afc",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gui/script_text_editor_controls.gd": {
+      "gdfmtSha256": "ecd015cd1e5622ca961b5fcfd66a99407c83f2b350c4aa8660e26b889bb2b3aa",
+      "gdtoolkitSha256": "892cb0521f643324c6e2961023b9791e09fa1f74d636d39481c1a8db530ea3bb",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gut.gd": {
+      "gdfmtSha256": "73c7314afea374210d283ea0657d26c026cdd92690ddaf14ccf432d1eb2b848c",
+      "gdtoolkitSha256": "90b5f035348bf48b7f53f6dadc85ff6fac01976067b6f56f0f04b1d1d368271c",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gut_cmdln.gd": {
+      "gdfmtSha256": "e2a7398f5868008ece3507232ac2fe2141f7b4ea91393874a2becdc4be1c775a",
+      "gdtoolkitSha256": "8a69afdde0b632d43bebb2af3a5b4df08acce07e0b77992e09c9e98e5caf8748",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gut_config.gd": {
+      "gdfmtSha256": "48005e7f39c52089753b9b96d14faa4acec92c6c1f4bb5d2912cef408507235b",
+      "gdtoolkitSha256": "e5d77c658eb076cc87b3eba9f8c529e97597e33258ed4cf0a76d64e4a829283b",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gut_plugin.gd": {
+      "gdfmtSha256": "d2973be3372ef4dd80f0b20c64409d4603ba3d6f73af6f3e6901f9dad23b4c0c",
+      "gdtoolkitSha256": "a5d5637c557eb1e1a656b0eac2cc738da64179a68f6badf30980382e8779ec6d",
+      "categories": ["layout", "quotes"]
+    },
+    "godot-statecharts/addons/gut/gut_to_move.gd": {
+      "gdfmtSha256": "456d7578fb7a2ca73373d69fb169512fbcdff51bda7e8efd095ea3519d3d97ce",
+      "gdtoolkitSha256": "68b9555c296707e7f69d03fd0b89d4e5d2bb63c08a67fae580dd8c95a49f92ae",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/hook_script.gd": {
+      "gdfmtSha256": "8fcc1a4d0fb1a75736b77e943a49237d1eb2a34235b62f42e471b68187eddfb0",
+      "gdtoolkitSha256": "b8cfee73c7df2726fe6ffc1931130abb1707cec3594cffa644dca2553cf6a240",
+      "categories": ["layout", "quotes"]
+    },
+    "godot-statecharts/addons/gut/inner_class_registry.gd": {
+      "gdfmtSha256": "6b2688aae4167f18532243289a9b79512f330ef1d497a206554ad7612e25f756",
+      "gdtoolkitSha256": "8dd080cf72d7b1af0c1c16c40bc41afa37a5ac8837045c2facd7b99991e88255",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/input_factory.gd": {
+      "gdfmtSha256": "a9235112568a3884f73aecedb5737f365f68dde69159e60b5f36499059e3a26a",
+      "gdtoolkitSha256": "580dfa481599733ceb6da200de96123eab2e3b68959a346b400247f72e6fcbad",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/gut/input_sender.gd": {
+      "gdfmtSha256": "1d5723a3784273ae7e13e6f75510ccf277ffa0668f84bbbca744095a3d406f1c",
+      "gdtoolkitSha256": "3d9ec6c60983cbb67b0c21f396250177bbebf446980a431afe4b6757001f92b3",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/junit_xml_export.gd": {
+      "gdfmtSha256": "57d0ec4aad4823dd573f4f80e23519bb97aedc2bd290c14bed4df9ec6dd3152a",
+      "gdtoolkitSha256": "2b557a1185517a73b785bc92b5118250b59dcde1868443bc4be6945c2322d4e1",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/logger.gd": {
+      "gdfmtSha256": "c0d46fcc38e5b193fd33054214412b6584b1fd345d89fc974b6d7e3e05a7bab1",
+      "gdtoolkitSha256": "aef37b9050dc1db00e57481622b661f68d86e40343148f4a649938999248570b",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/method_maker.gd": {
+      "gdfmtSha256": "730b0379e1ccb5e3cbc32242348c9dafa7b911123bb4e4ed0d25fdf1e2404b47",
+      "gdtoolkitSha256": "80a4285b51211366874115efb922f0e515b276cfe93dd52c5a55f6f1d5b70ba3",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/one_to_many.gd": {
+      "gdfmtSha256": "2224b82fadc1263d2da9a56dd49fcccc35995e50f68275bca6b97794f44d3c2f",
+      "gdtoolkitSha256": "5da2ca71479862e273bcfd03b21aef0867216b42a1df0b8cd839cc217fab2031",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/optparse.gd": {
+      "gdfmtSha256": "9d41005b8f0f5adffb41f1c177d082ce1e0a13fd08059304af3e8baf352806cb",
+      "gdtoolkitSha256": "9470dbef6b9f19785b48685e87d7ba2c6224b1f43b1a81994478c62cc628e560",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/orphan_counter.gd": {
+      "gdfmtSha256": "026618193827e66fc661793a88662cca7f8aab15adcb540cd500e1aadca01bbd",
+      "gdtoolkitSha256": "a0165587144c6da812ac861e83de102db6150b79a9ecb76ab29aad7236da1054",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/parameter_factory.gd": {
+      "gdfmtSha256": "9f40d11fdc34e52e4e1039f3b50a364457c61cf612bfcffa8e1f95d02634cfe2",
+      "gdtoolkitSha256": "54beb876402bde207185dba9517e69a4e69b46f5c4db454afbe2109b2993e2af",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/gut/parameter_handler.gd": {
+      "gdfmtSha256": "26f98ce6eafd1cd99d0c8e70d63e750d3d4ee0506314956b30d4e9b0603c622c",
+      "gdtoolkitSha256": "cdd474c5425e7df87cb5e417d81aa976301b9b769563feaa2dcf635bea978241",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/printers.gd": {
+      "gdfmtSha256": "eb65f1f127889a36a8c6be628e60fcad6c7f8c7b932b76615b71010baa26400f",
+      "gdtoolkitSha256": "d6071077a8505d69da087ad972b272cb9f48f8a714d451388330a9fcfe0e8a19",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/result_exporter.gd": {
+      "gdfmtSha256": "f9b1cea53a3a7bab3f852431c98abd66ca1d8e1fb13ecedef417e3ce92b4c514",
+      "gdtoolkitSha256": "c192e87d1728d2611bffb7b3e6c050286f1ecb67e8efdd8e2ca357b8c568d96b",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/script_parser.gd": {
+      "gdfmtSha256": "8ee951a1467db788272d5f0f9047a926ac6bcf2d1ade2805444a345eb5e34ba1",
+      "gdtoolkitSha256": "211a72b3ea7bac48bec295cb806bb9e671c37be056cae57344dedb29c810775e",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/signal_watcher.gd": {
+      "gdfmtSha256": "56d9b0690af3aaf9abb4237c80d80e29580e9d373796b7fe2737da8a55c146a6",
+      "gdtoolkitSha256": "cd07639febc62fa58991498c72f36f79f0698901d1a6970ef0fbfc76b86a8023",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/spy.gd": {
+      "gdfmtSha256": "d6dedc1e0cc03c3f1d142f50df69f47f24377397bd32e528728a92e607e74c6d",
+      "gdtoolkitSha256": "231e5f8a2aa1cbd150855165f6c37a20f8bd86c4cf0a77ad575346f29e83542b",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/strutils.gd": {
+      "gdfmtSha256": "867daee683f53bd92ce2d9e70db73b9784576f0901e6cc416a523f6328a38db2",
+      "gdtoolkitSha256": "1b6b21ca6829b230290ce9350935d82875bed2ae5521148a7cf3441da48f21ff",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/stub_params.gd": {
+      "gdfmtSha256": "ef130071526732c74c44e654bb4b1054883944f55b44bee32679f5e7a6318868",
+      "gdtoolkitSha256": "7c0ddc9fbaa9ef2b96baa1263716f74b14330c73e1dc6fa8fbb2aad1104307fa",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/stubber.gd": {
+      "gdfmtSha256": "6d28e4540decefd7bcaad4b3e5fe1b83f0fbfc20c78d8a344ec9e17d9a3f5fff",
+      "gdtoolkitSha256": "fae97c284ed4ac81f9ce15ca1cef0bdbc7eaa8978c0bec02cb9b08479eb842be",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/summary.gd": {
+      "gdfmtSha256": "ff8922c73ab3b7d0c7b2cfc4124569efff9b3cc523c27d9e71649364b4e7fb57",
+      "gdtoolkitSha256": "8f9519937d0262d69b0fd4d41ddf34923a0f2f771bac7eba3d780d545e94a7fc",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/test.gd": {
+      "gdfmtSha256": "b05c5340159438622a6822c7dbc61255592b51065bcccbc6d3a38e60ef7ebfa8",
+      "gdtoolkitSha256": "97865cfad0e7d2197682be4ab3d098a2e1182bc904afecc534a403c04e5a6fc4",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/test_collector.gd": {
+      "gdfmtSha256": "6d197b0aae77d186ea639ac9a4710798864692f787539ac5dac0a6ba11b8ddfa",
+      "gdtoolkitSha256": "fcde8c46c9ad4572476f86cf21ec3ad48ea4929df70b5d50be51779458ded03a",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/addons/gut/thing_counter.gd": {
+      "gdfmtSha256": "04760e204c2ac8d031a84e1c417166d6f01447fce96898cfc8e504b45e46d8a1",
+      "gdtoolkitSha256": "2cfe73760b606041a4887fcb45bc9e473e6417bd90057abf5661f8e8b5c0f691",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/addons/gut/utils.gd": {
+      "gdfmtSha256": "1dd91b22ae5f99064c2d84f66e9464c5ac64fa6f94d79a16b46e6476893f7a88",
+      "gdtoolkitSha256": "c74d6afb3bd3515435c924be57f22241713da286bf6f9831c7ad92bdc9fa4f35",
+      "categories": ["layout", "parentheses-commas-semicolons", "quotes"]
+    },
+    "godot-statecharts/godot_state_charts_examples/ant_hill/ant/ant.gd": {
+      "gdfmtSha256": "495d9d49709739875db385ebe8a0c04c3fca57ba6f4d59b80e91ef4f5d47d5a6",
+      "gdtoolkitSha256": "e63aafc62af383eb85f7ed61b31dc0f8cbd2c78cb5dbc191e6ed4fb3ea9cec2c",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/godot_state_charts_examples/ant_hill/ant_hill_demo.gd": {
+      "gdfmtSha256": "512139af9c68e1e58edf06cbc74a8ebca66ada6b24de36785e005e92617eb791",
+      "gdtoolkitSha256": "512139af9c68e1e58edf06cbc74a8ebca66ada6b24de36785e005e92617eb791",
+      "categories": ["identical"]
+    },
+    "godot-statecharts/godot_state_charts_examples/ant_hill/marker/marker.gd": {
+      "gdfmtSha256": "97ce45f8300cc0b87c72c78ebe78bf5eaf4513cb740ad6d8f414ee7a38d21e7a",
+      "gdtoolkitSha256": "c69f8f6fc505b04539ade175dc75c4f297a4c35a0761cb56116f34df941c57a9",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/ant_hill/pause_controller.gd": {
+      "gdfmtSha256": "271270c071aea8c4f842d94fca5bee46bbbbc444555d2f3a45ccfa8e14bf65dc",
+      "gdtoolkitSha256": "a0c9c4ed192a79ebe188a3215b47b19d02b4ca729e7812e053c20671ca3a9c66",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/automatic_transitions/stamina_bar.gd": {
+      "gdfmtSha256": "bc8c7fc6d54cbc23d541af334d76b4d9f87af198c5efb8d39fdd23edf75b22f3",
+      "gdtoolkitSha256": "2aa72624b87ad8f9c4fa3e35b9d68efdef6951957bd7ca7e7569d80efa05cc53",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/automatic_transitions/the_frog.gd": {
+      "gdfmtSha256": "cc7f0fe564a8adce43ee9f61480e82d1e178fb20be6d59acaaca4efef5b1a7cb",
+      "gdtoolkitSha256": "33c7ac170fad7a582ae8e9ae04f1f40565864e1c8c854313b9da3ce64e839360",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/cooldown/skill_button/skill_button.gd": {
+      "gdfmtSha256": "cf5c9cac060867e83deb473a854921e9e3afc2c871eb6f776834d8417f3a4569",
+      "gdtoolkitSha256": "5065a2ebfe2359052aa25ab681c78907aeb86a83b6da3ccccc8dcd842a835392",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/godot_state_charts_examples/history_states/history_demo.gd": {
+      "gdfmtSha256": "617d0375a9e5647548e68f61f854432577cf5637d6adc7f0bbf31720886efc83",
+      "gdtoolkitSha256": "4dcdfabb8f6eba6473459cced101a2bca25cd511ecddee3fd8c05e0ed126430d",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/performance_test/state_chart_receiver.gd": {
+      "gdfmtSha256": "8516217d8a43617861ac77427787f9fc2794cad1fe4e1234ff7f78efedd54b88",
+      "gdtoolkitSha256": "8516217d8a43617861ac77427787f9fc2794cad1fe4e1234ff7f78efedd54b88",
+      "categories": ["identical"]
+    },
+    "godot-statecharts/godot_state_charts_examples/platformer/breaking_box/breaking_box.gd": {
+      "gdfmtSha256": "5a2655ddf860f320d5aeca752161d163b24e5f5b0464454fbc79b5829f7f51d5",
+      "gdtoolkitSha256": "0165bfca3851bff6a96c94143036d615b717f248bdc11f28c2cab3efc2bde5bd",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/godot_state_charts_examples/platformer/checkpoint/checkpoint.gd": {
+      "gdfmtSha256": "2da228156c2b666c0da321ab77dd21640ebdc87f07af96fffe48d90c76200ed0",
+      "gdtoolkitSha256": "38dcfd9aef968fdeca9f8276741b2c4919b6958c77338bbc1ea88627ffabc2c9",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/godot_state_charts_examples/platformer/fireworks_box/fireworks_box.gd": {
+      "gdfmtSha256": "75201f2c4e9fb7feafd7971ed75a92aa393bfee197403bc9919697920f38353a",
+      "gdtoolkitSha256": "024d3833102b1263b00b1624b934db512a6f1941ef046d5ca730d83ad1239816",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/godot_state_charts_examples/platformer/ninja_frog/ninja_frog.gd": {
+      "gdfmtSha256": "c63f610dd64dc5c5472aea935a148aa7f05007fa0632da8961d3071fde796620",
+      "gdtoolkitSha256": "7164ef0cab1918e545fc2019d9b76cb76a297dcbcba630aefdc17b8ad3dd470d",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/godot_state_charts_examples/random_transitions/wandering_frog/wandering_frog.gd": {
+      "gdfmtSha256": "3bed66f9b135cef0b9e7c00e1454c62d4ef3df41f37ee70f33dcfc864ccb7f92",
+      "gdtoolkitSha256": "2d0b709d6345eb9e25d5fc96968d46f2ec5140fabd5bcc2f779cfabba6da99c8",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/save_and_load/color_box/color_box.gd": {
+      "gdfmtSha256": "cac51e489e48483c22fdeb9df982b1cbae4d2a06ee263d4a2337abeb31431f68",
+      "gdtoolkitSha256": "d1f3beff7ade21f043782975df6fee8a69b1257a67b166110dbe775af30f997c",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/godot_state_charts_examples/save_and_load/color_box/serialized_color_box.gd": {
+      "gdfmtSha256": "b2063f7a3e96b353709f3404e8687f5d47ae671d7c5b4c9cc817f01ec3a9ad9b",
+      "gdtoolkitSha256": "efa1f01041fdb5227ca5a05e2e64bde4fc8f1f7b35f66f0f0b91a856e55a5aad",
+      "categories": ["layout", "parentheses-commas-semicolons"]
+    },
+    "godot-statecharts/godot_state_charts_examples/save_and_load/save_and_load.gd": {
+      "gdfmtSha256": "3c93295d8c2bec475a8a1d3a221d1c695c15784130ec0afadc4a7a3e5d96db92",
+      "gdtoolkitSha256": "5acedba4bcee3ad79b18d2dfb69e523c6057fa5d0d1a8d1b0f2cf7ff82c2eddd",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/save_and_load/save_resource.gd": {
+      "gdfmtSha256": "41adf58299096046a809fd52c5980318049e767bad9c50716d0441b897179075",
+      "gdtoolkitSha256": "5b0d34a9f8de79b1ea7dbf423bc89921af7715034873dc48dfb19f6cb4092c14",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/godot_state_charts_examples/stepping/stepping.gd": {
+      "gdfmtSha256": "5cf9a50aa706a046c2fed61fe72b07a06a54ad5b12b1002cf048329a5b7de47e",
+      "gdtoolkitSha256": "f56840170dcfba274f4ff50d64c2fc7628e62f4ac5b3c350580a311f30a9386c",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/tests/framework/state_chart_test_base.gd": {
+      "gdfmtSha256": "6b9de9a77282eec933ea7b54439cd779e0bb617c8468daea585bd46d4e6524cc",
+      "gdtoolkitSha256": "128dec069306581dce3751f21aa4323cba9e776b22c942c2e39c042e7c4b8625",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/tests/framework/test_debugger.gd": {
+      "gdfmtSha256": "93252a6654f371d8b26f4f7cedce97cea7cd45100f2b9a9dff01824529a7e9dd",
+      "gdtoolkitSha256": "8afce66ec9066c8bcd3227aaf30fdbea95dcb7f8915ee37c5a363c6ef32bd435",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/tests/test_all_of_guard.gd": {
+      "gdfmtSha256": "e3f8202a76c91b467390553f165cb4c0b378224fe2b63e6fd7d633e2717b6791",
+      "gdtoolkitSha256": "654d7779124c01b7abbe790cda17af794be1db89cce6023f30285ab6ff37842f",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_any_of_guard.gd": {
+      "gdfmtSha256": "27eae39947b69b7c25ba563f1083bf27162005851c277fe0ac5cacca9ed60b3d",
+      "gdtoolkitSha256": "57a85c7b2667c4207c1c4e16ff5a37d73be1582fe046360511c6a5d2431b391c",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_automatic_transition_leaving_compound_state.gd": {
+      "gdfmtSha256": "c2a2545b686769677c2826d389ef61709abacefa7da1e76b752a4d6e0a699963",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/tests/test_automatic_transition_on_property_change.gd": {
+      "gdfmtSha256": "a9ab18b631e83862374a5c97006c37be75508c3236fb5ae45e2398495dfefab5",
+      "gdtoolkitSha256": "a9ab18b631e83862374a5c97006c37be75508c3236fb5ae45e2398495dfefab5",
+      "categories": ["identical"]
+    },
+    "godot-statecharts/tests/test_automatic_transition_on_state_enter.gd": {
+      "gdfmtSha256": "0c380001a932f55a7c9fd91d4fe99e3c1f4f920b3e98cb34f6db2ae461ddce6c",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/tests/test_automatic_transitions_on_state_change.gd": {
+      "gdfmtSha256": "079ed424d22c2197bccd2c7184e4622bb8a1dbf87230ce248b1b876ecbda2b46",
+      "gdtoolkitSha256": "7ad1362e6e769a812e21f486c2693cd4201dcd7203b439e79c8d7f435c3958f1",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/tests/test_delayed_transition.gd": {
+      "gdfmtSha256": "0b0175bdde0a5ed2716bb1028942a88acc43f6a178e557c566e8fb1b0824995d",
+      "gdtoolkitSha256": "1c37168334c646129c0ebe3fc9cbad3c6d1f3054933a440804bcdaf6a3355e9c",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_explicit_event_consumption.gd": {
+      "gdfmtSha256": "84a8dc6c4df3ba59bc89e532fbc6b1da0a8eee1947b8e0aa8708fdb4f7d2d980",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/tests/test_expression_guard.gd": {
+      "gdfmtSha256": "4a1e741a510be0b108c9c9c943081455f396e00c2df313b0731521b6890c1d27",
+      "gdtoolkitSha256": "337c1f5850b223e296086f53c7c4dc36c5b442f9c5900f57d50cd62d141c4baf",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_expression_properties.gd": {
+      "gdfmtSha256": "c79df3dd5c01aad3b37de980a3bd941543de609b0403555a2ea225e50797b79e",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/tests/test_history_state.gd": {
+      "gdfmtSha256": "760c3fc3c5eb1580cce120d88fa0a5c9b10b04378f6ab864edb7a7e7c7d16bb5",
+      "gdtoolkitSha256": "c1ba0e72c28e7f44ee60b0a92f9f0fb4d715ab14c78ff21c342fd84c30618216",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_immediate_condition_state.gd": {
+      "gdfmtSha256": "42a8cc1b878b741346ca0f755fe095d712275dbf61ede244220f7e29bf93aa53",
+      "gdtoolkitSha256": "39ff4083bdc916ba6fa958f119626c50b55e892bcbb994d72341902ef503d9ae",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_infinite_loop_detection.gd": {
+      "gdfmtSha256": "53d55301e9ffefaa1c2006442b36b4f91b897a3a47be97e7259d36d50577ea99",
+      "gdtoolkitSha256": "06780d34c9363edcdad0691716f1286e3788988871501261e5b4abc1be37cb50",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_initial_state_bypass_on_deep_transition.gd": {
+      "gdfmtSha256": "23733ab275358a98acae56aa2c34da4cb570b35ed570d5b2ac3653633f34c45a",
+      "gdtoolkitSha256": "ac8f2fd7b82df4a2e97040a3c3e6954653f24eaa4e07c49c46310facc2df0842",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/tests/test_manual_transaction_trigger.gd": {
+      "gdfmtSha256": "60f31c9ebe3108642610118e612f03fd89db057ac2e847cc7ef29056a4c36c68",
+      "gdtoolkitSha256": "406c91116dcb71e1ea77237a9e56a88790d80afe1910ec28c0988fa1d5e3963f",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/tests/test_multiple_delayed_transition.gd": {
+      "gdfmtSha256": "25dc3dfd36380b4dfb19c79424779a0f662b17a635f81317e30d12396a942836",
+      "gdtoolkitSha256": "9a9c4ff1d010def71aa33b14661818b12f40c1500d9ac835a8f4176663f44013",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_not_guard.gd": {
+      "gdfmtSha256": "7a36b11261df872383b92ca182fd631261dbe5bf4ccb58dd2f2c673f04f65edd",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/tests/test_parallel_state_deep_transition.gd": {
+      "gdfmtSha256": "260aa0fbab0084ee8a364f0d9257f0f9a6ea6feb45fae5083e23d195649013ea",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/tests/test_parallel_state_event_handling.gd": {
+      "gdfmtSha256": "12bdeb542773dd586573b9c2e527e5a024f9e17078b8ab6a0a6df85619a90b53",
+      "gdtoolkitSha256": "62d466873914d3dbc949d51de0d1d6fe1cb0bc3e3868ef2c37dd74f05b0f16bc",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_parallel_state_initialization.gd": {
+      "gdfmtSha256": "53410728c1b5e7a7db755dd159ddf6a8af5ba851ca55ff195444c826927277b4",
+      "gdtoolkitSha256": "43dee3b6e927fd3cad4125a504e4dc79b58c45b76f05e4d573e2f281ac41c20d",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/tests/test_parallel_transition.gd": {
+      "gdfmtSha256": "7434ff68f1445d0d5e9fbf0662e80faaa4b097ee65c1e2a228b2de6908b2d7d5",
+      "gdtoolkitSha256": "369890f725cdd6db4582ec7bf71dc4240fd0a7a0fcaac39568f3c68e30177569",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/tests/test_pending_transition_cancellation.gd": {
+      "gdfmtSha256": "2231de37124cce576970a236c2f0ecaf3b6f0bb74d7cc61ba6e18e9243a1d4b8",
+      "gdtoolkitSha256": null,
+      "categories": ["gdtoolkit-rejected-gdfmt-accepted"]
+    },
+    "godot-statecharts/tests/test_processing.gd": {
+      "gdfmtSha256": "e56175067fe141c05571ff8695765312673a0fbfbc82b307ba73c4fc0a5ac35d",
+      "gdtoolkitSha256": "25ff0af6c88b469afcc3316df2f3ad7c6fe13cab07282d917cca426478253d68",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_property_changes_immediately_visible.gd": {
+      "gdfmtSha256": "8ba27be27144befc27e6badc042a478bd4622048113dded3a3b94556afd3fd73",
+      "gdtoolkitSha256": "995882c0e169ec906bb2c6dd1af3e84264f344a8911bcc1bd3fa6274005feb04",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_save_and_load.gd": {
+      "gdfmtSha256": "b8190ef6135495bbf0c52d7a319d9990ef519aa044800d94e0c424923dcb506a",
+      "gdtoolkitSha256": "6589e2cc768ca372bfd869ddf9ffc340c5a8ae8df4b304777edc7eb214748e9f",
+      "categories": [
+        "comment-trailing-whitespace",
+        "layout",
+        "parentheses-commas-semicolons"
+      ]
+    },
+    "godot-statecharts/tests/test_simple_transition.gd": {
+      "gdfmtSha256": "c0f58be663285a1f4cfdec5b9b4ae703441576b09b35bd8f7b6b3e196fc9edf3",
+      "gdtoolkitSha256": "3cdf369f72974804cc83c3eb9a19bdc47a912c33ffad535790450fcdcc8e1757",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_state_is_active_guard.gd": {
+      "gdfmtSha256": "6c97825fc05bd1000a77fc7f32f689a15847c4f41c2266682b05908f9da8d7c5",
+      "gdtoolkitSha256": "1094026d5c77433294833ad2011fa8ebd190c10e2b21ddc9caef105e2536bfea",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_stepping.gd": {
+      "gdfmtSha256": "23c2b5784d5832e2ddf566215d7d2a71ea87d8c87901471b354b1e17a01ea88b",
+      "gdtoolkitSha256": "cbcae55558f823e0f82d06571c2b09cd78c2a169add06d28b04f5572e0c2d314",
+      "categories": ["comment-trailing-whitespace", "layout"]
+    },
+    "godot-statecharts/tests/test_transition_delay_expression.gd": {
+      "gdfmtSha256": "a1fa1864fcbf3c4ed551181e6da3ed28ea8075d8cdd02563146c92eac34fa02a",
+      "gdtoolkitSha256": "a1fcf2884c7bb55a3d20f0ad81486f350159901f376db89d8d635fba40768e48",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_transition_pending_signal.gd": {
+      "gdfmtSha256": "f81bfd2d342d4016560f88f0e476f9524349380be6b0415463c2d9ce8588cca1",
+      "gdtoolkitSha256": "cf2ef60a7847b2785864d7467224c1957ec6727d97da87c676d5ec263b86c7b1",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_transition_taken_signal.gd": {
+      "gdfmtSha256": "ef43347d44e477bcbb85b70a93ee09e8c97271f95625f097a80b3ef9c94f98f9",
+      "gdtoolkitSha256": "6512958917f4c52ed497dc137266f9920c5fe464a181161db3077c900a02bb70",
+      "categories": ["layout"]
+    },
+    "godot-statecharts/tests/test_warning_on_nonexisting_event.gd": {
+      "gdfmtSha256": "8df90db9ec238d0015dab12fc417b96cffcee40f9bb6b6e6f69a5d5a225faa2a",
+      "gdtoolkitSha256": "f9d1609ed64e97069f3562395373d7833ded508f6103148e8a414088dd2a2a83",
       "categories": ["layout"]
     }
   }

@@ -5,7 +5,12 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
-publish = false
+description = "Lossless GDScript lexer and parser for gdfmt"
+readme = "README.md"
+keywords = ["gdscript", "godot", "parser", "formatter"]
+categories = ["parsing", "development-tools"]
+include = ["src/**", "Cargo.toml", "README.md", "LICENSE", "LICENSE-THIRD-PARTY"]
+publish = ["crates-io"]
 
 [lints]
 workspace = true

@@ -5,7 +5,12 @@ edition.workspace = true
 rust-version.workspace = true
 license.workspace = true
 repository.workspace = true
-publish = false
+description = "Configuration and JSON Schema for the gdfmt GDScript formatter"
+readme = "README.md"
+keywords = ["gdscript", "godot", "formatter", "configuration"]
+categories = ["development-tools", "config"]
+include = ["src/**", "Cargo.toml", "README.md", "LICENSE"]
+publish = ["crates-io"]
 
 [lints]
 workspace = true
