@@ -44,6 +44,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm test:npm ${{ matrix.platform.triple }}
       - uses: actions/upload-artifact@v7.0.2
+        if: always()
         with:
           name: npm-${{ matrix.platform.id }}-${{ matrix.node }}
           path: target/npm/artifacts/${{ matrix.platform.id }}/
@@ -73,6 +74,7 @@ jobs:
               pnpm test:npm x86_64-unknown-linux-musl
             '
       - uses: actions/upload-artifact@v7.0.2
+        if: always()
         with:
           name: npm-linux-x64-musl-${{ matrix.node }}
           path: target/npm/artifacts/linux-x64-musl/

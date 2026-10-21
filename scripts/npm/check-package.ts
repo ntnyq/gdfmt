@@ -146,6 +146,7 @@ try {
         new URL('../../node_modules/vitest/vitest.mjs', import.meta.url),
       ),
       'run',
+      '--reporter=default',
       '--reporter=json',
       '--outputFile',
       join(artifacts, 'vitest.json'),

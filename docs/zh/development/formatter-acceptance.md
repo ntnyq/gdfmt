@@ -131,7 +131,7 @@ P6 已实现本地 JSON 继承、以声明目录为基准的 overrides、EditorC
 
 ## P7：Node/npm 本地验收 {#p7-node-acceptance}
 
-验收日期 **2026-10-21**，环境为 macOS arm64、Rust 1.98.0、Node **22.13.0、24.0.0、24.21.0**。绑定、npm facade 和本地分发流程已实现。**尚未发布；完整跨平台产物验收待 CI**，名称归属和发布权限也未核验。
+验收日期 **2026-10-21**，环境为 macOS arm64、Rust 1.98.0、Node **22.13.0、24.0.0、24.21.0**。绑定、npm facade 和本地分发流程已实现。**尚未发布；完整跨平台产物验收被 Windows 消费测试阻塞**，名称归属和发布权限也未核验。
 
 | 契约                 | 证据                                                                                                                                                                                                |
 | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -146,4 +146,20 @@ Node 测试使用 **Vitest 5 与 TypeScript**，仓库脚本使用 **TypeScript/
 
 五个固定引擎再次通过 **1310 次源码对照和 522 份格式化输出**；另有 **20 份保护区域输出**保留 P6 预期字节并通过引擎 check-only。本地引擎报告为 `target/conformance/p7-summary.json`、`p7-report-<profile>.json`、`p7-formatter-<profile>.json`、`p7-regions.json`。运行时回执和 tarball 保存在 `target/npm/local-evidence/`，当前宿主运行产物在 `target/npm/artifacts/`；`pnpm verify:npm --local` 生成明确标注矩阵未完成的回执。
 
-拟定矩阵为 macOS arm64/x64、Windows x64 MSVC、Linux x64 glibc/musl，分别运行 Node 22.13.0 和 24.0.0。`.github/workflows/npm.yml` 在各平台构建、安装最终 tarball，再验证根包/平台包精确一致。**本地只执行了 macOS arm64**；不宣称 Linux/macOS x64/Windows 或 registry 发布/恢复已通过。Linux glibc 构建目标为 Ubuntu 24.04，更旧 glibc 和更多系统版本未验证。命令和可审查的部分发布恢复流程见 [Node/npm 契约](/zh/reference/node)。napi 宿主 crate 禁止手写 unsafe，同时允许 napi 生成的 FFI constructor；核心 crate 继续 forbid unsafe。P4 源码/项目排除项和 P5/P6 保护字节、写入限制继续适用。
+矩阵为 macOS arm64/x64、Windows x64 MSVC、Linux x64 glibc/musl，分别运行 Node 22.13.0 和 24.0.0。`.github/workflows/npm.yml` 在各平台构建、安装最终 tarball，再验证根包/平台包精确一致。**本地只执行了 macOS arm64**；其他平台的执行证据见下方 CI 记录，不宣称 registry 发布/恢复已通过。Linux glibc 构建目标为 Ubuntu 24.04，更旧 glibc 和更多系统版本未验证。命令和可审查的部分发布恢复流程见 [Node/npm 契约](/zh/reference/node)。napi 宿主 crate 禁止手写 unsafe，同时允许 napi 生成的 FFI constructor；核心 crate 继续 forbid unsafe。P4 源码/项目排除项和 P5/P6 保护字节、写入限制继续适用。
+
+### P7 跨平台 CI 首轮记录
+
+**2026-10-21**，提交 `cda83c5578574e16c8a5db1a713f3e1e2301f286` 实际运行 hosted 矩阵。[Rust CI](https://github.com/ntnyq/gdfmt/actions/runs/39584231669) 的十项 job 全部通过：质量检查、Rust 1.88 MSRV、Linux/macOS/Windows 两种 feature 配置以及五个固定引擎对照。[npm 产物矩阵](https://github.com/ntnyq/gdfmt/actions/runs/39584231649) 失败，**P7 跨平台验收仍未完成**。
+
+| 产物目标                 | Node 22.13.0                      | Node 24.0.0                       |
+| ------------------------ | --------------------------------- | --------------------------------- |
+| macOS arm64              | 8 项测试及安装后声明检查通过      | 8 项测试及安装后声明检查通过      |
+| macOS x64                | 8 项测试及安装后声明检查通过      | 8 项测试及安装后声明检查通过      |
+| Linux x64 glibc          | 8 项测试及安装后声明检查通过      | 8 项测试及安装后声明检查通过      |
+| Linux x64 musl（Alpine） | 8 项测试及安装后声明检查通过      | 8 项测试及安装后声明检查通过      |
+| Windows x64 MSVC         | 构建、打包、安装通过；Vitest 失败 | 构建、打包、安装通过；Vitest 失败 |
+
+下载的 CI 证据保存在本地 `target/p7-ci/main-matrix/`，失败步骤日志为 `target/p7-ci/main-failed.log`。八组成功回执对应的实际 JSON 报告均有 8 项通过测试，根包 tarball 的 SHA-512 全部相同：`047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec`。这些证据覆盖上述四个目标安装后的同步/异步 API、ESM/CJS、声明和 CLI 一致性，尚不能证明 Windows 一致性。
+
+Windows 两个运行时均执行到 Vitest 后以退出码 1 失败。仅 JSON 的 reporter 没有把失败断言显示到控制台，失败后上传步骤又被跳过，Windows JSON 报告因此未保留。聚合 `parity` job 按预期跳过，没有完整矩阵回执。本地后续修改增加默认控制台 reporter，同时保留 JSON，并在失败时上传产物。该修改尚未在 Windows 运行；具体失败断言及修复仍需要新一轮 CI 验证。本次没有发布包。
