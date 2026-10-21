@@ -88,6 +88,7 @@ jobs:
             -e RUSTFLAGS='-C target-feature=-crt-static' \
             "node:${NODE_VERSION}-alpine" sh -ec '
               apk add --no-cache build-base curl bash git libgcc
+              git config --global --add safe.directory /workspace
               curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y --default-toolchain 1.98.0 --profile minimal
               export PATH="$HOME/.cargo/bin:$PATH"
               npm install --global pnpm@12.14.0 --ignore-scripts
