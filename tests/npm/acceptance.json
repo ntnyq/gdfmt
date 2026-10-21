@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "acceptedOn": "2026-10-21",
+  "testedRevision": "5abcb012ebaba76481cea4f3328e624ca0007568",
+  "version": "0.1.0-alpha.0",
+  "completeMatrix": true,
+  "published": false,
+  "npmWorkflow": "https://github.com/ntnyq/gdfmt/actions/runs/39592751263",
+  "rustWorkflow": "https://github.com/ntnyq/gdfmt/actions/runs/39592751260",
+  "testsPerConsumer": 8,
+  "totalConsumerTests": 80,
+  "fixtureProfileComparisons": 13100,
+  "receipts": [
+    {
+      "target": "darwin-arm64",
+      "node": "v22.13.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "967fc31b8b495e3bc7f0da312b8b58dcbce26ffdd8d570d8f895beccf9d0a66a684a7c9a24b2c3d1fd71941579ccaf2c1c03b235371b58347b754cef2ba4cff6"
+    },
+    {
+      "target": "darwin-arm64",
+      "node": "v24.0.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "967fc31b8b495e3bc7f0da312b8b58dcbce26ffdd8d570d8f895beccf9d0a66a684a7c9a24b2c3d1fd71941579ccaf2c1c03b235371b58347b754cef2ba4cff6"
+    },
+    {
+      "target": "darwin-x64",
+      "node": "v22.13.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "1efe02ef86c4dbf6728c409ac8d65bca04110a6b694e4328d41916ff372c98637b0067338b602e810ec13d03dcd7d8a22f88b5d6a6ef4fb476d614e337c73bc3"
+    },
+    {
+      "target": "darwin-x64",
+      "node": "v24.0.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "1efe02ef86c4dbf6728c409ac8d65bca04110a6b694e4328d41916ff372c98637b0067338b602e810ec13d03dcd7d8a22f88b5d6a6ef4fb476d614e337c73bc3"
+    },
+    {
+      "target": "linux-x64-gnu",
+      "node": "v22.13.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "8336cc0bcee740d6555aaa1559431275c22ab9ce9712b45fd7c7da943ab3bdeaabaa67ffc8360ffc61c158e3b90fc4dc598c49980200f68a08f5adb99b13ab51"
+    },
+    {
+      "target": "linux-x64-gnu",
+      "node": "v24.0.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "8336cc0bcee740d6555aaa1559431275c22ab9ce9712b45fd7c7da943ab3bdeaabaa67ffc8360ffc61c158e3b90fc4dc598c49980200f68a08f5adb99b13ab51"
+    },
+    {
+      "target": "linux-x64-musl",
+      "node": "v22.13.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "e494821726c70f3da796a81e1d6e773a05cfaee2d2d091c00043fa9141495bd10172b822650ffb7b7291fc77e7196dc165348dc977f16ca99b1eec88a6897da1"
+    },
+    {
+      "target": "linux-x64-musl",
+      "node": "v24.0.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "e494821726c70f3da796a81e1d6e773a05cfaee2d2d091c00043fa9141495bd10172b822650ffb7b7291fc77e7196dc165348dc977f16ca99b1eec88a6897da1"
+    },
+    {
+      "target": "win32-x64-msvc",
+      "node": "v22.13.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "72a01ed56939d27711071626d13d3b8caf0a0caccea565f1f4d2d42e83911710c834d289b06cf21bda680cda5befdbaf6701bdac7d54a11220d57d4d79fc1d59"
+    },
+    {
+      "target": "win32-x64-msvc",
+      "node": "v24.0.0",
+      "rootSha512": "047bf4ba6b2b248de8a6f53008ac8dd4218fd34f82d981f75b29e70915de386ac9e75bf401ab87c9d224cfd4800287109e313474c2143fdc787a8b39626bb3ec",
+      "nativeSha512": "afa9f34f7d174abf7619411f7d447b0a83c9be1ceca59215b04ccfc2f1a4cac138888fcf19cf0d39e9c969d19005bde570336788ed495cebebacb45a6b926208"
+    }
+  ]
+}
