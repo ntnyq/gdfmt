@@ -118,6 +118,10 @@ pnpm release:publish:npm --execute
 
 **两个 `--execute` 命令执行真实 registry 写入**，要求 checkout 干净，包括已暂存和未跟踪文件。npm 操作通过当前 Node 执行 npm 的 JavaScript CLI，避免 Windows 上直接执行 `npm.cmd` 的问题；如果使用自定义 npm 安装前缀，通过 `GDFMT_NPM_CLI` 指定对应的 `npm/bin/npm-cli.js`。发布脚本按顺序补发缺失包，并校验已存在版本的 hash。Cargo 需要正常解析 crates.io；registry source replacement 可能干扰 workspace 临时 registry，遇到这类问题应使用配置干净的发布环境。
 
+crates.io 首次创建新包允许连续发布 5 个，之后每 10 分钟恢复 1 个名额。因此这 8 个 crate 的首次发布可能需要约 30 分钟等待配额恢复。遇到 429 时按服务器给出的时间等待，再使用原冻结产物重新执行发布命令；已发布且 hash 相同的 crate 会跳过。后续更新已有 crate 使用独立的版本发布限额，见 [crates.io 发布限流](https://crates.io/docs/rate-limits)。
+
+本机 npm 首次发布和 Trusted Publisher 设置可能分别要求浏览器二次认证；`npm login` 成功不代表后续写入无需验证。手动发布请使用交互式终端，并按 npm 提示完成认证。
+
 6. 完成 Trusted Publisher 配置后开启 `RELEASE_ENABLED=true`，并在 npm 的两天验证窗口内通过 CI 发布下一个新版本。也可以在首次发布的 tag 上手动运行工作流并开启 `publish`，验证已发布包并补建 GitHub Release；由于不会上传新的 npm 版本，这一步不能验证尚未使用过的 npm Trusted Publisher。
 
 ## 后续版本更新

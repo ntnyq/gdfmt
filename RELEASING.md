@@ -117,6 +117,10 @@ pnpm release:publish:npm --execute
 
 The two `--execute` commands perform real registry writes. They require a clean checkout, including staged and untracked files. The npm publisher invokes npm's JavaScript CLI with the active Node runtime instead of executing `npm.cmd`; for a custom npm installation prefix, set `GDFMT_NPM_CLI` to that installation's `npm/bin/npm-cli.js`. The scripts publish missing packages in order, verify registry checksums, and stop on conflicts. crates.io packaging must resolve against crates.io; registry source replacement can interfere with Cargo's temporary workspace registry. Use a clean release environment if local Cargo configuration changes registry resolution.
 
+crates.io allows a burst of five new crates, then restores one new-crate publication every ten minutes. Bootstrapping these eight crates can therefore require about thirty minutes waiting for quota recovery. On HTTP 429, wait until the server's stated retry time and rerun the publisher with the original frozen artifacts; matching published crates are skipped. Updates to existing crates have a separate version-publication quota; see [crates.io publishing rate limits](https://crates.io/docs/rate-limits).
+
+Local npm publication and Trusted Publisher configuration may each require browser-based two-factor authentication. A successful `npm login` does not remove these checks. Use an interactive terminal for manual publication and follow npm's authentication prompts.
+
 6. Configure the Trusted Publishers above and enable `RELEASE_ENABLED=true`. Publish the next version through CI within npm's two-day validation window. If desired, manually dispatch `release.yml` **on the bootstrap tag** with `publish=true` to verify existing package checks and finish the GitHub Release; this does not validate an unused npm publisher because no new npm version is uploaded.
 
 ## Prepare subsequent versions
