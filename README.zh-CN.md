@@ -37,7 +37,7 @@ gdfmt init              # 创建 .gdfmtrc.json
 
 不传参数时默认格式化当前目录。检查发现语法错误或格式差异时退出码为 `1`，配置、参数或 I/O 错误为 `2`。
 
-npm 包与 Node.js API 已实现，尚未发布。本地包的使用方式见 [Node.js API](docs/zh/reference/node.md)。
+使用 `pnpm add @gdfmt/gdfmt@next` 安装 npm 预发布版本。使用方式见 [Node.js API](docs/zh/reference/node.md)。
 
 ## 配置
 

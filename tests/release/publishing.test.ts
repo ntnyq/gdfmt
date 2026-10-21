@@ -162,12 +162,12 @@ test('npm plans never write, publishes platforms first, and only promotes a comp
     await publishNpm(files.frozen, true, fake.operations)
     const publishes = fake.writes.filter(value => value.startsWith('publish:'))
     assert.equal(publishes.length, 6)
-    assert.equal(publishes.at(-1), 'publish:gdfmt')
+    assert.equal(publishes.at(-1), `publish:${metadata.name}`)
     assert.ok(
       fake.writes.indexOf('promote:@gdfmt/darwin-arm64') >
         fake.writes.indexOf('consumer'),
     )
-    assert.equal(fake.writes.at(-1), 'promote:gdfmt')
+    assert.equal(fake.writes.at(-1), `promote:${metadata.name}`)
     fake.writes.length = 0
     await publishNpm(files.frozen, true, fake.operations)
     assert.equal(
@@ -184,7 +184,7 @@ test('npm integrity conflicts, newer channels and platform failures prevent root
   try {
     await prepareRelease(files.matrix, files.frozen)
     const fake = fakePublisher(files.frozen)
-    fake.versions.set('gdfmt', { dist: { integrity: 'sha512-conflict' } })
+    fake.versions.set(metadata.name, { dist: { integrity: 'sha512-conflict' } })
     await assert.rejects(
       () => publishNpm(files.frozen, true, fake.operations),
       /registry integrity differs/,
@@ -212,7 +212,7 @@ test('npm integrity conflicts, newer channels and platform failures prevent root
         }),
       /platform unavailable/,
     )
-    assert.equal(fake.writes.includes('publish:gdfmt'), false)
+    assert.equal(fake.writes.includes(`publish:${metadata.name}`), false)
     assert.equal(
       fake.writes.some(value => value.startsWith('promote:')),
       false,
@@ -307,12 +307,12 @@ test('npm resumes a partially promoted set without uploading or rewriting comple
         }),
       AggregateError,
     )
-    assert.equal(fake.channels.has('gdfmt'), false)
+    assert.equal(fake.channels.has(metadata.name), false)
     fake.writes.length = 0
     await publishNpm(files.frozen, true, fake.operations)
     assert.deepEqual(
       fake.writes.filter(value => value.startsWith('promote:')),
-      [`promote:${failed}`, 'promote:gdfmt'],
+      [`promote:${failed}`, `promote:${metadata.name}`],
     )
     assert.equal(
       fake.writes.some(value => value.startsWith('publish:')),
@@ -339,7 +339,38 @@ test('npm confirms a committed upload even when the publishing CLI reports an er
       fake.writes.filter(value => value.startsWith('publish:')).length,
       6,
     )
-    assert.equal(fake.writes.at(-1), 'promote:gdfmt')
+    assert.equal(fake.writes.at(-1), `promote:${metadata.name}`)
+  } finally {
+    rmSync(files.directory, { recursive: true, force: true })
+  }
+})
+
+test('asynchronous registry processing overlaps platforms and gates root on visible platforms', async () => {
+  const files = fixture()
+  try {
+    await prepareRelease(files.matrix, files.frozen)
+    const fake = fakePublisher(files.frozen)
+    const availableAt = new Map<string, number>()
+    const verified = new Set<string>()
+    let time = 0
+    const latency = 180_000
+    await publishNpm(files.frozen, true, {
+      ...fake.operations,
+      publish: entry => {
+        if (entry.name === metadata.name) assert.equal(verified.size, 5)
+        availableAt.set(entry.name, time + latency)
+        fake.operations.publish(entry, files.frozen)
+      },
+      wait: async (name, version, integrity) => {
+        const visible = availableAt.get(name)
+        assert.ok(visible !== undefined)
+        time = Math.max(time, visible)
+        await fake.operations.wait(name, version, integrity)
+        verified.add(name)
+      },
+    })
+    assert.equal(time, 2 * latency)
+    assert.equal(verified.size, 6)
   } finally {
     rmSync(files.directory, { recursive: true, force: true })
   }

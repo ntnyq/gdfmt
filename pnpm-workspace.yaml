@@ -9,3 +9,7 @@ minimumReleaseAge: 0
 pmOnFail: warn
 shellEmulator: true
 ignoreWorkspaceRootCheck: true
+
+# Native release artifacts are built and tested in isolated consumers.
+ignoredOptionalDependencies:
+  - '@gdfmt/*'

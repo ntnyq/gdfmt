@@ -15,7 +15,7 @@ gdfmt --version
 
 确保 Cargo 的可执行文件目录已加入 `PATH`。也可以在仓库内通过 `cargo run -p gdfmt_cli -- <参数>` 直接运行 CLI。
 
-npm 包尚未发布。构建和使用本地 npm 产物见[贡献指南](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#nodejs-packages)。
+使用 `pnpm dlx @gdfmt/gdfmt@next --version` 运行 npm 预发布版本，CLI 命令仍为 `gdfmt`。
 
 ## 格式化项目
 

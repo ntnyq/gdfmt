@@ -1,10 +1,10 @@
 # gdfmt
 
 Rust GDScript formatter with validated output, Node.js APIs and a CLI.
-This package is being prepared locally; **it has not been published**. See the [language support and limitations](https://github.com/ntnyq/gdfmt/blob/main/docs/reference/compatibility.md).
+Install the prerelease with `pnpm add @gdfmt/gdfmt@next`, or run the CLI with `pnpm dlx @gdfmt/gdfmt@next --check .`. See the [language support and limitations](https://github.com/ntnyq/gdfmt/blob/main/docs/reference/compatibility.md).
 
 ```js
-import { format, formatSync, resolveConfig } from 'gdfmt'
+import { format, formatSync, resolveConfig } from '@gdfmt/gdfmt'
 
 const result = await format('var score=1\n', {
   language: { godotVersion: '4.7' },
@@ -12,7 +12,7 @@ const result = await format('var score=1\n', {
 })
 if (result.output !== null) console.log(result.output)
 
-// CommonJS exposes the same named functions via require('gdfmt').
+// CommonJS exposes the same named functions via require('@gdfmt/gdfmt').
 const immediate = formatSync('var score=1\n')
 const resolution = await resolveConfig('src/player.gd')
 const configured = await format('var score=1\n', {

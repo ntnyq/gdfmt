@@ -40,7 +40,7 @@ gdfmt .
 gdfmt --check .
 ```
 
-完整安装步骤见[快速开始](/zh/guide/)。npm 包尚未发布。
+完整安装步骤见[快速开始](/zh/guide/)。npm 预发布版本的包名为 `@gdfmt/gdfmt@next`。
 
 ## 浏览文档
 

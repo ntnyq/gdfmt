@@ -37,7 +37,7 @@ gdfmt init              # Create .gdfmtrc.json
 
 The default command formats the current directory. A check exits with `1` for syntax errors or formatting differences, and `2` for configuration, argument or I/O failures.
 
-The npm package and Node.js API are implemented but not yet published. See the [Node.js API](docs/reference/node.md) for local package usage.
+Install the npm prerelease with `pnpm add @gdfmt/gdfmt@next`. See the [Node.js API](docs/reference/node.md) for usage.
 
 ## Configuration
 

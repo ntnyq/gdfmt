@@ -15,7 +15,7 @@ gdfmt --version
 
 Make sure Cargo's binary directory is on your `PATH`. You can also run the CLI directly from the checkout with `cargo run -p gdfmt_cli -- <arguments>`.
 
-The npm package is not yet published. To build and use local npm artifacts, see [contributing](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#nodejs-packages).
+Run the npm prerelease with `pnpm dlx @gdfmt/gdfmt@next --version`. The CLI command remains `gdfmt`.
 
 ## Format a project
 

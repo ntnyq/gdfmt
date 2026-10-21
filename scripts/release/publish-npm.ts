@@ -11,6 +11,7 @@ import { assertNpmRuntime } from './auth.ts'
 import {
   assertCleanReleaseSource,
   compareVersions,
+  publicNpmPackage,
   readObject,
 } from './project.ts'
 import {
@@ -77,7 +78,7 @@ const npmOperations: NpmOperations = {
       runNpm(
         [
           'install',
-          `gdfmt@${version}`,
+          `${publicNpmPackage}@${version}`,
           '--ignore-scripts',
           '--no-audit',
           '--no-fund',
@@ -93,13 +94,13 @@ const npmOperations: NpmOperations = {
         [
           '--input-type=module',
           '-e',
-          'import assert from "node:assert/strict"; import { format } from "gdfmt"; const result = await format("var value=1\\n"); assert.equal(result.output, "var value = 1\\n"); assert.deepEqual(result.diagnostics, [])',
+          `import assert from "node:assert/strict"; import { format } from ${JSON.stringify(publicNpmPackage)}; const result = await format("var value=1\\n"); assert.equal(result.output, "var value = 1\\n"); assert.deepEqual(result.diagnostics, [])`,
         ],
         { cwd: directory, stdio: 'inherit' },
       )
       const output = execFileSync(
         process.execPath,
-        ['node_modules/gdfmt/dist/cli.cjs', '--version'],
+        [join('node_modules', publicNpmPackage, 'dist/cli.cjs'), '--version'],
         { cwd: directory, encoding: 'utf8' },
       )
       assert.equal(output.trim(), `gdfmt ${version}`)
@@ -122,7 +123,7 @@ export async function publishNpm(
     assertNpmRuntime()
   }
   const release = validateFrozenRelease(directory)
-  const pending = []
+  const pending: string[] = []
   // Complete the existing-version checks before the first write.
   for (const entry of release.packages) {
     const current = await operations.version(entry.name, release.version)
@@ -152,15 +153,30 @@ export async function publishNpm(
     console.log('Read-only plan. Pass --execute to publish.')
     return
   }
-  for (const entry of release.packages) {
-    // Platforms precede the root; every package must be visible with matching bytes.
-    if (pending.includes(entry.name))
+  const platforms = release.packages.slice(0, -1)
+  const root = release.packages.at(-1)
+  assert.ok(root && root.name === publicNpmPackage)
+  const upload = async (entry: ReleasePackage): Promise<void> => {
+    if (!pending.includes(entry.name)) return
+    try {
+      operations.publish(entry, directory)
+    } catch (error) {
+      // An ambiguous upload must be reconciled before submitting more writes.
       await confirmRegistryWrite(
-        () => operations.publish(entry, directory),
+        () => {
+          throw error
+        },
         () => operations.wait(entry.name, release.version, entry.integrity),
       )
-    else await operations.wait(entry.name, release.version, entry.integrity)
+    }
   }
+  // npm processes accepted uploads asynchronously. Submit platform candidates
+  // together, then require every platform to be visible before uploading root.
+  for (const entry of platforms) await upload(entry)
+  for (const entry of platforms)
+    await operations.wait(entry.name, release.version, entry.integrity)
+  await upload(root)
+  await operations.wait(root.name, release.version, root.integrity)
   operations.verifyConsumer(release.version)
   // Recheck every platform after uploads, before the first channel write.
   for (const entry of release.packages) await currentChannel(entry.name)

@@ -1,13 +1,13 @@
 # Node.js API
 
-The `gdfmt` package exposes validated text formatting and explicit project configuration resolution, with ESM, CommonJS and TypeScript declarations.
+The `@gdfmt/gdfmt` package exposes validated text formatting and explicit project configuration resolution, with ESM, CommonJS and TypeScript declarations.
 
-The package is not yet published. To prepare local packages, follow [contributing](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#nodejs-packages). The examples below assume the root package and matching native package are installed.
+Install the prerelease with `pnpm add @gdfmt/gdfmt@next`. The matching native package is selected automatically.
 
 ## Format text
 
 ```js
-import { format, formatSync } from 'gdfmt'
+import { format, formatSync } from '@gdfmt/gdfmt'
 
 const source = 'var count=1\n'
 const result = await format(source, {
@@ -24,7 +24,7 @@ if (result.output === null) {
 const syncResult = formatSync(source)
 ```
 
-CommonJS exposes the same named functions through `require('gdfmt')`.
+CommonJS exposes the same named functions through `require('@gdfmt/gdfmt')`.
 
 | API                                 | Behavior                                                             |
 | ----------------------------------- | -------------------------------------------------------------------- |
@@ -40,7 +40,7 @@ Invalid options throw or reject, including unknown fields, `null`, non-JSON valu
 ## Resolve project settings
 
 ```js
-import { format, resolveConfig } from 'gdfmt'
+import { format, resolveConfig } from '@gdfmt/gdfmt'
 
 const resolution = await resolveConfig('src/player.gd')
 if (!resolution.ignored) {

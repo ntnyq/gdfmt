@@ -29,7 +29,7 @@ npm 需要发布 6 个包：
 @gdfmt/linux-x64-gnu
 @gdfmt/linux-x64-musl
 @gdfmt/win32-x64-msvc
-gdfmt
+@gdfmt/gdfmt
 ```
 
 平台包先发布，主包最后发布，版本必须完全一致。预发布版本进入 `next`，正式版本进入 `latest`。所有包先以 `candidate` tag 上传；确认整套版本可查询、完整性匹配，并从 registry 安装的消费者通过 API 和 CLI 检查后，才更新发布渠道。先更新平台包渠道，再更新主包渠道。`candidate` 保留用于检查。
@@ -66,7 +66,7 @@ gdfmt
 ### npm
 
 1. 验证账号和邮箱，启用双因素认证。
-2. 创建或取得 **`@gdfmt` scope** 的发布权限，确认非 scoped 包 **`gdfmt`** 的名称可用或属于你。GitHub 仓库权限与 npm scope 权限相互独立。
+2. 创建或取得 **`@gdfmt` scope** 的发布权限，包括主包 **`@gdfmt/gdfmt`**。GitHub 仓库权限与 npm scope 权限相互独立。
 3. 确保账号可以创建和更新全部 6 个公开包，首次通过交互式认证发布。
 4. 在 **6 个包各自的设置**中添加 GitHub Actions Trusted Publisher：
 

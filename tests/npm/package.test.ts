@@ -6,6 +6,7 @@ import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { test } from 'vitest'
+import packageManifest from '../../packages/gdfmt/package.json' with { type: 'json' }
 import type * as Gdfmt from '../../packages/gdfmt/src/index.cjs'
 import targets from '../../packages/gdfmt/src/targets.json' with { type: 'json' }
 import manifest from '../compatibility/manifest.json' with { type: 'json' }
@@ -34,18 +35,21 @@ function parseLanguageVersion(value: string): Gdfmt.LanguageVersion {
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..')
 const installed = requiredEnv('GDFMT_PACKAGE_ROOT')
+const consumer = requiredEnv('GDFMT_CONSUMER_ROOT')
+const packageName = packageManifest.name
 const consumerRequire = createRequire(join(installed, 'package.json'))
-const cjs: typeof Gdfmt = consumerRequire('gdfmt')
+const cjs: typeof Gdfmt = consumerRequire(packageName)
 const esm: typeof Gdfmt = await import(
-  pathToFileURL(consumerRequire.resolve('gdfmt')).href.replace(
+  pathToFileURL(consumerRequire.resolve(packageName)).href.replace(
     /index\.cjs$/,
     'index.mjs',
   )
 )
 const cliPath = join(installed, 'dist/cli.cjs')
 const standalone = requiredEnv('GDFMT_STANDALONE')
-const packageMetadata: { version: string } =
-  consumerRequire('gdfmt/package.json')
+const packageMetadata: { version: string } = consumerRequire(
+  `${packageName}/package.json`,
+)
 
 function execute(
   isNode: boolean,
@@ -100,13 +104,13 @@ test('installed ESM/CJS export branches share the same public functions and sche
     [
       '--input-type=module',
       '-e',
-      "import {formatSync} from 'gdfmt'; import {createRequire} from 'node:module'; const r=createRequire(import.meta.url); if(formatSync!==r('gdfmt').formatSync) process.exit(1)",
+      `import {formatSync} from ${JSON.stringify(packageName)}; import {createRequire} from 'node:module'; const r=createRequire(import.meta.url); if(formatSync!==r(${JSON.stringify(packageName)}).formatSync) process.exit(1)`,
     ],
-    { cwd: dirname(dirname(installed)), encoding: 'utf8' },
+    { cwd: consumer, encoding: 'utf8' },
   )
   assert.equal(child.status, 0, child.stderr)
   assert.deepEqual(
-    consumerRequire('gdfmt/schema.json'),
+    consumerRequire(`${packageName}/schema.json`),
     JSON.parse(
       await readFile(join(root, 'schemas/gdfmtrc.schema.json'), 'utf8'),
     ),
@@ -417,8 +421,8 @@ test('npm CLI has byte-identical stdout/stderr, exit codes, writes and host fail
     )
     // Actual installed bin mapping and executable bit/shebang are also exercised.
     const bin = join(
-      dirname(installed),
-      '.bin',
+      consumer,
+      'node_modules/.bin',
       process.platform === 'win32' ? 'gdfmt.cmd' : 'gdfmt',
     )
     const invoked = spawnSync(bin, ['--version'], {
@@ -464,7 +468,7 @@ test('async formatting queues CPU work on libuv and remains independent across c
 
 test('loader rejects missing, mismatched and corrupt platform packages without falling back', async () => {
   await temporary(async directory => {
-    const copy = join(directory, 'node_modules/gdfmt')
+    const copy = join(directory, 'node_modules', packageName)
     await cp(installed, copy, { recursive: true })
     const header: unknown = process.report.getReport()
     const reportText = JSON.stringify(header)

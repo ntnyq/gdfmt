@@ -1,13 +1,13 @@
 # Node.js API
 
-`gdfmt` 包提供经过验证的文本格式化与显式项目配置解析，支持 ESM、CommonJS 和 TypeScript 声明。
+`@gdfmt/gdfmt` 包提供经过验证的文本格式化与显式项目配置解析，支持 ESM、CommonJS 和 TypeScript 声明。
 
-npm 包尚未发布。本地产物准备见[贡献指南](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#nodejs-packages)。以下示例假设已安装主包与对应的原生平台包。
+使用 `pnpm add @gdfmt/gdfmt@next` 安装预发布版本，对应的原生平台包会自动选择。
 
 ## 格式化文本
 
 ```js
-import { format, formatSync } from 'gdfmt'
+import { format, formatSync } from '@gdfmt/gdfmt'
 
 const source = 'var count=1\n'
 const result = await format(source, {
@@ -24,7 +24,7 @@ if (result.output === null) {
 const syncResult = formatSync(source)
 ```
 
-CommonJS 通过 `require('gdfmt')` 提供相同的具名函数。
+CommonJS 通过 `require('@gdfmt/gdfmt')` 提供相同的具名函数。
 
 | API                                 | 行为                                            |
 | ----------------------------------- | ----------------------------------------------- |
@@ -40,7 +40,7 @@ CommonJS 通过 `require('gdfmt')` 提供相同的具名函数。
 ## 解析项目配置
 
 ```js
-import { format, resolveConfig } from 'gdfmt'
+import { format, resolveConfig } from '@gdfmt/gdfmt'
 
 const resolution = await resolveConfig('src/player.gd')
 if (!resolution.ignored) {

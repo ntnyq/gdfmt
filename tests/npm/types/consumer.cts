@@ -1,5 +1,5 @@
-import { format, formatSync, resolveConfigSync } from 'gdfmt'
-import type { ConfigResolution, FormatResult } from 'gdfmt'
+import { format, formatSync, resolveConfigSync } from '@gdfmt/gdfmt'
+import type { ConfigResolution, FormatResult } from '@gdfmt/gdfmt'
 
 const result: FormatResult = formatSync('var x=1\n')
 const pending: Promise<FormatResult> = format('var x=1\n')

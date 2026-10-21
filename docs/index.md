@@ -40,7 +40,7 @@ gdfmt .
 gdfmt --check .
 ```
 
-See the [quickstart](/guide/) for installation. The npm package is not yet published.
+See the [quickstart](/guide/) for installation. The npm prerelease is available as `@gdfmt/gdfmt@next`.
 
 ## Explore the docs
 

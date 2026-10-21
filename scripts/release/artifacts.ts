@@ -8,6 +8,7 @@ import { packedMetadata, verifyArtifacts } from '../npm/verify-artifacts.ts'
 import {
   checkRelease,
   gitRevision,
+  publicNpmPackage,
   readJson,
   readObject,
   releaseChannel,
@@ -63,7 +64,7 @@ export async function prepareRelease(
     join(destination, file),
   )
   packages.push({
-    name: 'gdfmt',
+    name: publicNpmPackage,
     file,
     integrity: integrity(join(destination, file)),
   })
@@ -110,7 +111,7 @@ export function validateFrozenRelease(directory: string): FrozenRelease {
     name: `@gdfmt/${target.id}`,
     file: `gdfmt-${target.id}-${version}.tgz`,
   }))
-  expected.push({ name: 'gdfmt', file: `gdfmt-${version}.tgz` })
+  expected.push({ name: publicNpmPackage, file: `gdfmt-${version}.tgz` })
   assert.ok(Array.isArray(manifest.packages))
   const entries = manifest.packages.map(readObject)
   assert.deepEqual(
@@ -131,7 +132,7 @@ export function validateFrozenRelease(directory: string): FrozenRelease {
     const packed = packedMetadata(path)
     assert.equal(packed.name, entry.name)
     assert.equal(packed.version, version)
-    if (entry.name === 'gdfmt') assert.deepEqual(packed, metadata)
+    if (entry.name === publicNpmPackage) assert.deepEqual(packed, metadata)
     else {
       const target = targets.find(
         target => entry.name === `@gdfmt/${target.id}`,

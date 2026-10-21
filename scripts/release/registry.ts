@@ -107,7 +107,8 @@ export async function waitForNpm(
   version: string,
   expected: string,
 ): Promise<void> {
-  for (let attempt = 0; attempt < 12; attempt++) {
+  // Accepted uploads can take several minutes to reach the public registry.
+  for (let attempt = 0; attempt < 120; attempt++) {
     const value = await npmVersion(name, version)
     if (value) {
       assertNpmIntegrity(value, expected)

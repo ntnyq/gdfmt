@@ -2,7 +2,15 @@ import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
 import type { SpawnOptions } from 'node:child_process'
 import { createHash } from 'node:crypto'
-import { cp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises'
+import {
+  cp,
+  mkdir,
+  readFile,
+  rename,
+  rm,
+  symlink,
+  writeFile,
+} from 'node:fs/promises'
 import { createServer } from 'node:http'
 import { dirname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -29,6 +37,13 @@ const pack = (directory: string): void => {
 pack(packageRoot)
 pack(nativeRoot)
 const rootTarball = join(artifacts, `gdfmt-${metadata.version}.tgz`)
+// Keep the release bundle's canonical project filename for the scoped facade.
+const packedRootTarball = join(
+  artifacts,
+  `${metadata.name.replace(/^@/, '').replace('/', '-')}-${metadata.version}.tgz`,
+)
+if (packedRootTarball !== rootTarball)
+  await rename(packedRootTarball, rootTarball)
 const nativeTarball = join(
   artifacts,
   `gdfmt-${target.id}-${metadata.version}.tgz`,
@@ -137,7 +152,7 @@ try {
     requests.includes('/native.tgz'),
     'native optional dependency must be installed through registry resolution',
   )
-  const installed = join(consumer, 'node_modules/gdfmt')
+  const installed = join(consumer, 'node_modules', metadata.name)
   assert.equal(
     await readFile(join(installed, 'dist/schema.json'), 'utf8'),
     await readFile(join(packageRoot, 'dist/schema.json'), 'utf8'),
@@ -160,6 +175,7 @@ try {
       env: {
         ...consumerEnv,
         GDFMT_PACKAGE_ROOT: installed,
+        GDFMT_CONSUMER_ROOT: consumer,
         GDFMT_STANDALONE: standalone,
       },
       cwd: consumer,

@@ -8,6 +8,8 @@ export const repositoryRoot: string = fileURLToPath(
   new URL('../../', import.meta.url),
 )
 
+export const publicNpmPackage: string = '@gdfmt/gdfmt'
+
 /**
  * Dependency order for the public Rust packages. Host adapters stay private.
  */
@@ -161,7 +163,7 @@ export function checkRelease(
       'release tag must match the package version',
     )
   const manifest = readJson(resolve(root, 'packages/gdfmt/package.json'))
-  assert.equal(manifest.name, 'gdfmt')
+  assert.equal(manifest.name, publicNpmPackage)
   assert.equal(manifest.version, version, 'Cargo/npm version mismatch')
   assert.notEqual(
     manifest.private,

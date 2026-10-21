@@ -21,7 +21,7 @@ gdfmt_text → gdfmt_syntax → gdfmt_parser → gdfmt_formatter
 cargo install gdfmt_cli --version '=VERSION' --locked
 ```
 
-The npm release contains `gdfmt` and these optional native packages:
+The npm release contains `@gdfmt/gdfmt` and these optional native packages:
 
 ```text
 @gdfmt/darwin-arm64
@@ -31,7 +31,7 @@ The npm release contains `gdfmt` and these optional native packages:
 @gdfmt/win32-x64-msvc
 ```
 
-All five platform versions must match the root package exactly. Prereleases use npm's `next` channel; stable versions use `latest`. Each package is first uploaded under `candidate`. The release channels are advanced only after all six versions are visible with matching integrity and an isolated registry consumer passes the Node API and CLI smoke checks. Platform channels advance before the root channel. The `candidate` tag is retained for inspection.
+All five platform versions must match the root package exactly. Prereleases use npm's `next` channel; stable versions use `latest`. Each package is first uploaded under `candidate`. Accepted npm uploads can take several minutes to appear publicly. Platform candidates are submitted before waiting up to ten minutes for visibility; the root is uploaded only after every platform is confirmed. The release channels are advanced only after all six versions are visible with matching integrity and an isolated registry consumer passes the Node API and CLI smoke checks. Platform channels advance before the root channel. The `candidate` tag is retained for inspection.
 
 ## One-time platform setup
 
@@ -65,7 +65,7 @@ After OIDC has published successfully, revoke the bootstrap token and optionally
 ### npm
 
 1. Verify your account/email and enable two-factor authentication.
-2. Create or obtain publishing access to the **`@gdfmt` scope** and verify availability or ownership of the unscoped **`gdfmt`** name. GitHub repository ownership does not grant npm scope ownership.
+2. Create or obtain publishing access to the **`@gdfmt` scope**, including the main package **`@gdfmt/gdfmt`**. GitHub repository ownership does not grant npm scope ownership.
 3. Ensure the publishing account can create and update all six public packages. Complete bootstrap below using interactive authentication.
 4. In **each of the six packages**, add a GitHub Actions Trusted Publisher:
 

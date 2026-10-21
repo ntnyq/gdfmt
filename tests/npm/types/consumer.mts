@@ -1,5 +1,10 @@
-import { format, formatSync, resolveConfig, resolveConfigSync } from 'gdfmt'
-import type { Diagnostic, FormatResult, TextOptions } from 'gdfmt'
+import {
+  format,
+  formatSync,
+  resolveConfig,
+  resolveConfigSync,
+} from '@gdfmt/gdfmt'
+import type { Diagnostic, FormatResult, TextOptions } from '@gdfmt/gdfmt'
 
 const options: TextOptions = {
   language: { godotVersion: '4.7' },
