@@ -1,10 +1,8 @@
 import assert from 'node:assert/strict'
-import { execFile } from 'node:child_process'
-import { promisify } from 'node:util'
+import { spawn } from 'node:child_process'
 import { resolveNpmCli } from '../npm/cli.ts'
 import { logReleaseProgress } from './progress.ts'
 
-const execFileAsync = promisify(execFile)
 const NPM_COMMAND_TIMEOUT_MS = 180_000
 
 export interface ReleaseCommandOptions {
@@ -39,32 +37,66 @@ export async function runReleaseCommand(
     'expected a positive heartbeat interval',
   )
   const started = Date.now()
-  const controller = new AbortController()
-  const timeout = setTimeout(() => controller.abort(), timeoutMs)
+  logReleaseProgress(`Starting ${label} (timeout ${timeoutMs}ms)`)
+  const child = spawn(executable, args, {
+    cwd,
+    stdio: captureOutput ? ['ignore', 'pipe', 'pipe'] : 'inherit',
+  })
+  let hasTimedOut = false
+  const timeout = setTimeout(() => {
+    hasTimedOut = true
+    child.kill('SIGKILL')
+  }, timeoutMs)
   const heartbeat = setInterval(() => {
     logReleaseProgress(
       `Still running ${label} (${Math.round((Date.now() - started) / 1000)}s elapsed; limit ${timeoutMs}ms)`,
     )
   }, heartbeatMs)
-  logReleaseProgress(`Starting ${label} (timeout ${timeoutMs}ms)`)
   try {
-    const command = execFileAsync(executable, args, {
-      cwd,
-      encoding: 'utf8',
-      signal: controller.signal,
-      killSignal: 'SIGKILL',
-      maxBuffer: 16 * 1024 * 1024,
+    const stdout = await new Promise<string>((resolve, reject) => {
+      let output = ''
+      let stderr = ''
+      let hasExceededOutputLimit = false
+      const appendOutput = (
+        stream: 'stdout' | 'stderr',
+        chunk: string,
+      ): void => {
+        if (hasExceededOutputLimit) return
+        if (stream === 'stdout') output += chunk
+        else stderr += chunk
+        if (
+          Buffer.byteLength(output) + Buffer.byteLength(stderr) >
+          16 * 1024 * 1024
+        ) {
+          hasExceededOutputLimit = true
+          child.kill('SIGKILL')
+        }
+      }
+      child.stdout
+        ?.setEncoding('utf8')
+        .on('data', (chunk: string) => appendOutput('stdout', chunk))
+      child.stderr
+        ?.setEncoding('utf8')
+        .on('data', (chunk: string) => appendOutput('stderr', chunk))
+      child.once('error', reject)
+      child.once('close', (code, signal) => {
+        if (hasExceededOutputLimit) {
+          reject(new Error(`${label} exceeded the captured output limit`))
+        } else if (code !== 0) {
+          reject(
+            Object.assign(
+              new Error(`${label} exited with ${signal ?? `code ${code}`}`),
+              { code, signal, stdout: output, stderr },
+            ),
+          )
+        } else resolve(output)
+      })
     })
-    if (!captureOutput) {
-      command.child.stdout?.pipe(process.stdout, { end: false })
-      command.child.stderr?.pipe(process.stderr, { end: false })
-    }
-    const { stdout } = await command
     logReleaseProgress(`Completed ${label} (${Date.now() - started}ms)`)
     return stdout
   } catch (error) {
     logReleaseProgress(`Failed ${label} (${Date.now() - started}ms)`)
-    if (controller.signal.aborted) {
+    if (hasTimedOut) {
       throw new Error(
         `${label} timed out after ${timeoutMs}ms; confirm registry state before retrying a write`,
         { cause: error },
