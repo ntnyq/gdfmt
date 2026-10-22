@@ -35,6 +35,8 @@ function fixture(): string {
     'LICENSE-THIRD-PARTY',
     'crates/gdfmt_parser/LICENSE-THIRD-PARTY',
     'packages/gdfmt/package.json',
+    'packages/wasm/package.json',
+    'editors/vscode/package.json',
     'packages/gdfmt/src/targets.json',
   ]) {
     const destination = join(root, file)

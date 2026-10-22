@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -9,6 +9,14 @@ export const repositoryRoot: string = fileURLToPath(
 )
 
 export const publicNpmPackage: string = '@gdfmt/gdfmt'
+export const wasmNpmPackage: string = '@gdfmt/wasm'
+
+/**
+ * Frozen legacy releases predate the WASM host; recovery uses their own source.
+ */
+export function hasWasmHost(root: string = repositoryRoot): boolean {
+  return existsSync(resolve(root, 'crates/gdfmt_wasm/Cargo.toml'))
+}
 
 /**
  * Dependency order for the public Rust packages. Host adapters stay private.
@@ -23,7 +31,11 @@ export const publicCrates: readonly string[] = [
   'gdfmt_workspace',
   'gdfmt_cli',
 ]
-export const privateCrates: readonly string[] = ['gdfmt_napi', 'xtask']
+export const privateCrates: readonly string[] = [
+  'gdfmt_napi',
+  'gdfmt_wasm',
+  'xtask',
+]
 
 export function readObject(value: unknown): Record<string, unknown> {
   assert.ok(
@@ -176,6 +188,28 @@ export function checkRelease(
     'git+https://github.com/ntnyq/gdfmt.git',
     'npm repository must match the Trusted Publisher repository',
   )
+  if (hasWasmHost(root)) {
+    const wasm = readJson(resolve(root, 'packages/wasm/package.json'))
+    assert.equal(wasm.name, wasmNpmPackage)
+    assert.equal(wasm.version, version, 'Cargo/WASM version mismatch')
+    assert.notEqual(wasm.private, true)
+    assert.equal(readObject(wasm.publishConfig).access, 'public')
+    assert.equal(
+      readObject(wasm.repository).url,
+      'git+https://github.com/ntnyq/gdfmt.git',
+    )
+    const extension = readJson(resolve(root, 'editors/vscode/package.json'))
+    assert.equal(
+      extension.gdfmtVersion,
+      version,
+      'VS Code/core version mismatch',
+    )
+    assert.ok(
+      typeof extension.version === 'string' &&
+        /^\d+\.\d+\.\d+$/.test(extension.version),
+      'VS Code requires a numeric Marketplace version',
+    )
+  }
   const targets: unknown = JSON.parse(
     readFileSync(resolve(root, 'packages/gdfmt/src/targets.json'), 'utf8'),
   )
@@ -205,7 +239,12 @@ export function checkRelease(
   const packages = metadata.packages.map(readObject)
   assert.deepEqual(
     packages.map(item => item.name).sort(),
-    [...publicCrates, ...privateCrates].sort(),
+    [
+      ...publicCrates,
+      ...privateCrates.filter(
+        name => name !== 'gdfmt_wasm' || hasWasmHost(root),
+      ),
+    ].sort(),
     'update the release allowlist for workspace changes',
   )
   const lock = readFileSync(resolve(root, 'Cargo.lock'), 'utf8')

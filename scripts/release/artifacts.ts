@@ -8,7 +8,9 @@ import { packedMetadata, verifyArtifacts } from '../npm/verify-artifacts.ts'
 import {
   checkRelease,
   gitRevision,
+  hasWasmHost,
   publicNpmPackage,
+  wasmNpmPackage,
   readJson,
   readObject,
   releaseChannel,
@@ -59,6 +61,16 @@ export async function prepareRelease(
       integrity: integrity(join(destination, file)),
     })
   }
+  const wasmDirectory = join(source, 'npm-wasm')
+  const wasm = readJson(join(wasmDirectory, 'acceptance.json'))
+  validateWasmReceipt(wasm, wasmDirectory, version, matrix.revision)
+  const wasmFile = `gdfmt-wasm-${version}.tgz`
+  await copyFile(join(wasmDirectory, wasmFile), join(destination, wasmFile))
+  packages.push({
+    name: wasmNpmPackage,
+    file: wasmFile,
+    integrity: integrity(join(destination, wasmFile)),
+  })
   const file = `gdfmt-${version}.tgz`
   await copyFile(
     join(source, `npm-${targets[0].id}-24.0.0`, file),
@@ -71,7 +83,7 @@ export async function prepareRelease(
   })
   await writeFile(
     join(destination, 'release.json'),
-    `${JSON.stringify({ schemaVersion: 1, version, revision: matrix.revision, channel: releaseChannel(version), packages, matrix }, null, 2)}\n`,
+    `${JSON.stringify({ schemaVersion: 1, version, revision: matrix.revision, channel: releaseChannel(version), packages, matrix, wasm }, null, 2)}\n`,
   )
   validateFrozenRelease(destination)
   console.log(
@@ -116,13 +128,17 @@ export function validateFrozenRelease(
     name: `@gdfmt/${target.id}`,
     file: `gdfmt-${target.id}-${version}.tgz`,
   }))
+  if (hasWasmHost(sourceRoot)) {
+    validateWasmReceipt(readObject(manifest.wasm), directory, version, revision)
+    expected.push({ name: wasmNpmPackage, file: `gdfmt-wasm-${version}.tgz` })
+  }
   expected.push({ name: publicNpmPackage, file: `gdfmt-${version}.tgz` })
   assert.ok(Array.isArray(manifest.packages))
   const entries = manifest.packages.map(readObject)
   assert.deepEqual(
     entries.map(entry => ({ name: entry.name, file: entry.file })),
     expected,
-    'expected exactly five platforms followed by the root package',
+    'expected five platforms, WASM, then the root package',
   )
   const packages: ReleasePackage[] = expected.map(entry => {
     const path = join(directory, entry.file)
@@ -138,6 +154,11 @@ export function validateFrozenRelease(
     assert.equal(packed.name, entry.name)
     assert.equal(packed.version, version)
     if (entry.name === publicNpmPackage) assert.deepEqual(packed, metadata)
+    else if (entry.name === wasmNpmPackage)
+      assert.deepEqual(
+        packed,
+        readJson(join(sourceRoot, 'packages/wasm/package.json')),
+      )
     else {
       const target = targets.find(
         target => entry.name === `@gdfmt/${target.id}`,
@@ -177,4 +198,37 @@ export function validateFrozenRelease(
     }
   }
   return { schemaVersion: 1, version, revision, channel, packages }
+}
+
+/**
+ * A browser-tested tarball must come from the same clean commit as native builds.
+ */
+function validateWasmReceipt(
+  receipt: Record<string, unknown>,
+  directory: string,
+  version: string,
+  revision: string,
+): void {
+  assert.equal(receipt.schemaVersion, 1)
+  assert.equal(receipt.passed, true)
+  assert.equal(receipt.published, false)
+  assert.equal(receipt.cleanSource, true, 'WASM artifacts require clean source')
+  assert.equal(receipt.version, version)
+  assert.equal(
+    receipt.revision,
+    revision,
+    'WASM receipt must belong to the release commit',
+  )
+  assert.equal(receipt.tarball, `gdfmt-wasm-${version}.tgz`)
+  assert.ok(
+    typeof receipt.fixtureCases === 'number' && receipt.fixtureCases > 0,
+  )
+  assert.equal(readObject(receipt.browser).crossOriginIsolated, false)
+  assert.equal(
+    receipt.sha512,
+    createHash('sha512')
+      .update(readFileSync(join(directory, `gdfmt-wasm-${version}.tgz`)))
+      .digest('hex'),
+    'WASM tarball must match tested bytes',
+  )
 }

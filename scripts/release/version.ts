@@ -87,6 +87,16 @@ export function planVersionUpdate(
     }),
   )
   files.set(npmPath, `${JSON.stringify(manifest, null, 2)}\n`)
+  for (const [relative, field] of [
+    ['packages/wasm/package.json', 'version'],
+    ['editors/vscode/package.json', 'gdfmtVersion'],
+  ]) {
+    const path = resolve(root, relative)
+    const manifest = readJson(path)
+    assert.equal(manifest[field], current)
+    manifest[field] = version
+    files.set(path, `${JSON.stringify(manifest, null, 2)}\n`)
+  }
   // The pnpm lockfile does not store workspace package versions. Platform packages
   // are generated artifacts, not workspace members or installed build dependencies.
   const pnpmLock = readFileSync(resolve(root, 'pnpm-lock.yaml'), 'utf8')
@@ -117,7 +127,7 @@ export function updateVersion(
     }
   }
   console.log(
-    `${dryRun ? 'Would update' : 'Updated'} Cargo.toml, Cargo.lock and packages/gdfmt/package.json to ${version}. No commit, tag or publication created.`,
+    `${dryRun ? 'Would update' : 'Updated'} Cargo, npm and VS Code core versions to ${version}. No commit, tag or publication created.`,
   )
 }
 

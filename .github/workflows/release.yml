@@ -74,8 +74,12 @@ jobs:
     needs: preflight
     uses: ./.github/workflows/npm.yml
 
+  hosts:
+    needs: preflight
+    uses: ./.github/workflows/hosts.yml
+
   freeze:
-    needs: [preflight, rust, npm]
+    needs: [preflight, rust, npm, hosts]
     runs-on: ubuntu-24.04
     outputs:
       artifact-id: ${{ steps.bundle.outputs.artifact-id }}
@@ -98,7 +102,11 @@ jobs:
           pattern: npm-*
           path: target/npm-ci
       - name: Package and compile the public Rust crates without publishing
-        run: cargo package --workspace --exclude gdfmt_napi --exclude xtask --registry crates-io --locked
+        run: cargo package --workspace --exclude gdfmt_napi --exclude gdfmt_wasm --exclude xtask --registry crates-io --locked
+      - uses: actions/download-artifact@v8.0.2
+        with:
+          pattern: vscode-*
+          path: target/editor-ci
       - run: pnpm release:prepare
       - uses: actions/upload-artifact@v7.0.2
         id: bundle
@@ -206,7 +214,7 @@ jobs:
             if [ "$RELEASE_CHANNEL" = next ]; then args+=(--prerelease); fi
             gh release create "$GITHUB_REF_NAME" "${args[@]}"
           fi
-          gh release upload "$GITHUB_REF_NAME" release/npm/* release/crates/* --clobber
+          gh release upload "$GITHUB_REF_NAME" release/npm/* release/crates/* release/editors/* --clobber
 
   recover-npm:
     if: github.event_name == 'workflow_dispatch' && inputs.publish && inputs.recovery_artifact != '' && vars.RELEASE_ENABLED == 'true'

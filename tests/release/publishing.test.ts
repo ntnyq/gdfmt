@@ -20,6 +20,9 @@ import {
 } from '../../scripts/release/artifacts.ts'
 import {
   gitRevision,
+  publicCrates,
+  privateCrates,
+  readJson,
   readObject,
   repositoryRoot,
 } from '../../scripts/release/project.ts'
@@ -83,6 +86,34 @@ function fixture(): { directory: string; matrix: string; frozen: string } {
       })
     }
   }
+  const wasmDirectory = join(matrix, 'npm-wasm')
+  mkdirSync(wasmDirectory, { recursive: true })
+  writeJson(
+    join(staging, 'package/package.json'),
+    readJson(join(repositoryRoot, 'packages/wasm/package.json')),
+  )
+  const wasmFile = `gdfmt-wasm-${metadata.version}.tgz`
+  execFileSync('tar', [
+    '-czf',
+    join(wasmDirectory, wasmFile),
+    '-C',
+    staging,
+    'package',
+  ])
+  writeJson(join(wasmDirectory, 'acceptance.json'), {
+    schemaVersion: 1,
+    revision: gitRevision(),
+    cleanSource: true,
+    version: metadata.version,
+    tarball: wasmFile,
+    sha512: createHash('sha512')
+      .update(readFileSync(join(wasmDirectory, wasmFile)))
+      .digest('hex'),
+    fixtureCases: 1,
+    browser: { crossOriginIsolated: false },
+    passed: true,
+    published: false,
+  })
   return { directory, matrix, frozen }
 }
 
@@ -123,12 +154,12 @@ function fakePublisher(frozen: string): {
   return { operations, writes, versions, channels }
 }
 
-test('complete matrices freeze exactly six packages and reject missing, changed and foreign receipts', async () => {
+test('complete matrices freeze exactly seven packages and reject missing, changed and foreign receipts', async () => {
   const files = fixture()
   try {
     await prepareRelease(files.matrix, files.frozen)
     const release = validateFrozenRelease(files.frozen)
-    assert.equal(release.packages.length, 6)
+    assert.equal(release.packages.length, 7)
     const receiptPath = join(
       files.matrix,
       `npm-${targets[0].id}-22.13.0/acceptance.json`,
@@ -168,6 +199,23 @@ test('recovery validates artifacts against the explicit clean source commit rath
       repositoryRoot,
       source,
     ])
+    const manifests = [
+      'Cargo.toml',
+      'Cargo.lock',
+      'packages/gdfmt/package.json',
+      'packages/wasm/package.json',
+      'editors/vscode/package.json',
+      ...[...publicCrates, ...privateCrates].map(
+        name => `${name === 'xtask' ? 'xtask' : `crates/${name}`}/Cargo.toml`,
+      ),
+    ]
+    for (const file of manifests) {
+      mkdirSync(join(source, file, '..'), { recursive: true })
+      copyFileSync(join(repositoryRoot, file), join(source, file))
+    }
+    mkdirSync(join(source, 'crates/gdfmt_wasm/src'), { recursive: true })
+    writeFileSync(join(source, 'crates/gdfmt_wasm/src/lib.rs'), '')
+    execFileSync('git', ['add', '--all'], { cwd: source })
     execFileSync(
       'git',
       [
@@ -189,6 +237,7 @@ test('recovery validates artifacts against the explicit clean source commit rath
       ...manifest,
       revision,
       matrix: { ...readObject(manifest.matrix), revision },
+      wasm: { ...readObject(manifest.wasm), revision },
     })
     assert.equal(validateFrozenRelease(files.frozen, source).revision, revision)
     assert.throws(() => validateFrozenRelease(files.frozen))
@@ -211,7 +260,7 @@ test('npm plans never write, publishes platforms first, and only promotes a comp
     assert.equal(fake.writes.length, 0)
     await publishNpm(files.frozen, true, fake.operations)
     const publishes = fake.writes.filter(value => value.startsWith('publish:'))
-    assert.equal(publishes.length, 6)
+    assert.equal(publishes.length, 7)
     assert.equal(publishes.at(-1), `publish:${metadata.name}`)
     assert.ok(
       fake.writes.indexOf('promote:@gdfmt/darwin-arm64') >
@@ -224,6 +273,88 @@ test('npm plans never write, publishes platforms first, and only promotes a comp
       fake.writes.some(value => value.startsWith('publish:')),
       false,
     )
+  } finally {
+    rmSync(files.directory, { recursive: true, force: true })
+  }
+})
+
+test('WASM release guards reject dirty, foreign and changed browser artifacts', async () => {
+  const files = fixture()
+  try {
+    const path = join(files.matrix, 'npm-wasm/acceptance.json')
+    const receipt = readJson(path)
+    writeJson(path, { ...receipt, cleanSource: false })
+    await assert.rejects(
+      () => prepareRelease(files.matrix, files.frozen),
+      /clean source/,
+    )
+    writeJson(path, { ...receipt, revision: '0'.repeat(40) })
+    await assert.rejects(
+      () => prepareRelease(files.matrix, files.frozen),
+      /release commit/,
+    )
+    writeJson(path, receipt)
+    writeFileSync(
+      join(files.matrix, 'npm-wasm', `gdfmt-wasm-${metadata.version}.tgz`),
+      'changed bytes',
+    )
+    await assert.rejects(
+      () => prepareRelease(files.matrix, files.frozen),
+      /tested bytes/,
+    )
+  } finally {
+    rmSync(files.directory, { recursive: true, force: true })
+  }
+})
+
+test('legacy six-package frozen releases remain recoverable against their original source', async () => {
+  const files = fixture()
+  const source = join(files.directory, 'original-source')
+  try {
+    await prepareRelease(files.matrix, files.frozen)
+    execFileSync('git', [
+      'clone',
+      '--shared',
+      '--quiet',
+      repositoryRoot,
+      source,
+    ])
+    // Model the original source contract without the optional WASM host.
+    rmSync(join(source, 'crates/gdfmt_wasm'), { recursive: true, force: true })
+    rmSync(join(source, 'packages/wasm'), { recursive: true, force: true })
+    execFileSync('cargo', ['generate-lockfile', '--offline'], {
+      cwd: source,
+      stdio: 'pipe',
+    })
+    execFileSync('git', ['add', '--all'], { cwd: source })
+    execFileSync(
+      'git',
+      [
+        '-c',
+        'user.name=Release test',
+        '-c',
+        'user.email=test@example.invalid',
+        'commit',
+        '--allow-empty',
+        '-qm',
+        'Legacy release source',
+      ],
+      { cwd: source },
+    )
+    const path = join(files.frozen, 'release.json')
+    const manifest = readJson(path)
+    assert.ok(Array.isArray(manifest.packages))
+    delete manifest.wasm
+    manifest.revision = gitRevision(source)
+    manifest.matrix = {
+      ...readObject(manifest.matrix),
+      revision: manifest.revision,
+    }
+    manifest.packages = manifest.packages.filter(
+      entry => readObject(entry).name !== '@gdfmt/wasm',
+    )
+    writeJson(path, manifest)
+    assert.equal(validateFrozenRelease(files.frozen, source).packages.length, 6)
   } finally {
     rmSync(files.directory, { recursive: true, force: true })
   }
@@ -368,7 +499,7 @@ test('npm resumes a partially promoted set without uploading or rewriting comple
     })
     assert.deepEqual(
       fake.writes.filter(value => value.startsWith('promote:')),
-      [`promote:${failed}`, `promote:${metadata.name}`],
+      [`promote:${failed}`, 'promote:@gdfmt/wasm', `promote:${metadata.name}`],
     )
     assert.equal(
       fake.writes.some(value => value.startsWith('publish:')),
@@ -393,7 +524,7 @@ test('npm confirms a committed upload even when the publishing CLI reports an er
     })
     assert.equal(
       fake.writes.filter(value => value.startsWith('publish:')).length,
-      6,
+      7,
     )
     assert.equal(fake.writes.at(-1), `promote:${metadata.name}`)
   } finally {
@@ -413,7 +544,7 @@ test('asynchronous registry processing overlaps platforms and gates root on visi
     await publishNpm(files.frozen, true, {
       ...fake.operations,
       publish: entry => {
-        if (entry.name === metadata.name) assert.equal(verified.size, 5)
+        if (entry.name === metadata.name) assert.equal(verified.size, 6)
         availableAt.set(entry.name, time + latency)
         fake.operations.publish(entry, files.frozen)
       },
@@ -426,7 +557,7 @@ test('asynchronous registry processing overlaps platforms and gates root on visi
       },
     })
     assert.equal(time, 2 * latency)
-    assert.equal(verified.size, 6)
+    assert.equal(verified.size, 7)
   } finally {
     rmSync(files.directory, { recursive: true, force: true })
   }

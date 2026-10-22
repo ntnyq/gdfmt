@@ -13,6 +13,7 @@ import {
   assertCleanReleaseSource,
   compareVersions,
   publicNpmPackage,
+  wasmNpmPackage,
   readObject,
   repositoryRoot,
 } from './project.ts'
@@ -38,7 +39,10 @@ export interface NpmOperations {
   ) => void | Promise<void>
   wait: typeof waitForNpm
   waitChannel: typeof waitForNpmChannel
-  verifyConsumer: (version: string) => void | Promise<void>
+  verifyConsumer: (
+    version: string,
+    includeWasm: boolean,
+  ) => void | Promise<void>
 }
 
 const npmOperations: NpmOperations = {
@@ -75,7 +79,7 @@ const npmOperations: NpmOperations = {
   },
   wait: waitForNpm,
   waitChannel: waitForNpmChannel,
-  verifyConsumer: async version => {
+  verifyConsumer: async (version, includeWasm) => {
     const directory = mkdtempSync(join(tmpdir(), 'gdfmt-registry-consumer-'))
     try {
       writeFileSync(
@@ -87,6 +91,7 @@ const npmOperations: NpmOperations = {
           [
             'install',
             `${publicNpmPackage}@${version}`,
+            ...(includeWasm ? [`${wasmNpmPackage}@${version}`] : []),
             '--prefer-online',
             '--ignore-scripts',
             '--no-audit',
@@ -117,6 +122,20 @@ const npmOperations: NpmOperations = {
           timeoutMs: 30_000,
         },
       )
+      if (includeWasm)
+        await runReleaseCommand(
+          process.execPath,
+          [
+            '--input-type=module',
+            '-e',
+            'import assert from "node:assert/strict"; import {readFile} from "node:fs/promises"; import {createFormatter} from "@gdfmt/wasm"; const wasm = await readFile(new URL(import.meta.resolve("@gdfmt/wasm/gdfmt.wasm"))); const formatter = await createFormatter({wasm}); assert.equal(formatter.formatSync("var x=1\\n").output, "var x = 1\\n")',
+          ],
+          {
+            label: 'registry-installed WASM smoke test',
+            cwd: directory,
+            timeoutMs: 30_000,
+          },
+        )
       const output = await runReleaseCommand(
         process.execPath,
         [join('node_modules', publicNpmPackage, 'dist/cli.cjs'), '--version'],
@@ -190,7 +209,7 @@ export async function publishNpm(
     console.log('Read-only plan. Pass --execute to publish.')
     return
   }
-  const platforms = release.packages.slice(0, -1)
+  const candidates = release.packages.slice(0, -1)
   const root = release.packages.at(-1)
   assert.ok(root && root.name === publicNpmPackage)
   const upload = async (entry: ReleasePackage): Promise<void> => {
@@ -212,8 +231,8 @@ export async function publishNpm(
   }
   // npm processes accepted uploads asynchronously. Submit platform candidates
   // together, then require every platform to be visible before uploading root.
-  for (const entry of platforms) await upload(entry)
-  for (const entry of platforms)
+  for (const entry of candidates) await upload(entry)
+  for (const entry of candidates)
     if (pending.includes(entry.name))
       await operations.wait(entry.name, release.version, entry.integrity)
   await upload(root)
@@ -222,10 +241,13 @@ export async function publishNpm(
   logReleaseProgress(
     'Verifying a fresh registry install before promoting any channels',
   )
-  await operations.verifyConsumer(release.version)
-  // Recheck every platform after uploads, before the first channel write.
+  await operations.verifyConsumer(
+    release.version,
+    release.packages.some(entry => entry.name === wasmNpmPackage),
+  )
+  // Recheck every package after uploads, before the first channel write.
   for (const entry of release.packages) await currentChannel(entry.name)
-  // Promotion starts only after all six immutable versions have been verified.
+  // Promotion starts only after all immutable versions have been verified.
   for (const entry of release.packages) {
     if ((await currentChannel(entry.name)) === release.version) {
       logReleaseProgress(

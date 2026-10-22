@@ -15,13 +15,13 @@ gdfmt_text → gdfmt_syntax → gdfmt_parser → gdfmt_formatter
 → gdfmt → gdfmt_config → gdfmt_workspace → gdfmt_cli
 ```
 
-`gdfmt_napi` and `xtask` remain unpublished. The CLI crate is `gdfmt_cli`; its installed executable is `gdfmt`:
+`gdfmt_napi`, `gdfmt_wasm` and `xtask` remain unpublished. The CLI crate is `gdfmt_cli`; its installed executable is `gdfmt`:
 
 ```sh
 cargo install gdfmt_cli --version '=VERSION' --locked
 ```
 
-The npm release contains `@gdfmt/gdfmt` and these optional native packages:
+The npm release contains `@gdfmt/wasm`, `@gdfmt/gdfmt` and these optional native packages:
 
 ```text
 @gdfmt/darwin-arm64
@@ -31,7 +31,7 @@ The npm release contains `@gdfmt/gdfmt` and these optional native packages:
 @gdfmt/win32-x64-msvc
 ```
 
-All five platform versions must match the root package exactly. Prereleases use npm's `next` channel; stable versions use `latest`. Each package is first uploaded under `candidate`. Accepted npm uploads can take several minutes to appear publicly. Platform candidates are submitted before waiting up to ten minutes for visibility; the root is uploaded only after every platform is confirmed. The release channels are advanced only after all six versions are visible with matching integrity and an isolated registry consumer passes the Node API and CLI smoke checks. Platform channels advance before the root channel. The `candidate` tag is retained for inspection.
+All five platform versions must match the root package exactly. Prereleases use npm's `next` channel; stable versions use `latest`. Each package is first uploaded under `candidate`. Accepted npm uploads can take several minutes to appear publicly. Platform candidates are submitted before waiting up to ten minutes for visibility; the root is uploaded only after every platform is confirmed. The release channels are advanced only after all seven versions are visible with matching integrity and an isolated registry consumer passes the Node API, WASM and CLI smoke checks. Platform channels advance before the root channel. The `candidate` tag is retained for inspection.
 
 ## One-time platform setup
 
@@ -66,8 +66,8 @@ After OIDC has published successfully, revoke the bootstrap token and optionally
 
 1. Verify your account/email and enable two-factor authentication.
 2. Create or obtain publishing access to the **`@gdfmt` scope**, including the main package **`@gdfmt/gdfmt`**. GitHub repository ownership does not grant npm scope ownership.
-3. Ensure the publishing account can create and update all six public packages. Complete bootstrap below using interactive authentication.
-4. In **each of the six packages**, add a GitHub Actions Trusted Publisher:
+3. Ensure the publishing account can create and update all seven public packages. Complete bootstrap below using interactive authentication.
+4. In **each of the seven packages**, add a GitHub Actions Trusted Publisher:
 
 | Field                | Value         |
 | -------------------- | ------------- |
@@ -103,7 +103,7 @@ pnpm release:publish:crates
 pnpm release:publish:npm
 ```
 
-Replace the example tag with the actual version. Replace `FREEZE_ATTEMPT` with the successful freeze attempt (for example, `1`); a later publisher-only retry does not change that artifact name. The bundle contains `npm/` and `crates/`. Downloaded `npm/release.json` records the commit, clean-source status, complete matrix, selected files and SHA-512 integrity. `crates/crates.json` binds all eight Rust archives to the same commit and SHA-256 checksums, and the verifier also checks each archive's Cargo VCS metadata. The selected native tarballs come from the Node 24.0.0 runs; the Node 22.13.0 runs independently test the same root tarball. Native artifacts built by the two Node jobs are not required to be byte-identical.
+Replace the example tag with the actual version. Replace `FREEZE_ATTEMPT` with the successful freeze attempt (for example, `1`); a later publisher-only retry does not change that artifact name. The bundle contains `npm/`, `crates/` and `editors/`. Downloaded `npm/release.json` records the commit, clean-source status, complete matrix, selected files and SHA-512 integrity. `crates/crates.json` binds all eight Rust archives to the same commit and SHA-256 checksums, and the verifier also checks each archive's Cargo VCS metadata. The selected native tarballs come from the Node 24.0.0 runs; the Node 22.13.0 runs independently test the same root tarball. Native artifacts built by the two Node jobs are not required to be byte-identical.
 
 5. When ready to perform the first actual publication, use the pinned npm 11.21.0, authenticate and explicitly execute the plans. Node 24.0.0's originally bundled npm is older, so upgrade it first:
 
@@ -139,8 +139,8 @@ The script updates:
 
 - `[workspace.package].version` in `Cargo.toml`;
 - all seven exact internal workspace dependency requirements;
-- all ten local workspace entries in `Cargo.lock`, including the private adapter and tooling;
-- the public npm version and all five optional native dependency versions.
+- all eleven local workspace entries in `Cargo.lock`, including private adapters and tooling;
+- both public npm versions, all five optional native dependency versions and the VS Code `gdfmtVersion` field.
 
 It validates before and after the change and rolls back modified version files if post-update validation fails. It rejects downgrades, malformed versions and build metadata. It creates no commits or tags and performs no publication. The private root npm package and documentation package retain their independent tooling versions. The pnpm lockfile currently contains no release package versions, so it stays unchanged; the script fails if release versions become locked and require a new update strategy. Do not use `bumpp` alone for coordinated releases.
 
@@ -155,13 +155,44 @@ Use a stable version such as `0.1.0` to publish to `latest`. Publishing an alpha
 
 ## What the workflow verifies
 
-`release.yml` calls `ci.yml` and `npm.yml` through `workflow_call` and waits for both. This includes Rust tests, Clippy, rustfmt, schema/compatibility/syntax checks, Rust 1.88 checks, engine comparisons and all ten npm consumer receipts. A separate release-script job runs on normal npm CI as well.
+`release.yml` calls `ci.yml`, `npm.yml` and `hosts.yml` through `workflow_call` and waits for all three. This includes Rust tests, Clippy, rustfmt, schema/compatibility/syntax checks, Rust 1.88 checks, engine comparisons and all ten npm consumer receipts. A separate release-script job runs on normal npm CI as well.
 
-The freeze job rechecks tarball hashes, clean-source receipts and commit identity, copies exactly six npm tarballs and compiles all eight packaged Rust crates using Cargo's temporary registry. It uploads one immutable `release-artifacts-ATTEMPT` bundle with 30-day retention. A freeze retry uses a new attempt name, so a successful upload followed by a failed job cleanup cannot collide with the previous artifact. Publisher jobs download the bundle by the exact **artifact ID returned by the successful freeze job**, not by a name search or latest-attempt guess. They do not rebuild npm artifacts.
+The freeze job rechecks tarball hashes, clean-source receipts and commit identity, copies exactly seven npm tarballs and compiles all eight packaged Rust crates using Cargo's temporary registry. It uploads one immutable `release-artifacts-ATTEMPT` bundle with 30-day retention. A freeze retry uses a new attempt name, so a successful upload followed by a failed job cleanup cannot collide with the previous artifact. Publisher jobs download the bundle by the exact **artifact ID returned by the successful freeze job**, not by a name search or latest-attempt guess. They do not rebuild npm artifacts.
 
 Rust publication checks its source manifest, archive VCS metadata and registry SHA-256 checksums, and compares each archive repackaged by Cargo against the frozen archive before upload. npm publication compares SHA-512 integrity and validates the frozen complete matrix. Registry reads use bounded backoff for network failures, 429 and 5xx responses; 401/403 fail immediately, and only 404 means absent. Existing versions with different bytes require investigation and a new version, not an overwrite. A CLI upload error is reconciled by checking the expected immutable bytes in the registry before deciding whether the job failed; a registry write is never automatically repeated.
 
-The Rust CLI is installed back from crates.io with an exact `=VERSION` requirement after publication. npm installs an exact root version from the registry with an empty cache and prefers fresh metadata. Missing install metadata (`ETARGET`/404) is retried for up to ten minutes because the install index can lag the immutable version endpoint; authentication and other install failures stop immediately. It tests API output and CLI version before advancing channels. The npm execution preflight validates Node/npm versions and, inside GitHub Actions, the presence of the OIDC request environment provided by `id-token: write`. It does not use `npm whoami`, which does not validate OIDC permissions. A successful upload of a new version remains the actual proof of the platform's trust configuration. A GitHub Release and artifact attachments are created only after both publisher jobs succeed. The workflow never uses `workflow_run` or `pull_request_target` to publish.
+The Rust CLI is installed back from crates.io with an exact `=VERSION` requirement after publication. npm installs an exact root version from the registry with an empty cache and prefers fresh metadata. Missing install metadata (`ETARGET`/404) is retried for up to ten minutes because the install index can lag the immutable version endpoint; authentication and other install failures stop immediately. It tests native/WASM API output and CLI version before advancing channels. The npm execution preflight validates Node/npm versions and, inside GitHub Actions, the presence of the OIDC request environment provided by `id-token: write`. It does not use `npm whoami`, which does not validate OIDC permissions. A successful upload of a new version remains the actual proof of the platform's trust configuration. A GitHub Release and artifact attachments are created only after both publisher jobs succeed. The workflow never uses `workflow_run` or `pull_request_target` to publish.
+
+## WASM and VS Code artifacts
+
+The browser workflow installs the actual WASM tarball in Node and Chromium,
+compares all shared fixtures across five profiles, and tests a module Worker
+without isolation headers. Its `npm-wasm` receipt must match the release commit,
+clean-source status and exact SHA-512 before freezing. The WASM package is
+uploaded with platform candidates before the native facade and receives the same
+`next` or `latest` channel. Configure its npm Trusted Publisher separately.
+
+`hosts.yml` also creates platform VSIX files. Freeze requires native version
+checks on all five targets and Extension Host evidence on four desktop runners.
+Alpine uses the native binary smoke check; Electron cannot run on musl. Linux's
+desktop host additionally tests with Godot Tools enabled. Each VSIX records its
+core version, numeric extension version, revision and SHA-512 in `editors.json`.
+GitHub Releases attach those frozen bytes. This workflow does not publish to the
+VS Code Marketplace. Increment the extension's numeric Marketplace version when
+preparing a Marketplace update; it cannot carry Cargo's prerelease suffix.
+
+`hosts.yml` also packages a separate browser-only Web VSIX from the same WASM
+package. Freeze requires its Chromium Web Extension Host receipt with
+`webExtensionHostPassed: true` and `crossOriginIsolated: false`, the same clean
+revision and exact SHA-512. All six VSIX files are attached to the GitHub Release;
+none is automatically published to the Marketplace. Local Web validation is
+`pnpm test:vscode:web`; `pnpm package:vscode:web` alone does not record acceptance.
+
+`release:version` updates the WASM npm version and the extension's `gdfmtVersion`;
+the numeric extension version is maintained independently. `gdfmt_wasm` is excluded
+from crates.io packaging. Historical six-package frozen releases remain valid
+when recovery selects their original source checkout; the new WASM requirement
+is applied only to source revisions that contain the WASM host.
 
 ## Dry runs and recovery
 

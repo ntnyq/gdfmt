@@ -15,13 +15,13 @@ gdfmt_text → gdfmt_syntax → gdfmt_parser → gdfmt_formatter
 → gdfmt → gdfmt_config → gdfmt_workspace → gdfmt_cli
 ```
 
-`gdfmt_napi` 和 `xtask` 保持不可发布。安装 Rust CLI 时包名是 `gdfmt_cli`，命令名是 `gdfmt`：
+`gdfmt_napi`、`gdfmt_wasm` 和 `xtask` 保持不可发布。安装 Rust CLI 时包名是 `gdfmt_cli`，命令名是 `gdfmt`：
 
 ```sh
 cargo install gdfmt_cli --version '=VERSION' --locked
 ```
 
-npm 需要发布 6 个包：
+npm 需要发布 7 个包：
 
 ```text
 @gdfmt/darwin-arm64
@@ -29,6 +29,7 @@ npm 需要发布 6 个包：
 @gdfmt/linux-x64-gnu
 @gdfmt/linux-x64-musl
 @gdfmt/win32-x64-msvc
+@gdfmt/wasm
 @gdfmt/gdfmt
 ```
 
@@ -67,8 +68,8 @@ npm 需要发布 6 个包：
 
 1. 验证账号和邮箱，启用双因素认证。
 2. 创建或取得 **`@gdfmt` scope** 的发布权限，包括主包 **`@gdfmt/gdfmt`**。GitHub 仓库权限与 npm scope 权限相互独立。
-3. 确保账号可以创建和更新全部 6 个公开包，首次通过交互式认证发布。
-4. 在 **6 个包各自的设置**中添加 GitHub Actions Trusted Publisher：
+3. 确保账号可以创建和更新全部 7 个公开包，首次通过交互式认证发布。
+4. 在 **7 个包各自的设置**中添加 GitHub Actions Trusted Publisher：
 
 | 配置项               | 值            |
 | -------------------- | ------------- |
@@ -104,7 +105,7 @@ pnpm release:publish:crates
 pnpm release:publish:npm
 ```
 
-将示例 tag 替换为实际版本。`FREEZE_ATTEMPT` 填写成功冻结的运行次数，例如 `1`；后续只重试发布 job 不会改变该 artifact 名称。bundle 包含 `npm/` 和 `crates/`。`npm/release.json` 记录提交、源码干净状态、完整矩阵、待发布文件及 SHA-512 integrity；`crates/crates.json` 记录 8 个 Rust 归档对应的提交和 SHA-256，校验时还会核对归档内的 Cargo VCS 信息。每个平台选择 Node 24.0.0 job 的 tarball，Node 22.13.0 job 独立验证同一份主包；两个 Node job 生成的原生包不要求字节完全相同。
+将示例 tag 替换为实际版本。`FREEZE_ATTEMPT` 填写成功冻结的运行次数，例如 `1`；后续只重试发布 job 不会改变该 artifact 名称。bundle 包含 `npm/`、`crates/` 和 `editors/`。`npm/release.json` 记录提交、源码干净状态、完整矩阵、待发布文件及 SHA-512 integrity；`crates/crates.json` 记录 8 个 Rust 归档对应的提交和 SHA-256，校验时还会核对归档内的 Cargo VCS 信息。每个平台选择 Node 24.0.0 job 的 tarball，Node 22.13.0 job 独立验证同一份主包；两个 Node job 生成的原生包不要求字节完全相同。
 
 5. 确定开始首次实际发布时，使用固定的 npm 11.21.0，登录并显式执行。Node 24.0.0 最初自带的 npm 较旧，需要先升级：
 
@@ -140,7 +141,7 @@ pnpm test:release
 
 - `Cargo.toml` 中的 workspace 版本；
 - 7 个内部 workspace 依赖的精确版本；
-- `Cargo.lock` 中全部 10 个本地 workspace 包，包括私有适配层和工具；
+- `Cargo.lock` 中全部 11 个本地 workspace 包，包括私有适配层和工具；
 - npm 主包版本及 5 个 optionalDependencies 版本。
 
 脚本在修改前后执行一致性检查，后置检查失败时回滚版本文件。它拒绝降级、非法版本和 build metadata，不创建提交或 tag，也不发布。私有根 npm 工具包和文档包保留独立版本。当前 pnpm lockfile 不保存发布包版本，因此不需要修改；如果以后出现对应的锁定版本，脚本会停止，要求先更新同步策略。不要单独使用 `bumpp` 完成跨生态版本更新。
@@ -156,9 +157,9 @@ git push origin v0.1.0-alpha.1
 
 ## CI 执行内容
 
-`release.yml` 通过 `workflow_call` 复用 `ci.yml` 和 `npm.yml`，明确等待它们通过，包括 Rust 测试、Clippy、rustfmt、schema、兼容性与语法覆盖检查、Rust 1.88 检查、引擎对比及 10 份 npm 消费者测试。普通 npm CI 也运行发布脚本测试。
+`release.yml` 通过 `workflow_call` 复用 `ci.yml`、`npm.yml` 和 `hosts.yml`，明确等待它们通过，包括 Rust 测试、Clippy、rustfmt、schema、兼容性与语法覆盖检查、Rust 1.88 检查、引擎对比及 10 份 npm 消费者测试。普通 npm CI 也运行发布脚本测试。
 
-冻结 job 重新检查 tarball hash、源码干净状态、提交来源和完整矩阵，复制 6 个 npm tarball，并通过 Cargo 临时 registry 打包、编译 8 个 Rust crate。整套产物作为一个不可变的 `release-artifacts-ATTEMPT` bundle 上传，保留 30 天；冻结 job 重试使用新的 attempt 名称，避免上传已成功而后置清理失败时出现名称冲突。发布 job 使用**成功冻结 job 返回的 artifact ID** 下载，避免按名称搜索或误选最新 attempt 的产物，不重新构建 npm 包。
+冻结 job 重新检查 tarball hash、源码干净状态、提交来源和完整矩阵，复制 7 个 npm tarball，并通过 Cargo 临时 registry 打包、编译 8 个 Rust crate。整套产物作为一个不可变的 `release-artifacts-ATTEMPT` bundle 上传，保留 30 天；冻结 job 重试使用新的 attempt 名称，避免上传已成功而后置清理失败时出现名称冲突。发布 job 使用**成功冻结 job 返回的 artifact ID** 下载，避免按名称搜索或误选最新 attempt 的产物，不重新构建 npm 包。
 
 Rust 发布前核对源码清单、归档内的 VCS 信息及已存在版本的 SHA-256，Cargo 重新打包的字节也必须与冻结产物一致。npm 发布前比较 SHA-512 并检查冻结的完整矩阵。网络中断、429 和 5xx 使用有次数上限的退避重试；401/403 立即失败，只有 404 才表示不存在。已存在版本字节不同则需要排查并使用新版本。上传命令报错时，会先查询 registry 是否已提交预期字节；不会自动重复写入。
 
@@ -176,7 +177,7 @@ npm 版本检查优先读取安装时使用的包元数据并核对其中的 int
 
 在 **Actions → Release → Run workflow** 中保持 `publish` 不勾选，可验证选定 ref 并冻结产物。尚未上传任何包时，可以手动选择版本 tag、开启 `publish` 并确保仓库开关已开启来开始发布；分支 ref 不能发布。已有上传后应恢复原运行，不要通过 dispatch 重建产物。
 
-发生部分发布失败时，优先在原运行中选择 **Re-run failed jobs**，即使运行次数增加，也继续使用成功冻结 job 返回的 artifact ID。已存在且 hash 相同的版本会跳过，只补发缺失版本；已完成的渠道更新也会跳过，只在整套版本和消费者测试通过后补做剩余更新。上传前和更新渠道前都会检查全部 6 个渠道，禁止回退较新的平台包或主包渠道。各平台渠道确认更新成功后，才更新主包渠道。
+发生部分发布失败时，优先在原运行中选择 **Re-run failed jobs**，即使运行次数增加，也继续使用成功冻结 job 返回的 artifact ID。已存在且 hash 相同的版本会跳过，只补发缺失版本；已完成的渠道更新也会跳过，只在整套版本和消费者测试通过后补做剩余更新。上传前和更新渠道前都会检查全部 7 个渠道，禁止回退较新的平台包或主包渠道。各平台渠道确认更新成功后，才更新主包渠道。
 
 如果恢复需要新版发布脚本，可从已提交且干净的工具 checkout 执行，并另外准备原版本 tag 的干净 checkout。下载原成功冻结的 bundle，不重建产物，先查看计划再执行：
 
@@ -202,3 +203,13 @@ pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/rel
 - [crates.io Trusted Publishing](https://crates.io/docs/trusted-publishing)
 - [官方 crates.io 认证 action](https://github.com/rust-lang/crates-io-auth-action)
 - [npm Trusted Publishing](https://docs.npmjs.com/trusted-publishers/)
+
+## WASM 与 VS Code 产物
+
+`hosts.yml` 安装真实 WASM tarball，在 Node 和 Chromium 中比较五种语言版本的共享 fixtures，并验证无需隔离响应头的 module Worker。冻结要求 `npm-wasm` 回执的提交、干净源码状态和 SHA-512 匹配。`@gdfmt/wasm` 与平台候选包一起先上传，主包最后上传，使用相同的 `next`/`latest` 渠道；需要单独配置其 npm Trusted Publisher。
+
+同一工作流构建五个平台的 VSIX；冻结要求每个平台原生程序的版本检查，以及四个桌面平台的 Extension Host 验收。Alpine 仅进行原生程序 smoke check，因为 Electron 不支持 musl。Linux 桌面额外启用 Godot Tools 验证共存。`editors.json` 记录核心版本、数字扩展版本、提交和 SHA-512；GitHub Release 附加冻结后的 VSIX。流程不会发布到 VS Code Marketplace。
+
+`hosts.yml` 还使用同一 WASM 包构建独立的纯浏览器 Web VSIX。冻结要求 Chromium Web Extension Host 回执包含 `webExtensionHostPassed: true` 和 `crossOriginIsolated: false`，并匹配干净的 revision 与精确 SHA-512。六个 VSIX 都作为 GitHub Release 附件，不会自动发布到 Marketplace。本地使用 `pnpm test:vscode:web` 验收；单独执行 `pnpm package:vscode:web` 不会记录验收通过。
+
+`release:version` 同步 WASM npm 版本和插件 `gdfmtVersion`。Marketplace 的数字版本独立维护，发布插件更新前需递增，不能使用 Cargo 的预发布后缀。`gdfmt_wasm` 不参与 crates.io 打包。恢复旧版六包冻结产物时，仍以原始源码 checkout 的发布契约校验，不强制补建 WASM。
