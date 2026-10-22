@@ -8,7 +8,7 @@
       "type": "string"
     },
     "extends": {
-      "description": "Local JSON files, applied in order before this file. No package or URL resolution.",
+      "description": "Local JSON/JSONC files, applied in order before this file. No package or URL resolution.",
       "type": "array",
       "items": {
         "type": "string"
@@ -50,7 +50,7 @@
   "additionalProperties": false,
   "$defs": {
     "ConfigOverride": {
-      "description": "Ordered, path-scoped layout/language changes. Paths are relative to the declaring JSON file.",
+      "description": "Ordered, path-scoped layout/language changes. Paths are relative to the declaring config file.",
       "type": "object",
       "properties": {
         "exclude": {

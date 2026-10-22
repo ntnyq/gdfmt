@@ -11,6 +11,8 @@ use std::{
 };
 
 pub const CONFIG_FILENAME: &str = ".gdfmtrc.json";
+/// Configuration discovery order within each directory; the first existing file wins.
+pub const CONFIG_FILENAMES: [&str; 2] = [CONFIG_FILENAME, ".gdfmtrc.jsonc"];
 const MAX_EXTENDS_DEPTH: usize = 32;
 const MAX_CONFIG_LAYERS: usize = 128;
 const MAX_TOTAL_CONFIG_BYTES: usize = 16 * 1024 * 1024;
@@ -19,7 +21,7 @@ const MAX_TOTAL_CONFIG_BYTES: usize = 16 * 1024 * 1024;
 #[serde(rename_all = "camelCase")]
 pub struct ConfigResolution {
     pub config: ResolvedConfig,
-    /// JSON files in application order, including inherited files (replays are retained).
+    /// JSON/JSONC files in application order, including inherited files (replays are retained).
     pub files: Vec<PathBuf>,
     pub editorconfig_files: Vec<PathBuf>,
     pub sources: BTreeMap<String, String>,
@@ -106,7 +108,7 @@ impl ConfigLoader {
                 if parent.is_empty() || parent.contains("://") {
                     return Err(configuration_error(
                         &path,
-                        "extends requires local JSON file paths",
+                        "extends requires local JSON/JSONC file paths",
                     ));
                 }
                 self.load(&absolute(
@@ -142,14 +144,17 @@ pub fn resolve_config(
     if let Some(config) = explicit {
         discovered.push(absolute(config, cwd));
     } else {
-        for ancestor in directory.ancestors() {
-            let path = ancestor.join(CONFIG_FILENAME);
-            if let Some(source) = optional_text(&path)? {
-                let config =
-                    parse_config(&source).map_err(|error| configuration_error(&path, error))?;
-                let stop = config.root == Some(true);
-                discovered.push(path);
-                if stop {
+        'ancestors: for ancestor in directory.ancestors() {
+            for filename in CONFIG_FILENAMES {
+                let path = ancestor.join(filename);
+                if let Some(source) = optional_text(&path)? {
+                    let config =
+                        parse_config(&source).map_err(|error| configuration_error(&path, error))?;
+                    let stop = config.root == Some(true);
+                    discovered.push(path);
+                    if stop {
+                        break 'ancestors;
+                    }
                     break;
                 }
             }

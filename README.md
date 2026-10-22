@@ -12,7 +12,7 @@ English | [简体中文](README.zh-CN.md)
 gdfmt formats `.gd` files with consistent spacing, indentation and line wrapping. Use it from the command line or through its Node.js API.
 
 - **Validated output.** Formatting reparses the result, checks syntax and comment preservation, and verifies that a second pass produces the same output.
-- **Project configuration.** Configure line width, indentation and newlines with `.gdfmtrc.json`, EditorConfig and per-path overrides.
+- **Project configuration.** Configure line width, indentation and newlines with `.gdfmtrc.json` or `.gdfmtrc.jsonc`, EditorConfig and per-path overrides.
 - **Fits your workflow.** Format a project, check it in CI, preview a diff or pipe a buffer through stdin. Git ignore rules and `.gdfmtignore` control file selection.
 - **Preserve intentional layout.** Keep selected regions unchanged with paired `formatter-off` / `formatter-on` comments.
 
@@ -41,7 +41,7 @@ Install the npm prerelease with `pnpm add @gdfmt/gdfmt@next`. See the [Node.js A
 
 ## Configuration
 
-gdfmt works without a configuration file. To share settings, create `.gdfmtrc.json`:
+gdfmt works without a configuration file. To share settings, create `.gdfmtrc.json` or `.gdfmtrc.jsonc` (both accept comments and trailing commas):
 
 ```json
 {

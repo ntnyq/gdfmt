@@ -52,7 +52,7 @@ if (!resolution.ignored) {
 }
 ```
 
-这里的 `source` 是已读取的文件或编辑器缓冲区文本。解析选项为 `{ cwd, config }`：`cwd` 必须是绝对路径，默认取调用时的工作目录；`config` 可指定本地 JSON 配置。结果包含 `config`、已应用的 `files`、`editorconfigFiles`、字段有效来源 `sources` 和 `ignored`。
+这里的 `source` 是已读取的文件或编辑器缓冲区文本。解析选项为 `{ cwd, config }`：`cwd` 必须是绝对路径，默认取调用时的工作目录；`config` 可指定本地 JSON/JSONC 配置。结果包含 `config`、已应用的 `files`、`editorconfigFiles`、字段有效来源 `sources` 和 `ignored`。
 
 调用方应自行检查 `ignored`，只将 `config.language` 和 `config.format` 传给文本 API。文件选择与写入由调用方负责。
 

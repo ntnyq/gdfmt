@@ -128,6 +128,111 @@ fn write(root: &std::path::Path, path: &str, source: &str) {
 }
 
 #[test]
+fn jsonc_discovery_inherits_mixed_layers_and_stops_at_root() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    write(root, ".gdfmtrc.json", "invalid parent must not be read");
+    write(
+        root,
+        "project/base.jsonc",
+        r#"{/* base */"format":{"indentWidth":2,},}"#,
+    );
+    write(
+        root,
+        "project/.gdfmtrc.jsonc",
+        r#"{"root":true,"extends":["base.jsonc",],"format":{"lineWidth":120,},}"#,
+    );
+    write(
+        root,
+        "project/src/.gdfmtrc.json",
+        r#"{"format":{"indentStyle":"space"}}"#,
+    );
+    write(
+        root,
+        "project/src/deep/.gdfmtrc.jsonc",
+        r#"{"overrides":[{"files":["**/*.gd",],"format":{"finalNewline":false,},},],}"#,
+    );
+    let resolved =
+        resolve_config(&root.join("project/src/deep/virtual/main.gd"), root, None).unwrap();
+    let project = fs::canonicalize(root.join("project")).unwrap();
+    assert_eq!(
+        resolved.files,
+        [
+            "base.jsonc",
+            ".gdfmtrc.jsonc",
+            "src/.gdfmtrc.json",
+            "src/deep/.gdfmtrc.jsonc"
+        ]
+        .map(|path| project.join(path))
+    );
+    assert_eq!(resolved.config.format.line_width, 120);
+    assert_eq!(resolved.config.format.indent_width, 2);
+    assert_eq!(
+        resolved.config.format.indent_style,
+        gdfmt_config::IndentStyle::Space
+    );
+    assert!(!resolved.config.format.final_newline);
+    assert!(resolved.sources["format.lineWidth"].ends_with(".gdfmtrc.jsonc"));
+    assert!(resolved.sources["format.finalNewline"].ends_with(".gdfmtrc.jsonc#overrides[0]"));
+}
+
+#[test]
+fn json_wins_same_directory_discovery_and_explicit_jsonc_bypasses_it() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    write(
+        root,
+        ".gdfmtrc.json",
+        r#"{"root":true,"format":{"lineWidth":120}}"#,
+    );
+    write(root, ".gdfmtrc.jsonc", "invalid unused config");
+    let resolved = resolve_config(root, root, None).unwrap();
+    assert_eq!(resolved.config.format.line_width, 120);
+    assert_eq!(resolved.files.len(), 1);
+    assert!(resolved.files[0].ends_with(".gdfmtrc.json"));
+
+    write(root, ".gdfmtrc.jsonc", r#"{"format":{"lineWidth":80,},}"#);
+    write(root, ".gdfmtrc.json", "invalid selected config");
+    assert!(
+        resolve_config(root, root, None)
+            .unwrap_err()
+            .to_string()
+            .contains(".gdfmtrc.json:")
+    );
+    let explicit =
+        resolve_config(root, root, Some(std::path::Path::new(".gdfmtrc.jsonc"))).unwrap();
+    assert_eq!(explicit.config.format.line_width, 80);
+    assert_eq!(explicit.files.len(), 1);
+    assert!(explicit.files[0].ends_with(".gdfmtrc.jsonc"));
+}
+
+#[test]
+fn jsonc_inheritance_rejects_cycles_and_reports_declaring_path_and_field() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    write(
+        root,
+        ".gdfmtrc.jsonc",
+        r#"{"root":true,"extends":["base.json",],}"#,
+    );
+    write(root, "base.json", r#"{"extends":[".gdfmtrc.jsonc"]}"#);
+    assert!(
+        resolve_config(root, root, None)
+            .unwrap_err()
+            .to_string()
+            .contains("extends cycle")
+    );
+    write(
+        root,
+        "base.json",
+        r#"{/* JSONC is also accepted in .json */"format":{"lineWidth":null,},}"#,
+    );
+    let error = resolve_config(root, root, None).unwrap_err().to_string();
+    assert!(error.contains("base.json"), "{error}");
+    assert!(error.contains("format.lineWidth"), "{error}");
+}
+
+#[test]
 fn local_extends_and_ordered_overrides_keep_their_declaring_directory() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();

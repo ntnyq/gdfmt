@@ -1,6 +1,98 @@
 use gdfmt_config::{PartialConfig, parse_config, schema_json};
 
 #[test]
+fn jsonc_accepts_comments_and_trailing_commas_without_changing_strings() {
+    let source = r#"// 项目配置
+{
+    "$schema": "https://example.test/schema.json#/*schema*/",
+    /* Keep escaped quotes, slashes and comment markers inside strings. */
+    "extends": ["base.jsonc", /* inherited */],
+    "ignore": ["路径//文件", "/*literal*/", "quote\"//literal", "backslash\\",],
+    "format": {"lineWidth": 120, "finalNewline": false, /* trailing */},
+    "overrides": [{"files": ["**/*.gd",], "format": {"maxBlankLines": 0,},},],
+} // no final newline"#;
+    let parsed = parse_config(source).unwrap();
+    assert_eq!(
+        parsed.schema.as_deref(),
+        Some("https://example.test/schema.json#/*schema*/")
+    );
+    assert_eq!(parsed.extends.unwrap(), ["base.jsonc"]);
+    assert_eq!(
+        parsed.ignore.unwrap(),
+        [
+            "路径//文件",
+            "/*literal*/",
+            "quote\"//literal",
+            "backslash\\"
+        ]
+    );
+    let format = parsed.format.unwrap();
+    assert_eq!(format.line_width, Some(120));
+    assert_eq!(format.final_newline, Some(false));
+    assert_eq!(
+        parsed.overrides.unwrap()[0]
+            .format
+            .as_ref()
+            .unwrap()
+            .max_blank_lines,
+        Some(0)
+    );
+    for source in [
+        "/* empty */ {} /* end */",
+        "{\r\n// comment\r\n}",
+        "{/**/}",
+        "{\"ignore\": [/* empty */],}",
+    ] {
+        assert!(parse_config(source).is_ok(), "{source}");
+    }
+}
+
+#[test]
+fn jsonc_rejects_malformed_syntax_and_preserves_field_validation() {
+    for source in [
+        "{} /* unterminated",
+        "/* unterminated",
+        "{} /",
+        "{} // comment\n {}",
+        "// only a comment",
+        "{,}",
+        r#"{"ignore":[,]}"#,
+        r#"{"ignore":["a",,]}"#,
+        r#"{"format":{"lineWidth":120,,}}"#,
+        r#"{"root":tr/* comment */ue}"#,
+        r#"{"format":{"lineWidth":1/* comment */00}}"#,
+        r#"{'root':true}"#,
+        "{root:true}",
+        "{# shell comment\n}",
+        r#"{"root":true,"root":false,}"#,
+        r#"{"format":{"lineWidth":120,"lineWidth":100,}}"#,
+    ] {
+        assert!(parse_config(source).is_err(), "{source}");
+    }
+    for (source, field) in [
+        ("{/* comment */\"unknown\":true,}", "unknown"),
+        (r#"{"format":{"lineWidth":null,},}"#, "format.lineWidth"),
+        (r#"{"format":{"lineWidth":"100",},}"#, "format.lineWidth"),
+        (r#"{"format":{"lineWidth":39,},}"#, "format.lineWidth"),
+        (r#"{"schemaVersion":2,}"#, "schemaVersion"),
+        (
+            r#"{"language":{"godotVersion":"latest",},}"#,
+            "language.godotVersion",
+        ),
+    ] {
+        assert_eq!(parse_config(source).unwrap_err().field, field, "{source}");
+    }
+}
+
+#[test]
+fn jsonc_diagnostics_keep_original_lines_and_columns_after_comments() {
+    let source = "{\r\n/* 多行\r\n注释 */\r\n\"format\": {\"lineWidth\": \"bad\"},\r\n}";
+    let error = parse_config(source).unwrap_err();
+    assert_eq!(error.field, "format.lineWidth");
+    assert!(error.message.ends_with("at line 4 column 29"), "{error}");
+}
+
+#[test]
 fn merge_preserves_unset_fields_and_explicit_false_and_zero() {
     let mut parent =
         parse_config(r#"{"format":{"lineWidth":120,"finalNewline":true,"maxBlankLines":3}}"#)

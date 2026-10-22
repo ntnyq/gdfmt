@@ -12,7 +12,7 @@
 gdfmt 为 `.gd` 文件提供统一的空格、缩进与换行布局，可通过命令行或 Node.js API 使用。
 
 - **验证格式化结果。** 重新解析输出，检查语法结构与注释保留情况，并验证再次格式化的结果完全一致。
-- **项目级配置。** 通过 `.gdfmtrc.json`、EditorConfig 和按路径覆盖配置行宽、缩进与换行。
+- **项目级配置。** 通过 `.gdfmtrc.json` 或 `.gdfmtrc.jsonc`、EditorConfig 和按路径覆盖配置行宽、缩进与换行。
 - **融入日常工作流。** 格式化项目、在 CI 中检查、预览差异，或通过 stdin 处理编辑器缓冲区。支持 Git 忽略规则与 `.gdfmtignore`。
 - **保留手动排版。** 使用成对的 `formatter-off` / `formatter-on` 注释，保持指定区域原样。
 
@@ -41,7 +41,7 @@ gdfmt init              # 创建 .gdfmtrc.json
 
 ## 配置
 
-gdfmt 无需配置即可使用。需要共享项目设置时，创建 `.gdfmtrc.json`：
+gdfmt 无需配置即可使用。需要共享项目设置时，创建 `.gdfmtrc.json` 或 `.gdfmtrc.jsonc`（均支持注释和尾随逗号）：
 
 ```json
 {

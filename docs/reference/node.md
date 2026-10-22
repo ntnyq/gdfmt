@@ -52,7 +52,7 @@ if (!resolution.ignored) {
 }
 ```
 
-Here `source` is the file or editor-buffer text you have already read. Resolver options are `{ cwd, config }`: `cwd` must be absolute and defaults to the working directory captured at call time; `config` is an optional explicit local JSON file. Results include `config`, applied `files`, `editorconfigFiles`, effective field `sources` and `ignored`.
+Here `source` is the file or editor-buffer text you have already read. Resolver options are `{ cwd, config }`: `cwd` must be absolute and defaults to the working directory captured at call time; `config` is an optional explicit local JSON/JSONC file. Results include `config`, applied `files`, `editorconfigFiles`, effective field `sources` and `ignored`.
 
 Inspect `ignored` yourself and pass only `config.language` and `config.format` to a text call. Filesystem selection and writing remain the caller's responsibility.
 

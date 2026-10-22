@@ -62,7 +62,7 @@ export interface ResolveConfigOptions {
    */
   cwd?: string
   /**
-   * Explicit local JSON file; relative to cwd. Disables ancestor JSON discovery.
+   * Explicit local JSON/JSONC file; relative to cwd. Disables ancestor config discovery.
    */
   config?: string
 }

@@ -1,4 +1,4 @@
-//! Strict partial configuration, field-wise merging, and generated JSON Schema.
+//! Validated JSON/JSONC configuration, field-wise merging, and generated JSON Schema.
 
 pub use gdfmt_syntax::LanguageVersion;
 use schemars::{JsonSchema, schema_for};
@@ -122,7 +122,7 @@ pub struct LanguageOptions {
     pub godot_version: LanguageVersion,
 }
 
-/// Ordered, path-scoped layout/language changes. Paths are relative to the declaring JSON file.
+/// Ordered, path-scoped layout/language changes. Paths are relative to the declaring config file.
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct ConfigOverride {
@@ -150,7 +150,7 @@ pub struct ConfigOverride {
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PartialConfig {
-    /// Local JSON files, applied in order before this file. No package or URL resolution.
+    /// Local JSON/JSONC files, applied in order before this file. No package or URL resolution.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
@@ -338,8 +338,12 @@ fn invalid(field: &str, message: &str) -> ConfigError {
     }
 }
 
+/// Parse JSON or JSONC with line/block comments and trailing commas.
+/// Field validation is identical for both formats, independent of the file extension.
 pub fn parse_config(source: &str) -> Result<PartialConfig, ConfigError> {
-    let mut deserializer = serde_json::Deserializer::from_str(source);
+    let mut deserializer = serde_json_lenient::Deserializer::from_str(source);
+    deserializer.set_allow_comments(true);
+    deserializer.set_ignore_trailing_commas(true);
     let config: PartialConfig =
         serde_path_to_error::deserialize(&mut deserializer).map_err(|error| ConfigError {
             field: error.path().to_string(),

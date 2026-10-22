@@ -18,6 +18,49 @@ fn run(args: &[&str], cwd: &Path, mut input: &[u8]) -> (i32, String, String) {
 }
 
 #[test]
+fn jsonc_config_applies_to_stdin_files_and_explain_and_is_preserved_by_init() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    let config = "{\n// project settings\n\"root\":true,\"format\":{\"finalNewline\":false,},\n}";
+    fs::write(root.join(".gdfmtrc.jsonc"), config).unwrap();
+    let source = "var a=1\n";
+    let (code, stdout, stderr) = run(&["format", "-"], root, source.as_bytes());
+    assert_eq!(code, 0, "{stderr}");
+    assert_eq!(stdout, "var a = 1");
+    let (code, explicit, stderr) = run(
+        &["format", "-", "--config", ".gdfmtrc.jsonc"],
+        root,
+        source.as_bytes(),
+    );
+    assert_eq!(code, 0, "{stderr}");
+    assert_eq!(explicit, stdout);
+    fs::write(root.join("test.gd"), source).unwrap();
+    assert_eq!(run(&["check", "test.gd"], root, b"").0, 1);
+    assert_eq!(run(&["format", "test.gd"], root, b"").0, 0);
+    assert_eq!(fs::read_to_string(root.join("test.gd")).unwrap(), stdout);
+    assert_eq!(run(&["check", "test.gd"], root, b"").0, 0);
+    let (code, stdout, stderr) = run(&["explain-config", "test.gd"], root, b"");
+    assert_eq!(code, 0, "{stderr}");
+    let report: serde_json::Value = serde_json::from_str(&stdout).unwrap();
+    assert_eq!(
+        report["configuration"]["config"]["format"]["finalNewline"],
+        false
+    );
+    assert!(
+        report["configuration"]["files"][0]
+            .as_str()
+            .unwrap()
+            .ends_with(".gdfmtrc.jsonc")
+    );
+    assert_eq!(run(&["init"], root, b"").0, 2);
+    assert!(!root.join(".gdfmtrc.json").exists());
+    assert_eq!(
+        fs::read_to_string(root.join(".gdfmtrc.jsonc")).unwrap(),
+        config
+    );
+}
+
+#[test]
 fn protected_regions_share_file_check_diff_and_stdin_behavior() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();

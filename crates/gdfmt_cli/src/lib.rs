@@ -6,8 +6,9 @@ use gdfmt_parser::{LexOptions, LexResult, lex};
 use gdfmt_syntax::SyntaxKind;
 use gdfmt_text::{Diagnostic, DiagnosticCategory, Severity, SourceId, Span};
 use gdfmt_workspace::{
-    CONFIG_FILENAME, ConfigResolution, LexedFile, WorkspaceError, discover_files_with_config,
-    format_request, lex_file, read_source, resolve_config, write_source,
+    CONFIG_FILENAME, CONFIG_FILENAMES, ConfigResolution, LexedFile, WorkspaceError,
+    discover_files_with_config, format_request, lex_file, read_source, resolve_config,
+    write_source,
 };
 use serde::Serialize;
 use std::{
@@ -83,7 +84,7 @@ enum Command {
     Format { paths: Vec<PathBuf> },
     /// Print the JSON Schema generated from the Rust configuration model.
     Schema,
-    /// Create .gdfmtrc.json in the current directory without overwriting a file.
+    /// Create .gdfmtrc.json unless a JSON/JSONC configuration already exists.
     Init,
     /// Print resolved configuration and the source of each field.
     ExplainConfig {
@@ -247,6 +248,18 @@ fn execute(
             Ok(0)
         }
         Some(Command::Init) => {
+            for filename in CONFIG_FILENAMES {
+                let existing = cwd.join(filename);
+                if existing.try_exists().map_err(|source| WorkspaceError::Io {
+                    path: existing.clone(),
+                    source,
+                })? {
+                    return Err(WorkspaceError::Input(format!(
+                        "configuration already exists: {}",
+                        existing.display()
+                    )));
+                }
+            }
             let path = cwd.join(CONFIG_FILENAME);
             let initial = PartialConfig {
                 schema_version: Some(1),

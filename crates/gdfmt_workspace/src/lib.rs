@@ -13,7 +13,7 @@ mod configuration;
 mod discovery;
 mod writing;
 
-pub use configuration::{CONFIG_FILENAME, ConfigResolution, resolve_config};
+pub use configuration::{CONFIG_FILENAME, CONFIG_FILENAMES, ConfigResolution, resolve_config};
 pub use discovery::{discover_files, discover_files_with_config};
 pub use writing::write_source;
 const MAX_CONFIG_BYTES: u64 = 1024 * 1024;

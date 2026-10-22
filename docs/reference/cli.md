@@ -9,30 +9,30 @@ With no command or paths, gdfmt formats the current directory. Paths are files o
 
 ## Commands
 
-| Command                               | Behavior                                                           |
-| ------------------------------------- | ------------------------------------------------------------------ |
-| `gdfmt [PATH]...`                     | Format files in place                                              |
-| `gdfmt format [PATH]...`              | Explicit form of the default command                               |
-| `gdfmt check [PATH]...`               | Check syntax and formatting without writing                        |
-| `gdfmt check [PATH]... --syntax-only` | Check parser diagnostics only                                      |
-| `gdfmt init`                          | Create `.gdfmtrc.json`; never overwrite an existing file           |
-| `gdfmt explain-config [PATH]`         | Print resolved settings and their sources as JSON; defaults to `.` |
-| `gdfmt schema`                        | Print the configuration JSON Schema                                |
-| `gdfmt lex [PATH]...`                 | Inspect tokens and lexical diagnostics without writing             |
+| Command                               | Behavior                                                               |
+| ------------------------------------- | ---------------------------------------------------------------------- |
+| `gdfmt [PATH]...`                     | Format files in place                                                  |
+| `gdfmt format [PATH]...`              | Explicit form of the default command                                   |
+| `gdfmt check [PATH]...`               | Check syntax and formatting without writing                            |
+| `gdfmt check [PATH]... --syntax-only` | Check parser diagnostics only                                          |
+| `gdfmt init`                          | Create `.gdfmtrc.json`; refuse if either configuration filename exists |
+| `gdfmt explain-config [PATH]`         | Print resolved settings and their sources as JSON; defaults to `.`     |
+| `gdfmt schema`                        | Print the configuration JSON Schema                                    |
+| `gdfmt lex [PATH]...`                 | Inspect tokens and lexical diagnostics without writing                 |
 
 `lex` is a debugging tool. Passing lexical checks does not establish valid script syntax; use `check --syntax-only` for that.
 
 ## Options
 
-| Option                     | Behavior                                                                     |
-| -------------------------- | ---------------------------------------------------------------------------- |
-| `--check`                  | Check syntax and formatting without writing; alias for `check`               |
-| `--diff`                   | Print formatting differences without writing                                 |
-| `--config <FILE>`          | Use an explicit local JSON configuration instead of directory JSON discovery |
-| `--stdin-filepath <PATH>`  | Read stdin and resolve settings using a virtual `.gd` path                   |
-| `--reporter <human\|json>` | Select output format; defaults to `human`                                    |
-| `-h`, `--help`             | Print help; available on each command                                        |
-| `-V`, `--version`          | Print the version                                                            |
+| Option                     | Behavior                                                                      |
+| -------------------------- | ----------------------------------------------------------------------------- |
+| `--check`                  | Check syntax and formatting without writing; alias for `check`                |
+| `--diff`                   | Print formatting differences without writing                                  |
+| `--config <FILE>`          | Use an explicit local JSON/JSONC configuration instead of directory discovery |
+| `--stdin-filepath <PATH>`  | Read stdin and resolve settings using a virtual `.gd` path                    |
+| `--reporter <human\|json>` | Select output format; defaults to `human`                                     |
+| `-h`, `--help`             | Print help; available on each command                                         |
+| `-V`, `--version`          | Print the version                                                             |
 
 `--check` and `--diff` are mutually exclusive. `--syntax-only` belongs to the `check` command and cannot be combined with `--diff`. Formatting modes and stdin paths apply to formatting/check commands.
 
