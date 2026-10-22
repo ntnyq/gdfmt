@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto'
 import { readFileSync } from 'node:fs'
 import { copyFile, mkdir, writeFile } from 'node:fs/promises'
 import { join, resolve } from 'node:path'
-import { metadata, targets } from '../npm/build.ts'
+import { targets } from '../npm/build.ts'
 import { packedMetadata, verifyArtifacts } from '../npm/verify-artifacts.ts'
 import {
   checkRelease,
@@ -12,6 +12,7 @@ import {
   readJson,
   readObject,
   releaseChannel,
+  repositoryRoot,
 } from './project.ts'
 
 export interface ReleasePackage {
@@ -81,12 +82,16 @@ export async function prepareRelease(
 /**
  * Refuses incomplete matrices, changed tarballs and artifacts from another commit.
  */
-export function validateFrozenRelease(directory: string): FrozenRelease {
-  const version = checkRelease()
+export function validateFrozenRelease(
+  directory: string,
+  sourceRoot: string = repositoryRoot,
+): FrozenRelease {
+  const version = checkRelease(sourceRoot)
+  const metadata = readJson(join(sourceRoot, 'packages/gdfmt/package.json'))
   const manifest = readJson(join(directory, 'release.json'))
   assert.equal(manifest.schemaVersion, 1)
   assert.equal(manifest.version, version)
-  const revision = gitRevision()
+  const revision = gitRevision(sourceRoot)
   assert.equal(manifest.revision, revision)
   const channel = releaseChannel(version)
   assert.equal(manifest.channel, channel)

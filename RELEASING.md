@@ -165,9 +165,20 @@ The Rust CLI is installed back from crates.io with an exact `=VERSION` requireme
 
 ## Dry runs and recovery
 
+Release commands log their start, completion, and a heartbeat every 15 seconds. npm commands have a three-minute deadline, individual HTTP requests use a 30-second timeout, and npm's automatic HTTP retries are disabled so registry writes are not silently repeated. Cargo packaging and publication have ten-minute command deadlines. Registry reads log each retry; npm visibility and install-metadata waits have ten-minute budgets, and channel confirmation has a one-minute budget. A timed-out write is reconciled against the registry before the publisher stops or continues.
+
 Run **Actions → Release → Run workflow** with `publish` unchecked to validate any selected ref and freeze artifacts. Before any uploads, dispatch can start publication by selecting the version **tag** as the ref, checking `publish`, and enabling the repository variable. Branch refs cannot publish. After an upload, resume the original run instead of dispatching a rebuild.
 
 For a partial publication, prefer **Re-run failed jobs** on the original run. This retains the successful freeze job's artifact ID, even when the run attempt increases. Matching existing versions are skipped and only missing versions are uploaded; completed channel promotions are skipped, and missing promotions resume after the complete set and consumer checks pass. All six channels are checked before uploads and again before promotion. Neither a newer platform channel nor a newer root channel can be moved backwards. The root channel is promoted last, after each platform promotion is confirmed.
+
+If recovery needs a newer publisher script, run it from a clean, committed tooling checkout and pass a separate clean checkout of the original version tag. Download the original successful freeze bundle without rebuilding it, then inspect the plan and execute it:
+
+```sh
+pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/release/npm
+pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/release/npm --execute
+```
+
+`--source` selects the source to validate, not a replacement revision for the artifacts. Its exact Git commit, version, package metadata, tarball hashes and original complete matrix must still match. Both checkouts must be clean for execution. Use the npm runtime and interactive authentication requirements described above. Create the GitHub Release from the original bundle only after both registries and installation checks have succeeded.
 
 Publish one version tag at a time. GitHub's default concurrency behavior preserves the running release and one pending release; additional pending runs can replace that pending run. If a tag's pending run is canceled, dispatch that tag explicitly after the active release finishes.
 

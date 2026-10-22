@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { setTimeout } from 'node:timers/promises'
+import { logReleaseProgress } from './progress.ts'
 import { readObject } from './project.ts'
 
 export const npmRegistry: string = 'https://registry.npmjs.org'
@@ -11,47 +12,75 @@ export async function registryJson(
   url: string,
   fetcher: typeof fetch = fetch,
   pause: (milliseconds: number) => Promise<void> = setTimeout,
+  signal?: AbortSignal,
 ): Promise<Record<string, unknown> | undefined> {
   for (let attempt = 0; attempt < 4; attempt++) {
-    let response: Response
+    signal?.throwIfAborted()
+    const started = Date.now()
+    logReleaseProgress(
+      `GET ${url} (attempt ${attempt + 1}/4; request timeout 30s)`,
+    )
     try {
-      response = await fetcher(url, {
+      const requestTimeout = AbortSignal.timeout(30_000)
+      const response = await fetcher(url, {
         headers: {
           'user-agent': 'gdfmt-release (https://github.com/ntnyq/gdfmt)',
           'cache-control': 'no-cache',
         },
-        signal: AbortSignal.timeout(30_000),
+        signal: signal
+          ? AbortSignal.any([signal, requestTimeout])
+          : requestTimeout,
       })
+      logReleaseProgress(
+        `GET ${url}: HTTP ${response.status} (${Date.now() - started}ms)`,
+      )
+      if (response.status === 404) {
+        await response.body?.cancel()
+        return undefined
+      }
+      if ((response.status === 429 || response.status >= 500) && attempt < 3) {
+        const retryAfter = response.headers.get('retry-after')
+        const delay =
+          retryAfter === null
+            ? Number.NaN
+            : /^\d+$/.test(retryAfter)
+              ? Number(retryAfter) * 1_000
+              : Date.parse(retryAfter) - Date.now()
+        await response.body?.cancel()
+        const retryDelay = Number.isFinite(delay)
+          ? Math.max(0, Math.min(delay, 30_000))
+          : 1_000 * 2 ** attempt
+        logReleaseProgress(
+          `Retrying GET ${url} in ${retryDelay}ms after HTTP ${response.status}`,
+        )
+        await (signal && pause === setTimeout
+          ? setTimeout(retryDelay, undefined, { signal })
+          : pause(retryDelay))
+        continue
+      }
+      if (!response.ok) await response.body?.cancel()
+      assert.ok(
+        response.ok,
+        `registry request failed (${response.status}): ${url}`,
+      )
+      return readObject(await response.json())
     } catch (error) {
+      logReleaseProgress(
+        `GET ${url} failed (${Date.now() - started}ms): ${error instanceof Error ? error.message : String(error)}`,
+      )
+      if (signal?.aborted)
+        throw new Error(`Registry deadline exceeded: ${url}`, { cause: error })
       const transient =
         error instanceof TypeError ||
         (error instanceof Error && error.name === 'TimeoutError')
       if (!transient || attempt === 3) throw error
-      await pause(1_000 * 2 ** attempt)
+      const delay = 1_000 * 2 ** attempt
+      logReleaseProgress(`Retrying GET ${url} in ${delay}ms`)
+      await (signal && pause === setTimeout
+        ? setTimeout(delay, undefined, { signal })
+        : pause(delay))
       continue
     }
-    if (response.status === 404) return undefined
-    if ((response.status === 429 || response.status >= 500) && attempt < 3) {
-      const retryAfter = response.headers.get('retry-after')
-      const delay =
-        retryAfter === null
-          ? Number.NaN
-          : /^\d+$/.test(retryAfter)
-            ? Number(retryAfter) * 1_000
-            : Date.parse(retryAfter) - Date.now()
-      await response.body?.cancel()
-      await pause(
-        Number.isFinite(delay)
-          ? Math.max(0, Math.min(delay, 30_000))
-          : 1_000 * 2 ** attempt,
-      )
-      continue
-    }
-    assert.ok(
-      response.ok,
-      `registry request failed (${response.status}): ${url}`,
-    )
-    return readObject(await response.json())
   }
   throw new Error(`registry request exhausted retries: ${url}`)
 }
@@ -61,16 +90,19 @@ export async function registryJson(
  * This never automatically repeats a registry write.
  */
 export async function confirmRegistryWrite(
-  write: () => void,
+  write: () => void | Promise<void>,
   confirm: () => Promise<void>,
 ): Promise<void> {
   let failed = false
   let writeError: unknown
   try {
-    write()
+    await write()
   } catch (error) {
     failed = true
     writeError = error
+    logReleaseProgress(
+      'Registry write failed; confirming its outcome before any further writes',
+    )
   }
   try {
     await confirm()
@@ -87,8 +119,14 @@ export async function confirmRegistryWrite(
 export async function npmVersion(
   name: string,
   version: string,
+  signal?: AbortSignal,
 ): Promise<Record<string, unknown> | undefined> {
-  return registryJson(`${npmRegistry}/${encodeURIComponent(name)}/${version}`)
+  return registryJson(
+    `${npmRegistry}/${encodeURIComponent(name)}/${version}`,
+    fetch,
+    setTimeout,
+    signal,
+  )
 }
 
 export function assertNpmIntegrity(
@@ -107,14 +145,17 @@ export async function waitForNpm(
   version: string,
   expected: string,
 ): Promise<void> {
+  const deadline = AbortSignal.timeout(600_000)
+  logReleaseProgress(`Waiting for ${name}@${version} integrity (limit 10m)`)
   // Accepted uploads can take several minutes to reach the public registry.
   for (let attempt = 0; attempt < 120; attempt++) {
-    const value = await npmVersion(name, version)
+    const value = await npmVersion(name, version, deadline)
     if (value) {
       assertNpmIntegrity(value, expected)
+      logReleaseProgress(`Verified ${name}@${version} integrity`)
       return
     }
-    await setTimeout(5_000)
+    await setTimeout(5_000, undefined, { signal: deadline })
   }
   throw new Error(`${name}@${version} is not visible yet; rerun the failed job`)
 }
@@ -124,12 +165,20 @@ export async function waitForNpmChannel(
   channel: string,
   version: string,
 ): Promise<void> {
+  const deadline = AbortSignal.timeout(60_000)
+  logReleaseProgress(`Confirming ${name} ${channel} -> ${version} (limit 60s)`)
   for (let attempt = 0; attempt < 12; attempt++) {
     const value = await registryJson(
       `${npmRegistry}/${encodeURIComponent(name)}`,
+      fetch,
+      setTimeout,
+      deadline,
     )
-    if (value && readObject(value['dist-tags'])[channel] === version) return
-    await setTimeout(5_000)
+    if (value && readObject(value['dist-tags'])[channel] === version) {
+      logReleaseProgress(`Confirmed ${name} ${channel} -> ${version}`)
+      return
+    }
+    await setTimeout(5_000, undefined, { signal: deadline })
   }
   throw new Error(
     `${name} channel promotion was not confirmed; rerun the failed job`,
@@ -141,20 +190,26 @@ export async function waitForNpmChannel(
  * Retry only missing-version reads; never retry publication or consumer assertions.
  */
 export async function waitForNpmInstall(
-  install: () => void,
+  install: (remainingMs: number) => void | Promise<void>,
   pause: (milliseconds: number) => Promise<void> = setTimeout,
 ): Promise<void> {
+  const deadline = Date.now() + 600_000
   for (let attempt = 0; attempt < 120; attempt++) {
     try {
-      install()
+      await install(Math.max(1, deadline - Date.now()))
       return
     } catch (error) {
       const stderr =
         error instanceof Error && 'stderr' in error ? String(error.stderr) : ''
-      if (!/npm error code (?:ETARGET|E404)\b/.test(stderr) || attempt === 119)
+      if (
+        !/npm error code (?:ETARGET|E404)\b/.test(stderr) ||
+        attempt === 119 ||
+        Date.now() >= deadline
+      )
         throw error
-      if (attempt === 0)
-        console.log('Waiting for npm install metadata to become visible...')
+      logReleaseProgress(
+        `Waiting for npm install metadata (attempt ${attempt + 1}/120; ${deadline - Date.now()}ms remaining)`,
+      )
       await pause(5_000)
     }
   }

@@ -166,9 +166,20 @@ Rust CLI 发布后会以精确的 `=VERSION` 要求从 crates.io 重新安装并
 
 ## 演练与失败恢复
 
+发布命令会输出开始、结束及每 15 秒一次的运行状态。npm 命令最多运行三分钟，单个 HTTP 请求超时为 30 秒，并禁用 npm 自带的 HTTP 重试，避免静默重复 registry 写入。Cargo 打包和发布命令最多运行十分钟。registry 读取会记录每次重试；npm 版本可见性和安装索引等待最多十分钟，渠道确认最多一分钟。写入超时后，仍会先核对 registry 结果，再决定停止或继续。
+
 在 **Actions → Release → Run workflow** 中保持 `publish` 不勾选，可验证选定 ref 并冻结产物。尚未上传任何包时，可以手动选择版本 tag、开启 `publish` 并确保仓库开关已开启来开始发布；分支 ref 不能发布。已有上传后应恢复原运行，不要通过 dispatch 重建产物。
 
 发生部分发布失败时，优先在原运行中选择 **Re-run failed jobs**，即使运行次数增加，也继续使用成功冻结 job 返回的 artifact ID。已存在且 hash 相同的版本会跳过，只补发缺失版本；已完成的渠道更新也会跳过，只在整套版本和消费者测试通过后补做剩余更新。上传前和更新渠道前都会检查全部 6 个渠道，禁止回退较新的平台包或主包渠道。各平台渠道确认更新成功后，才更新主包渠道。
+
+如果恢复需要新版发布脚本，可从已提交且干净的工具 checkout 执行，并另外准备原版本 tag 的干净 checkout。下载原成功冻结的 bundle，不重建产物，先查看计划再执行：
+
+```sh
+pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/release/npm
+pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/release/npm --execute
+```
+
+`--source` 只选择校验源码的位置，不会替换产物中的提交。源码的精确 Git 提交、版本、包元数据、tarball hash 和原完整矩阵仍须全部匹配。执行时两个 checkout 都必须干净，并满足前文的 npm 运行时及交互式认证要求。只有两个 registry 和安装检查均已成功后，才使用原 bundle 创建 GitHub Release。
 
 一次只推送一个发布 tag。GitHub 默认并发策略会保留正在运行的发布和一个等待中的发布，额外的等待运行可能替换前一个等待运行。如果某个 tag 的等待运行被取消，在当前发布完成后显式选择该 tag 手动运行即可。
 

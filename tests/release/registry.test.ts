@@ -87,6 +87,60 @@ test('ambiguous writes are reconciled without ever repeating the write', async (
   assert.equal(writes, 3)
 })
 
+test('asynchronous write failures are awaited and reconciled exactly once', async () => {
+  const events: string[] = []
+  await confirmRegistryWrite(
+    async () => {
+      await Promise.resolve()
+      events.push('write')
+      throw new Error('request timed out after submission')
+    },
+    async () => {
+      assert.deepEqual(events, ['write'])
+      events.push('confirm')
+    },
+  )
+  assert.deepEqual(events, ['write', 'confirm'])
+})
+
+test('an overall registry deadline aborts a pending response body without retrying', async () => {
+  const controller = new AbortController()
+  const timer = setTimeout(
+    () => controller.abort(new DOMException('deadline', 'TimeoutError')),
+    30,
+  )
+  let attempts = 0
+  try {
+    const fetcher: typeof fetch = async (_input, options) => {
+      attempts++
+      return new Response(
+        new ReadableStream({
+          start(stream) {
+            options?.signal?.addEventListener(
+              'abort',
+              () => stream.error(options.signal?.reason),
+              { once: true },
+            )
+          },
+        }),
+      )
+    }
+    await assert.rejects(
+      () =>
+        registryJson(
+          'https://example.invalid/body',
+          fetcher,
+          async () => assert.fail('deadline must not retry'),
+          controller.signal,
+        ),
+      /Registry deadline exceeded/,
+    )
+    assert.equal(attempts, 1)
+  } finally {
+    clearTimeout(timer)
+  }
+})
+
 test('npm install tolerates delayed metadata but fails immediately on authentication and other errors', async () => {
   let attempts = 0
   const delays: number[] = []

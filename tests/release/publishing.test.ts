@@ -18,7 +18,11 @@ import {
   prepareRelease,
   validateFrozenRelease,
 } from '../../scripts/release/artifacts.ts'
-import { gitRevision, readObject } from '../../scripts/release/project.ts'
+import {
+  gitRevision,
+  readObject,
+  repositoryRoot,
+} from '../../scripts/release/project.ts'
 import { publishNpm } from '../../scripts/release/publish-npm.ts'
 import type { NpmOperations } from '../../scripts/release/publish-npm.ts'
 import { registryJson } from '../../scripts/release/registry.ts'
@@ -146,6 +150,52 @@ test('complete matrices freeze exactly six packages and reject missing, changed 
     assert.throws(
       () => validateFrozenRelease(files.frozen),
       /frozen tarball changed/,
+    )
+  } finally {
+    rmSync(files.directory, { recursive: true, force: true })
+  }
+})
+
+test('recovery validates artifacts against the explicit clean source commit rather than the tooling commit', async () => {
+  const files = fixture()
+  const source = join(files.directory, 'source')
+  try {
+    await prepareRelease(files.matrix, files.frozen)
+    execFileSync('git', [
+      'clone',
+      '--shared',
+      '--quiet',
+      repositoryRoot,
+      source,
+    ])
+    execFileSync(
+      'git',
+      [
+        '-c',
+        'user.name=Release test',
+        '-c',
+        'user.email=test@example.invalid',
+        'commit',
+        '--allow-empty',
+        '-qm',
+        'Frozen source fixture',
+      ],
+      { cwd: source },
+    )
+    const manifestPath = join(files.frozen, 'release.json')
+    const manifest = readObject(JSON.parse(readFileSync(manifestPath, 'utf8')))
+    const revision = gitRevision(source)
+    writeJson(manifestPath, {
+      ...manifest,
+      revision,
+      matrix: { ...readObject(manifest.matrix), revision },
+    })
+    assert.equal(validateFrozenRelease(files.frozen, source).revision, revision)
+    assert.throws(() => validateFrozenRelease(files.frozen))
+    writeFileSync(join(source, 'untracked'), 'dirty source')
+    await assert.rejects(
+      () => publishNpm(files.frozen, true, undefined, source),
+      /clean checkout/,
     )
   } finally {
     rmSync(files.directory, { recursive: true, force: true })

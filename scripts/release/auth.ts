@@ -32,7 +32,7 @@ export function validateNpmRuntime(
 export function assertNpmRuntime(): void {
   validateNpmRuntime(
     process.versions.node,
-    runNpm(['--version']).trim(),
+    runNpm(['--version'], { timeout: 10_000, killSignal: 'SIGKILL' }).trim(),
     process.env,
   )
 }

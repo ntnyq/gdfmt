@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict'
-import { execFileSync } from 'node:child_process'
 import { resolve } from 'node:path'
 import { setTimeout } from 'node:timers/promises'
 import { fileURLToPath } from 'node:url'
+import { runReleaseCommand } from './commands.ts'
 import { crateChecksum, validateFrozenCrates } from './crate-artifacts.ts'
+import { logReleaseProgress } from './progress.ts'
 import {
   assertCleanReleaseSource,
   readObject,
@@ -16,8 +17,8 @@ export interface CrateOperations {
     name: string,
     version: string,
   ) => Promise<Record<string, unknown> | undefined>
-  package: (name: string, version: string) => string
-  publish: (name: string) => void
+  package: (name: string, version: string) => string | Promise<string>
+  publish: (name: string) => void | Promise<void>
   wait: (name: string, version: string, checksum: string) => Promise<void>
 }
 
@@ -43,21 +44,29 @@ function assertPublishedCrate(
 const crateOperations: CrateOperations = {
   version: (name, version) =>
     registryJson(`https://crates.io/api/v1/crates/${name}/${version}`),
-  package: (name, version) => {
-    execFileSync(
+  package: async (name, version) => {
+    await runReleaseCommand(
       'cargo',
       ['package', '-p', name, '--registry', 'crates-io', '--locked'],
-      { cwd: repositoryRoot, stdio: 'inherit' },
+      {
+        label: `cargo package ${name}`,
+        cwd: repositoryRoot,
+        timeoutMs: 600_000,
+      },
     )
     return crateChecksum(
       resolve(repositoryRoot, 'target/package', `${name}-${version}.crate`),
     )
   },
-  publish: name => {
-    execFileSync(
+  publish: async name => {
+    await runReleaseCommand(
       'cargo',
       ['publish', '-p', name, '--registry', 'crates-io', '--locked'],
-      { cwd: repositoryRoot, stdio: 'inherit' },
+      {
+        label: `cargo publish ${name}`,
+        cwd: repositoryRoot,
+        timeoutMs: 600_000,
+      },
     )
   },
   wait: async (name, version, expected) => {
@@ -87,9 +96,13 @@ export async function publishCrates(
   const { version, packages: entries } = validateFrozenCrates(directory)
   const pending = []
   for (const entry of entries) {
+    logReleaseProgress(`Checking immutable crate ${entry.name}@${version}`)
     const current = await operations.version(entry.name, version)
     if (current) {
       assertPublishedCrate(current, entry.name, version, entry.checksum)
+      logReleaseProgress(
+        `Already published with matching checksum: ${entry.name}`,
+      )
     } else pending.push(entry.name)
   }
   console.log(
@@ -104,7 +117,7 @@ export async function publishCrates(
     // Cargo repackages from the checked-out tag. Verify it agrees with the frozen
     // workspace archive before allowing an upload.
     assert.equal(
-      operations.package(entry.name, version),
+      await operations.package(entry.name, version),
       entry.checksum,
       `repackaged bytes differ: ${entry.name}`,
     )
