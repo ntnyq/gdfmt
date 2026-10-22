@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict'
 import { spawn } from 'node:child_process'
+import { fileURLToPath } from 'node:url'
 import { resolveNpmCli } from '../npm/cli.ts'
 import { logReleaseProgress } from './progress.ts'
 
@@ -118,7 +119,13 @@ export async function runReleaseNpm(
 ): Promise<string> {
   return runReleaseCommand(
     process.execPath,
-    [resolveNpmCli(), ...args, '--fetch-retries=0', '--fetch-timeout=30000'],
+    [
+      fileURLToPath(new URL('./npm-cli.mjs', import.meta.url)),
+      resolveNpmCli(),
+      ...args,
+      '--fetch-retries=0',
+      '--fetch-timeout=30000',
+    ],
     options,
   )
 }

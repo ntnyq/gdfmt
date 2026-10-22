@@ -167,6 +167,8 @@ The Rust CLI is installed back from crates.io with an exact `=VERSION` requireme
 
 Release commands log their start, completion, and a heartbeat every 15 seconds. npm commands have a three-minute deadline, individual HTTP requests use a 30-second timeout, and npm's automatic HTTP retries are disabled so registry writes are not silently repeated. Cargo packaging and publication have ten-minute command deadlines. Registry reads log each retry; npm visibility and install-metadata waits have ten-minute budgets, and channel confirmation has a one-minute budget. A timed-out write is reconciled against the registry before the publisher stops or continues.
 
+The npm launcher canonicalizes scoped package slash escapes to `%2F` for dist-tag reads and writes, retaining npm's original OIDC/OTP handling. This avoids registry routes that fail on npm's lowercase `%2f` spelling without modifying the installed npm files.
+
 npm version checks first read the package metadata used by installs and verify the recorded integrity. If that index has not listed the version yet, the publisher checks the immutable version endpoint before treating it as absent. Existing versions verified during preflight are not polled again; newly uploaded versions still wait for matching integrity before publication continues.
 
 Run **Actions → Release → Run workflow** with `publish` unchecked to validate any selected ref and freeze artifacts. Before any uploads, dispatch can start publication by selecting the version **tag** as the ref, checking `publish`, and enabling the repository variable. Branch refs cannot publish. After an upload, resume the original run instead of dispatching a rebuild.
