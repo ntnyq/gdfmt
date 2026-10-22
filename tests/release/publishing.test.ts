@@ -322,10 +322,8 @@ test('legacy six-package frozen releases remain recoverable against their origin
     // Model the original source contract without the optional WASM host.
     rmSync(join(source, 'crates/gdfmt_wasm'), { recursive: true, force: true })
     rmSync(join(source, 'packages/wasm'), { recursive: true, force: true })
-    execFileSync('cargo', ['generate-lockfile', '--offline'], {
-      cwd: source,
-      stdio: 'pipe',
-    })
+    // Recovery reads workspace metadata without resolving registry dependencies,
+    // so the fixture can retain the lockfile without requiring a Cargo cache.
     execFileSync('git', ['add', '--all'], { cwd: source })
     execFileSync(
       'git',

@@ -69,6 +69,12 @@ gdfmt 无需配置即可使用。需要共享项目设置时，创建 `.gdfmtrc.
 
 提供 Godot 4.3–4.7 语法配置，尚未声明完整 Godot 兼容性；项目分析与运行时行为仍由引擎负责。gdfmt 使用自己的格式化风格，不保证与 gdtoolkit 的 `gdformat` 输出完全一致。
 
+## WASM 与 VS Code
+
+浏览器包 `@gdfmt/wasm` 提供 `createFormatter()`，用法见 [WASM API](docs/zh/reference/wasm.md)。首次发布前可运行 `pnpm build:wasm`、`pnpm test:wasm` 从源码构建与验收。
+
+`gdfmt --lsp` 通过 stdio 提供格式化服务。运行 `pnpm package:vscode` 构建桌面 VSIX，或运行 `pnpm package:vscode:web` 构建复用 WASM 的 Web VSIX。安装对应版本后将 GDScript 的 `editor.defaultFormatter` 设为 `ntnyq.gdfmt`。详见[编辑器集成](docs/zh/guide/integrations.md)。
+
 ## 许可
 
 [MIT](LICENSE)。第三方归属见 [LICENSE-THIRD-PARTY](LICENSE-THIRD-PARTY)。

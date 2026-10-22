@@ -23,6 +23,9 @@ cargo run -p gdfmt_cli -- --help
 | `crates/gdfmt_config`    | Configuration model and JSON Schema                               |
 | `crates/gdfmt_workspace` | Configuration/file discovery and guarded writes                   |
 | `crates/gdfmt_cli`       | Shared command runner and binary                                  |
+| `crates/gdfmt_wasm`      | Thin WASM adapter; shared text validation lives in config         |
+| `editors/vscode`         | Desktop LSP client, Web Worker adapter and host tests             |
+| `packages/wasm`          | Browser ESM package, loader and examples                          |
 | `crates/gdfmt_napi`      | Node-API adapter                                                  |
 | `packages/gdfmt`         | npm facade and TypeScript declarations                            |
 | `xtask`                  | Schema, compatibility and project-trial tooling                   |
@@ -50,6 +53,56 @@ cargo xtask syntax-coverage
 CI also checks Rust 1.88 and runs tests on Linux, macOS and Windows. Ordinary Rust tests require no Godot installation.
 
 Add focused regressions to the affected crate. Parser tests should check diagnostics, tree structure and exact source preservation. Shared fixtures use descriptive hyphenated names and entries in `tests/compatibility/manifest.json`; classify script fixtures in `engine.json`. Formatting changes should check comments, literal spelling, protected bytes and idempotence. Regenerate the schema with `cargo xtask schema` when configuration changes.
+
+## WASM and editors
+
+```sh
+rustup target add wasm32-unknown-unknown
+cargo install wasm-pack --version 0.15.0 --locked
+pnpm build:wasm
+pnpm exec playwright install chromium
+pnpm test:wasm
+pnpm typecheck:vscode
+pnpm test:vscode
+pnpm package:vscode
+pnpm typecheck:vscode:web
+pnpm test:vscode:web:unit
+pnpm test:vscode:web
+pnpm package:vscode:web
+```
+
+`test:wasm` installs the actual packed artifact and compares every shared fixture
+across all five profiles with the native binding. It also checks a browser page,
+a module Worker, malformed options, initialization failures and the source limit.
+Receipts and measurements are written to `target/wasm/acceptance.json`.
+
+`test:vscode` creates isolated profiles and temporary multi-root projects outside
+ignored build directories, then tests unsaved buffers, save formatting, undo,
+untitled documents and service restart. On Linux use `xvfb-run -a pnpm test:vscode`.
+Set `GDFMT_TEST_GODOT_TOOLS=1` to install pinned Godot Tools 2.7.1 into the isolated
+profile and verify the selected default formatter while both extensions are active.
+`GDFMT_VSCODE_EXECUTABLE` can select an existing test executable; CI otherwise pins
+VS Code 1.96.4. Platform VSIX files and receipts live under `target/editors/`.
+
+`test:vscode:web` builds a separate Web VSIX and runs a real VS Code 1.96.4 Web
+Extension Host in headless Chromium with cross-origin isolation disabled. It uses
+a virtual filesystem and tests configuration inheritance/boundaries, Unicode
+diagnostics, save/undo, multiple roots, untitled buffers and Worker restart. The
+unit suite covers queue cancellation, late replies, traps, timeouts and UTF-16
+conversion. Runtime downloads stay under `target/vscode-web-test/`; the virtual
+test workspace lives in memory.
+Web VSIX files contain only browser bundles, WASM, schema and documentation;
+native VSIX files contain the native entry and executable.
+
+The `hosts.yml` workflow runs Chromium acceptance, a Web Extension Host and four desktop Extension Host
+runners. Alpine's native binary gets a version smoke check and a platform VSIX;
+Electron host tests run on glibc Linux. No command here publishes a package or
+installs the development extension into the user's normal VS Code profile.
+
+`gdfmt --lsp` speaks stdio LSP; diagnostics use UTF-16 positions while core and
+JavaScript result spans remain UTF-8 bytes. Keep protocol regression tests in
+`crates/gdfmt_cli/tests/lsp.rs`. Keep Web lifecycle regressions in
+`tests/vscode-web/` and browser integration tests in `editors/vscode/tests/web/`.
 
 ## Engine comparisons
 

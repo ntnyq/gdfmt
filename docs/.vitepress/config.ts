@@ -18,6 +18,7 @@ const englishSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Language support', link: '/reference/compatibility' },
       { text: 'Language versions', link: '/reference/language-versions' },
       { text: 'Node.js API', link: '/reference/node' },
+      { text: 'WebAssembly API', link: '/reference/wasm' },
     ],
   },
   {
@@ -47,6 +48,7 @@ const chineseSidebar: DefaultTheme.SidebarItem[] = [
       { text: '语言支持', link: '/zh/reference/compatibility' },
       { text: '语言版本', link: '/zh/reference/language-versions' },
       { text: 'Node.js API', link: '/zh/reference/node' },
+      { text: 'WebAssembly API', link: '/zh/reference/wasm' },
     ],
   },
   {

@@ -2,9 +2,9 @@
 
 ## Project Structure & Module Organization
 
-gdfmt is a Rust-based GDScript formatter. The Cargo workspace contains nine crates under `crates/`: `gdfmt_text` (spans and diagnostics), `gdfmt_syntax` (lossless CST and language versions), `gdfmt_parser` (lexing and parsing), `gdfmt_formatter` (Doc printer, comment attachment and script layout), `gdfmt` (validated text facade), `gdfmt_config` (configuration and schema), `gdfmt_workspace` (file/configuration discovery and guarded writes), `gdfmt_cli` (command runner and binary), and `gdfmt_napi` (Node-API host adapter). Keep filesystem traversal and CLI concerns outside the parser and formatter.
+gdfmt is a Rust-based GDScript formatter. The Cargo workspace contains ten crates under `crates/`: `gdfmt_text` (spans and diagnostics), `gdfmt_syntax` (lossless CST and language versions), `gdfmt_parser` (lexing and parsing), `gdfmt_formatter` (Doc printer, comment attachment and script layout), `gdfmt` (validated text facade), `gdfmt_config` (configuration and schema), `gdfmt_workspace` (file/configuration discovery and guarded writes), `gdfmt_cli` (command runner and binary), `gdfmt_napi` (Node-API host adapter), and `gdfmt_wasm` (browser WASM host adapter). Keep filesystem traversal and CLI concerns outside the parser and formatter.
 
-`packages/gdfmt/` contains the npm facade and declarations. TypeScript scripts under `scripts/npm/` run through `tsx`; installed-tarball integration tests under `tests/npm/` use Vitest and TypeScript.
+`packages/gdfmt/` contains the native npm facade and declarations; `packages/wasm/` contains the explicit browser ESM facade. `editors/vscode/` contains the desktop language client and Web Worker extension. Shared pure text/JSON validation and request conversion live in `gdfmt_config`; keep host-specific I/O outside its dependency graph. TypeScript scripts under `scripts/npm/` run through `tsx`; installed-tarball integration tests under `tests/npm/` use Vitest and TypeScript.
 
 Integration tests live in each crate’s `tests/` directory. Shared GDScript fixtures and expected results live in `tests/compatibility/`. `xtask/` implements schema and compatibility tooling; `schemas/` contains the generated configuration schema; `docs/` contains the bilingual VitePress user documentation; `CONTRIBUTING.md` covers workspace structure and contributor workflows.
 
@@ -13,6 +13,9 @@ Integration tests live in each crate’s `tests/` directory. Shared GDScript fix
 Use the development toolchain pinned in `rust-toolchain.toml`; preserve the Rust 1.88 minimum supported version and edition 2024.
 
 - `pnpm typecheck`, `pnpm test:npm`, and `pnpm verify:npm --local`: validate Node scripts, installed tarballs, and current-platform receipts; CI requires the complete `pnpm verify:npm` matrix. Nothing is published by these commands.
+- `pnpm build:wasm`, `pnpm test:wasm`: build the WASM package and test an installed tarball in Node, Chromium and a module Worker. Building requires wasm-pack and the `wasm32-unknown-unknown` target.
+- `pnpm typecheck:vscode:web`, `pnpm test:vscode:web:unit`, `pnpm test:vscode:web`, `pnpm package:vscode:web`: check Web code and lifecycle tests, run the Chromium Web Extension Host against a virtual filesystem and package a browser-only VSIX.
+- `pnpm typecheck:vscode`, `pnpm test:vscode`, `pnpm package:vscode`: check the extension, run the isolated Extension Host suite and package a platform VSIX.
 - `cargo build --workspace`: build all workspace members.
 - `cargo run -p gdfmt_cli -- lex tests/compatibility/fixtures/containers.gd`: inspect tokens and lexical diagnostics.
 - `cargo test --workspace --all-features --locked`: run the primary test suite.

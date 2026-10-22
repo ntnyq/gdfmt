@@ -69,6 +69,17 @@ See [configuration](docs/guide/configuration.md) for all options, inheritance, o
 
 Grammar profiles cover Godot 4.3–4.7. Full Godot compatibility is not declared; project analysis and runtime behavior remain the engine's responsibility. gdfmt uses its own formatting style and does not promise identical output to gdtoolkit's `gdformat`.
 
+## WASM and VS Code
+
+The browser package exposes `createFormatter()` from `@gdfmt/wasm`; see the
+[WASM API](docs/reference/wasm.md). Build and test from source with
+`pnpm build:wasm` and `pnpm test:wasm` until its first release.
+
+`gdfmt --lsp` provides formatting over stdio. Build a native desktop extension
+with `pnpm package:vscode`, or a browser-only VSIX with `pnpm package:vscode:web`.
+Install the matching VSIX and set `editor.defaultFormatter` to
+`ntnyq.gdfmt` for GDScript. See [editor integration](docs/guide/integrations.md).
+
 ## License
 
 [MIT](LICENSE). Third-party attribution is listed in [LICENSE-THIRD-PARTY](LICENSE-THIRD-PARTY).
