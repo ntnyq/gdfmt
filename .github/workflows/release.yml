@@ -9,12 +9,6 @@ on:
         description: Publish the selected version tag (requires RELEASE_ENABLED=true)
         type: boolean
         default: false
-      recovery_tag:
-        description: Original version tag for npm recovery (never rebuilds artifacts)
-        type: string
-      recovery_run:
-        description: Original Release run ID containing the successful freeze
-        type: string
       recovery_artifact:
         description: Exact frozen release artifact ID from the original run
         type: string
@@ -29,7 +23,7 @@ concurrency:
 
 jobs:
   preflight:
-    if: inputs.recovery_run == ''
+    if: inputs.recovery_artifact == ''
     runs-on: ubuntu-24.04
     outputs:
       version: ${{ steps.version.outputs.version }}
@@ -181,7 +175,7 @@ jobs:
         with:
           version: 12.14.0
       - run: pnpm install --frozen-lockfile
-      - run: npm install --global npm@11.21.0 --ignore-scripts
+      - run: npm install --global "npm@$(node -p "require('./scripts/release/npm-compat.json').version")" --ignore-scripts
       - uses: actions/download-artifact@v8.0.2
         with:
           artifact-ids: ${{ needs.freeze.outputs.artifact-id }}
@@ -215,7 +209,7 @@ jobs:
           gh release upload "$GITHUB_REF_NAME" release/npm/* release/crates/* --clobber
 
   recover-npm:
-    if: github.event_name == 'workflow_dispatch' && inputs.publish && inputs.recovery_run != '' && vars.RELEASE_ENABLED == 'true'
+    if: github.event_name == 'workflow_dispatch' && inputs.publish && inputs.recovery_artifact != '' && vars.RELEASE_ENABLED == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 20
     environment: release
@@ -224,8 +218,6 @@ jobs:
       actions: read
       id-token: write
     env:
-      RECOVERY_TAG: ${{ inputs.recovery_tag }}
-      RECOVERY_RUN: ${{ inputs.recovery_run }}
       RECOVERY_ARTIFACT: ${{ inputs.recovery_artifact }}
     steps:
       - uses: actions/checkout@v7.0.1
@@ -243,49 +235,19 @@ jobs:
       - uses: pnpm/action-setup@v6.1.0
         with:
           version: 12.14.0
-      - name: Verify the original run and frozen artifact provenance
+      - run: pnpm install --frozen-lockfile
+      - name: Verify the frozen artifact and prepare its original source
+        id: recovery
         env:
           GH_TOKEN: ${{ github.token }}
           GH_REPO: ${{ github.repository }}
           DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
-        run: |
-          [[ "$GITHUB_REF_TYPE" = tag && "$GITHUB_REF_NAME" = v-recovery-* ]]
-          [[ "$RECOVERY_TAG" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[a-zA-Z0-9.-]+)?$ ]]
-          [[ "$RECOVERY_RUN" =~ ^[0-9]+$ && "$RECOVERY_ARTIFACT" =~ ^[0-9]+$ ]]
-          git merge-base --is-ancestor HEAD "origin/$DEFAULT_BRANCH"
-          export RECOVERY_SHA="$(git rev-parse "$RECOVERY_TAG^{commit}")"
-          git merge-base --is-ancestor "$RECOVERY_SHA" HEAD
-          gh api "repos/$GH_REPO/actions/runs/$RECOVERY_RUN" > "$RUNNER_TEMP/recovery-run.json"
-          gh api "repos/$GH_REPO/actions/artifacts/$RECOVERY_ARTIFACT" > "$RUNNER_TEMP/recovery-artifact.json"
-          gh api --paginate --slurp "repos/$GH_REPO/actions/runs/$RECOVERY_RUN/jobs?filter=all&per_page=100" > "$RUNNER_TEMP/recovery-jobs.json"
-          node --input-type=module <<'NODE'
-          import assert from 'node:assert/strict'
-          import { readFileSync } from 'node:fs'
-          const read = name => JSON.parse(readFileSync(`${process.env.RUNNER_TEMP}/recovery-${name}.json`, 'utf8'))
-          const run = read('run')
-          const artifact = read('artifact')
-          const jobs = read('jobs').flatMap(page => page.jobs)
-          assert.equal(run.repository.full_name, process.env.GH_REPO)
-          assert.equal(run.path, '.github/workflows/release.yml')
-          assert.equal(run.status, 'completed')
-          assert.equal(run.head_sha, process.env.RECOVERY_SHA)
-          assert.equal(run.head_branch, process.env.RECOVERY_TAG)
-          assert.equal(artifact.workflow_run.id, Number(process.env.RECOVERY_RUN))
-          assert.equal(artifact.id, Number(process.env.RECOVERY_ARTIFACT))
-          assert.equal(artifact.workflow_run.head_sha, process.env.RECOVERY_SHA)
-          assert.equal(artifact.expired, false)
-          assert.match(artifact.name, /^release-artifacts-[1-9][0-9]*$/)
-          for (const name of ['freeze', 'publish-crates'])
-            assert.ok(jobs.some(job => job.name === name && job.conclusion === 'success'), `missing successful ${name}`)
-          console.log(`Recovering ${process.env.RECOVERY_TAG} from artifact ${artifact.id} (${artifact.digest})`)
-          NODE
-          git worktree add --detach target/recovery-source "$RECOVERY_SHA"
-      - run: pnpm install --frozen-lockfile
-      - run: npm install --global npm@11.21.0 --ignore-scripts
+        run: pnpm exec tsx scripts/release/recovery.ts --artifact "$RECOVERY_ARTIFACT"
+      - run: npm install --global "npm@$(node -p "require('./scripts/release/npm-compat.json').version")" --ignore-scripts
       - uses: actions/download-artifact@v8.0.2
         with:
           github-token: ${{ github.token }}
-          run-id: ${{ inputs.recovery_run }}
+          run-id: ${{ steps.recovery.outputs.run-id }}
           artifact-ids: ${{ inputs.recovery_artifact }}
           merge-multiple: true
           path: target/recovery-artifacts

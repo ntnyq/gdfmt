@@ -12,6 +12,7 @@ test('npm launcher canonicalizes scoped GET and PUT paths while retaining the or
   try {
     mkdirSync(join(directory, 'bin'))
     mkdirSync(join(directory, 'lib/commands'), { recursive: true })
+    writeFileSync(join(directory, 'package.json'), '{"version":"11.21.0"}')
     writeFileSync(
       join(directory, 'lib/commands/dist-tag.js'),
       'module.exports = class { fetchTags(spec, options) { return { originalOptions: options } } }',
@@ -20,6 +21,10 @@ test('npm launcher canonicalizes scoped GET and PUT paths while retaining the or
     writeFileSync(
       cli,
       `
+      if (process.argv[2] !== 'dist-tag') {
+        console.log('unpatched CLI')
+        return
+      }
       const DistTag = require('../lib/commands/dist-tag.js')
       const spec = { name: '@scope/package', escapedName: '@scope%2fpackage' }
       const options = { auth: 'synthetic fixture' }
@@ -50,6 +55,38 @@ test('npm launcher canonicalizes scoped GET and PUT paths while retaining the or
       sameAuth: true,
       args,
     })
+    const launcher = fileURLToPath(
+      new URL('../../scripts/release/npm-cli.mjs', import.meta.url),
+    )
+    for (const version of ['11.20.0', '11.21.1', '12.2.0', '13.0.0']) {
+      writeFileSync(
+        join(directory, 'package.json'),
+        JSON.stringify({ version }),
+      )
+      assert.throws(
+        () =>
+          execFileSync(process.execPath, [launcher, cli, ...args], {
+            stdio: 'pipe',
+          }),
+        error =>
+          error instanceof Error &&
+          'stderr' in error &&
+          /temporary dist-tag patch only supports npm 11\.21\.0/.test(
+            String(error.stderr),
+          ),
+      )
+    }
+    // Other npm commands must not load or modify private dist-tag internals.
+    writeFileSync(
+      join(directory, 'lib/commands/dist-tag.js'),
+      'throw new Error("private API loaded")',
+    )
+    assert.equal(
+      execFileSync(process.execPath, [launcher, cli, '--version'], {
+        encoding: 'utf8',
+      }).trim(),
+      'unpatched CLI',
+    )
   } finally {
     rmSync(directory, { recursive: true, force: true })
   }

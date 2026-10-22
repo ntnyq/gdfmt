@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict'
 import { runNpm } from '../npm/cli.ts'
+import compatibility from './npm-compat.json' with { type: 'json' }
 import { compareVersions } from './project.ts'
 
 /**
- * OIDC dist-tags need npm 11.21+ or 12.2+, independently of publish permission.
+ * Rejects unverified npm versions before any write while the internal patch exists.
  */
 export function validateNpmRuntime(
   node: string,
@@ -14,11 +15,10 @@ export function validateNpmRuntime(
     compareVersions(node, '22.14.0') >= 0,
     'npm Trusted Publishing requires Node >=22.14.0',
   )
-  assert.ok(
-    npm.startsWith('11.')
-      ? compareVersions(npm, '11.21.0') >= 0
-      : compareVersions(npm, '12.2.0') >= 0,
-    'release publication requires npm 11.21+ or 12.2+ for OIDC dist-tags',
+  assert.equal(
+    npm,
+    compatibility.version,
+    `release publication requires pinned npm ${compatibility.version}; review the temporary dist-tag patch before upgrading (RELEASING.md)`,
   )
   if (environment.GITHUB_ACTIONS === 'true') {
     assert.ok(

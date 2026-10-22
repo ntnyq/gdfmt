@@ -81,7 +81,7 @@ npm 需要发布 6 个包：
 
 工作流名称只填写带扩展名的文件名。新配置可能默认只允许 staged publishing，本流程需要另外开启直接发布和 dist-tag 权限。新 Trusted Publisher 必须在 **两天内成功发布一个新版本**；重试时跳过已存在的版本不能完成这个验证，过期后需要重新创建配置。
 
-发布 job 固定使用 Node 24.0.0 和 npm 11.21.0，支持 OIDC 发布及 dist-tag 操作；消费者矩阵继续覆盖 Node 22.13.0 和 24.0.0。OIDC 验证成功后，可以在 npm 包设置中启用要求 2FA 并禁止 token 发布。
+发布 job 固定使用 Node 24.0.0 和 `scripts/release/npm-compat.json` 中记录的 npm 版本（目前为 11.21.0），支持 OIDC 发布及 dist-tag 操作。执行前检查和临时 dist-tag 补丁都会拒绝其他 npm 版本，避免未验证的运行时开始写入；消费者矩阵继续覆盖 Node 22.13.0 和 24.0.0。OIDC 验证成功后，可以在 npm 包设置中启用要求 2FA 并禁止 token 发布。
 
 ## 首次发布
 
@@ -106,7 +106,7 @@ pnpm release:publish:npm
 
 将示例 tag 替换为实际版本。`FREEZE_ATTEMPT` 填写成功冻结的运行次数，例如 `1`；后续只重试发布 job 不会改变该 artifact 名称。bundle 包含 `npm/` 和 `crates/`。`npm/release.json` 记录提交、源码干净状态、完整矩阵、待发布文件及 SHA-512 integrity；`crates/crates.json` 记录 8 个 Rust 归档对应的提交和 SHA-256，校验时还会核对归档内的 Cargo VCS 信息。每个平台选择 Node 24.0.0 job 的 tarball，Node 22.13.0 job 独立验证同一份主包；两个 Node job 生成的原生包不要求字节完全相同。
 
-5. 确定开始首次实际发布时，使用 npm 11.21+ 或 12.2+，登录并显式执行。Node 24.0.0 最初自带的 npm 较旧，需要先升级：
+5. 确定开始首次实际发布时，使用固定的 npm 11.21.0，登录并显式执行。Node 24.0.0 最初自带的 npm 较旧，需要先升级：
 
 ```sh
 npm install --global npm@11.21.0 --ignore-scripts
@@ -168,7 +168,9 @@ Rust CLI 发布后会以精确的 `=VERSION` 要求从 crates.io 重新安装并
 
 发布命令会输出开始、结束及每 15 秒一次的运行状态。npm 命令最多运行三分钟，单个 HTTP 请求超时为 30 秒，并禁用 npm 自带的 HTTP 重试，避免静默重复 registry 写入。Cargo 打包和发布命令最多运行十分钟。registry 读取会记录每次重试；npm 版本可见性和安装索引等待最多十分钟，渠道确认最多一分钟。写入超时后，仍会先核对 registry 结果，再决定停止或继续。
 
-npm 启动器在 dist-tag 读写时，将 scoped 包名中的斜杠编码规范为 `%2F`，继续使用 npm 原有的 OIDC/OTP 认证逻辑。这可以避开无法处理小写 `%2f` 的 registry 路由，且不修改已安装的 npm 文件。
+临时 npm 启动器在 dist-tag 读写时，将 scoped 包名中的斜杠编码规范为 `%2F`，继续使用 npm 原有的 OIDC/OTP 认证逻辑。alpha.5 恢复时实测小写 `%2f` 请求停滞、等价的大写编码请求成功，但未确定故障位于网络或 registry 的哪一层。补丁依赖 npm 私有的 `DistTag.fetchTags` 方法，因此只允许 `scripts/release/npm-compat.json` 中的精确版本；其他命令不加载该私有模块。升级时不要直接放宽版本限制。
+
+移除条件：候选 npm 运行时在不加载此补丁的情况下，通过 scoped dist-tag 读取、现有 `release` environment 中使用 GitHub OIDC 的受控标签写入，以及全新安装后的 API/CLI 检查。写入使用可丢弃的测试渠道，并核对 registry 中的实际结果。验证通过后，在同一次修改中固定新的 `npm-compat.json` 版本、删除私有方法覆盖、更新启动器测试并记录验证证据；此前继续保留当前固定版本和补丁。
 
 npm 版本检查优先读取安装时使用的包元数据并核对其中的 integrity。如果索引尚未列出目标版本，再检查不可变版本接口，避免将索引延迟误判为版本不存在。预检查已确认的不可变版本不会再次轮询；新上传的版本仍须等待 integrity 匹配后才能继续。
 
@@ -185,7 +187,7 @@ pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/rel
 
 `--source` 只选择校验源码的位置，不会替换产物中的提交。源码的精确 Git 提交、版本、包元数据、tarball hash 和原完整矩阵仍须全部匹配。执行时两个 checkout 都必须干净，并满足前文的 npm 运行时及交互式认证要求。只有两个 registry 和安装检查均已成功后，才使用原 bundle 创建 GitHub Release。
 
-恢复需要新版工具且要保留 GitHub Trusted Publishing 时，为已提交的工具版本创建唯一的 `v-recovery-*` tag，再在该 ref 上手动运行 `release.yml`：设置 `publish=true`、原版本 `recovery_tag`、原运行 `recovery_run` 和原冻结产物 `recovery_artifact` ID。恢复 tag 不触发常规发布。恢复 job 要求两个提交均位于默认分支历史中，核对指定 artifact 确实来自原版本的 Release 运行，且原冻结和 Rust 发布 job 已成功，然后按精确 ID 下载产物。新版 npm 发布脚本对照独立的原源码 checkout 校验，继续使用已有 `release` environment 和 OIDC 信任，不重建产物，也不创建 GitHub Release；两侧 registry 确认完成后，再用原 bundle 创建 Release。不要移动原版本 tag，也不要放宽 environment 策略。
+恢复需要新版工具且要保留 GitHub Trusted Publishing 时，为已提交的工具版本创建唯一的 `v-recovery-*` tag，再在该 ref 上手动运行 `release.yml`：只设置 `publish=true` 和原冻结产物 `recovery_artifact` ID。原运行、版本 tag 和提交均从该 artifact 推导，避免手动填写不一致。恢复 tag 不触发常规发布。恢复 job 要求两个提交均位于默认分支历史中，核对指定 artifact 确实来自原版本的 Release 运行，且原冻结和 Rust 发布 job 已成功，然后按精确 ID 下载产物。新版 npm 发布脚本对照独立的原源码 checkout 校验，继续使用已有 `release` environment 和 OIDC 信任，不重建产物，也不创建 GitHub Release；两侧 registry 确认完成后，再用原 bundle 创建 Release。不要移动原版本 tag，也不要放宽 environment 策略。
 
 一次只推送一个发布 tag。GitHub 默认并发策略会保留正在运行的发布和一个等待中的发布，额外的等待运行可能替换前一个等待运行。如果某个 tag 的等待运行被取消，在当前发布完成后显式选择该 tag 手动运行即可。
 

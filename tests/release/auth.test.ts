@@ -12,12 +12,11 @@ import {
 } from '../../scripts/release/project.ts'
 
 test('OIDC validates both CLI capabilities and the actual GitHub id-token environment', () => {
-  for (const version of ['11.21.0', '12.2.0', '13.0.0'])
-    validateNpmRuntime('24.0.0', version, {})
-  for (const version of ['10.9.0', '11.20.0', '12.1.0'])
+  validateNpmRuntime('24.0.0', '11.21.0', {})
+  for (const version of ['10.9.0', '11.20.0', '11.21.1', '12.2.0', '13.0.0'])
     assert.throws(
       () => validateNpmRuntime('24.0.0', version, {}),
-      /OIDC dist-tags/,
+      /pinned npm 11\.21\.0/,
     )
   assert.throws(() => validateNpmRuntime('22.13.0', '11.21.0', {}), /Node/)
   assert.throws(
