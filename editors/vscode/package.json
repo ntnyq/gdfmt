@@ -102,5 +102,5 @@
       "description": "Web supports URI-based workspaces with bounded JSON/JSONC configuration. Desktop formatting uses local file workspaces."
     }
   },
-  "gdfmtVersion": "0.1.0-alpha.5"
+  "gdfmtVersion": "0.1.0-alpha.6"
 }
