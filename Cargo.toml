@@ -3,20 +3,20 @@ resolver = "3"
 members = ["crates/*", "xtask"]
 
 [workspace.package]
-version = "0.1.0-alpha.4"
+version = "0.1.0-alpha.5"
 edition = "2024"
 rust-version = "1.88"
 license = "MIT"
 repository = "https://github.com/ntnyq/gdfmt"
 
 [workspace.dependencies]
-gdfmt_text = { path = "crates/gdfmt_text", version = "=0.1.0-alpha.4" }
-gdfmt_syntax = { path = "crates/gdfmt_syntax", version = "=0.1.0-alpha.4" }
-gdfmt_parser = { path = "crates/gdfmt_parser", version = "=0.1.0-alpha.4" }
-gdfmt_formatter = { path = "crates/gdfmt_formatter", version = "=0.1.0-alpha.4" }
-gdfmt = { path = "crates/gdfmt", version = "=0.1.0-alpha.4" }
-gdfmt_config = { path = "crates/gdfmt_config", version = "=0.1.0-alpha.4" }
-gdfmt_workspace = { path = "crates/gdfmt_workspace", version = "=0.1.0-alpha.4" }
+gdfmt_text = { path = "crates/gdfmt_text", version = "=0.1.0-alpha.5" }
+gdfmt_syntax = { path = "crates/gdfmt_syntax", version = "=0.1.0-alpha.5" }
+gdfmt_parser = { path = "crates/gdfmt_parser", version = "=0.1.0-alpha.5" }
+gdfmt_formatter = { path = "crates/gdfmt_formatter", version = "=0.1.0-alpha.5" }
+gdfmt = { path = "crates/gdfmt", version = "=0.1.0-alpha.5" }
+gdfmt_config = { path = "crates/gdfmt_config", version = "=0.1.0-alpha.5" }
+gdfmt_workspace = { path = "crates/gdfmt_workspace", version = "=0.1.0-alpha.5" }
 clap = { version = "4.5", features = ["derive"] }
 ignore = "0.4"
 globset = "0.4"
