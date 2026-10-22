@@ -3,8 +3,50 @@ import { test } from 'node:test'
 import {
   confirmRegistryWrite,
   registryJson,
+  npmVersion,
   waitForNpmInstall,
 } from '../../scripts/release/registry.ts'
+
+test('published versions use package metadata and only a real 404 proves an unlisted version absent', async () => {
+  const version = { dist: { integrity: 'sha512-fixture' } }
+  const requests: string[] = []
+  const fetcher: typeof fetch = async input => {
+    requests.push(String(input))
+    if (String(input).endsWith('/1.0.0'))
+      return new Response('{}', { status: 404 })
+    return new Response(JSON.stringify({ versions: { '0.9.0': version } }))
+  }
+  assert.deepEqual(
+    await npmVersion('@scope/package', '0.9.0', undefined, fetcher),
+    version,
+  )
+  assert.equal(requests.length, 1)
+  requests.length = 0
+  assert.equal(
+    await npmVersion('@scope/package', '1.0.0', undefined, fetcher),
+    undefined,
+  )
+  assert.equal(requests.length, 2)
+  assert.ok(requests[1].endsWith('/1.0.0'))
+  const delayedIndex: typeof fetch = async input =>
+    new Response(
+      JSON.stringify(
+        String(input).endsWith('/1.0.0') ? version : { versions: {} },
+      ),
+    )
+  assert.deepEqual(
+    await npmVersion('@scope/package', '1.0.0', undefined, delayedIndex),
+    version,
+  )
+  const delayedPackage: typeof fetch = async input =>
+    String(input).endsWith('/1.0.0')
+      ? new Response(JSON.stringify(version))
+      : new Response('{}', { status: 404 })
+  assert.deepEqual(
+    await npmVersion('@scope/package', '1.0.0', undefined, delayedPackage),
+    version,
+  )
+})
 
 test('registry reads back off on transient failures, then validate the successful response', async () => {
   const delays: number[] = []

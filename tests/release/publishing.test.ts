@@ -359,7 +359,13 @@ test('npm resumes a partially promoted set without uploading or rewriting comple
     )
     assert.equal(fake.channels.has(metadata.name), false)
     fake.writes.length = 0
-    await publishNpm(files.frozen, true, fake.operations)
+    await publishNpm(files.frozen, true, {
+      ...fake.operations,
+      wait: async () =>
+        assert.fail(
+          'existing immutable versions were already verified during preflight',
+        ),
+    })
     assert.deepEqual(
       fake.writes.filter(value => value.startsWith('promote:')),
       [`promote:${failed}`, `promote:${metadata.name}`],

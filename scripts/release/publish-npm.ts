@@ -214,9 +214,11 @@ export async function publishNpm(
   // together, then require every platform to be visible before uploading root.
   for (const entry of platforms) await upload(entry)
   for (const entry of platforms)
-    await operations.wait(entry.name, release.version, entry.integrity)
+    if (pending.includes(entry.name))
+      await operations.wait(entry.name, release.version, entry.integrity)
   await upload(root)
-  await operations.wait(root.name, release.version, root.integrity)
+  if (pending.includes(root.name))
+    await operations.wait(root.name, release.version, root.integrity)
   logReleaseProgress(
     'Verifying a fresh registry install before promoting any channels',
   )

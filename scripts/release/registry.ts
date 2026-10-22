@@ -120,13 +120,15 @@ export async function npmVersion(
   name: string,
   version: string,
   signal?: AbortSignal,
+  fetcher: typeof fetch = fetch,
 ): Promise<Record<string, unknown> | undefined> {
-  return registryJson(
-    `${npmRegistry}/${encodeURIComponent(name)}/${version}`,
-    fetch,
-    setTimeout,
-    signal,
-  )
+  const packageUrl = `${npmRegistry}/${encodeURIComponent(name)}`
+  const manifest = await registryJson(packageUrl, fetcher, setTimeout, signal)
+  const current = manifest ? readObject(manifest.versions)[version] : undefined
+  if (current !== undefined) return readObject(current)
+  // The immutable endpoint can be ahead of the install index. Only its 404
+  // proves a version missing from an existing package's metadata is absent.
+  return registryJson(`${packageUrl}/${version}`, fetcher, setTimeout, signal)
 }
 
 export function assertNpmIntegrity(
