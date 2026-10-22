@@ -1,0 +1,11 @@
+src/**
+tests/**
+node_modules/**
+tsconfig.json
+**/*.map
+.vscodeignore
+
+dist/test.cjs
+
+dist/web/test.js
+tsconfig.web.json

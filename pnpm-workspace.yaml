@@ -1,9 +1,12 @@
 packages:
   - docs
   - packages/*
+  - editors/*
 
 allowBuilds:
   esbuild: true
+  '@playwright/browser-chromium': false
+  '@vscode/vsce-sign': false
 
 minimumReleaseAge: 0
 pmOnFail: warn

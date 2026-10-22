@@ -6,13 +6,17 @@
     "noEmit": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
-    "types": ["node"]
+    "types": ["node"],
+    "paths": {
+      "@gdfmt/wasm": ["../packages/wasm/src/index.d.mts"]
+    }
   },
   "include": [
     "**/*.ts",
     "../tests/npm/**/*.test.ts",
     "../tests/release/**/*.test.ts",
     "../tests/project-trials/**/*.test.ts",
-    "../vitest.config.ts"
+    "../vitest.config.ts",
+    "../tests/vscode-web/**/*.test.ts"
   ]
 }
