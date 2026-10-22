@@ -1,5 +1,7 @@
 //! Reusable CLI runner. Only the outer binary chooses when to exit the process.
 
+pub mod lsp;
+
 use clap::{Parser, Subcommand, ValueEnum};
 use gdfmt_config::{PartialConfig, schema_json};
 use gdfmt_parser::{LexOptions, LexResult, lex};
@@ -34,6 +36,9 @@ enum Reporter {
     after_help = "Formats GDScript with paired formatter-off/on regions, reparse, structure and idempotence validation. Lint rules and semantic fixes are outside the project scope."
 )]
 struct Args {
+    /// Run the formatting language server over stdio.
+    #[arg(long, conflicts_with_all = ["paths", "check", "diff", "stdin_filepath"])]
+    lsp: bool,
     #[arg(long, global = true, value_enum, default_value = "human")]
     reporter: Reporter,
     #[arg(long, global = true, value_name = "FILE")]
@@ -168,7 +173,7 @@ impl Report {
 pub fn run<I, T>(
     arguments: I,
     cwd: &Path,
-    stdin: &mut dyn Read,
+    stdin: &mut (dyn Read + Send),
     stdout: &mut dyn Write,
     stderr: &mut dyn Write,
 ) -> i32
@@ -203,6 +208,19 @@ where
             return if written.is_ok() { code } else { 2 };
         }
     };
+    if args.lsp {
+        if args.command.is_some() {
+            let _ = writeln!(stderr, "--lsp cannot be combined with a subcommand");
+            return 2;
+        }
+        return match lsp::run(stdin, stdout, cwd, args.config) {
+            Ok(code) => code,
+            Err(error) => {
+                let _ = writeln!(stderr, "gdfmt LSP: {error}");
+                2
+            }
+        };
+    }
     let reporter = args.reporter;
     match execute(args, cwd, stdin, stdout, stderr) {
         Ok(code) => code,

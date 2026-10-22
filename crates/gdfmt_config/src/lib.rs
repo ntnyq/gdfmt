@@ -1,6 +1,9 @@
 //! Validated JSON/JSONC configuration, field-wise merging, and generated JSON Schema.
 
+mod request;
+pub mod text;
 pub use gdfmt_syntax::LanguageVersion;
+pub use request::format_request;
 use schemars::{JsonSchema, schema_for};
 use serde::{Deserialize, Deserializer, Serialize};
 use thiserror::Error;

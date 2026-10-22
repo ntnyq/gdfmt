@@ -22,6 +22,9 @@ gdfmt_config.workspace = true
 gdfmt_workspace.workspace = true
 gdfmt_parser.workspace = true
 gdfmt_syntax.workspace = true
+lsp-server = "=0.7.9"
+crossbeam-channel = "0.5"
+url = "2.5"
 clap.workspace = true
 serde.workspace = true
 serde_json.workspace = true

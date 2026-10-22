@@ -16,6 +16,9 @@ publish = ["crates-io"]
 workspace = true
 
 [dependencies]
+gdfmt.workspace = true
+gdfmt_text.workspace = true
+gdfmt_parser.workspace = true
 gdfmt_syntax.workspace = true
 serde.workspace = true
 serde_json.workspace = true

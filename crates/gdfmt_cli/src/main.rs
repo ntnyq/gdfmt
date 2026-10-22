@@ -11,7 +11,7 @@ fn main() {
     let code = gdfmt_cli::run(
         std::env::args_os(),
         &cwd,
-        &mut io::stdin().lock(),
+        &mut io::stdin(),
         &mut io::stdout().lock(),
         &mut io::stderr().lock(),
     );

@@ -484,6 +484,28 @@ test('npm CLI has byte-identical stdout/stderr, exit codes, writes and host fail
       )
       assert.equal(await readFile(join(directory, 'file.gd'), 'utf8'), after)
     }
+    const protocol = [
+      {
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'initialize',
+        params: { capabilities: {} },
+      },
+      { jsonrpc: '2.0', id: 2, method: 'shutdown', params: null },
+      { jsonrpc: '2.0', method: 'exit', params: null },
+    ]
+      .map(message => {
+        const body = JSON.stringify(message)
+        return `Content-Length: ${Buffer.byteLength(body)}\r\n\r\n${body}`
+      })
+      .join('')
+    const protocolResult = execute(false, ['--lsp'], directory, protocol)
+    assert.equal(protocolResult.status, 0)
+    assert.match(protocolResult.stdout, /documentFormattingProvider/)
+    assert.deepEqual(
+      execute(true, ['--lsp'], directory, protocol),
+      protocolResult,
+    )
     const bytes = Buffer.from([0xff])
     assert.deepEqual(
       execute(true, ['--reporter=json', '-'], directory, bytes),

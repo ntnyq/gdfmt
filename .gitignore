@@ -8,3 +8,13 @@
 
 /docs/.vitepress/cache/
 /docs/.vitepress/dist/
+
+/packages/wasm/dist/
+/packages/wasm/LICENSE
+/packages/wasm/LICENSE-THIRD-PARTY
+/editors/vscode/dist/
+/editors/vscode/server/
+/editors/vscode/schemas/
+/editors/vscode/LICENSE
+/editors/vscode/LICENSE-THIRD-PARTY
+/.vscode-test/

@@ -1,35 +1,12 @@
 //! Node boundary only: owned UTF-8 text/JSON crosses into libuv workers.
 //! Syntax, configuration, validated formatting and CLI behavior stay in Rust.
-use gdfmt_config::{PartialConfig, PartialFormatOptions, PartialLanguageOptions};
-use gdfmt_text::{Diagnostic, SourceId};
-use napi::{Env, Error, Result, Status, Task, bindgen_prelude::AsyncTask};
+use napi::{Env, Error, Result, Task, bindgen_prelude::AsyncTask};
 use napi_derive::napi;
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 use std::{io, path::Path};
 
-#[derive(Default, Deserialize)]
-#[serde(rename_all = "camelCase", deny_unknown_fields)]
-struct TextOptions {
-    #[serde(default)]
-    language: PartialLanguageOptions,
-    #[serde(default)]
-    format: PartialFormatOptions,
-    #[serde(default)]
-    source_id: u32,
-}
-
-#[derive(Serialize)]
-#[serde(rename_all = "camelCase")]
-struct TextResult {
-    schema_version: u32,
-    span_encoding: &'static str,
-    output: Option<String>,
-    changed: bool,
-    diagnostics: Vec<Diagnostic>,
-}
-
 fn invalid(error: impl ToString) -> Error {
-    Error::new(Status::InvalidArg, error.to_string())
+    Error::new(napi::Status::InvalidArg, error.to_string())
 }
 
 fn json(value: &impl Serialize) -> Result<String> {
@@ -37,23 +14,7 @@ fn json(value: &impl Serialize) -> Result<String> {
 }
 
 fn format_text(source: &str, options: &str) -> Result<String> {
-    let options: TextOptions = serde_json::from_str(options).map_err(invalid)?;
-    let config = PartialConfig {
-        language: Some(options.language),
-        format: Some(options.format),
-        ..Default::default()
-    }
-    .resolve()
-    .map_err(invalid)?;
-    let request = gdfmt_workspace::format_request(&config, SourceId(options.source_id));
-    let result = gdfmt::format(source, &request);
-    json(&TextResult {
-        schema_version: 1,
-        span_encoding: "utf8Bytes",
-        output: result.output,
-        changed: result.changed,
-        diagnostics: result.diagnostics,
-    })
+    gdfmt_config::text::format_text_json(source, options).map_err(invalid)
 }
 
 #[napi]
@@ -134,7 +95,7 @@ pub fn run_cli(arguments: Vec<String>) -> i32 {
     gdfmt_cli::run(
         std::iter::once("gdfmt".to_string()).chain(arguments),
         &cwd,
-        &mut io::stdin().lock(),
+        &mut io::stdin(),
         &mut io::stdout().lock(),
         &mut io::stderr().lock(),
     )

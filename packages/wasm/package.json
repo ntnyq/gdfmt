@@ -1,0 +1,30 @@
+{
+  "name": "@gdfmt/wasm",
+  "version": "0.1.0-alpha.5",
+  "description": "Validated GDScript formatting for browsers and Web Workers",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ntnyq/gdfmt.git",
+    "directory": "packages/wasm"
+  },
+  "files": [
+    "dist",
+    "examples",
+    "LICENSE",
+    "LICENSE-THIRD-PARTY",
+    "README.md"
+  ],
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "./gdfmt.wasm": "./dist/binding_bg.wasm",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

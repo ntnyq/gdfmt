@@ -1,6 +1,5 @@
 //! Filesystem/configuration adapters and guarded per-file replacement.
 
-use gdfmt_config::ResolvedConfig;
 use gdfmt_parser::{LexOptions, LexResult, lex};
 use std::{
     fs::File,
@@ -81,71 +80,8 @@ pub fn lex_file(path: &Path, options: &LexOptions) -> Result<LexedFile, Workspac
     })
 }
 
-/// Map resolved host configuration into the pure text formatter.
-pub fn format_request(
-    config: &ResolvedConfig,
-    source_id: gdfmt_text::SourceId,
-) -> gdfmt::FormatRequest {
-    gdfmt::FormatRequest {
-        parse: gdfmt::ParseOptions {
-            language_version: config.language.godot_version,
-            lex: LexOptions {
-                source_id,
-                ..Default::default()
-            },
-            ..Default::default()
-        },
-        format: gdfmt::FormatOptions {
-            line_width: config.format.line_width as usize,
-            indent: match config.format.indent_style {
-                gdfmt_config::IndentStyle::Tab => "\t".into(),
-                gdfmt_config::IndentStyle::Space => " ".repeat(config.format.indent_width as usize),
-            },
-            tab_width: config.format.indent_width as usize,
-            line_ending: match config.format.line_ending {
-                gdfmt_config::LineEnding::Lf => gdfmt::LineEnding::Lf,
-                gdfmt_config::LineEnding::Crlf => gdfmt::LineEnding::Crlf,
-                gdfmt_config::LineEnding::Preserve => gdfmt::LineEnding::Preserve,
-            },
-            max_blank_lines: config.format.max_blank_lines as usize,
-            final_newline: config.format.final_newline,
-            array_layout: match config.format.array_layout {
-                gdfmt_config::CollectionLayout::Auto => gdfmt::CollectionLayout::Auto,
-                gdfmt_config::CollectionLayout::Multiline => gdfmt::CollectionLayout::Multiline,
-                gdfmt_config::CollectionLayout::Preserve => gdfmt::CollectionLayout::Preserve,
-            },
-            dictionary_layout: match config.format.dictionary_layout {
-                gdfmt_config::CollectionLayout::Auto => gdfmt::CollectionLayout::Auto,
-                gdfmt_config::CollectionLayout::Multiline => gdfmt::CollectionLayout::Multiline,
-                gdfmt_config::CollectionLayout::Preserve => gdfmt::CollectionLayout::Preserve,
-            },
-            enum_layout: match config.format.enum_layout {
-                gdfmt_config::CollectionLayout::Auto => gdfmt::CollectionLayout::Auto,
-                gdfmt_config::CollectionLayout::Multiline => gdfmt::CollectionLayout::Multiline,
-                gdfmt_config::CollectionLayout::Preserve => gdfmt::CollectionLayout::Preserve,
-            },
-            dictionary_spacing: match config.format.dictionary_spacing {
-                gdfmt_config::DictionarySpacing::Compact => gdfmt::DictionarySpacing::Compact,
-                gdfmt_config::DictionarySpacing::Spaced => gdfmt::DictionarySpacing::Spaced,
-            },
-            trailing_comma_layout: match config.format.trailing_comma_layout {
-                gdfmt_config::TrailingCommaLayout::Auto => gdfmt::TrailingCommaLayout::Auto,
-                gdfmt_config::TrailingCommaLayout::Multiline => {
-                    gdfmt::TrailingCommaLayout::Multiline
-                }
-            },
-            blank_lines_around_definitions: match config.format.blank_lines_around_definitions {
-                gdfmt_config::BlankLinesAroundDefinitions::Preserve(_) => None,
-                gdfmt_config::BlankLinesAroundDefinitions::Count(count) => Some(count),
-            },
-            lambda_body_style: match config.format.lambda_body_style {
-                gdfmt_config::LambdaBodyStyle::Auto => gdfmt::LambdaBodyStyle::Auto,
-                gdfmt_config::LambdaBodyStyle::Multiline => gdfmt::LambdaBodyStyle::Multiline,
-            },
-            inline_comment_spacing: config.format.inline_comment_spacing,
-        },
-    }
-}
+// Preserve the workspace API for existing callers.
+pub use gdfmt_config::format_request;
 
 pub fn read_source(path: &Path) -> Result<String, WorkspaceError> {
     read_utf8(path, LexOptions::default().max_source_bytes as u64)
