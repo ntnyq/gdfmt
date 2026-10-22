@@ -39,17 +39,62 @@
 
 `gdfmt init` 创建 `.gdfmtrc.json`；两种配置文件名任一已存在时，都会拒绝创建。
 
-| 字段                  | 默认值 | 范围                        |
-| --------------------- | ------ | --------------------------- |
-| schemaVersion         | 1      | 仅 1                        |
-| root                  | false  | 布尔值，终止祖先配置查找    |
-| language.godotVersion | 4.7    | 4.3 / 4.4 / 4.5 / 4.6 / 4.7 |
-| format.lineWidth      | 100    | 40–320                      |
-| format.indentStyle    | tab    | tab / space                 |
-| format.indentWidth    | 4      | 1–8                         |
-| format.lineEnding     | lf     | lf / crlf / preserve        |
-| format.maxBlankLines  | 2      | 0–5                         |
-| format.finalNewline   | true   | 布尔值                      |
+| 字段                               | 默认值   | 范围                        |
+| ---------------------------------- | -------- | --------------------------- |
+| schemaVersion                      | 1        | 仅 1                        |
+| root                               | false    | 布尔值，终止祖先配置查找    |
+| language.godotVersion              | 4.7      | 4.3 / 4.4 / 4.5 / 4.6 / 4.7 |
+| format.lineWidth                   | 100      | 40–320                      |
+| format.indentStyle                 | tab      | tab / space                 |
+| format.indentWidth                 | 4        | 1–8                         |
+| format.lineEnding                  | lf       | lf / crlf / preserve        |
+| format.maxBlankLines               | 2        | 0–5                         |
+| format.finalNewline                | true     | 布尔值                      |
+| format.arrayLayout                 | auto     | auto / multiline / preserve |
+| format.dictionaryLayout            | auto     | auto / multiline / preserve |
+| format.enumLayout                  | auto     | auto / multiline / preserve |
+| format.dictionarySpacing           | compact  | compact / spaced            |
+| format.trailingCommaLayout         | auto     | auto / multiline            |
+| format.blankLinesAroundDefinitions | preserve | preserve 或整数 0–5         |
+| format.lambdaBodyStyle             | auto     | auto / multiline            |
+| format.inlineCommentSpacing        | 1        | 整数 1–4                    |
+
+## 布局策略 {#layout-policies}
+
+全部布局选项沿用现有默认输出，并保留有效 token 原文。它们均支持继承、overrides 和 npm 同步/异步文本 API；`explain-config` 显示最终值与来源。
+
+- `arrayLayout`、`dictionaryLayout`、`enumLayout` 分别控制数组、字典字面量和枚举成员。`auto` 按宽度换行，`multiline` 展开非空列表，`preserve` 保留已有多行布局，但仍会对过宽的单行输入换行。空集合保持紧凑，注释要求换行时除外。`Dictionary[String, int]` 等集合类型引用保持不可拆分。
+- `dictionarySpacing: "spaced"` 为非空单行字典增加花括号内空格，如 `{ "key": 1 }` 或 `{ name = 1 }`。空字典仍为 `{}`，多行字典、数组和调用不增加此类空格。
+- `trailingCommaLayout: "multiline"` 展开已有尾逗号的非空分隔列表，包括集合字面量、枚举、调用/注解实参、函数/signal/lambda 形参和 match 模式。它不增删逗号。要求展开的策略优先于 `auto`；块 lambda 仍保留外层语句所需的合法缩进。
+- `blankLinesAroundDefinitions` 接受 `"preserve"` 或 0–5 的整数。数字规范同一脚本/类作用域内函数、内部类与相邻声明的间隔；在这些边界优先于 `maxBlankLines`，即使目标数字更大，其他间隔仍受 `maxBlankLines` 限制。不在作用域首尾或函数体内部补空行，前置注释和注解与目标声明保持为一组。
+- `lambdaBodyStyle: "multiline"` 强制块体；`auto` 沿用简单、无注释、单条语句可内联的现有行为。复杂或含注释的函数体始终服从必要的块布局。
+- `inlineCommentSpacing` 设置代码与行尾 `#` 注释之间的 1–4 个空格。不改变注释文本；独立行注释继续遵循原有关联和缩进规则。
+
+例如：
+
+```json
+{
+  "format": {
+    "arrayLayout": "preserve",
+    "dictionarySpacing": "spaced",
+    "trailingCommaLayout": "multiline",
+    "blankLinesAroundDefinitions": 2,
+    "lambdaBodyStyle": "multiline",
+    "inlineCommentSpacing": 2
+  }
+}
+```
+
+该配置将 `var points = [1, 2,] # points` 格式化为：
+
+```gdscript
+var points = [
+	1,
+	2,
+]  # points
+```
+
+字面量内容与 formatter-off/on 区域不受这些设置改写，仍逐字节保留。验证和保护区域回退行为见[脚本格式化](/zh/reference/formatting)。
 
 ## 发现、继承与 overrides {#discovery-inheritance-and-overrides}
 
@@ -112,6 +157,6 @@ Tab 优先使用 `tab_width`，空格优先使用数值 `indent_size`；首选�
 
 写入使用源码目录中的临时文件，保留权限，并在原子替换前复核原始文件。拒绝只读文件与符号链接，Unix 下还拒绝硬链接。替换以单文件为单位保持原子性，并发修改检测采用尽力复核，不提供多文件事务。强制终止进程可能遗留临时文件。
 
-GDScript 引号转换和尾逗号选项尚未实现。`lint`、`rules` 和规则插件不属于 formatter 范围，仍报未知字段错误。
+GDScript 引号转换和逗号增删尚未实现；`trailingCommaLayout` 只改变布局。`lint`、`rules` 和规则插件不属于 formatter 范围，仍报未知字段错误。
 
 语言版本与 parser 的 `ParseOptions.language_version` 共用枚举。CLI 的 `lex` 只做词法检查，不运行版本 gates；`check`/formatter 使用最终语法 profile。profile 与完整引擎兼容性的区别见[语言版本](/zh/reference/language-versions)。

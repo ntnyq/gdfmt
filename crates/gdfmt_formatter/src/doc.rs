@@ -8,6 +8,10 @@ pub(crate) enum Doc {
     Concat(Vec<Doc>),
     Group(Box<Doc>),
     Indent(Box<Doc>),
+    /// Visual continuation indentation does not enter the lexer suite stack.
+    ContinuationIndent(Box<Doc>),
+    /// A delimiter ending an inline lambda must use the enclosing suite column.
+    StatementIndent(Box<Doc>),
     Line(&'static str),
     HardLine,
     /// Start a line unless already at its beginning.
@@ -28,6 +32,12 @@ impl Doc {
     pub(crate) fn indent(self) -> Self {
         Self::Indent(Box::new(self))
     }
+    pub(crate) fn continuation_indent(self) -> Self {
+        Self::ContinuationIndent(Box::new(self))
+    }
+    pub(crate) fn statement_indent(self) -> Self {
+        Self::StatementIndent(Box::new(self))
+    }
 }
 
 #[derive(Clone, Copy)]
@@ -38,6 +48,7 @@ enum Mode {
 #[derive(Clone, Copy)]
 struct Frame<'a> {
     level: usize,
+    statement_level: usize,
     mode: Mode,
     doc: &'a Doc,
 }
@@ -85,7 +96,10 @@ fn fits(
             Doc::Concat(parts) => {
                 pending.extend(parts.iter().rev().map(|doc| Frame { doc, ..frame }))
             }
-            Doc::Group(doc) | Doc::Indent(doc) => pending.push(Frame { doc, ..frame }),
+            Doc::Group(doc)
+            | Doc::Indent(doc)
+            | Doc::ContinuationIndent(doc)
+            | Doc::StatementIndent(doc) => pending.push(Frame { doc, ..frame }),
             Doc::Line(flat) => match frame.mode {
                 Mode::Flat => column += flat.len(),
                 Mode::Break => return true,
@@ -104,6 +118,7 @@ pub(crate) fn print(
 ) -> String {
     let mut pending = vec![Frame {
         level: 0,
+        statement_level: 0,
         mode: Mode::Break,
         doc,
     }];
@@ -148,6 +163,17 @@ pub(crate) fn print(
             }
             Doc::Indent(doc) => pending.push(Frame {
                 level: frame.level + 1,
+                statement_level: frame.statement_level + 1,
+                doc,
+                ..frame
+            }),
+            Doc::ContinuationIndent(doc) => pending.push(Frame {
+                level: frame.level + 1,
+                doc,
+                ..frame
+            }),
+            Doc::StatementIndent(doc) => pending.push(Frame {
+                level: frame.statement_level,
                 doc,
                 ..frame
             }),

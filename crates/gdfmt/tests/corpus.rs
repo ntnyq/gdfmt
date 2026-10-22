@@ -103,3 +103,48 @@ fn failed_output_reparse_returns_no_writable_text() {
     assert_eq!(result.diagnostics[0].code, "FMT001");
     assert_eq!(result.diagnostics[0].source_id, gdfmt_text::SourceId(17));
 }
+
+#[test]
+fn layout_options_preserve_valid_corpus_across_profiles() {
+    use gdfmt::{CollectionLayout, DictionarySpacing, LambdaBodyStyle, TrailingCommaLayout};
+    let manifest: serde_json::Value =
+        serde_json::from_str(include_str!("../../../tests/compatibility/manifest.json")).unwrap();
+    let root = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/compatibility");
+    for fixture in manifest["fixtures"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|fixture| fixture["stage"] == "script")
+    {
+        let file = fixture["file"].as_str().unwrap();
+        let source = std::fs::read_to_string(root.join(file)).unwrap();
+        for version in LanguageVersion::ALL {
+            for policy in [
+                CollectionLayout::Auto,
+                CollectionLayout::Multiline,
+                CollectionLayout::Preserve,
+            ] {
+                let mut request = FormatRequest::default();
+                request.parse.language_version = version;
+                request.format.array_layout = policy;
+                request.format.dictionary_layout = policy;
+                request.format.enum_layout = policy;
+                request.format.dictionary_spacing = DictionarySpacing::Spaced;
+                request.format.trailing_comma_layout = TrailingCommaLayout::Multiline;
+                request.format.blank_lines_around_definitions = Some(2);
+                request.format.max_blank_lines = 0;
+                request.format.lambda_body_style = LambdaBodyStyle::Multiline;
+                request.format.inline_comment_spacing = 3;
+                if parse(&source, &request.parse).has_errors() {
+                    continue;
+                }
+                let result = format(&source, &request);
+                assert!(
+                    result.output.is_some(),
+                    "{file}/{version}/{policy:?}: {:?}",
+                    result.diagnostics
+                );
+            }
+        }
+    }
+}

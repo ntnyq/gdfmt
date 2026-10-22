@@ -49,6 +49,28 @@
   },
   "additionalProperties": false,
   "$defs": {
+    "BlankLinesAroundDefinitions": {
+      "description": "Either retain existing spacing or normalize definition boundaries to a count.",
+      "anyOf": [
+        {
+          "$ref": "#/$defs/PreserveBlankLines"
+        },
+        {
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 5,
+          "minimum": 0
+        }
+      ]
+    },
+    "CollectionLayout": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "multiline",
+        "preserve"
+      ]
+    },
     "ConfigOverride": {
       "description": "Ordered, path-scoped layout/language changes. Paths are relative to the declaring config file.",
       "type": "object",
@@ -80,11 +102,25 @@
         "files"
       ]
     },
+    "DictionarySpacing": {
+      "type": "string",
+      "enum": [
+        "compact",
+        "spaced"
+      ]
+    },
     "IndentStyle": {
       "type": "string",
       "enum": [
         "tab",
         "space"
+      ]
+    },
+    "LambdaBodyStyle": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "multiline"
       ]
     },
     "LanguageVersion": {
@@ -109,6 +145,26 @@
     "PartialFormatOptions": {
       "type": "object",
       "properties": {
+        "arrayLayout": {
+          "description": "Array literal layout. Default: auto.",
+          "$ref": "#/$defs/CollectionLayout"
+        },
+        "blankLinesAroundDefinitions": {
+          "description": "Blank lines around functions and classes in declaration scopes. Default: preserve.",
+          "$ref": "#/$defs/BlankLinesAroundDefinitions"
+        },
+        "dictionaryLayout": {
+          "description": "Dictionary literal layout. Default: auto.",
+          "$ref": "#/$defs/CollectionLayout"
+        },
+        "dictionarySpacing": {
+          "description": "Spaces inside single-line nonempty dictionaries. Default: compact.",
+          "$ref": "#/$defs/DictionarySpacing"
+        },
+        "enumLayout": {
+          "description": "Enum member layout. Default: auto.",
+          "$ref": "#/$defs/CollectionLayout"
+        },
         "finalNewline": {
           "description": "End formatted files with one newline. Default: true.",
           "type": "boolean"
@@ -123,6 +179,17 @@
           "format": "uint8",
           "maximum": 8,
           "minimum": 1
+        },
+        "inlineCommentSpacing": {
+          "description": "Spaces before inline comments. Default: 1.",
+          "type": "integer",
+          "format": "uint8",
+          "maximum": 4,
+          "minimum": 1
+        },
+        "lambdaBodyStyle": {
+          "description": "Lambda body layout. Default: auto.",
+          "$ref": "#/$defs/LambdaBodyStyle"
         },
         "lineEnding": {
           "description": "Physical line endings. Default: lf; preserve uses the first newline, or lf.",
@@ -141,6 +208,10 @@
           "format": "uint8",
           "maximum": 5,
           "minimum": 0
+        },
+        "trailingCommaLayout": {
+          "description": "Expand nonempty lists with an existing trailing comma. Default: auto.",
+          "$ref": "#/$defs/TrailingCommaLayout"
         }
       },
       "additionalProperties": false
@@ -154,6 +225,19 @@
         }
       },
       "additionalProperties": false
+    },
+    "PreserveBlankLines": {
+      "type": "string",
+      "enum": [
+        "preserve"
+      ]
+    },
+    "TrailingCommaLayout": {
+      "type": "string",
+      "enum": [
+        "auto",
+        "multiline"
+      ]
     }
   }
 }

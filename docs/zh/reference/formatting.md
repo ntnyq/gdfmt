@@ -4,7 +4,7 @@ gdfmt 格式化完整脚本，覆盖表达式、注释、lambda、声明与语�
 
 ## 当前行为
 
-格式化器规范运算符、调用、数组、字典、分组、注解、签名、声明、属性访问器、语句和 match 模式的布局。具名函数、类、分支、循环和访问器使用缩进后的多行 suite。分号分隔的语句展开为独立行，同时保留原分号 token。仅有一条简单语句且无注释的 lambda 使用行内函数体，其余使用块布局。容器内块 lambda 的 suite 缩进以外层语句为基准，因为续行列不是 lexer 缩进栈中的层级。
+格式化器规范运算符、调用、数组、字典、分组、注解、签名、声明、属性访问器、语句和 match 模式的布局。具名函数、类、分支、循环和访问器使用缩进后的多行 suite。分号分隔的语句展开为独立行，同时保留原分号 token。仅有一条简单语句且无注释的 lambda 使用行内函数体，其余使用块布局。容器内块 lambda 的 suite 缩进以外层语句为基准，因为续行列不是 lexer 缩进栈中的层级。在后续行结束行内 lambda 的逗号或闭合分隔符及其前置注释，也使用外层语句的缩进。
 
 参数和元素列表按 `format.lineWidth` 换行，suite 和续行统一使用 `indentStyle`/`indentWidth`。列宽按 Unicode scalar 和 tab stop 计算。不可拆分的 token 与类型引用允许超宽：Godot 会拒绝在集合类型左方括号后立即换行。括号、逗号、分号、字典分隔符风格、字面量词形和 BOM 均保留。多行字面量内容逐字节保留，包括其中的原始换行和缩进。
 
@@ -22,6 +22,8 @@ func run( value : int=1 ): return [value,2] # result
 func run(value: int = 1):
 	return [value, 2] # result
 ```
+
+可选的 `arrayLayout`、`dictionaryLayout`、`enumLayout`、`dictionarySpacing`、`trailingCommaLayout`、`blankLinesAroundDefinitions`、`lambdaBodyStyle`、`inlineCommentSpacing` 只调整上述默认布局，不改写 token。多个策略组合时采用要求展开的多行布局，空集合保持紧凑。数字形式的声明空行在声明边界优先于已有空行上限，注释和注解与目标保持一组。取值、示例和作用范围见[布局策略](/zh/guide/configuration#layout-policies)。
 
 ## 保护区域 {#protected-regions}
 

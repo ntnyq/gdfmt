@@ -201,12 +201,36 @@ test('Unicode/BOM/CRLF, protected regions and layout options agree with stdin CL
     '\uFEFF# 中文 😀\r\nvar 标识="😀"\r\n',
     '# gdfmt: formatter-off\r\nvar x=  [1,2]\r\n# gdfmt: formatter-on\r\nvar y=3\r\n',
     'func f():\n  var é="😀";var x=1\n',
+    'var items=[1,2,] # values\nvar data={name=1}\nenum E {A,B}\nfunc f(): return func(x): return x+1\n',
+    'var items=[\n  1,2\n]\n## docs\n@warning_ignore("unused_parameter")\nfunc f(value): pass\nclass Inner:\n  func g(): pass\n',
     '# 😀 中文\nvar x = )\n',
     'var x = "😀"; var y = )\r\n',
+    'var data=[{key=func(): pass}] # tail\n',
+    'var callbacks=[func(): pass\n# before comma\n,]\n',
     '# gdfmt: formatter-off\nvar x = )\n# gdfmt: formatter-on\n',
   ]
   const layouts: Gdfmt.FormatOptions[] = [
     {},
+    {
+      arrayLayout: 'multiline',
+      dictionaryLayout: 'multiline',
+      enumLayout: 'multiline',
+      dictionarySpacing: 'spaced',
+      trailingCommaLayout: 'multiline',
+      blankLinesAroundDefinitions: 2,
+      lambdaBodyStyle: 'multiline',
+      inlineCommentSpacing: 4,
+    },
+    {
+      arrayLayout: 'preserve',
+      dictionaryLayout: 'preserve',
+      enumLayout: 'preserve',
+      dictionarySpacing: 'spaced',
+      trailingCommaLayout: 'auto',
+      blankLinesAroundDefinitions: 0,
+      maxBlankLines: 5,
+      inlineCommentSpacing: 2,
+    },
     {
       indentStyle: 'space',
       indentWidth: 2,
@@ -231,6 +255,11 @@ test('Unicode/BOM/CRLF, protected regions and layout options agree with stdin CL
       for (const source of sources) {
         const sync = cjs.formatSync(source, { format })
         assert.deepEqual(await esm.format(source, { format }), sync)
+        if (!source.includes('= )')) {
+          assert.notEqual(sync.output, null, JSON.stringify(sync.diagnostics))
+          if (sync.output !== null)
+            assert.equal(cjs.formatSync(sync.output, { format }).changed, false)
+        }
         const args = ['--reporter=json', '--stdin-filepath', 'virtual.gd']
         const rust = execute(false, args, directory, source)
         assert.deepEqual(execute(true, args, directory, source), rust)
@@ -258,6 +287,17 @@ test('strict invalid options throw synchronously and reject asynchronously witho
     { format: { maxBlankLines: 6 } },
     { format: { finalNewline: 0 } },
     { format: { lineEnding: 'auto' } },
+    { format: { arrayLayout: 'compact' } },
+    { format: { dictionaryLayout: null } },
+    { format: { enumLayout: true } },
+    { format: { dictionarySpacing: 'auto' } },
+    { format: { trailingCommaLayout: 'none' } },
+    { format: { blankLinesAroundDefinitions: 6 } },
+    { format: { blankLinesAroundDefinitions: -1 } },
+    { format: { blankLinesAroundDefinitions: 1.5 } },
+    { format: { lambdaBodyStyle: 'inline' } },
+    { format: { inlineCommentSpacing: 0 } },
+    { format: { inlineCommentSpacing: 5 } },
     { language: { godotVersion: '4.8' } },
     { unknown: true },
     { extends: [] },
@@ -298,7 +338,10 @@ test('explicit sync/async config resolution agrees with explain-config and keeps
       join(directory, '.editorconfig'),
       'root=true\n[*]\nindent_style=space\nindent_size=2\n',
     )
-    await writeFile(join(directory, 'base.json'), '{"format":{"lineWidth":80}}')
+    await writeFile(
+      join(directory, 'base.json'),
+      '{"format":{"lineWidth":80,"arrayLayout":"multiline","enumLayout":"preserve"}}',
+    )
     await writeFile(
       join(directory, '.gdfmtrc.json'),
       JSON.stringify({
@@ -308,7 +351,17 @@ test('explicit sync/async config resolution agrees with explain-config and keeps
         overrides: [
           {
             files: ['nested/*.gd'],
-            format: { lineWidth: 40, finalNewline: false },
+            format: {
+              lineWidth: 40,
+              finalNewline: false,
+              arrayLayout: 'auto',
+              dictionaryLayout: 'multiline',
+              dictionarySpacing: 'spaced',
+              trailingCommaLayout: 'multiline',
+              blankLinesAroundDefinitions: 0,
+              lambdaBodyStyle: 'multiline',
+              inlineCommentSpacing: 3,
+            },
           },
         ],
       }),
@@ -323,6 +376,23 @@ test('explicit sync/async config resolution agrees with explain-config and keeps
     assert.equal(sync.config.format.lineWidth, 40)
     assert.equal(sync.config.format.indentWidth, 2)
     assert.equal(sync.config.format.finalNewline, false)
+    assert.equal(sync.config.format.arrayLayout, 'auto')
+    assert.equal(sync.config.format.enumLayout, 'preserve')
+    assert.equal(sync.config.format.dictionaryLayout, 'multiline')
+    assert.equal(sync.config.format.blankLinesAroundDefinitions, 0)
+    assert.ok(sync.sources['format.enumLayout']?.endsWith('base.json'))
+    for (const field of [
+      'arrayLayout',
+      'dictionaryLayout',
+      'dictionarySpacing',
+      'trailingCommaLayout',
+      'blankLinesAroundDefinitions',
+      'lambdaBodyStyle',
+      'inlineCommentSpacing',
+    ])
+      assert.ok(
+        sync.sources[`format.${field}`]?.endsWith('.gdfmtrc.json#overrides[0]'),
+      )
     assert.equal(
       cjs.resolveConfigSync('ignored.gd', { cwd: directory }).ignored,
       true,

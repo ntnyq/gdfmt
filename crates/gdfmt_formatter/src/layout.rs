@@ -4,9 +4,14 @@ use std::collections::{BTreeMap, BTreeSet};
 
 use gdfmt_syntax::{SyntaxElement, SyntaxKind as K, SyntaxNode, SyntaxToken};
 
-use crate::{FormatOptions, doc::Doc};
+use crate::{
+    CollectionLayout, DictionarySpacing, FormatOptions, LambdaBodyStyle, TrailingCommaLayout,
+    doc::Doc,
+};
 
-pub(super) struct Layout {
+pub(super) struct Layout<'a> {
+    options: &'a FormatOptions,
+    source: &'a str,
     leading: BTreeMap<u32, Vec<SyntaxToken>>,
     trailing: BTreeMap<u32, String>,
     continuations: BTreeSet<u32>,
@@ -24,13 +29,15 @@ fn start(token: &SyntaxToken) -> u32 {
     token.text_range().start().into()
 }
 
-impl Layout {
-    pub(super) fn new(root: &SyntaxNode, source: &str, options: &FormatOptions) -> Self {
+impl<'a> Layout<'a> {
+    pub(super) fn new(root: &SyntaxNode, source: &'a str, options: &'a FormatOptions) -> Self {
         let tokens: Vec<_> = root
             .descendants_with_tokens()
             .filter_map(SyntaxElement::into_token)
             .collect();
         let mut layout = Self {
+            options,
+            source,
             leading: BTreeMap::new(),
             trailing: BTreeMap::new(),
             continuations: BTreeSet::new(),
@@ -107,7 +114,91 @@ impl Layout {
                 }
             }
         }
+        if let Some(count) = options.blank_lines_around_definitions {
+            layout.definition_spacing(root, usize::from(count));
+        }
         layout
+    }
+
+    /// Normalize only declaration boundaries in script/class scopes. Annotations
+    /// and leading comments travel with the declaration, never with its gap.
+    fn definition_spacing(&mut self, root: &SyntaxNode, count: usize) {
+        for scope in root.descendants().filter(|node| {
+            node.kind() == K::SourceFile
+                || (node.kind() == K::Suite
+                    && node
+                        .parent()
+                        .is_some_and(|parent| parent.kind() == K::ClassDecl))
+        }) {
+            let mut previous = None;
+            let mut annotations = Vec::new();
+            for node in scope.children() {
+                if node.kind() == K::AnnotationNode {
+                    annotations.push(node);
+                    continue;
+                }
+                let definition = matches!(node.kind(), K::FunctionDecl | K::ClassDecl);
+                let declaration = matches!(
+                    node.kind(),
+                    K::FunctionDecl
+                        | K::ClassDecl
+                        | K::VariableDecl
+                        | K::ConstantDecl
+                        | K::SignalDecl
+                        | K::EnumDecl
+                        | K::ExtendsDecl
+                        | K::ClassNameDecl
+                );
+                if declaration
+                    && previous.is_some_and(|was_definition| definition || was_definition)
+                {
+                    let mut heads = annotations.clone();
+                    heads.push(node.clone());
+                    let mut boundary = None;
+                    for head in heads {
+                        if let Some(token) = head
+                            .descendants_with_tokens()
+                            .filter_map(SyntaxElement::into_token)
+                            .find(significant)
+                        {
+                            let offset = start(&token);
+                            let comments = self.leading.get(&offset).cloned().unwrap_or_default();
+                            boundary.get_or_insert_with(|| comments.first().map_or(offset, start));
+                            self.blanks.remove(&offset);
+                            for comment in comments {
+                                self.blanks.remove(&start(&comment));
+                            }
+                        }
+                    }
+                    if let Some(boundary) = boundary {
+                        self.blanks.insert(boundary, count);
+                    }
+                }
+                previous = declaration.then_some(definition);
+                annotations.clear();
+            }
+        }
+    }
+
+    fn inline_lambda(&self, node: &SyntaxNode) -> bool {
+        self.options.lambda_body_style == LambdaBodyStyle::Auto && inline_lambda(node)
+    }
+
+    fn ends_in_inline_lambda(&self, element: &SyntaxElement) -> bool {
+        let Some(node) = element.as_node() else {
+            return false;
+        };
+        let last = |node: &SyntaxNode| {
+            node.descendants_with_tokens()
+                .filter_map(SyntaxElement::into_token)
+                .filter(significant)
+                .last()
+                .map(|token| token.text_range().end())
+        };
+        let end = last(node);
+        node.descendants().any(|lambda| {
+            lambda.kind() == K::LambdaExpr && self.inline_lambda(&lambda) && last(&lambda) == end
+        })
     }
 
     fn leading(&self, token: &SyntaxToken) -> Doc {
@@ -141,7 +232,10 @@ impl Layout {
             docs.push(Doc::LineSuffix(" \\".into()));
         }
         if let Some(comment) = self.trailing.get(&start(token)) {
-            docs.push(Doc::LineSuffix(format!(" {comment}")));
+            docs.push(Doc::LineSuffix(format!(
+                "{}{comment}",
+                " ".repeat(usize::from(self.options.inline_comment_spacing))
+            )));
         }
         Doc::concat(docs)
     }
@@ -186,7 +280,7 @@ impl Layout {
                 .map(|comment| self.comment(comment)),
         )
     }
-    fn delimited(&self, parts: &[SyntaxElement]) -> Doc {
+    fn delimited(&self, parts: &[SyntaxElement], kind: K) -> Doc {
         let (Some(open), Some(close)) = (parts.first(), parts.last()) else {
             return Doc::text("");
         };
@@ -200,26 +294,76 @@ impl Layout {
         {
             return Doc::concat(parts.iter().map(|part| self.element(part)));
         }
+        let policy = match kind {
+            K::ArrayExpr => self.options.array_layout,
+            K::DictionaryExpr => self.options.dictionary_layout,
+            K::EnumDecl => self.options.enum_layout,
+            _ => CollectionLayout::Auto,
+        };
+        let multiline_source = || {
+            let first = open.as_token().map(start).unwrap_or_default() as usize;
+            let last = close.as_token().map(start).unwrap_or(first as u32) as usize;
+            self.source[first..last].contains('\n')
+        };
+        let force = parts.len() > 2
+            && (policy == CollectionLayout::Multiline
+                || (policy == CollectionLayout::Preserve && multiline_source())
+                || (self.options.trailing_comma_layout == TrailingCommaLayout::Multiline
+                    && parts[parts.len() - 2].kind() == K::Comma));
+        let spacing = if kind == K::DictionaryExpr
+            && self.options.dictionary_spacing == DictionarySpacing::Spaced
+        {
+            " "
+        } else {
+            ""
+        };
+        let boundary = || {
+            if force {
+                Doc::EnsureLine
+            } else {
+                Doc::Line(spacing)
+            }
+        };
         // A lambda suite's indentation belongs to its enclosing statement.
         // Continuation indentation is not a lexer indentation-stack entry, so
         // dedenting a block lambda to that column can be invalid GDScript.
         let block_lambda = parts.iter().filter_map(SyntaxElement::as_node).any(|node| {
             node.descendants()
-                .any(|node| node.kind() == K::LambdaExpr && !inline_lambda(&node))
+                .any(|node| node.kind() == K::LambdaExpr && !self.inline_lambda(&node))
         });
         let mut body = if block_lambda {
             Vec::new()
         } else {
-            vec![Doc::Line("")]
+            vec![boundary()]
         };
         for (index, element) in parts[1..parts.len() - 1].iter().enumerate() {
-            body.push(self.element(element));
+            let doc = self.element(element);
+            body.push(
+                if element.kind() == K::Comma
+                    && index > 0
+                    && self.ends_in_inline_lambda(&parts[index])
+                {
+                    doc.statement_indent()
+                } else {
+                    doc
+                },
+            );
             if element.kind() == K::Comma && index + 2 < parts.len() - 1 {
-                body.push(Doc::Line(" "));
+                body.push(if force {
+                    Doc::EnsureLine
+                } else {
+                    Doc::Line(" ")
+                });
             }
         }
+        let lambda_end = self.ends_in_inline_lambda(&parts[parts.len() - 2]);
         let close_doc = if let Some(token) = close.as_token() {
-            body.push(self.leading(token));
+            let leading = self.leading(token);
+            body.push(if lambda_end {
+                leading.statement_indent()
+            } else {
+                leading
+            });
             Doc::text(token.text())
         } else {
             self.element(close)
@@ -229,10 +373,14 @@ impl Layout {
             if block_lambda {
                 Doc::concat(body)
             } else {
-                Doc::concat(body).indent()
+                Doc::concat(body).continuation_indent()
             },
-            Doc::Line(""),
-            close_doc,
+            boundary(),
+            if lambda_end {
+                close_doc.statement_indent()
+            } else {
+                close_doc
+            },
         ])
         .group();
         Doc::concat([
@@ -260,7 +408,7 @@ impl Layout {
         Doc::concat(docs)
     }
 
-    fn with_delimiters(&self, parts: &[SyntaxElement]) -> Doc {
+    fn with_delimiters(&self, parts: &[SyntaxElement], kind: K) -> Doc {
         let open = parts
             .iter()
             .position(|part| matches!(part.kind(), K::LeftParen | K::LeftBracket | K::LeftBrace));
@@ -270,7 +418,7 @@ impl Layout {
         if let (Some(open), Some(close)) = (open, close) {
             Doc::concat([
                 self.generic(&parts[..open]),
-                self.delimited(&parts[open..=close]),
+                self.delimited(&parts[open..=close], kind),
                 self.generic(&parts[close + 1..]),
             ])
         } else {
@@ -303,17 +451,16 @@ impl Layout {
             | K::DictionaryExpr
             | K::GroupExpr
             | K::ArgumentList
-            | K::ParameterList => self.delimited(&parts),
+            | K::ParameterList => self.delimited(&parts, node.kind()),
             // Godot requires a collection's first type on the same line as '['.
             // Keep type references indivisible rather than inventing a break.
             K::AnnotationNode | K::AssertStmt | K::Pattern | K::SubscriptExpr => {
-                self.with_delimiters(&parts)
+                self.with_delimiters(&parts, node.kind())
             }
             K::Suite => {
-                if node
-                    .parent()
-                    .is_some_and(|parent| parent.kind() == K::LambdaExpr && inline_lambda(&parent))
-                {
+                if node.parent().is_some_and(|parent| {
+                    parent.kind() == K::LambdaExpr && self.inline_lambda(&parent)
+                }) {
                     return Doc::concat([
                         self.element(&parts[0]),
                         Doc::text(" "),
@@ -329,7 +476,7 @@ impl Layout {
                 docs.push(Doc::concat(body).indent());
                 Doc::concat(docs)
             }
-            K::LambdaExpr if !inline_lambda(node) => {
+            K::LambdaExpr if !self.inline_lambda(node) => {
                 Doc::concat([self.generic(&parts), Doc::EnsureLine])
             }
             K::PropertyBlock => {
@@ -383,7 +530,7 @@ impl Layout {
                 Doc::concat([
                     self.generic(&parts[..open]),
                     Doc::text(" "),
-                    self.delimited(&parts[open..=close]),
+                    self.delimited(&parts[open..=close], K::EnumDecl),
                     self.generic(&parts[close + 1..]),
                 ])
             }

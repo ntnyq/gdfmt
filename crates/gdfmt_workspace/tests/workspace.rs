@@ -395,7 +395,7 @@ fn editorconfig_sections_unset_fallbacks_and_json_precedence_are_explained() {
             .ends_with("src/.editorconfig:3 (tab_width)")
     );
     assert!(resolved.sources["format.lineWidth"].ends_with(".gdfmtrc.json"));
-    assert_eq!(resolved.sources.len(), 8);
+    assert_eq!(resolved.sources.len(), 16);
     write(
         root,
         "src/.editorconfig",
@@ -603,4 +603,58 @@ fn config_cycle_detection_uses_the_real_file_identity_path() {
             .to_string()
             .contains("cycle")
     );
+}
+
+#[test]
+fn layout_fields_inherit_override_explain_and_reach_the_formatter() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    write(
+        root,
+        "base.json",
+        r#"{"format":{"arrayLayout":"multiline","dictionaryLayout":"multiline","enumLayout":"preserve","dictionarySpacing":"spaced","trailingCommaLayout":"multiline","blankLinesAroundDefinitions":5,"lambdaBodyStyle":"multiline","inlineCommentSpacing":4}}"#,
+    );
+    write(
+        root,
+        ".gdfmtrc.json",
+        r#"{"root":true,"extends":["base.json"],"format":{},"overrides":[{"files":["special.gd"],"format":{"arrayLayout":"auto","blankLinesAroundDefinitions":0,"inlineCommentSpacing":1}}]}"#,
+    );
+    let resolved = resolve_config(&root.join("special.gd"), root, None).unwrap();
+    for field in [
+        "arrayLayout",
+        "blankLinesAroundDefinitions",
+        "inlineCommentSpacing",
+    ] {
+        assert!(
+            resolved.sources[&format!("format.{field}")].ends_with(".gdfmtrc.json#overrides[0]")
+        );
+    }
+    for field in [
+        "dictionaryLayout",
+        "enumLayout",
+        "dictionarySpacing",
+        "trailingCommaLayout",
+        "lambdaBodyStyle",
+    ] {
+        assert!(resolved.sources[&format!("format.{field}")].ends_with("base.json"));
+    }
+    let request = gdfmt_workspace::format_request(&resolved.config, gdfmt_text::SourceId(17));
+    assert_eq!(request.format.array_layout, gdfmt::CollectionLayout::Auto);
+    assert_eq!(
+        request.format.enum_layout,
+        gdfmt::CollectionLayout::Preserve
+    );
+    assert_eq!(request.format.blank_lines_around_definitions, Some(0));
+    let source = "var a=[1,2] # tail\nvar d={name=1}\nfunc f(): return func(x): return x+1\n";
+    let result = gdfmt::format(source, &request);
+    assert_eq!(
+        result.output.unwrap(),
+        "var a = [1, 2] # tail\nvar d = {\n\tname = 1\n}\nfunc f():\n\treturn func(x):\n\t\treturn x + 1\n"
+    );
+    let inherited = resolve_config(&root.join("ordinary.gd"), root, None).unwrap();
+    assert_eq!(
+        inherited.config.format.array_layout,
+        gdfmt_config::CollectionLayout::Multiline
+    );
+    assert_eq!(inherited.config.format.inline_comment_spacing, 4);
 }

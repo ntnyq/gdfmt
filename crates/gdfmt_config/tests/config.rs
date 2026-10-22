@@ -235,3 +235,81 @@ fn ordinary_arrays_replace_but_overrides_append_even_with_empty_child_arrays() {
     );
     assert_eq!(parent.overrides.as_ref().unwrap().len(), 2);
 }
+
+#[test]
+fn layout_options_validate_merge_and_match_schema() {
+    let schema: serde_json::Value = serde_json::from_str(&schema_json()).unwrap();
+    let validator = jsonschema::validator_for(&schema).unwrap();
+    let fields = [
+        (
+            "arrayLayout",
+            vec!["\"auto\"", "\"multiline\"", "\"preserve\""],
+        ),
+        (
+            "dictionaryLayout",
+            vec!["\"auto\"", "\"multiline\"", "\"preserve\""],
+        ),
+        (
+            "enumLayout",
+            vec!["\"auto\"", "\"multiline\"", "\"preserve\""],
+        ),
+        ("dictionarySpacing", vec!["\"compact\"", "\"spaced\""]),
+        ("trailingCommaLayout", vec!["\"auto\"", "\"multiline\""]),
+        (
+            "blankLinesAroundDefinitions",
+            vec!["\"preserve\"", "0", "1", "5"],
+        ),
+        ("lambdaBodyStyle", vec!["\"auto\"", "\"multiline\""]),
+        ("inlineCommentSpacing", vec!["1", "2", "4"]),
+    ];
+    for (field, values) in fields {
+        for value in values.iter().copied().chain([
+            "null",
+            "true",
+            "-1",
+            "0.5",
+            "6",
+            "\"unknown\"",
+            "{}",
+            "[]",
+        ]) {
+            let valid = values.contains(&value);
+            let source = format!(r#"{{"format":{{"{field}":{value}}}}}"#);
+            let parsed = parse_config(&source);
+            assert_eq!(parsed.is_ok(), valid, "{source}");
+            assert_eq!(
+                validator.is_valid(&serde_json::from_str(&source).unwrap()),
+                valid,
+                "{source}"
+            );
+            if !valid {
+                assert_eq!(parsed.unwrap_err().field, format!("format.{field}"));
+            }
+            let nested =
+                format!(r#"{{"overrides":[{{"files":[],"format":{{"{field}":{value}}}}}]}}"#);
+            assert_eq!(parse_config(&nested).is_ok(), valid, "{nested}");
+            assert_eq!(
+                validator.is_valid(&serde_json::from_str(&nested).unwrap()),
+                valid,
+                "{nested}"
+            );
+        }
+    }
+    let mut parent = parse_config(r#"{"format":{"arrayLayout":"multiline","dictionaryLayout":"preserve","enumLayout":"multiline","dictionarySpacing":"spaced","trailingCommaLayout":"multiline","blankLinesAroundDefinitions":5,"lambdaBodyStyle":"multiline","inlineCommentSpacing":4}}"#).unwrap();
+    parent.merge(&parse_config(r#"{"format":{}}"#).unwrap());
+    let resolved = serde_json::to_value(parent.resolve().unwrap()).unwrap();
+    assert_eq!(resolved["format"]["dictionaryLayout"], "preserve");
+    parent.merge(&parse_config(r#"{"format":{"arrayLayout":"auto","dictionaryLayout":"auto","enumLayout":"auto","dictionarySpacing":"compact","trailingCommaLayout":"auto","blankLinesAroundDefinitions":0,"lambdaBodyStyle":"auto","inlineCommentSpacing":1}}"#).unwrap());
+    let mut expected = serde_json::to_value(PartialConfig::default().resolve().unwrap()).unwrap();
+    expected["format"]["blankLinesAroundDefinitions"] = 0.into();
+    assert_eq!(
+        serde_json::to_value(parent.resolve().unwrap()).unwrap(),
+        expected
+    );
+    parent
+        .merge(&parse_config(r#"{"format":{"blankLinesAroundDefinitions":"preserve"}}"#).unwrap());
+    assert_eq!(
+        parent.resolve().unwrap(),
+        PartialConfig::default().resolve().unwrap()
+    );
+}

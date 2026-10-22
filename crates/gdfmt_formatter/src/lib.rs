@@ -5,6 +5,35 @@ use gdfmt_syntax::{LosslessTree, SyntaxKind as K, SyntaxNode};
 use gdfmt_text::{Diagnostic, Severity};
 use thiserror::Error;
 
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub enum CollectionLayout {
+    #[default]
+    Auto,
+    Multiline,
+    Preserve,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub enum DictionarySpacing {
+    #[default]
+    Compact,
+    Spaced,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub enum TrailingCommaLayout {
+    #[default]
+    Auto,
+    Multiline,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq)]
+pub enum LambdaBodyStyle {
+    #[default]
+    Auto,
+    Multiline,
+}
+
 #[derive(Debug, Clone)]
 pub struct FormatOptions {
     pub line_width: usize,
@@ -13,6 +42,15 @@ pub struct FormatOptions {
     pub line_ending: LineEnding,
     pub max_blank_lines: usize,
     pub final_newline: bool,
+    pub array_layout: CollectionLayout,
+    pub dictionary_layout: CollectionLayout,
+    pub enum_layout: CollectionLayout,
+    pub dictionary_spacing: DictionarySpacing,
+    pub trailing_comma_layout: TrailingCommaLayout,
+    /// None preserves existing gaps; Some(0..=5) normalizes declaration boundaries.
+    pub blank_lines_around_definitions: Option<u8>,
+    pub lambda_body_style: LambdaBodyStyle,
+    pub inline_comment_spacing: u8,
 }
 
 #[derive(Debug, Clone, Copy, Default)]
@@ -31,6 +69,14 @@ impl Default for FormatOptions {
             line_ending: LineEnding::Preserve,
             max_blank_lines: 2,
             final_newline: true,
+            array_layout: CollectionLayout::default(),
+            dictionary_layout: CollectionLayout::default(),
+            enum_layout: CollectionLayout::default(),
+            dictionary_spacing: DictionarySpacing::default(),
+            trailing_comma_layout: TrailingCommaLayout::default(),
+            blank_lines_around_definitions: None,
+            lambda_body_style: LambdaBodyStyle::default(),
+            inline_comment_spacing: 1,
         }
     }
 }
@@ -41,7 +87,7 @@ pub enum FormatError {
     InvalidDirective,
     #[error("formatting requires a valid parse without recovery or error diagnostics")]
     InvalidSyntax,
-    #[error("invalid formatter width or indentation")]
+    #[error("invalid formatter layout options")]
     InvalidOptions,
 }
 
@@ -68,6 +114,10 @@ pub fn format_with_regions(
         || options.indent.is_empty()
         || options.indent.len() > 8
         || options.max_blank_lines > 5
+        || options
+            .blank_lines_around_definitions
+            .is_some_and(|value| value > 5)
+        || !(1..=4).contains(&options.inline_comment_spacing)
         || !options
             .indent
             .chars()

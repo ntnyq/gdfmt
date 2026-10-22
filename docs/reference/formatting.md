@@ -4,7 +4,7 @@ gdfmt formats complete scripts, including expressions, comments, lambdas, declar
 
 ## Current behavior
 
-The formatter normalizes operators, calls, arrays, dictionaries, groups, annotations, signatures, declarations, accessors, statements and match patterns. Named functions, classes, branches, loops and accessor bodies use indented multiline suites. Semicolon-separated statements become separate lines while retaining the original semicolon tokens. A lambda with one simple, comment-free statement uses an inline body; other lambdas use a block. Block lambdas inside containers keep their suite indentation relative to the enclosing statement, because continuation columns are not lexer indentation-stack entries.
+The formatter normalizes operators, calls, arrays, dictionaries, groups, annotations, signatures, declarations, accessors, statements and match patterns. Named functions, classes, branches, loops and accessor bodies use indented multiline suites. Semicolon-separated statements become separate lines while retaining the original semicolon tokens. A lambda with one simple, comment-free statement uses an inline body; other lambdas use a block. Block lambdas inside containers keep their suite indentation relative to the enclosing statement, because continuation columns are not lexer indentation-stack entries. A comma or closing delimiter that ends an inline lambda on a later line, together with its leading comments, also uses the enclosing statement indentation.
 
 Argument, parameter and element lists wrap to `format.lineWidth`. `indentStyle` and `indentWidth` apply to suites and continuation lines. Columns count Unicode scalar values and tab stops. Unbreakable tokens and type references may exceed the width: Godot rejects a newline immediately after a collection type's opening bracket. Parentheses, commas, semicolons, dictionary separator styles, literal spellings and BOMs remain intact. Multiline literal contents retain their exact bytes, including their original line endings and indentation.
 
@@ -22,6 +22,8 @@ becomes:
 func run(value: int = 1):
 	return [value, 2] # result
 ```
+
+The optional layout policies `arrayLayout`, `dictionaryLayout`, `enumLayout`, `dictionarySpacing`, `trailingCommaLayout`, `blankLinesAroundDefinitions`, `lambdaBodyStyle` and `inlineCommentSpacing` adjust these defaults without rewriting tokens. Expansion policies combine by taking the required multiline layout; empty collections stay compact. Numeric definition spacing overrides the existing-blank-line cap at declaration boundaries and keeps comments/annotations with their targets. See [layout policies](/guide/configuration#layout-policies) for accepted values, examples and scope.
 
 ## Protected regions
 

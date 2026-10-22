@@ -30,6 +30,15 @@ to select the original bytes. Strings with unpaired surrogates are rejected befo
 conversion to Rust UTF-8. Omitted options use the same Rust defaults as the CLI;
 unknown fields, explicit null, invalid ranges and non-JSON values are rejected.
 
+`format` also accepts `arrayLayout`, `dictionaryLayout` and `enumLayout`
+(`auto` / `multiline` / `preserve`), `dictionarySpacing` (`compact` / `spaced`),
+`trailingCommaLayout` (`auto` / `multiline`), `blankLinesAroundDefinitions`
+(`preserve` or 0–5), `lambdaBodyStyle` (`auto` / `multiline`) and
+`inlineCommentSpacing` (1–4). Defaults preserve existing output. These options
+change layout only; existing comma tokens, literal spellings and protected bytes
+remain intact. See the [configuration guide](https://github.com/ntnyq/gdfmt/blob/main/docs/guide/configuration.md#layout-policies)
+for scopes and precedence.
+
 Text calls never discover configuration or write files. `resolveConfig` and
 `resolveConfigSync` explicitly discover JSON/EditorConfig/ignore rules for an
 existing or virtual path. They accept `{ cwd, config }`; `cwd` must be absolute

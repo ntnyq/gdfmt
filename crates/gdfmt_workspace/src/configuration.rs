@@ -174,6 +174,14 @@ pub fn resolve_config(
         "format.lineEnding",
         "format.maxBlankLines",
         "format.finalNewline",
+        "format.arrayLayout",
+        "format.dictionaryLayout",
+        "format.enumLayout",
+        "format.dictionarySpacing",
+        "format.trailingCommaLayout",
+        "format.blankLinesAroundDefinitions",
+        "format.lambdaBodyStyle",
+        "format.inlineCommentSpacing",
     ]
     .into_iter()
     .map(|key| (key.to_owned(), "default".to_owned()))
@@ -266,6 +274,23 @@ fn apply_layer(
             ("lineEnding", format.line_ending.is_some()),
             ("maxBlankLines", format.max_blank_lines.is_some()),
             ("finalNewline", format.final_newline.is_some()),
+            ("arrayLayout", format.array_layout.is_some()),
+            ("dictionaryLayout", format.dictionary_layout.is_some()),
+            ("enumLayout", format.enum_layout.is_some()),
+            ("dictionarySpacing", format.dictionary_spacing.is_some()),
+            (
+                "trailingCommaLayout",
+                format.trailing_comma_layout.is_some(),
+            ),
+            (
+                "blankLinesAroundDefinitions",
+                format.blank_lines_around_definitions.is_some(),
+            ),
+            ("lambdaBodyStyle", format.lambda_body_style.is_some()),
+            (
+                "inlineCommentSpacing",
+                format.inline_comment_spacing.is_some(),
+            ),
         ] {
             if present {
                 sources.insert(format!("format.{field}"), origin.into());

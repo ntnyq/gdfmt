@@ -391,3 +391,203 @@ fn invalid_sources_and_recovery_trees_never_produce_output() {
         .unwrap();
     assert!(!structurally_equivalent(&inline, &own_line));
 }
+
+#[test]
+fn collection_layouts_are_independent_and_empty_lists_stay_compact() {
+    use gdfmt_formatter::{CollectionLayout, DictionarySpacing};
+    let source = "var a = [1,2]\nvar d = {name=1, 'other'=2}\nenum E {A,B,}\nvar empty = [[],{}]\n";
+    let options = FormatOptions {
+        array_layout: CollectionLayout::Multiline,
+        dictionary_layout: CollectionLayout::Multiline,
+        enum_layout: CollectionLayout::Multiline,
+        dictionary_spacing: DictionarySpacing::Spaced,
+        ..Default::default()
+    };
+    assert_eq!(
+        script(source, &options),
+        "var a = [\n\t1,\n\t2\n]\nvar d = {\n\tname = 1,\n\t'other' = 2\n}\nenum E {\n\tA,\n\tB,\n}\nvar empty = [\n\t[],\n\t{}\n]\n"
+    );
+    let options = FormatOptions {
+        dictionary_spacing: DictionarySpacing::Spaced,
+        ..Default::default()
+    };
+    assert_eq!(
+        script(source, &options),
+        "var a = [1, 2]\nvar d = { name = 1, 'other' = 2 }\nenum E {A, B,}\nvar empty = [[], {}]\n"
+    );
+    for policy in [CollectionLayout::Auto, CollectionLayout::Preserve] {
+        let options = FormatOptions {
+            array_layout: policy,
+            dictionary_layout: policy,
+            enum_layout: policy,
+            ..Default::default()
+        };
+        let output = script(
+            "var a = [\n  1,2\n]\nvar d = {\n  'k': 1\n}\nenum E {\n A,B\n}\n",
+            &options,
+        );
+        assert_eq!(output.contains("[\n"), policy == CollectionLayout::Preserve);
+        assert_eq!(output.contains("{\n"), policy == CollectionLayout::Preserve);
+        assert_eq!(script("var a = [1,2]\n", &options), "var a = [1, 2]\n");
+    }
+}
+
+#[test]
+fn existing_trailing_commas_expand_lists_without_inserting_tokens() {
+    use gdfmt_formatter::TrailingCommaLayout;
+    let options = FormatOptions {
+        trailing_comma_layout: TrailingCommaLayout::Multiline,
+        ..Default::default()
+    };
+    let source = "func f(a,b,): return call([1,2,], {'k': 3,},)\n";
+    assert_eq!(
+        script(source, &options),
+        "func f(\n\ta,\n\tb,\n):\n\treturn call(\n\t\t[\n\t\t\t1,\n\t\t\t2,\n\t\t],\n\t\t{\n\t\t\t'k': 3,\n\t\t},\n\t)\n"
+    );
+    assert_eq!(
+        script("var a = [1,2]\nvar b = []\n", &options),
+        "var a = [1, 2]\nvar b = []\n"
+    );
+}
+
+#[test]
+fn definition_spacing_keeps_annotation_comment_groups_and_class_boundaries() {
+    let source = "var x=1\n## Documentation\n@warning_ignore(\"unused_parameter\")\nfunc f(value): pass\nclass Inner:\n    var y=2\n    func run(): pass\n    var z=3\nvar end=4\n";
+    for count in [0, 1, 2, 5] {
+        for max_blank_lines in [0, 2, 5] {
+            let options = FormatOptions {
+                blank_lines_around_definitions: Some(count),
+                max_blank_lines,
+                ..Default::default()
+            };
+            let gap = "\n".repeat(usize::from(count) + 1);
+            let output = script(source, &options);
+            assert_eq!(
+                output,
+                format!(
+                    "var x = 1{gap}## Documentation\n@warning_ignore(\"unused_parameter\")\nfunc f(value):\n\tpass{gap}class Inner:\n\tvar y = 2{gap}\tfunc run():\n\t\tpass{gap}\tvar z = 3{gap}var end = 4\n"
+                )
+            );
+        }
+    }
+}
+
+#[test]
+fn multiline_lambdas_comments_and_typed_collections_keep_valid_layout() {
+    use gdfmt_formatter::{
+        CollectionLayout, DictionarySpacing, LambdaBodyStyle, TrailingCommaLayout,
+    };
+    let sources = [
+        "var callback = func(x): return x+1\n",
+        "var callbacks = [func(x): return x+1, func(): pass,]\n",
+        "var callbacks = {name = func(x): return x+1,}\n",
+        "func f():\n    call(func(x): return x+1, 2,)\n",
+        "var values: Dictionary[String, int] = {'a': 1,} # tail\n",
+        "var values = [1, # first\n    # leading\n    2,\n    # dangling\n] # after\n",
+        "func f():\n    pass # body\n    # dangling\n## next\nfunc g(): pass\n",
+    ];
+    for width in [20, 40, 100] {
+        for policy in [
+            CollectionLayout::Auto,
+            CollectionLayout::Multiline,
+            CollectionLayout::Preserve,
+        ] {
+            for source in sources {
+                let options = FormatOptions {
+                    line_width: width,
+                    array_layout: policy,
+                    dictionary_layout: policy,
+                    enum_layout: policy,
+                    dictionary_spacing: DictionarySpacing::Spaced,
+                    trailing_comma_layout: TrailingCommaLayout::Multiline,
+                    lambda_body_style: LambdaBodyStyle::Multiline,
+                    blank_lines_around_definitions: Some(2),
+                    inline_comment_spacing: 4,
+                    ..Default::default()
+                };
+                let output = script(source, &options);
+                if source.contains("# tail") {
+                    assert!(output.contains("    # tail"));
+                }
+                if source.contains("var callback =") {
+                    assert!(output.contains(":\n\treturn x + 1"));
+                }
+            }
+        }
+    }
+}
+
+#[test]
+fn layout_option_bounds_are_checked_for_direct_rust_callers() {
+    let parsed = parse("var a = 1\n", &ParseOptions::default());
+    let tree = parsed.tree.unwrap();
+    for options in [
+        FormatOptions {
+            blank_lines_around_definitions: Some(6),
+            ..Default::default()
+        },
+        FormatOptions {
+            inline_comment_spacing: 0,
+            ..Default::default()
+        },
+        FormatOptions {
+            inline_comment_spacing: 5,
+            ..Default::default()
+        },
+    ] {
+        assert_eq!(
+            format(&tree, &parsed.diagnostics, &options),
+            Err(FormatError::InvalidOptions)
+        );
+    }
+}
+
+#[test]
+fn preserve_layout_still_wraps_wide_input_and_definitions_do_not_change_local_gaps() {
+    use gdfmt_formatter::CollectionLayout;
+    let options = FormatOptions {
+        line_width: 20,
+        array_layout: CollectionLayout::Preserve,
+        dictionary_layout: CollectionLayout::Auto,
+        enum_layout: CollectionLayout::Auto,
+        blank_lines_around_definitions: Some(5),
+        max_blank_lines: 1,
+        ..Default::default()
+    };
+    assert_eq!(
+        script("var a = [alpha,beta,gamma]\n", &options),
+        "var a = [\n\talpha,\n\tbeta,\n\tgamma\n]\n"
+    );
+    assert_eq!(
+        script("func f():\n    var a=1\n\n\n\n    var b=2\n", &options),
+        "func f():\n\tvar a = 1\n\n\tvar b = 2\n"
+    );
+    assert_eq!(
+        script("var d = {'a':1}\nenum E {A,B}\n", &options),
+        "var d = {'a': 1}\nenum E {A, B}\n"
+    );
+}
+
+#[test]
+fn nested_inline_lambda_endings_keep_statement_indentation() {
+    use gdfmt_formatter::CollectionLayout;
+    let options = FormatOptions {
+        dictionary_layout: CollectionLayout::Multiline,
+        ..Default::default()
+    };
+    assert_eq!(
+        script("var a = [{k = func(): pass}]\n", &options),
+        "var a = [\n\t{\n\t\tk = func(): pass\n}\n]\n"
+    );
+}
+
+#[test]
+fn comments_before_inline_lambda_separators_keep_statement_indentation() {
+    assert_eq!(
+        script(
+            "var a = [func(): pass\n# leading\n,]\n",
+            &FormatOptions::default()
+        ),
+        "var a = [\n\tfunc(): pass\n# leading\n,\n]\n"
+    );
+}

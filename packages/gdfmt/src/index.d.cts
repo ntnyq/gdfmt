@@ -4,6 +4,8 @@ export interface LanguageOptions {
   godotVersion?: LanguageVersion
 }
 
+export type CollectionLayout = 'auto' | 'multiline' | 'preserve'
+
 export interface FormatOptions {
   lineWidth?: number
   indentStyle?: 'tab' | 'space'
@@ -11,6 +13,14 @@ export interface FormatOptions {
   lineEnding?: 'lf' | 'crlf' | 'preserve'
   maxBlankLines?: number
   finalNewline?: boolean
+  arrayLayout?: CollectionLayout
+  dictionaryLayout?: CollectionLayout
+  enumLayout?: CollectionLayout
+  dictionarySpacing?: 'compact' | 'spaced'
+  trailingCommaLayout?: 'auto' | 'multiline'
+  blankLinesAroundDefinitions?: 'preserve' | 0 | 1 | 2 | 3 | 4 | 5
+  lambdaBodyStyle?: 'auto' | 'multiline'
+  inlineCommentSpacing?: 1 | 2 | 3 | 4
 }
 
 /**

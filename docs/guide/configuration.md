@@ -41,17 +41,62 @@ For example, save this as `.gdfmtrc.jsonc`:
 
 ## Options
 
-| Field                 | Default | Accepted values                                 |
-| --------------------- | ------- | ----------------------------------------------- |
-| schemaVersion         | 1       | Only 1                                          |
-| root                  | false   | Boolean; stops ancestor configuration discovery |
-| language.godotVersion | 4.7     | 4.3 / 4.4 / 4.5 / 4.6 / 4.7                     |
-| format.lineWidth      | 100     | 40–320                                          |
-| format.indentStyle    | tab     | tab / space                                     |
-| format.indentWidth    | 4       | 1–8                                             |
-| format.lineEnding     | lf      | lf / crlf / preserve                            |
-| format.maxBlankLines  | 2       | 0–5                                             |
-| format.finalNewline   | true    | Boolean                                         |
+| Field                              | Default  | Accepted values                                 |
+| ---------------------------------- | -------- | ----------------------------------------------- |
+| schemaVersion                      | 1        | Only 1                                          |
+| root                               | false    | Boolean; stops ancestor configuration discovery |
+| language.godotVersion              | 4.7      | 4.3 / 4.4 / 4.5 / 4.6 / 4.7                     |
+| format.lineWidth                   | 100      | 40–320                                          |
+| format.indentStyle                 | tab      | tab / space                                     |
+| format.indentWidth                 | 4        | 1–8                                             |
+| format.lineEnding                  | lf       | lf / crlf / preserve                            |
+| format.maxBlankLines               | 2        | 0–5                                             |
+| format.finalNewline                | true     | Boolean                                         |
+| format.arrayLayout                 | auto     | auto / multiline / preserve                     |
+| format.dictionaryLayout            | auto     | auto / multiline / preserve                     |
+| format.enumLayout                  | auto     | auto / multiline / preserve                     |
+| format.dictionarySpacing           | compact  | compact / spaced                                |
+| format.trailingCommaLayout         | auto     | auto / multiline                                |
+| format.blankLinesAroundDefinitions | preserve | preserve or integer 0–5                         |
+| format.lambdaBodyStyle             | auto     | auto / multiline                                |
+| format.inlineCommentSpacing        | 1        | Integer 1–4                                     |
+
+## Layout policies
+
+All layout options keep the existing defaults and significant token spellings. They apply through inheritance, overrides and the npm sync/async text APIs; `explain-config` reports their effective values and sources.
+
+- `arrayLayout`, `dictionaryLayout` and `enumLayout` independently control literals/members. `auto` wraps by width; `multiline` expands nonempty lists; `preserve` retains an existing multiline layout but still wraps long single-line input. Empty collections stay compact unless comments require lines. Collection type references such as `Dictionary[String, int]` remain indivisible.
+- `dictionarySpacing: "spaced"` adds spaces inside nonempty single-line dictionary braces: `{ "key": 1 }` or `{ name = 1 }`. Empty dictionaries remain `{}`; multiline dictionaries, arrays and calls receive no brace padding.
+- `trailingCommaLayout: "multiline"` expands nonempty delimited lists that already end in a comma, including literals, enums, call/annotation arguments, function/signal/lambda parameters and match patterns. It never adds or removes commas. A policy requiring expansion takes precedence over `auto`; block lambdas retain the indentation required by their enclosing statement.
+- `blankLinesAroundDefinitions` accepts `"preserve"` or an integer from 0 to 5. A number sets the gap between a function or inner class and adjacent declarations in the same script/class scope. It takes precedence over `maxBlankLines` at those boundaries, including when the count is larger; other gaps remain capped by `maxBlankLines`. No gap is added at scope boundaries or inside function bodies. Leading comments and annotations stay together with their target declaration.
+- `lambdaBodyStyle: "multiline"` forces block bodies. `auto` keeps the existing simple, comment-free single-statement inline behavior. Complex/commented bodies always use the required block layout.
+- `inlineCommentSpacing` sets 1–4 spaces between code and a trailing `#` comment. Comment text and own-line comment indentation remain governed by their existing attachment rules.
+
+For example:
+
+```json
+{
+  "format": {
+    "arrayLayout": "preserve",
+    "dictionarySpacing": "spaced",
+    "trailingCommaLayout": "multiline",
+    "blankLinesAroundDefinitions": 2,
+    "lambdaBodyStyle": "multiline",
+    "inlineCommentSpacing": 2
+  }
+}
+```
+
+With this configuration, `var points = [1, 2,] # points` becomes:
+
+```gdscript
+var points = [
+	1,
+	2,
+]  # points
+```
+
+Literal contents and formatter-off/on regions retain their original bytes regardless of these settings. See [script formatting](/reference/formatting) for validation and protected-region fallback behavior.
 
 ## Discovery, inheritance and overrides
 
@@ -114,6 +159,6 @@ All selected configurations and source reads are preflighted before the first fi
 
 Writes use a temporary file in the source directory, preserve permissions and recheck the original file before atomic replacement. Read-only files and symlinks are refused, as are Unix hardlinks. Replacement is atomic per file, with best-effort concurrent-change detection; it is not a multi-file transaction. Forced termination may leave a temporary file behind.
 
-GDScript quote conversion and trailing comma options are not implemented. `lint`, `rules` and rule-plugin configuration remain outside formatter scope and produce unknown-field errors.
+GDScript quote conversion and comma insertion/removal are not implemented; `trailingCommaLayout` only changes layout. `lint`, `rules` and rule-plugin configuration remain outside formatter scope and produce unknown-field errors.
 
 Language versions share an enum with the parser's `ParseOptions.language_version`. The CLI's `lex` performs lexical checks without version gates; `check` and formatting use the resolved grammar profile. See [language versions](/reference/language-versions) for the distinction between profiles and full engine compatibility.

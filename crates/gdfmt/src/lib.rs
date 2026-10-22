@@ -1,6 +1,9 @@
 //! Pure text facade. Writable output is returned only after syntax, structure
 //! and idempotence checks succeed with the same language profile and limits.
-pub use gdfmt_formatter::{FormatOptions, LineEnding};
+pub use gdfmt_formatter::{
+    CollectionLayout, DictionarySpacing, FormatOptions, LambdaBodyStyle, LineEnding,
+    TrailingCommaLayout,
+};
 pub use gdfmt_parser::{LanguageVersion, ParseOptions};
 use gdfmt_text::{Diagnostic, DiagnosticCategory, Severity, Span};
 

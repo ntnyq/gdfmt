@@ -145,3 +145,27 @@ fn directive_errors_use_source_byte_spans_and_a_bounded_diagnostic_count() {
         "# gdfmt: formatter-on"
     );
 }
+
+#[test]
+fn new_layout_options_respect_protected_bytes_and_invalid_syntax() {
+    let raw = "# gdfmt: formatter-off\r\nvar items=[ 1,2, ] # original\r\nfunc f(): pass\r\n# gdfmt: formatter-on\r\n";
+    let source = format!("{raw}var data={{name=1}} # tail\nfunc g(): return [1,2]\n");
+    for version in LanguageVersion::ALL {
+        let mut request = FormatRequest::default();
+        request.parse.language_version = version;
+        request.format.array_layout = gdfmt::CollectionLayout::Multiline;
+        request.format.dictionary_layout = gdfmt::CollectionLayout::Preserve;
+        request.format.enum_layout = gdfmt::CollectionLayout::Multiline;
+        request.format.dictionary_spacing = gdfmt::DictionarySpacing::Spaced;
+        request.format.trailing_comma_layout = gdfmt::TrailingCommaLayout::Multiline;
+        request.format.blank_lines_around_definitions = Some(2);
+        request.format.lambda_body_style = gdfmt::LambdaBodyStyle::Multiline;
+        request.format.inline_comment_spacing = 4;
+        let output = verified(&source, &request);
+        assert!(output.starts_with(raw));
+        assert!(output.contains("var data = { name = 1 }    # tail"));
+        assert!(output.contains("return [\r\n\t\t1,"));
+        let invalid = source.replace("var items=[ 1,2, ]", "var items=[ )");
+        assert!(format(&invalid, &request).output.is_none());
+    }
+}

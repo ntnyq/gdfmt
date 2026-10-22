@@ -36,6 +36,60 @@ pub enum LineEnding {
     Preserve,
 }
 
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub enum CollectionLayout {
+    #[default]
+    Auto,
+    Multiline,
+    Preserve,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub enum DictionarySpacing {
+    #[default]
+    Compact,
+    Spaced,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub enum TrailingCommaLayout {
+    #[default]
+    Auto,
+    Multiline,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub enum LambdaBodyStyle {
+    #[default]
+    Auto,
+    Multiline,
+}
+
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(rename_all = "camelCase")]
+pub enum PreserveBlankLines {
+    #[default]
+    Preserve,
+}
+
+/// Either retain existing spacing or normalize definition boundaries to a count.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
+#[serde(untagged)]
+pub enum BlankLinesAroundDefinitions {
+    Preserve(PreserveBlankLines),
+    Count(#[schemars(range(min = 0, max = MAX_BLANK_LINES))] u8),
+}
+
+impl Default for BlankLinesAroundDefinitions {
+    fn default() -> Self {
+        Self::Preserve(PreserveBlankLines::Preserve)
+    }
+}
+
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PartialFormatOptions {
@@ -87,6 +141,70 @@ pub struct PartialFormatOptions {
     )]
     #[schemars(with = "bool")]
     pub final_newline: Option<bool>,
+    /// Array literal layout. Default: auto.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "CollectionLayout")]
+    pub array_layout: Option<CollectionLayout>,
+    /// Dictionary literal layout. Default: auto.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "CollectionLayout")]
+    pub dictionary_layout: Option<CollectionLayout>,
+    /// Enum member layout. Default: auto.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "CollectionLayout")]
+    pub enum_layout: Option<CollectionLayout>,
+    /// Spaces inside single-line nonempty dictionaries. Default: compact.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "DictionarySpacing")]
+    pub dictionary_spacing: Option<DictionarySpacing>,
+    /// Expand nonempty lists with an existing trailing comma. Default: auto.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "TrailingCommaLayout")]
+    pub trailing_comma_layout: Option<TrailingCommaLayout>,
+    /// Blank lines around functions and classes in declaration scopes. Default: preserve.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "BlankLinesAroundDefinitions")]
+    pub blank_lines_around_definitions: Option<BlankLinesAroundDefinitions>,
+    /// Lambda body layout. Default: auto.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "LambdaBodyStyle")]
+    pub lambda_body_style: Option<LambdaBodyStyle>,
+    /// Spaces before inline comments. Default: 1.
+    #[serde(
+        default,
+        skip_serializing_if = "Option::is_none",
+        deserialize_with = "non_null"
+    )]
+    #[schemars(with = "u8", range(min = 1, max = 4))]
+    pub inline_comment_spacing: Option<u8>,
 }
 
 impl PartialFormatOptions {
@@ -98,7 +216,15 @@ impl PartialFormatOptions {
             indent_width,
             line_ending,
             max_blank_lines,
-            final_newline
+            final_newline,
+            array_layout,
+            dictionary_layout,
+            enum_layout,
+            dictionary_spacing,
+            trailing_comma_layout,
+            blank_lines_around_definitions,
+            lambda_body_style,
+            inline_comment_spacing
         );
     }
 }
@@ -225,6 +351,14 @@ pub struct FormatOptions {
     pub line_ending: LineEnding,
     pub max_blank_lines: u8,
     pub final_newline: bool,
+    pub array_layout: CollectionLayout,
+    pub dictionary_layout: CollectionLayout,
+    pub enum_layout: CollectionLayout,
+    pub dictionary_spacing: DictionarySpacing,
+    pub trailing_comma_layout: TrailingCommaLayout,
+    pub blank_lines_around_definitions: BlankLinesAroundDefinitions,
+    pub lambda_body_style: LambdaBodyStyle,
+    pub inline_comment_spacing: u8,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize)]
@@ -310,6 +444,24 @@ impl PartialConfig {
         if max_blank_lines > MAX_BLANK_LINES {
             return Err(invalid("format.maxBlankLines", "must be between 0 and 5"));
         }
+        if format
+            .inline_comment_spacing
+            .is_some_and(|value| !(1..=4).contains(&value))
+        {
+            return Err(invalid(
+                "format.inlineCommentSpacing",
+                "must be between 1 and 4",
+            ));
+        }
+        if let Some(BlankLinesAroundDefinitions::Count(value)) =
+            format.blank_lines_around_definitions
+            && value > MAX_BLANK_LINES
+        {
+            return Err(invalid(
+                "format.blankLinesAroundDefinitions",
+                "must be preserve or between 0 and 5",
+            ));
+        }
         Ok(ResolvedConfig {
             schema_version,
             language: LanguageOptions {
@@ -326,6 +478,16 @@ impl PartialConfig {
                 indent_style: format.indent_style.unwrap_or_default(),
                 line_ending: format.line_ending.unwrap_or_default(),
                 final_newline: format.final_newline.unwrap_or(true),
+                array_layout: format.array_layout.unwrap_or_default(),
+                dictionary_layout: format.dictionary_layout.unwrap_or_default(),
+                enum_layout: format.enum_layout.unwrap_or_default(),
+                dictionary_spacing: format.dictionary_spacing.unwrap_or_default(),
+                trailing_comma_layout: format.trailing_comma_layout.unwrap_or_default(),
+                blank_lines_around_definitions: format
+                    .blank_lines_around_definitions
+                    .unwrap_or_default(),
+                lambda_body_style: format.lambda_body_style.unwrap_or_default(),
+                inline_comment_spacing: format.inline_comment_spacing.unwrap_or(1),
             },
         })
     }
