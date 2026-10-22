@@ -185,6 +185,8 @@ pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/rel
 
 `--source` 只选择校验源码的位置，不会替换产物中的提交。源码的精确 Git 提交、版本、包元数据、tarball hash 和原完整矩阵仍须全部匹配。执行时两个 checkout 都必须干净，并满足前文的 npm 运行时及交互式认证要求。只有两个 registry 和安装检查均已成功后，才使用原 bundle 创建 GitHub Release。
 
+恢复需要新版工具且要保留 GitHub Trusted Publishing 时，为已提交的工具版本创建唯一的 `v-recovery-*` tag，再在该 ref 上手动运行 `release.yml`：设置 `publish=true`、原版本 `recovery_tag`、原运行 `recovery_run` 和原冻结产物 `recovery_artifact` ID。恢复 tag 不触发常规发布。恢复 job 要求两个提交均位于默认分支历史中，核对指定 artifact 确实来自原版本的 Release 运行，且原冻结和 Rust 发布 job 已成功，然后按精确 ID 下载产物。新版 npm 发布脚本对照独立的原源码 checkout 校验，继续使用已有 `release` environment 和 OIDC 信任，不重建产物，也不创建 GitHub Release；两侧 registry 确认完成后，再用原 bundle 创建 Release。不要移动原版本 tag，也不要放宽 environment 策略。
+
 一次只推送一个发布 tag。GitHub 默认并发策略会保留正在运行的发布和一个等待中的发布，额外的等待运行可能替换前一个等待运行。如果某个 tag 的等待运行被取消，在当前发布完成后显式选择该 tag 手动运行即可。
 
 任何包上传后，都不要重建或覆盖冻结产物。重新运行全部 job 可能生成不同的原生字节，完整性冲突会阻止发布。产物过期或字节无法匹配时，准备新版本。不要强制移动已使用的版本 tag。
