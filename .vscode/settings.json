@@ -5,6 +5,9 @@
   "editor.codeActionsOnSave": {
     "source.format.oxc": "explicit"
   },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
   "cSpell.words": [
     "assymetric",
     "bidi",
@@ -13,6 +16,7 @@
     "cdylib",
     "clippy",
     "COEP",
+    "Consolas",
     "dedenting",
     "dedents",
     "dont",
@@ -36,9 +40,12 @@
     "MSVC",
     "napi",
     "nocapture",
+    "Noto",
     "onready",
     "pycache",
+    "reka",
     "retokenizing",
+    "rgba",
     "rsplit",
     "rustc",
     "schemars",
@@ -47,6 +54,7 @@
     "variadics",
     "venv",
     "vitepress",
+    "vueuse",
     "WASI",
     "wasip",
     "webrtc",

@@ -13,6 +13,9 @@ hero:
       text: Get started
       link: /guide/
     - theme: alt
+      text: Try the playground
+      link: /playground
+    - theme: alt
       text: View on GitHub
       link: https://github.com/ntnyq/gdfmt
 

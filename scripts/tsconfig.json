@@ -17,6 +17,7 @@
     "../tests/release/**/*.test.ts",
     "../tests/project-trials/**/*.test.ts",
     "../vitest.config.ts",
-    "../tests/vscode-web/**/*.test.ts"
+    "../tests/vscode-web/**/*.test.ts",
+    "../tests/docs/**/*.test.ts"
   ]
 }

@@ -19,6 +19,7 @@
     "release:publish:crates": "tsx scripts/release/publish-crates.ts",
     "release:publish:npm": "tsx scripts/release/publish-npm.ts",
     "release:version": "tsx scripts/release/version.ts",
+    "test:docs": "pnpm docs:build && tsx --test tests/docs/*.test.ts",
     "test:npm": "tsx scripts/npm/check-package.ts",
     "test:release": "tsx --test tests/release/*.test.ts",
     "test:trials": "tsx --test tests/project-trials/*.test.ts",
@@ -28,6 +29,7 @@
     "test:wasm": "tsx scripts/wasm/check-package.ts",
     "trials": "tsx scripts/project-trials/run.ts",
     "typecheck": "tsc --noEmit -p scripts/tsconfig.json",
+    "typecheck:docs": "pnpm -C docs run typecheck",
     "typecheck:vscode": "tsc --noEmit -p editors/vscode/tsconfig.json",
     "typecheck:vscode:web": "tsc --noEmit -p editors/vscode/tsconfig.web.json",
     "verify:npm": "tsx scripts/npm/verify-artifacts.ts"
@@ -52,5 +54,5 @@
   "nano-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern"
   },
-  "packageManager": "pnpm@12.14.0"
+  "packageManager": "pnpm@12.15.0"
 }

@@ -1,0 +1,117 @@
+/* Omit Preflight and prefix utilities to preserve VitePress and Monaco styles. */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme) prefix(tw);
+@import "tailwindcss/utilities.css" layer(utilities) prefix(tw) source(none);
+@source "./components";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-background: var(--pg-background);
+  --color-popover: var(--vp-c-bg);
+  --color-popover-foreground: var(--vp-c-text-1);
+  --color-foreground: var(--vp-c-text-1);
+  --color-primary: #286a9d;
+  --color-primary-foreground: #fff;
+  --color-secondary: var(--vp-c-bg-soft);
+  --color-secondary-foreground: var(--vp-c-text-1);
+  --color-accent: var(--vp-c-default-soft);
+  --color-accent-foreground: var(--vp-c-text-1);
+  --color-input: var(--vp-c-divider);
+  --color-border: var(--vp-c-divider);
+  --color-ring: var(--vp-c-brand-1);
+  --color-muted-foreground: var(--vp-c-text-2);
+  --color-destructive: var(--vp-c-danger-1);
+}
+
+.playground {
+  --pg-background: var(--vp-c-bg);
+  padding: 24px 32px;
+  color: var(--vp-c-text-1);
+  font-family: var(--vp-font-family-base);
+}
+
+.playground [data-slot],
+.playground .pg-control,
+.pg-select-content,
+.pg-select-content [data-slot] {
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0;
+}
+
+.playground [data-slot="button"][data-variant="outline"],
+.playground [data-slot="select-trigger"],
+.pg-select-content[data-slot="select-content"] {
+  border: 1px solid var(--vp-c-divider);
+}
+
+.playground .pg-control {
+  height: 34px;
+  width: 100%;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  padding: 0 9px;
+  background: var(--vp-c-bg);
+  color: var(--vp-c-text-1);
+  font: inherit;
+  font-size: 13px;
+}
+
+.playground .pg-control:focus-visible {
+  outline: 2px solid var(--vp-c-brand-1);
+  outline-offset: 2px;
+}
+
+.playground .pg-workspace {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  overflow: hidden;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
+  background: var(--vp-c-bg);
+}
+
+.playground .pg-workspace.with-settings {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) 270px;
+}
+
+.playground .pg-editor {
+  height: max(460px, calc(100dvh - 240px));
+  min-width: 0;
+}
+
+@media (max-width: 1100px) {
+  .playground .pg-workspace.with-settings {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .playground .pg-settings {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--vp-c-divider);
+  }
+  .playground .pg-settings-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-height: none;
+  }
+}
+
+@media (max-width: 700px) {
+  .playground {
+    padding: 24px 16px;
+  }
+  .playground .pg-workspace,
+  .playground .pg-workspace.with-settings {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .playground .pg-editor {
+    height: 360px;
+  }
+  .playground .pg-output {
+    border-top: 1px solid var(--vp-c-divider);
+  }
+  .playground .pg-settings-body {
+    display: block;
+  }
+}

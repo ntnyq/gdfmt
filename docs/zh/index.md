@@ -13,6 +13,9 @@ hero:
       text: 快速开始
       link: /zh/guide/
     - theme: alt
+      text: 在线体验
+      link: /zh/playground
+    - theme: alt
       text: 在 GitHub 上查看
       link: https://github.com/ntnyq/gdfmt
 

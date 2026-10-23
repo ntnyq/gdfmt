@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "types": ["vite/client"],
+    "paths": {
+      "@/*": ["./.vitepress/theme/*"],
+      "@gdfmt/wasm": ["../packages/wasm/src/index.d.mts"]
+    }
+  },
+  "include": [".vitepress/**/*.ts", ".vitepress/**/*.vue"]
+}

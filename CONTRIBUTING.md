@@ -150,6 +150,10 @@ pnpm test:release
 
 ## Documentation
 
+The playground uses the local `@gdfmt/wasm` package. Install `wasm-pack` and the
+`wasm32-unknown-unknown` target as described above before starting the docs.
+Both `pnpm dev` and `pnpm build` build WASM before running VitePress.
+
 ```sh
 cd docs
 pnpm install --frozen-lockfile
@@ -158,11 +162,34 @@ pnpm build
 pnpm preview
 ```
 
+From the repository root, run `pnpm typecheck:docs` for the Vue/TypeScript check
+and `pnpm test:docs` to build the site and run Chromium acceptance tests. Install
+Chromium once with `pnpm exec playwright install chromium`. The docs package
+uses TypeScript 5.9 for compatibility with the Vue SFC compiler and `vue-tsc`;
+the repository's Node scripts retain their own TypeScript version.
+
 English pages live under `docs/`; Chinese pages mirror their relative paths under `docs/zh/`. Keep navigation, examples and public behavior synchronized. Shared assets live in `docs/public/`; configuration and theme live in `docs/.vitepress/`.
+
+The playground lives at `/playground` and `/zh/playground`, without the docs
+sidebar. Its Vue components live under
+`docs/.vitepress/theme/components/playground/`. Monaco is loaded only in the
+browser; a module Worker runs the actual formatter and reports execution time
+without including WASM initialization or messaging. Tailwind utilities use the
+`tw:` prefix and omit Preflight to preserve VitePress and Monaco styles. The
+local Button and Switch primitives are adapted from the MIT-licensed
+[shadcn-vue registry](https://www.shadcn-vue.com/); `docs/components.json` records
+their configuration. Keep source/options state in `usePlayground` and keep
+Worker request IDs synchronized so outdated results cannot replace current code.
 
 For subpath hosting, use the same base for build and preview, such as `pnpm build --base /gdfmt/` and `pnpm preview --base /gdfmt/`. VitePress checks internal page links during builds.
 
-For Vercel, set the project's Root Directory to `docs` and use Node.js 22 or newer. `docs/vercel.json` configures dependency installation, the VitePress build, `.vitepress/dist` output and extensionless URLs.
+For Vercel, set the project's Root Directory to `docs` and use Node.js 22 or newer.
+Enable including files outside the Root Directory so Cargo workspace sources and
+scripts are available. `docs/vercel.json` configures dependency installation,
+`.vitepress/dist` output and extensionless URLs. Its build script prepares rustup,
+the pinned Rust toolchain, the WASM target and wasm-pack before building the site.
+Other static hosts need the same Rust/WASM prerequisites when building from source;
+only the generated `.vitepress/dist` directory is needed at runtime.
 
 ## Pull requests
 

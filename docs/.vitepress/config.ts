@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'vitepress'
 import type { DefaultTheme } from 'vitepress'
 
@@ -65,6 +66,11 @@ export default defineConfig({
   title: 'gdfmt',
   description: 'A GDScript formatter, built in Rust.',
   cleanUrls: true,
+  vite: {
+    plugins: [tailwindcss()],
+    worker: { format: 'es' },
+    optimizeDeps: { exclude: ['@gdfmt/wasm'] },
+  },
   head: [['meta', { name: 'theme-color', content: '#478cbf' }]],
   transformHead({ siteData }) {
     return [
@@ -86,6 +92,7 @@ export default defineConfig({
         nav: [
           { text: 'Guide', link: '/guide/' },
           { text: 'Reference', link: '/reference/cli' },
+          { text: 'Playground', link: '/playground' },
           {
             text: 'Contributing',
             link: 'https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md',
@@ -108,6 +115,7 @@ export default defineConfig({
         nav: [
           { text: '指南', link: '/zh/guide/' },
           { text: '参考', link: '/zh/reference/cli' },
+          { text: '演练场', link: '/zh/playground' },
           {
             text: '参与贡献',
             link: 'https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md',
