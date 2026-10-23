@@ -45,41 +45,40 @@ async function expectDocumentText(
   }
 }
 
-export async function run(): Promise<void> {
-  if (process.env.GDFMT_DEBUG_SAVE === '1') {
-    const folder = vscode.workspace.workspaceFolders?.[0]
-    assert.ok(folder)
-    const probe = await vscode.workspace.openTextDocument(
-      vscode.Uri.joinPath(folder.uri, 'ready.txt'),
-    )
-    const editor = await vscode.window.showTextDocument(probe)
+async function waitForSaveParticipants(): Promise<void> {
+  // VS Code registers its built-in trim and format participants together. Probe
+  // that host capability before testing gdfmt, independently of any formatter.
+  const folder = vscode.workspace.workspaceFolders?.[0]
+  assert.ok(folder)
+  const document = await vscode.workspace.openTextDocument(
+    vscode.Uri.joinPath(folder.uri, 'ready.txt'),
+  )
+  const editor = await vscode.window.showTextDocument(document)
+  const deadline = Date.now() + 5_000
+  for (let attempt = 0; Date.now() < deadline; attempt++) {
+    const expected = `ready ${attempt}\n`
     await editor.edit(builder =>
-      builder.replace(new vscode.Range(0, 0, probe.lineCount, 0), 'ready \n'),
-    )
-    await probe.save()
-    console.log(
-      '[DEBUG-rc1-save] builtin probe',
-      probe.getText(),
-      vscode.workspace
-        .getConfiguration('files', probe)
-        .get('trimTrailingWhitespace'),
-    )
-    assert.equal(
-      probe.getText(),
-      'ready\n',
-      'built-in save participants must be ready before testing gdfmt',
-    )
-  }
-  if (process.env.GDFMT_DEBUG_SAVE === '1')
-    vscode.workspace.onWillSaveTextDocument(event =>
-      console.log(
-        '[DEBUG-rc1-save] will save',
-        new Date().toISOString(),
-        event.reason,
-        event.document.version,
-        event.document.uri.toString(),
+      builder.replace(
+        new vscode.Range(0, 0, document.lineCount, 0),
+        `ready ${attempt} \n`,
       ),
     )
+    assert.equal(await document.save(), true)
+    if (document.getText() === expected) {
+      assert.equal(
+        new TextDecoder().decode(
+          await vscode.workspace.fs.readFile(document.uri),
+        ),
+        expected,
+      )
+      return
+    }
+  }
+  assert.fail('VS Code built-in save participants did not become ready')
+}
+
+export async function run(): Promise<void> {
+  await waitForSaveParticipants()
   const extension = vscode.extensions.getExtension('ntnyq.gdfmt')
   assert.ok(extension)
   await extension.activate()
@@ -127,20 +126,6 @@ export async function run(): Promise<void> {
       '\tvar value=3',
     )
     await vscode.workspace.applyEdit(change)
-    if (process.env.GDFMT_DEBUG_SAVE === '1')
-      console.log(
-        '[DEBUG-rc1-save] before save',
-        new Date().toISOString(),
-        folder.name,
-        document.version,
-        document.isDirty,
-        vscode.workspace
-          .getConfiguration('editor', document)
-          .get('formatOnSave'),
-        vscode.workspace
-          .getConfiguration('editor', document)
-          .get('defaultFormatter'),
-      )
     const saved = `func example():\n${' '.repeat(indentWidth)}var value = 3\n`
     await expectDocumentText(document, saved, () => document.save())
     assert.equal(
@@ -149,9 +134,6 @@ export async function run(): Promise<void> {
       ),
       saved,
     )
-    if (process.env.GDFMT_DEBUG_SAVE === '1')
-      console.log('[DEBUG-rc1-save] saved', document.getText())
-    if (process.env.GDFMT_SAVE_REPRO === '1') return
     // Format Document is an editor action with a single undo step.
     await vscode.window.activeTextEditor?.edit(builder =>
       builder.replace(

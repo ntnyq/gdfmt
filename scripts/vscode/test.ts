@@ -83,11 +83,8 @@ await build({
   target: 'node20',
 })
 const isGodotToolsEnabled = process.env.GDFMT_TEST_GODOT_TOOLS === '1'
-const debugProfile =
-  process.env.GDFMT_DEBUG_SAVE === '1'
-    ? await mkdtemp(join(tmpdir(), 'gdfmt-save-repro-'))
-    : resolve(repositoryRoot, 'target/vscode-test')
-const extensionsDirectory = resolve(debugProfile, 'extensions')
+const profile = await mkdtemp(join(tmpdir(), 'gdfmt-vscode-profile-'))
+const extensionsDirectory = resolve(profile, 'extensions')
 if (isGodotToolsEnabled)
   await runVSCodeCommand(
     [
@@ -96,7 +93,7 @@ if (isGodotToolsEnabled)
       '--extensions-dir',
       extensionsDirectory,
       '--user-data-dir',
-      resolve(debugProfile, 'user-data'),
+      resolve(profile, 'user-data'),
       '--force',
     ],
     { version: '1.96.4', timeout: 30_000 },
@@ -128,14 +125,14 @@ for (const order of [folders, [...folders].reverse()]) {
     },
     launchArgs: [
       resolve(workspace, 'test.code-workspace'),
-      ...(isGodotToolsEnabled
-        ? ['--extensions-dir', extensionsDirectory]
-        : ['--disable-extensions']),
+      '--extensions-dir',
+      extensionsDirectory,
+      ...(!isGodotToolsEnabled ? ['--disable-extensions'] : []),
       '--skip-welcome',
       '--skip-release-notes',
       '--disable-workspace-trust',
       '--user-data-dir',
-      resolve(debugProfile, 'user-data'),
+      resolve(profile, 'user-data'),
     ],
   })
 }
@@ -211,3 +208,5 @@ await writeFile(
 )
 
 await rm(workspace, { recursive: true, force: true })
+
+await rm(profile, { recursive: true, force: true })
