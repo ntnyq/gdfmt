@@ -12,10 +12,11 @@ Rust workspace 与公开 npm 包使用统一版本。推送 `v版本号` tag 后
 
 源码候选现为 **0.1.0-rc.1**（npm 渠道 `next`），独立扩展数字版本 **0.2.0**，
 `gdfmtVersion: 0.1.0-rc.1`。候选尚未发布，没有候选 tag 或 registry 上传。
-[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)单独跟踪提交后的验收，
-与最初非干净工作区检查区分。详见[候选说明](docs/zh/releases/0.1.0-rc.1.md)和
-[审查及本机检查](docs/zh/research/0.1.0-rc.1-preparation.md)。发布前仍需合并后的
-干净提交及其完整 CI 矩阵。
+[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)记录精确提交源码的验收、产物 hash、
+完整项目试用和本地 7 份 npm/8 份 crate/6 份 VSIX bundle 演练，详见
+[候选说明](docs/zh/releases/0.1.0-rc.1.md)。[最初本机准备](docs/zh/research/0.1.0-rc.1-preparation.md)
+保留为非干净源码历史证据。PR #1 尚未合并；发布仍需合并后的干净提交、该提交的
+完整 CI 和绑定 tag 的冻结，本地演练不授权 registry 写入。
 
 [registry 与环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)记录了
 2026-10-23 的初次只读快照及后续分支/tag 保护落实情况。八个 crate 和七个 npm 包均已存在，公开 owner/maintainer

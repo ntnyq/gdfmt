@@ -13,10 +13,13 @@ Track the first stable release's remaining acceptance work in the
 
 The source candidate is now **0.1.0-rc.1** (npm channel `next`), with independent
 extension version **0.2.0** and `gdfmtVersion: 0.1.0-rc.1`. The candidate is unpublished; no tag or registry upload exists.
-The [candidate CI report](docs/research/0.1.0-rc.1-ci.md) tracks committed-source
-acceptance separately from the initial dirty-working-tree checks. See the [candidate notes](docs/releases/0.1.0-rc.1.md) and
-[review and local checks](docs/research/0.1.0-rc.1-preparation.md). A clean merged
-revision and its complete CI matrices remain required before publication.
+The [candidate CI report](docs/research/0.1.0-rc.1-ci.md) records exact committed-source
+acceptance, artifact hashes, the full project trial and a local 7-npm/8-crate/6-VSIX
+bundle rehearsal. See the [candidate notes](docs/releases/0.1.0-rc.1.md); the
+[initial local preparation](docs/research/0.1.0-rc.1-preparation.md) remains historical
+dirty-source evidence. PR #1 remains unmerged. Publication still requires a clean
+merged revision, its own complete CI and a tag-bound freeze; the local rehearsal
+does not authorize registry writes.
 
 The [registry and environment review](docs/research/0.1.0-registry-readiness-review.md)
 records the initial read-only snapshot and the branch/tag protection follow-up

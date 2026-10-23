@@ -18,7 +18,7 @@ gdfmt formats `.gd` files with consistent spacing, indentation and line wrapping
 
 Source preparation is now `0.1.0-rc.1`; it has not been tagged or published. See the
 [candidate notes](docs/releases/0.1.0-rc.1.md) and
-[preparation evidence](docs/research/0.1.0-rc.1-preparation.md). Published installation
+[committed-source CI evidence](docs/research/0.1.0-rc.1-ci.md). Published installation
 commands below continue to reference the existing registry release.
 
 ## Get started

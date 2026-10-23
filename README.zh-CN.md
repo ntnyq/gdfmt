@@ -18,7 +18,7 @@ gdfmt 为 `.gd` 文件提供统一的空格、缩进与换行布局，可通过�
 
 当前源码已准备为 `0.1.0-rc.1`，尚未创建 tag 或发布。详见
 [候选说明](docs/zh/releases/0.1.0-rc.1.md)和
-[准备证据](docs/zh/research/0.1.0-rc.1-preparation.md)。下面的已发布安装命令仍指向
+[提交源码的 CI 证据](docs/zh/research/0.1.0-rc.1-ci.md)。下面的已发布安装命令仍指向
 现有 registry 版本。
 
 ## 快速开始

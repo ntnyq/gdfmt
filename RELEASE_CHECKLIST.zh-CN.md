@@ -41,41 +41,44 @@ JavaScript 严格校验、WASM 元数据和版本同步均已补充回归。
 
 ## 候选版本验收
 
-提交候选及完整 CI 的后续进展见[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)。
-下面早期的未提交证据仍按历史快照保留，待记录干净源码结果后更新验收状态。
+**`0.1.0-rc.1`** 源码已提交到 [PR #1](https://github.com/ntnyq/gdfmt/pull/1)，独立扩展
+数字版本为 **`0.2.0`**，默认风格不变。[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)
+将验收绑定到源码 `5d95932e63a1d5199916466013bf557561279fe5`；关联产物证据记录
+干净源码回执、工作流/artifact ID 和 hash。最终文档提交也必须在自己的 PR head
+通过完整 CI，并记录在 PR。
 
-源码候选现为 **`0.1.0-rc.1`**，独立扩展数字版本 **`0.2.0`**。
-[准备报告](docs/zh/research/0.1.0-rc.1-preparation.md)记录当前改动审查、版本同步
-及本机检查。这是未提交的 `cleanSource: false` 证据，尚无 tag 或发布。下面条目
-仍需精确的干净候选提交及完整 CI；最终 0.1.0 产物也需在自己的 tag 提交上验证。
+[准备报告](docs/zh/research/0.1.0-rc.1-preparation.md)保留为历史
+`cleanSource: false` WIP 快照。没有创建 tag 或发布。下面的候选验收不能替代未来
+最终 0.1.0 tag 提交及其产物的验证。
 
 - [x] 准备 rc.1 源码版本及双语候选说明，审查当前改动，修复依赖版本的旧版恢复
       测试夹具，运行本机发布检查；与干净提交/完整矩阵验收分开记录。
 
-- [ ] 完整通过 [Rust CI](.github/workflows/ci.yml)：rustfmt、Clippy、Schema、
+- [x] 完整通过 [Rust CI](.github/workflows/ci.yml)：rustfmt、Clippy、Schema、
       兼容性与语法覆盖，Linux/macOS/Windows 的默认与无默认特性测试，以及
       Rust 1.88 workspace/WASM 检查。
-- [ ] 五种固定 Godot profile 的 parser 与 formatter conformance 全部通过。
+- [x] 五种固定 Godot profile 的 parser 与 formatter conformance 全部通过。
       单独审查归类的 analyzer 边界，详见[引擎对比](CONTRIBUTING.md#engine-comparisons)。
-- [ ] 通过 `pnpm typecheck`、`pnpm release:check`、`pnpm test:release` 和完整
+- [x] 通过 `pnpm typecheck`、`pnpm release:check`、`pnpm test:release` 和完整
       [npm 矩阵](.github/workflows/npm.yml)。要求全部十份消费者回执与
       `pnpm verify:npm` 通过；仅 `--local` 通过不足以验收。
-- [ ] 通过 [WASM 与编辑器验收](.github/workflows/hosts.yml)：安装后的 WASM tarball
+- [x] 通过 [WASM 与编辑器验收](.github/workflows/hosts.yml)：安装后的 WASM tarball
       在 Node/Chromium/module Worker 中运行，桌面 Extension Host、Godot Tools 共存、
       Alpine smoke check，以及无跨源隔离的 Web 生命周期与真实 Web Extension Host 测试。
       桌面 runner 补充隔离的 VSIX 安装 smoke check；staging Web 宿主测试不代表
       最终用户的浏览器安装路线已验证。
-- [ ] 通过 `pnpm typecheck:docs` 和 `pnpm test:docs`，包括两种语言的 Playground；
+- [x] 通过 `pnpm typecheck:docs` 和 `pnpm test:docs`，包括两种语言的 Playground；
       对照选定候选提交及对应版本产物，重查安装/示例/API/编辑器文档。
-- [ ] 在候选提交上重跑[固定真实项目试用](tests/project-trials/README.md)的完整流程，
+- [x] 在候选提交上重跑[固定真实项目试用](tests/project-trials/README.md)的完整流程，
       不能仅运行普通的 `pnpm test:trials` 守卫测试。审查变化的差异与指纹，解决未解释
       的变化，再不带 `--record-review` 重跑，附上摘要与测试提交。这是 0.1.0 的手动
       验收项；普通 CI 中的完整试用仍为可选。
 
-rc.1 本机证据见准备报告：原生 npm/WASM、桌面与 Web 宿主、桌面 VSIX 隔离安装、
-双语 Playground、八个 crate 打包编译、五组引擎及完整项目试用。完整试用保持
-606 个指纹不变、零未解释差异。本地产物回执仍为非干净源码证据，不据此勾选
-完整矩阵或真实发布门槛。
+干净 rc.1 证据见候选 CI 报告：十份原生消费者、安装后的 WASM、六个 VSIX 目标
+（四个桌面安装检查）、桌面/Web 宿主、双语 Playground、八个干净 crate 打包编译
+及五组引擎。完整项目试用保持 606 个审查条目不变、零未解释差异。完整
+`pnpm verify:npm` 与本地 `pnpm release:prepare` 演练核验了七份 npm tarball、八份
+crate 和六份 VSIX。这些用于源码候选验收，绑定 tag 的冻结和真实发布门槛独立保留。
 
 ## 文档与发布说明
 

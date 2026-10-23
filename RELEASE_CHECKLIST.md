@@ -52,51 +52,53 @@ dirty-working-tree evidence; the final-candidate trial below remains required.
 
 ## Candidate validation
 
-The committed-candidate follow-up and full CI are tracked in the
-[candidate CI report](docs/research/0.1.0-rc.1-ci.md). Earlier uncommitted evidence
-below remains a historical snapshot until clean-source results are recorded.
+The **`0.1.0-rc.1`** source is committed in [PR #1](https://github.com/ntnyq/gdfmt/pull/1),
+with independent extension version **`0.2.0`** and unchanged default style.
+The [candidate CI report](docs/research/0.1.0-rc.1-ci.md) binds acceptance to source
+`5d95932e63a1d5199916466013bf557561279fe5`; its linked artifact evidence records
+clean-source receipts, workflow/artifact IDs and hashes. The final documentation
+follow-up must also pass complete CI on its own PR head, recorded in the PR.
 
-The source candidate is now **`0.1.0-rc.1`**, with independent extension version
-**`0.2.0`**. The [preparation report](docs/research/0.1.0-rc.1-preparation.md) records
-the WIP review, version synchronization and local checks. This is uncommitted,
-`cleanSource: false` evidence, with no tag or publication. The items below remain
-open for a clean exact candidate revision and full CI; final 0.1.0 artifacts also
-need validation at their own tagged revision.
+The [preparation report](docs/research/0.1.0-rc.1-preparation.md) remains a historical
+`cleanSource: false` WIP snapshot. No tag or publication occurred. Candidate
+acceptance below does not validate final 0.1.0 artifacts at a future tagged revision.
 
 - [x] Prepare rc.1 source versions and bilingual candidate notes; review current
       changes, fix the version-dependent legacy recovery test fixture, and run
       local release checks. Keep clean-revision/full-matrix acceptance separate.
 
-- [ ] Pass the complete [Rust CI](.github/workflows/ci.yml): rustfmt, Clippy,
+- [x] Pass the complete [Rust CI](.github/workflows/ci.yml): rustfmt, Clippy,
       schema, compatibility and syntax coverage, tests with and without default
       features on Linux/macOS/Windows, and Rust 1.88 workspace/WASM checks.
-- [ ] Pass parser and formatter conformance against all five pinned Godot
+- [x] Pass parser and formatter conformance against all five pinned Godot
       profiles. Review separately classified analyzer boundaries; see
       [engine comparisons](CONTRIBUTING.md#engine-comparisons).
-- [ ] Pass `pnpm typecheck`, `pnpm release:check` and `pnpm test:release`, plus
+- [x] Pass `pnpm typecheck`, `pnpm release:check` and `pnpm test:release`, plus
       the complete [npm matrix](.github/workflows/npm.yml). Require all ten
       consumer receipts and `pnpm verify:npm`; a `--local` pass is insufficient.
-- [ ] Pass [WASM and editor acceptance](.github/workflows/hosts.yml): installed
+- [x] Pass [WASM and editor acceptance](.github/workflows/hosts.yml): installed
       WASM tarball in Node/Chromium/module Worker, desktop Extension Hosts,
       Godot Tools coexistence, Alpine smoke check, and Web lifecycle and real
       Web Extension Host tests without cross-origin isolation. Include isolated
       installed-VSIX smoke checks on desktop runners; staged Web host tests do
       not establish an end-user browser installation route.
-- [ ] Pass `pnpm typecheck:docs` and `pnpm test:docs`, including both languages
+- [x] Pass `pnpm typecheck:docs` and `pnpm test:docs`, including both languages
       of the playground. Repeat the installation/example/API/editor documentation
       audit against the chosen candidate revision and its versioned artifacts.
-- [ ] Rerun the full [pinned project trials](tests/project-trials/README.md) on
+- [x] Rerun the full [pinned project trials](tests/project-trials/README.md) on
       the candidate, beyond the ordinary `pnpm test:trials` guards. Review changed
       diffs and fingerprints, resolve unexplained changes, then rerun without
       `--record-review`. Attach the summary and tested revision. This is a manual
       0.1.0 acceptance item; the full trial remains optional in ordinary CI.
 
-Local rc.1 evidence is recorded in the preparation report: native npm/WASM and
-both editor hosts, an isolated installed desktop VSIX, bilingual Playground,
-eight packaged crate builds, all five engine profiles and the complete project
-trial. The latter retains all 606 fingerprints and zero unexplained differences.
-Every local artifact receipt remains dirty-source evidence; no full matrix or
-publication gate is closed by these runs.
+Clean rc.1 evidence is recorded in the candidate CI report: ten native consumers,
+installed WASM, all six VSIX targets (four desktop installed-VSIX checks), both
+editor hosts, bilingual Playground, eight clean packaged crate builds and all five
+engine profiles. The full project trial retains all 606 review entries and zero
+unexplained differences. Complete `pnpm verify:npm` and a local `pnpm release:prepare`
+rehearsal verified seven npm tarballs, eight crates and six VSIX files. These are
+source-candidate validation artifacts; tag-bound freezing and publication gates
+remain separate.
 
 ## Documentation and release notes
 
