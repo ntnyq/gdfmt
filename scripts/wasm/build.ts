@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
+import { execFileSync } from 'node:child_process'
 import { copyFile, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
-import { resolve } from 'node:path'
+import { delimiter, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { run } from '../npm/build.ts'
 import {
@@ -20,22 +21,47 @@ export async function buildWasm(): Promise<void> {
     ),
   )
   const dist = resolve(wasmPackageRoot, 'dist')
+  const toolchain = await readFile(
+    resolve(repositoryRoot, 'rust-toolchain.toml'),
+    'utf8',
+  )
+  const channel = /^channel\s*=\s*"([^"]+)"/m.exec(toolchain)?.[1]
+  assert.ok(channel, 'rust-toolchain.toml must pin a toolchain channel')
+  const rustc = execFileSync(
+    'rustup',
+    ['which', '--toolchain', channel, 'rustc'],
+    {
+      cwd: repositoryRoot,
+      encoding: 'utf8',
+    },
+  ).trim()
   await rm(dist, { recursive: true, force: true })
   await mkdir(dist, { recursive: true })
-  run('wasm-pack', [
-    'build',
-    'crates/gdfmt_wasm',
-    '--target',
-    'web',
-    '--release',
-    '--out-dir',
-    '../../packages/wasm/dist',
-    '--out-name',
-    'binding',
-    '--no-pack',
-    '--',
-    '--locked',
-  ])
+  // Honor the workspace pin even when another Rust installation precedes rustup.
+  run(
+    'wasm-pack',
+    [
+      'build',
+      'crates/gdfmt_wasm',
+      '--target',
+      'web',
+      '--release',
+      '--out-dir',
+      '../../packages/wasm/dist',
+      '--out-name',
+      'binding',
+      '--no-pack',
+      '--',
+      '--locked',
+    ],
+    {
+      env: {
+        ...process.env,
+        PATH: `${dirname(rustc)}${delimiter}${process.env.PATH ?? ''}`,
+        RUSTC: rustc,
+      },
+    },
+  )
   // wasm-bindgen's web output caches a singleton. Enclose its glue in a factory
   // so formatter instances own their memories and can be replaced after a trap.
   // These assertions intentionally fail on incompatible generator upgrades.
