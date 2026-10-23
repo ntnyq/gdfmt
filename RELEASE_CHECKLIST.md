@@ -29,7 +29,7 @@ The [full project-trial review](docs/research/0.1.0-project-trials-review.md)
 passed on the pre-candidate alpha.6 working tree: 606 scripts, 2,420 accepted layouts,
 zero unexplained differences and all 606 approved fingerprints unchanged.
 A comparator colon-classification gap was fixed with two regressions. This is
-dirty-working-tree evidence; the final-candidate trial below remains required.
+dirty-working-tree evidence; the candidate validation below records the clean rc.1 rerun.
 
 - [x] Review and freeze the default formatting style and configuration schema;
       inspect representative diffs for comments, lambdas, wrapping, literal

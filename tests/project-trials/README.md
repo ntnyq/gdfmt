@@ -123,4 +123,7 @@ The [rc.1 preparation](../../docs/research/0.1.0-rc.1-preparation.md) reran the
 complete trial on the unpublished `0.1.0-rc.1` working tree using the fixed Rust
 toolchain and Python hash seed 109. All 606 reviewed entries remained equal, with
 the same accepted layouts, source/comparator rejections and explained differences.
-This remains dirty-source evidence; the clean-candidate gate stays open.
+This remains historical dirty-source evidence. The subsequent
+[committed-candidate CI report](../../docs/research/0.1.0-rc.1-ci.md) records the
+clean rc.1 rerun, exact source revision and report hashes; later release revisions
+still require their own acceptance.
