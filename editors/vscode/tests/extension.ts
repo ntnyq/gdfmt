@@ -46,6 +46,30 @@ async function expectDocumentText(
 }
 
 export async function run(): Promise<void> {
+  if (process.env.GDFMT_DEBUG_SAVE === '1') {
+    const folder = vscode.workspace.workspaceFolders?.[0]
+    assert.ok(folder)
+    const probe = await vscode.workspace.openTextDocument(
+      vscode.Uri.joinPath(folder.uri, 'ready.txt'),
+    )
+    const editor = await vscode.window.showTextDocument(probe)
+    await editor.edit(builder =>
+      builder.replace(new vscode.Range(0, 0, probe.lineCount, 0), 'ready \n'),
+    )
+    await probe.save()
+    console.log(
+      '[DEBUG-rc1-save] builtin probe',
+      probe.getText(),
+      vscode.workspace
+        .getConfiguration('files', probe)
+        .get('trimTrailingWhitespace'),
+    )
+    assert.equal(
+      probe.getText(),
+      'ready\n',
+      'built-in save participants must be ready before testing gdfmt',
+    )
+  }
   if (process.env.GDFMT_DEBUG_SAVE === '1')
     vscode.workspace.onWillSaveTextDocument(event =>
       console.log(

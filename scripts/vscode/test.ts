@@ -29,6 +29,7 @@ const folders = [
 for (const { path: name, indentWidth } of folders) {
   await mkdir(resolve(workspace, name), { recursive: true })
   await writeFile(resolve(workspace, name, 'example.gd'), 'var value=1\n')
+  await writeFile(resolve(workspace, name, 'ready.txt'), 'ready\n')
   await writeFile(
     resolve(workspace, name, '.gdfmtrc.json'),
     JSON.stringify({
@@ -112,6 +113,7 @@ for (const order of [folders, [...folders].reverse()]) {
           'editor.formatOnSave': true,
         },
         'files.autoSave': 'off',
+        '[plaintext]': { 'files.trimTrailingWhitespace': true },
       },
     }),
   )
