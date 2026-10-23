@@ -4,44 +4,45 @@ import { documentEdits, UnsupportedLineEndingsError } from '../src/formatting'
 import { verifyFormattingBoundaries } from './formatting-boundaries'
 import { preservationCases } from './preservation-cases'
 
-async function undoTo(
+async function expectDocumentText(
   document: vscode.TextDocument,
   expected: string,
+  action: () => Thenable<unknown>,
 ): Promise<void> {
-  // The command acknowledgement can precede the document-change notification
-  // across the Extension Host boundary. Wait for that change, not a fixed delay.
-  await new Promise<void>((done, reject) => {
-    const subscription = vscode.workspace.onDidChangeTextDocument(event => {
-      if (event.document === document && document.getText() === expected) {
-        clearTimeout(timeout)
-        subscription.dispose()
-        done()
+  // Command/save acknowledgements can precede document-change notifications.
+  // Require both the completed action and exact text, without a fixed delay.
+  let timeout: ReturnType<typeof setTimeout> | undefined
+  let subscription: vscode.Disposable | undefined
+  try {
+    await new Promise<void>((done, reject) => {
+      let isActionComplete = false
+      const check = (): void => {
+        if (isActionComplete && document.getText() === expected) done()
       }
-    })
-    const timeout = setTimeout(() => {
-      subscription.dispose()
-      reject(
-        new Error(
-          `undo did not restore expected text: ${JSON.stringify(document.getText())}`,
-        ),
+      subscription = vscode.workspace.onDidChangeTextDocument(event => {
+        if (event.document === document) check()
+      })
+      timeout = setTimeout(
+        () =>
+          reject(
+            new Error(
+              `document did not reach expected text: ${JSON.stringify(document.getText())}`,
+            ),
+          ),
+        5_000,
       )
-    }, 5_000)
-    void vscode.commands.executeCommand('undo').then(
-      () => {
-        if (document.getText() === expected) {
-          clearTimeout(timeout)
-          subscription.dispose()
-          done()
-        }
-      },
-      error => {
-        clearTimeout(timeout)
-        subscription.dispose()
-        reject(error)
-      },
-    )
-  })
-  assert.equal(document.getText(), expected)
+      void Promise.resolve()
+        .then(action)
+        .then(() => {
+          isActionComplete = true
+          check()
+        }, reject)
+    })
+    assert.equal(document.getText(), expected)
+  } finally {
+    clearTimeout(timeout)
+    subscription?.dispose()
+  }
 }
 
 export async function run(): Promise<void> {
@@ -92,10 +93,13 @@ export async function run(): Promise<void> {
       '\tvar value=3',
     )
     await vscode.workspace.applyEdit(change)
-    await document.save()
+    const saved = `func example():\n${' '.repeat(indentWidth)}var value = 3\n`
+    await expectDocumentText(document, saved, () => document.save())
     assert.equal(
-      document.getText(),
-      `func example():\n${' '.repeat(indentWidth)}var value = 3\n`,
+      new TextDecoder().decode(
+        await vscode.workspace.fs.readFile(document.uri),
+      ),
+      saved,
     )
     // Format Document is an editor action with a single undo step.
     await vscode.window.activeTextEditor?.edit(builder =>
@@ -107,7 +111,9 @@ export async function run(): Promise<void> {
     const beforeFormatting = document.getText()
     await vscode.commands.executeCommand('editor.action.formatDocument')
     assert.ok(document.getText().includes('value = 4'))
-    await undoTo(document, beforeFormatting)
+    await expectDocumentText(document, beforeFormatting, () =>
+      vscode.commands.executeCommand('undo'),
+    )
   }
   const first = vscode.workspace.workspaceFolders.find(
     folder => folder.name === 'first',
@@ -135,14 +141,15 @@ export async function run(): Promise<void> {
     assert.equal(document.eol, expectedEol)
     await vscode.commands.executeCommand('editor.action.formatDocument')
     assert.equal(document.getText(), after, 'EOL conversion must be idempotent')
-    await undoTo(document, before)
+    await expectDocumentText(document, before, () =>
+      vscode.commands.executeCommand('undo'),
+    )
     assert.equal(
       document.getText(),
       before,
       'formatting and EOL conversion share one undo step',
     )
-    await document.save()
-    assert.equal(document.getText(), after)
+    await expectDocumentText(document, after, () => document.save())
   }
   for (const test of preservationCases) {
     const document: vscode.TextDocument =
@@ -179,7 +186,7 @@ export async function run(): Promise<void> {
     )
     await vscode.commands.executeCommand('editor.action.formatDocument')
     assert.equal(document.getText(), expected, `${test.name}: idempotence`)
-    await document.save()
+    await expectDocumentText(document, expected, () => document.save())
     assert.equal(document.getText(), expected, `${test.name}: save formatting`)
     assert.equal(
       new TextDecoder().decode(
