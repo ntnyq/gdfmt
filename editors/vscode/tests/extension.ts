@@ -46,6 +46,16 @@ async function expectDocumentText(
 }
 
 export async function run(): Promise<void> {
+  if (process.env.GDFMT_DEBUG_SAVE === '1')
+    vscode.workspace.onWillSaveTextDocument(event =>
+      console.log(
+        '[DEBUG-rc1-save] will save',
+        new Date().toISOString(),
+        event.reason,
+        event.document.version,
+        event.document.uri.toString(),
+      ),
+    )
   const extension = vscode.extensions.getExtension('ntnyq.gdfmt')
   assert.ok(extension)
   await extension.activate()
@@ -93,6 +103,20 @@ export async function run(): Promise<void> {
       '\tvar value=3',
     )
     await vscode.workspace.applyEdit(change)
+    if (process.env.GDFMT_DEBUG_SAVE === '1')
+      console.log(
+        '[DEBUG-rc1-save] before save',
+        new Date().toISOString(),
+        folder.name,
+        document.version,
+        document.isDirty,
+        vscode.workspace
+          .getConfiguration('editor', document)
+          .get('formatOnSave'),
+        vscode.workspace
+          .getConfiguration('editor', document)
+          .get('defaultFormatter'),
+      )
     const saved = `func example():\n${' '.repeat(indentWidth)}var value = 3\n`
     await expectDocumentText(document, saved, () => document.save())
     assert.equal(
@@ -101,6 +125,9 @@ export async function run(): Promise<void> {
       ),
       saved,
     )
+    if (process.env.GDFMT_DEBUG_SAVE === '1')
+      console.log('[DEBUG-rc1-save] saved', document.getText())
+    if (process.env.GDFMT_SAVE_REPRO === '1') return
     // Format Document is an editor action with a single undo step.
     await vscode.window.activeTextEditor?.edit(builder =>
       builder.replace(

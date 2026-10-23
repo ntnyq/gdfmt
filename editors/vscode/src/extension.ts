@@ -28,6 +28,8 @@ export async function activate(
   const version = coreVersion
 
   async function stopClients(): Promise<void> {
+    if (process.env.GDFMT_DEBUG_SAVE === '1')
+      console.log('[DEBUG-rc1-save] stop clients', new Date().toISOString())
     await Promise.all(
       sessions.splice(0).map(async ({ client, watcher }) => {
         watcher?.dispose()
@@ -92,6 +94,15 @@ export async function activate(
               session =>
                 session.folder?.uri.toString() === owner?.uri.toString(),
             )
+            if (process.env.GDFMT_DEBUG_SAVE === '1')
+              console.log(
+                '[DEBUG-rc1-save] format entry',
+                new Date().toISOString(),
+                document.version,
+                document.getText(),
+                owner?.name,
+                session?.client.isRunning(),
+              )
             if (!session?.client.isRunning()) return []
             const source = document.getText()
             const version = document.version
@@ -101,6 +112,16 @@ export async function activate(
                 { textDocument: { uri: document.uri.toString() } },
                 token,
               )
+              if (process.env.GDFMT_DEBUG_SAVE === '1')
+                console.log(
+                  '[DEBUG-rc1-save] format result',
+                  new Date().toISOString(),
+                  version,
+                  document.version,
+                  token.isCancellationRequested,
+                  sessions.includes(session),
+                  result,
+                )
               if (
                 token.isCancellationRequested ||
                 document.isClosed ||
@@ -183,7 +204,14 @@ export async function activate(
       void restart()
     }),
     vscode.workspace.onDidChangeConfiguration(event => {
-      if (event.affectsConfiguration('gdfmt')) void restart()
+      if (event.affectsConfiguration('gdfmt')) {
+        if (process.env.GDFMT_DEBUG_SAVE === '1')
+          console.log(
+            '[DEBUG-rc1-save] config restart',
+            new Date().toISOString(),
+          )
+        void restart()
+      }
     }),
   )
   stop = async () => {
