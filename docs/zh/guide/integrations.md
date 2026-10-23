@@ -12,7 +12,8 @@ gdfmt --check .
 
 非零退出码使步骤失败。本地可运行 `gdfmt --diff .` 查看差异，运行 `gdfmt .` 应用格式化。通过[退出码](/zh/reference/cli#exit-codes)可区分格式差异与配置、I/O 错误。
 
-发布包可用之前，请从经过审查的固定 Git revision 安装。例如，在已安装 Rust 的 CI shell 步骤中执行：
+CI 从源码安装时，请固定经过审查的 Git revision。例如，在已安装 Rust 的 CI shell
+步骤中执行：
 
 ```sh
 # 将 GDFMT_REVISION 设置为你已审查的完整 commit SHA。
@@ -21,6 +22,9 @@ gdfmt --check .
 ```
 
 在 CI 配置中固定 revision，需要采用格式化变化时再显式更新。
+
+npm 方式应提交依赖及 lockfile，运行 `pnpm install --frozen-lockfile`，再运行
+`pnpm exec gdfmt --check .`，避免每次 CI 都重新解析会移动的 `next` 标签。
 
 ## 编辑器命令
 
@@ -34,7 +38,47 @@ gdfmt --stdin-filepath path/to/current-file.gd
 
 ## VS Code
 
-在仓库运行 `pnpm package:vscode` 生成当前平台的 VSIX，再通过 **Extensions: Install from VSIX** 安装。插件内置匹配版本的原生程序，无需额外安装 Node。SSH、WSL 和容器中，服务在工作区扩展宿主运行。
+从项目 [GitHub Releases](https://github.com/ntnyq/gdfmt/releases) 下载匹配的原生
+VSIX，或运行 `pnpm package:vscode` 构建，通过 **Extensions: Install from VSIX**
+安装。插件内置原生程序，无需额外安装 Node。SSH、WSL 和容器场景先连接远程窗口，
+再为远程扩展宿主的平台安装对应产物。
+
+源码构建需要固定的 Rust 工具链、Node 22.x 的 22.13+ 或 Node 24.x，以及
+`package.json` 声明的 pnpm 版本；先运行 `pnpm install --frozen-lockfile`，详见
+[构建准备](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#wasm-and-editors)。
+原生 VSIX 必须匹配扩展宿主的 OS/CPU/libc；WSL、SSH 或容器需要对应宿主的目标，
+产物位于 `target/editors/TARGET/`。
+
+0.1.0 建议随核心发布冻结的 VSIX，将 Marketplace 正式发布作为独立后续工作。
+截至 2026-10-23，[Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
+已有扩展数字版本 `0.1.0` 的预发布，内置核心 `0.1.0-alpha.6`；可通过
+**Install Pre-Release Version** 安装预览，它不是最终核心 0.1.0。首个正式扩展版本
+建议 `0.2.0`，以重新核对 Gallery 可用性为准，详见
+[分发审查](../research/0.1.0-editor-distribution-review.md)。
+
+VSIX 文件名使用核心版本，扩展视图显示数字扩展版本。替换 `CORE_VERSION`，
+按宿主选择后缀：
+
+| 宿主             | VSIX 后缀             | Gallery target |
+| ---------------- | --------------------- | -------------- |
+| macOS ARM64      | `darwin-arm64.vsix`   | `darwin-arm64` |
+| macOS x64        | `darwin-x64.vsix`     | `darwin-x64`   |
+| Windows x64 MSVC | `win32-x64-msvc.vsix` | `win32-x64`    |
+| Linux x64 glibc  | `linux-x64-gnu.vsix`  | `linux-x64`    |
+| Linux x64 musl   | `linux-x64-musl.vsix` | `alpine-x64`   |
+| 浏览器           | `web.vsix`            | `web`          |
+
+已下载的原生产物也可通过桌面 CLI 安装：
+
+```sh
+code --install-extension ./gdfmt-CORE_VERSION-darwin-arm64.vsix
+```
+
+请选用匹配宿主的文件名。VSIX 安装默认手动更新，见
+[VS Code 安装指南](https://code.visualstudio.com/docs/configure/extensions/extension-marketplace#install-from-a-vsix)。
+更新时下载新版产物，回滚时明确重装旧产物；CLI 有意替换相同数字版本时可增加
+`--force`。安装后通过 **gdfmt: Show Version** 核对核心版本。原生/Web 包共用
+`ntnyq.gdfmt`，每个扩展宿主应选择适用的变体。
 
 ```json
 {
@@ -47,21 +91,31 @@ gdfmt --stdin-filepath path/to/current-file.gd
 
 格式化使用未保存的缓冲区；源码无效时展示诊断，不返回文本编辑。可以保留 Godot Tools 的语言与引擎功能，并显式将 gdfmt 选为默认格式化器。
 
-VS Code 缓冲区只能使用统一换行符。若核心输出需要混合换行以保留 formatter-off 区域或多行字符串，桌面端与 Web 端会报告错误并保持文档不变。可设置 `lineEnding: "preserve"`，或使用 CLI 保留精确输出。若保留文本决定了统一换行符，则以核心实际输出为准，而不是覆盖为配置中的结构换行符。
+VS Code 缓冲区只能使用统一换行符。若核心输出需要混合换行以保留 formatter-off 区域或多行字符串，桌面端与 Web 端会报告错误并保持文档不变。输入换行统一时，设置 `lineEnding: "preserve"` 可避免这类冲突；对本身已混合换行的输入，它不保证输出统一。需要保留精确的混合换行输出时使用 CLI。VS Code 可能在载入文件时就统一混合换行，formatter 接收到的是载入后的缓冲区。若保留文本决定了统一换行符，则以核心实际输出为准，而不是覆盖为配置中的结构换行符。
 
 支持 `gdfmt.enable`、`gdfmt.serverPath`、`gdfmt.configPath`。相对路径以所属工作区目录为基准。程序选择顺序为显式路径、受信任工作区安装的 `@gdfmt/gdfmt`、插件内置程序；所选程序必须与插件记录的核心版本完全一致。工作区 npm 脚本使用扩展宿主的 Node，并需满足 npm 包的 Node 版本要求。未信任的工作区只运行内置程序，使用常规配置发现。
 
-提供 **gdfmt: Restart Server**、**gdfmt: Show Output**、**gdfmt: Show Version** 命令。多根目录使用独立客户端。Untitled 文档使用内置程序，直接使用格式化器默认配置；保存到项目后才使用项目配置。浏览器与虚拟工作区使用下方独立的 Web VSIX。
+提供 **gdfmt: Restart Server**、**gdfmt: Show Output**、**gdfmt: Show Version** 命令。多根目录使用独立客户端。Untitled 文档使用格式化器默认配置，不读取项目配置；其桌面会话在可信环境中采用已设置的全局 `gdfmt.serverPath`，否则使用内置程序。保存到项目后才使用项目配置。浏览器与虚拟工作区使用下方独立的 Web VSIX。
 
 ### VS Code Web
 
-运行 `pnpm package:vscode:web` 生成 `target/editors/web/gdfmt-VERSION-web.vsix`，在 VS Code Web 中安装，使用上方相同的默认格式化器和保存设置。Web 版本在独立 Worker 中复用现有 `@gdfmt/wasm`，无需原生程序、Node 运行时或跨源隔离响应头。`gdfmt.serverPath` 仅用于桌面端；**Restart Server** 在 Web 中重建 Worker。
+Web 源码构建还需要 wasm-pack 和 `wasm32-unknown-unknown` Rust 目标。运行
+`pnpm package:vscode:web` 生成 `target/editors/web/gdfmt-CORE_VERSION-web.vsix`。
+`CORE_VERSION` 是包含预发布后缀的精确 `gdfmtVersion`，与 Marketplace 数字扩展
+版本独立；构建 VSIX 不会发布到 Marketplace。已测试的纯浏览器 VS Code 1.96.4
+在没有本地/远程扩展管理 server 时不提供本地 VSIX 安装入口。可使用现有 Gallery
+预发布、`pnpm test:vscode:web` 的 staging 开发宿主，或
+[官方开发侧载方式](https://code.visualstudio.com/api/extension-guides/web-extensions#test-your-web-extension-in-vscode-dev)。
+支持 VSIX 安装的 Web 宿主可使用 Web 产物，不能仅凭开发宿主测试通过就推断安装
+入口可用。默认格式化器与保存设置使用上方配置。Web 版本在独立 Worker 中复用 `@gdfmt/wasm`，
+无需原生程序、Node 运行时或跨源隔离响应头。`gdfmt.serverPath` 仅用于桌面端；
+**Restart Server** 在 Web 中重建 Worker。
 
 Web 通过 `vscode.workspace.fs` 支持虚拟工作区 URI、未保存缓冲区、保存格式化、撤销、多根工作区与 UTF-16 诊断。每次请求使用文档所属工作区的配置；Untitled 文档使用默认值。工作区外的文档需要先放入工作区目录。
 
 配置发现从文档目录向上搜索到所属工作区根目录，每层优先使用 `.gdfmtrc.json`，其次是 `.gdfmtrc.jsonc`。先合并祖先层，再合并子层；`root: true` 停止向上发现。JSONC 注释和相对 `extends` 使用共享 Rust 解析器与选项校验。`gdfmt.configPath` 相对于所属工作区目录，设置后替代自动发现。所有路径及继承配置必须留在该目录内，使用 `/` 分隔符；嵌套工作区目录有独立的配置边界。
 
-Web 暂时拒绝包含 `overrides` 或 `ignore` 的配置（包括空数组），也拒绝发现到的 `.editorconfig`，展示错误并保留原文。需要这些功能时使用桌面扩展，或改用受支持的 JSON/JSONC 选项。Web 格式化显式打开的文档，`.gitignore` 和 `.gdfmtignore` 不参与选择或排除。受信任和未信任工作区使用相同的 Web 配置规则。
+Web 暂时拒绝包含 `overrides` 或 `ignore` 的配置（包括空数组），也拒绝发现到的 `.editorconfig`，展示错误并保留原文。需要这些功能时使用桌面扩展，或改用受支持的 JSON/JSONC 选项。Web 格式化显式打开的文档，`.gitignore` 和 `.gdfmtignore` 不参与选择或排除。这些 Web 配置限制在受信任和未信任工作区中均适用。已打包 Web 扩展在两种信任状态下都允许工作区相对 `gdfmt.configPath`，仍受所属工作区边界限制；只有桌面端在信任前限制工作区显式配置和自定义程序。
 
 每个配置文件限制为 1 MiB，累计 16 MiB，最多 32 层继承、128 个合并层，配置发现最多经过 128 个目录；源码限制为 16 MiB。取消或过期的请求不会应用编辑。Worker 异常或超时后会被丢弃，下次请求重新创建。
 
@@ -71,7 +125,7 @@ Web 暂时拒绝包含 `overrides` 或 `ignore` 的配置（包括空数组）�
 gdfmt --lsp
 ```
 
-服务通过 stdio 使用 LSP 3.17，仅声明全文同步、UTF-16 位置和全文格式化能力，不声明范围格式化。每次请求都重新读取项目配置，包括 JSON/JSONC 继承、override、EditorConfig 和忽略规则。源码错误发布诊断并返回空编辑，配置失败返回 LSP 错误。服务不会写入文档。
+服务通过 stdio 使用 LSP 3.17，仅声明全文同步、UTF-16 位置和全文格式化能力，不声明范围格式化。范围格式化请求返回 JSON-RPC `-32601`（不支持的方法）；两个 VS Code 宿主均不注册范围格式化 provider，即使选区覆盖全文也不例外，请使用 Format Document。编辑器的 tabSize 和 insertSpaces 偏好不会覆盖 gdfmt 配置。每次请求都重新读取项目配置，包括 JSON/JSONC 继承、override、EditorConfig 和忽略规则。源码错误发布诊断并返回空编辑，配置失败返回 LSP 错误。服务不会写入文档。
 
 VS Code 客户端使用 `gdfmt/formatting` 扩展请求，传入相同的 `textDocument` 标识。结果包含 `output`（格式化文本，源码无效或被忽略时为 `null`）和解析后的 `lineEnding`（`lf`、`crlf` 或 `preserve`），以便同时应用文本编辑与缓冲区 EOL 变更。服务通过 `experimental.gdfmtTextFormattingProvider` 声明该能力；取消、失效检查和诊断行为与标准格式化请求一致。
 

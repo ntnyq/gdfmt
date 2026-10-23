@@ -3,6 +3,7 @@ import {
   documentEdits,
   UnsupportedLineEndingsError,
 } from '../../src/formatting'
+import { verifyFormattingBoundaries } from '../formatting-boundaries'
 import { preservationCases } from '../preservation-cases'
 import { TestFileSystem } from './filesystem'
 
@@ -299,10 +300,69 @@ async function runSuite(): Promise<void> {
     '{"ignore":[]}',
     '{"extends":[".gdfmtrc.jsonc"]}',
     '{"format":{"lineWidth":1}}',
+    '{"schemaVersion":2}',
+    '{"extends":["missing.json"]}',
+    '{"extends":["../outside.json"]}',
+    '{"extends":["/absolute.json"]}',
+    '{"extends":["https://example.com/config.json"]}',
+    '{"extends":["config\\\\base.json"]}',
   ]) {
     await write('.gdfmtrc.jsonc', config)
     equal((await format('first.gd', 'var x=1\n')).getText(), 'var x=1\n')
   }
+  await write('.gdfmtrc.jsonc', '{"root":true}')
+  // Ignore files do not select which already-open Web documents can format.
+  await write('.gitignore', '*.gd\n')
+  await write('.gdfmtignore', '*.gd\n')
+  equal((await format('first.gd', 'var x=1\n')).getText(), 'var x = 1\n')
+  for (const path of [
+    '../outside.json',
+    '/absolute.json',
+    'config\\base.json',
+  ]) {
+    await settings.update(
+      'configPath',
+      path,
+      vscode.ConfigurationTarget.WorkspaceFolder,
+    )
+    await pause()
+    equal((await format('first.gd', 'var x=1\n')).getText(), 'var x=1\n')
+  }
+  await settings.update(
+    'configPath',
+    '',
+    vscode.ConfigurationTarget.WorkspaceFolder,
+  )
+  await pause()
+
+  // Inclusive inheritance/layer bounds, including replayed cached parents.
+  await vscode.workspace.fs.createDirectory(file('limits'))
+  for (let index = 0; index < 33; index++)
+    await vscode.workspace.fs.writeFile(
+      file(`limits/${index}.json`),
+      encode(
+        JSON.stringify(index === 32 ? {} : { extends: [`${index + 1}.json`] }),
+      ),
+    )
+  await write('.gdfmtrc.jsonc', '{"root":true,"extends":["limits/1.json"]}')
+  equal((await format('first.gd', 'var x=1\n')).getText(), 'var x=1\n')
+  await write('.gdfmtrc.jsonc', '{"root":true,"extends":["limits/2.json"]}')
+  equal((await format('first.gd', 'var x=1\n')).getText(), 'var x = 1\n')
+  for (const count of [127, 128]) {
+    await write(
+      '.gdfmtrc.jsonc',
+      JSON.stringify({
+        root: true,
+        extends: Array.from({ length: count }, () => 'limits/32.json'),
+      }),
+    )
+    equal(
+      (await format('first.gd', 'var x=1\n')).getText(),
+      count === 127 ? 'var x = 1\n' : 'var x=1\n',
+    )
+  }
+  await write('.gdfmtrc.jsonc', '{}'.padEnd(1024 * 1024 + 1, ' '))
+  equal((await format('first.gd', 'var x=1\n')).getText(), 'var x=1\n')
   await write('.gdfmtrc.jsonc', '{"root":true}')
   await write('.editorconfig', 'root=true\n[*.gd]\nindent_style=space')
   equal((await format('first.gd', 'var x=1\n')).getText(), 'var x=1\n')
@@ -313,6 +373,7 @@ async function runSuite(): Promise<void> {
     content: 'var unsaved=1\n',
   })
   await vscode.window.showTextDocument(untitled)
+  await verifyFormattingBoundaries(untitled)
   await vscode.commands.executeCommand('editor.action.formatDocument')
   equal(untitled.getText(), 'var unsaved = 1\n')
   await vscode.commands.executeCommand('gdfmt.restartServer')

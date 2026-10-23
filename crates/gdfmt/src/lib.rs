@@ -8,6 +8,7 @@ pub use gdfmt_parser::{LanguageVersion, ParseOptions};
 use gdfmt_text::{Diagnostic, DiagnosticCategory, Severity, Span};
 
 #[derive(Debug, Clone, Default)]
+/// A pure text request; options and limits are supplied explicitly by the caller.
 pub struct FormatRequest {
     pub parse: ParseOptions,
     pub format: FormatOptions,
@@ -18,7 +19,9 @@ pub struct FormatResult {
     /// None for source errors or failed formatter invariants. Never write a
     /// recovery tree or a partially formatted file to disk.
     pub output: Option<String>,
+    /// Whether writable output differs byte-for-byte from the input. False on failure.
     pub changed: bool,
+    /// Source diagnostics use the request's SourceId and half-open UTF-8 byte spans.
     pub diagnostics: Vec<Diagnostic>,
 }
 

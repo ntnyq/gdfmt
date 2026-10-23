@@ -15,14 +15,24 @@ const result = formatter.formatSync('var value=1\n', {
 if (result.output !== null) console.log(result.output)
 ```
 
-Build from source with `pnpm build:wasm` until the first WASM package is released.
-Building requires `wasm-pack` and the `wasm32-unknown-unknown` Rust target.
+Install the browser package with `pnpm add @gdfmt/wasm@next`; it has no native
+platform addon and does not require Rust to consume. The `next` channel moves;
+pin an exact version or commit your lockfile for reproducible builds.
+
+To build from a repository checkout, install dependencies with
+`pnpm install --frozen-lockfile`, then run `pnpm build:wasm`.
+Building requires Node 22.13+ on 22.x or Node 24.x, the repository's pnpm version,
+`wasm-pack` and the `wasm32-unknown-unknown` Rust target. See
+[build setup](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#wasm-and-editors).
 
 ## Loading and bundlers
 
 The default loader fetches `binding_bg.wasm` beside the ESM entry. Deploy all of
 `dist` and serve WASM with the `application/wasm` MIME type. No threads, shared
 memory or COOP/COEP headers are required. A cross-origin asset must allow CORS.
+
+Omit `wasm` or pass `undefined` to use the default loader. Explicit `null` is an
+invalid initialization parameter and rejects rather than selecting the default.
 
 `createFormatter({ wasm })` accepts a string or URL, a `Response`, an
 `ArrayBuffer`, a `Uint8Array`, or a compiled `WebAssembly.Module`. Bundlers that
@@ -79,7 +89,8 @@ const result = formatter.formatSync('var value=1\n', options)
 ```
 
 `parseConfig(source)` validates a configuration up to 1 MiB and returns optional
-`root`, `extends`, `language` and `format` fields. It rejects `overrides` and `ignore`,
+`$schema`, `schemaVersion`, `root`, `extends`, `language` and `format` fields.
+`schemaVersion`, when present, is 1. It rejects `overrides` and `ignore`,
 including empty arrays. `resolveTextOptions(layers)` accepts at most 128 layers,
 validates them, merges in array order and supplies defaults. It rejects unresolved
 `extends`; the host must load those files and remove discovery metadata first.

@@ -7,10 +7,23 @@ export interface LanguageOptions {
 export type CollectionLayout = 'auto' | 'multiline' | 'preserve'
 
 export interface FormatOptions {
+  /**
+   * Target width, integer 40–320; long indivisible or retained text may exceed it.
+   * Defaults to 100.
+   */
   lineWidth?: number
   indentStyle?: 'tab' | 'space'
+  /**
+   * Space indent size or tab display width, integer 1–8. Defaults to 4.
+   */
   indentWidth?: number
+  /**
+   * Structural newline policy. Defaults to lf; literal/protected bytes are retained.
+   */
   lineEnding?: 'lf' | 'crlf' | 'preserve'
+  /**
+   * Maximum retained blank lines, integer 0–5. Defaults to 2.
+   */
   maxBlankLines?: number
   finalNewline?: boolean
   arrayLayout?: CollectionLayout
@@ -25,10 +38,14 @@ export interface FormatOptions {
 
 /**
  * Pure text options. No filesystem discovery or configuration inheritance.
+ * Omit unused fields; explicit undefined property values are invalid at runtime.
  */
 export interface TextOptions {
   language?: LanguageOptions
   format?: FormatOptions
+  /**
+   * Diagnostic source identifier; an integer from 0 to 4294967295. Defaults to 0.
+   */
   sourceId?: number
 }
 
@@ -56,6 +73,9 @@ export interface FormatResult {
    * Null on source errors or a failed formatter invariant; never partial output.
    */
   output: string | null
+  /**
+   * Byte comparison of output and input; false when output is null.
+   */
   changed: boolean
   diagnostics: Diagnostic[]
 }

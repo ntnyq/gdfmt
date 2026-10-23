@@ -41,8 +41,14 @@ export async function prepareEditors(
     assert.equal(receipt.target, target.id)
     assert.equal(receipt.published, false)
     assert.equal(receipt.nativeSmokePassed, true)
-    if (target.id !== 'linux-x64-musl')
+    if (target.id !== 'linux-x64-musl') {
       assert.equal(receipt.extensionHostPassed, true)
+      assert.equal(
+        receipt.installedVsixPassed,
+        true,
+        'installed VSIX acceptance is required',
+      )
+    }
     if (target.id === 'linux-x64-gnu')
       assert.equal(receipt.godotToolsPassed, true)
     const file = `gdfmt-${version}-${target.id}.vsix`

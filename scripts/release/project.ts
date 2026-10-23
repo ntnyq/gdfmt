@@ -209,6 +209,7 @@ export function checkRelease(
         /^\d+\.\d+\.\d+$/.test(extension.version),
       'VS Code requires a numeric Marketplace version',
     )
+    validateVersion(extension.version)
   }
   const targets: unknown = JSON.parse(
     readFileSync(resolve(root, 'packages/gdfmt/src/targets.json'), 'utf8'),

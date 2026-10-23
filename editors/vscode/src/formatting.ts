@@ -35,7 +35,7 @@ export function documentEdits(
   const targetNewline = eol === vscode.EndOfLine.CRLF ? '\r\n' : '\n'
   if (output.replace(/\r\n|\r|\n/g, targetNewline) !== output)
     throw new UnsupportedLineEndingsError(
-      'VS Code cannot preserve this formatter output with a single buffer EOL. No edits were applied, to retain protected regions and multiline strings exactly. Use lineEnding: preserve or the CLI.',
+      'VS Code cannot preserve this formatter output with a single buffer EOL. No edits were applied, to retain protected regions and multiline strings exactly. Try lineEnding: preserve when the input uses a uniform EOL; use the CLI if the output still contains mixed line endings.',
     )
   const normalized = output.replace(
     /\r\n|\r|\n/g,

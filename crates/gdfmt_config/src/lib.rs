@@ -22,6 +22,38 @@ where
     T::deserialize(deserializer).map(Some)
 }
 
+// JSON Schema integers include values such as 100.0 and 1e2. Normalize only
+// integral, nonnegative numbers, then let the target integer enforce its range.
+fn integer<'de, D, T>(deserializer: D) -> Result<T, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    let number = serde_json::Number::deserialize(deserializer)?;
+    let value = if let Some(value) = number.as_u64() {
+        value
+    } else {
+        let value = number
+            .as_f64()
+            .ok_or_else(|| serde::de::Error::custom("expected an unsigned integer"))?;
+        // The upper bound is exclusive: u64::MAX rounds to 2^64 as f64.
+        // Check before casting so fractions and overflowing values cannot saturate.
+        if value.fract() != 0.0 || value < 0.0 || value >= u64::MAX as f64 {
+            return Err(serde::de::Error::custom("expected an unsigned integer"));
+        }
+        value as u64
+    };
+    T::deserialize(serde::de::value::U64Deserializer::<D::Error>::new(value))
+}
+
+fn non_null_integer<'de, D, T>(deserializer: D) -> Result<Option<T>, D::Error>
+where
+    D: Deserializer<'de>,
+    T: Deserialize<'de>,
+{
+    integer(deserializer).map(Some)
+}
+
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase")]
 pub enum IndentStyle {
@@ -84,7 +116,11 @@ pub enum PreserveBlankLines {
 #[serde(untagged)]
 pub enum BlankLinesAroundDefinitions {
     Preserve(PreserveBlankLines),
-    Count(#[schemars(range(min = 0, max = MAX_BLANK_LINES))] u8),
+    Count(
+        #[serde(deserialize_with = "integer")]
+        #[schemars(range(min = 0, max = MAX_BLANK_LINES))]
+        u8,
+    ),
 }
 
 impl Default for BlankLinesAroundDefinitions {
@@ -96,11 +132,13 @@ impl Default for BlankLinesAroundDefinitions {
 #[derive(Debug, Clone, Default, PartialEq, Eq, Serialize, Deserialize, JsonSchema)]
 #[serde(rename_all = "camelCase", deny_unknown_fields)]
 pub struct PartialFormatOptions {
-    /// Target print width; long indivisible tokens may exceed this value. Default: 100.
+    /// Target width at supported break points, not a hard limit. Default: 100.
+    /// Long expressions/chains, indivisible tokens/types, comments, literal contents
+    /// and protected regions may exceed this value.
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "non_null"
+        deserialize_with = "non_null_integer"
     )]
     #[schemars(with = "u16", range(min = MIN_LINE_WIDTH, max = MAX_LINE_WIDTH))]
     pub line_width: Option<u16>,
@@ -116,7 +154,7 @@ pub struct PartialFormatOptions {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "non_null"
+        deserialize_with = "non_null_integer"
     )]
     #[schemars(with = "u8", range(min = MIN_INDENT_WIDTH, max = MAX_INDENT_WIDTH))]
     pub indent_width: Option<u8>,
@@ -132,7 +170,7 @@ pub struct PartialFormatOptions {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "non_null"
+        deserialize_with = "non_null_integer"
     )]
     #[schemars(with = "u8", range(min = 0, max = MAX_BLANK_LINES))]
     pub max_blank_lines: Option<u8>,
@@ -204,7 +242,7 @@ pub struct PartialFormatOptions {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "non_null"
+        deserialize_with = "non_null_integer"
     )]
     #[schemars(with = "u8", range(min = 1, max = 4))]
     pub inline_comment_spacing: Option<u8>,
@@ -316,7 +354,7 @@ pub struct PartialConfig {
     #[serde(
         default,
         skip_serializing_if = "Option::is_none",
-        deserialize_with = "non_null"
+        deserialize_with = "non_null_integer"
     )]
     #[schemars(with = "u32", range(min = 1, max = 1))]
     pub schema_version: Option<u32>,

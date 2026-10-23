@@ -1,12 +1,19 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
+import {
+  mkdir,
+  mkdtemp,
+  readFile,
+  readdir,
+  rm,
+  writeFile,
+} from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { dirname, join, resolve } from 'node:path'
 import { runTests, runVSCodeCommand } from '@vscode/test-electron'
 import { build } from 'esbuild'
 import { preservationCases } from '../../editors/vscode/tests/preservation-cases.ts'
-import { repositoryRoot } from '../release/project.ts'
+import { readJson, repositoryRoot } from '../release/project.ts'
 import { extensionRoot } from './build.ts'
 import { packageExtension } from './package.ts'
 
@@ -130,13 +137,74 @@ for (const order of [folders, [...folders].reverse()]) {
   })
 }
 
+// Install the archive in a separate profile: a passing development host alone
+// cannot prove that the packaged manifest and bundled server install correctly.
+const installedProfile = await mkdtemp(join(tmpdir(), 'gdfmt-vsix-'))
+try {
+  const extensions = resolve(installedProfile, 'extensions')
+  const profileArgs = [
+    '--extensions-dir',
+    extensions,
+    '--user-data-dir',
+    resolve(installedProfile, 'profile'),
+  ]
+  await runVSCodeCommand(
+    ['--install-extension', vsix, ...profileArgs, '--force'],
+    { version: '1.96.4', timeout: 30_000 },
+  )
+  const listed = await runVSCodeCommand(
+    ['--list-extensions', '--show-versions', ...profileArgs],
+    { version: '1.96.4', timeout: 30_000 },
+  )
+  const manifest = readJson(resolve(extensionRoot, 'package.json'))
+  assert.ok(
+    listed.stdout.split(/\r?\n/).includes(`ntnyq.gdfmt@${manifest.version}`),
+  )
+  const candidates = (
+    await readdir(extensions, { withFileTypes: true })
+  ).filter(
+    entry =>
+      entry.isDirectory() &&
+      entry.name.startsWith(`ntnyq.gdfmt-${manifest.version}`),
+  )
+  assert.equal(candidates.length, 1, 'expected exactly one installed candidate')
+  const installed = resolve(extensions, candidates[0].name)
+  const installedManifest = readJson(resolve(installed, 'package.json'))
+  assert.equal(installedManifest.version, manifest.version)
+  assert.equal(installedManifest.gdfmtVersion, manifest.gdfmtVersion)
+  const binary = process.platform === 'win32' ? 'gdfmt.exe' : 'gdfmt'
+  const server = resolve(installed, 'server', binary)
+  assert.deepEqual(
+    await readFile(server),
+    await readFile(resolve(extensionRoot, 'server', binary)),
+  )
+  assert.equal(
+    execFileSync(server, ['--version'], { encoding: 'utf8' }).trim(),
+    `gdfmt ${manifest.gdfmtVersion}`,
+  )
+  assert.equal(
+    execFileSync(
+      server,
+      ['--stdin-filepath', resolve(workspace, 'first/example.gd')],
+      {
+        cwd: workspace,
+        input: 'var value=1\n',
+        encoding: 'utf8',
+      },
+    ),
+    'var value = 1\n',
+  )
+} finally {
+  await rm(installedProfile, { recursive: true, force: true })
+}
+
 const receiptPath = resolve(dirname(vsix), 'acceptance.json')
 const receipt: unknown = JSON.parse(await readFile(receiptPath, 'utf8'))
 if (!receipt || typeof receipt !== 'object')
   throw new Error('invalid VSIX receipt')
 await writeFile(
   receiptPath,
-  `${JSON.stringify({ ...receipt, extensionHostPassed: true, godotToolsPassed: isGodotToolsEnabled, vscodeVersion: '1.96.4' }, null, 2)}\n`,
+  `${JSON.stringify({ ...receipt, extensionHostPassed: true, installedVsixPassed: true, godotToolsPassed: isGodotToolsEnabled, vscodeVersion: '1.96.4' }, null, 2)}\n`,
 )
 
 await rm(workspace, { recursive: true, force: true })

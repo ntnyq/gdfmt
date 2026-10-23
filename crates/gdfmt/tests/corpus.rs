@@ -2,6 +2,43 @@ use gdfmt::{FormatRequest, LanguageVersion, format};
 use gdfmt_parser::{parse, parse_expression};
 
 #[test]
+fn rust_result_contract_distinguishes_empty_output_and_keeps_utf8_diagnostic_spans() {
+    let mut request = FormatRequest::default();
+    request.parse.lex.source_id = gdfmt_text::SourceId(u32::MAX);
+    let empty = format("", &request);
+    assert_eq!(empty.output.as_deref(), Some(""));
+    assert!(!empty.changed);
+    assert!(empty.diagnostics.is_empty());
+    let changed = format("var x=1\r\n", &request);
+    assert_eq!(changed.output.as_deref(), Some("var x = 1\r\n"));
+    assert!(changed.changed);
+    assert!(!format(changed.output.as_deref().unwrap(), &request).changed);
+    let source = "\u{feff}# 😀\r\nvar x = )\r\n";
+    let invalid = format(source, &request);
+    assert!(invalid.output.is_none());
+    assert!(!invalid.changed);
+    assert!(!invalid.diagnostics.is_empty());
+    assert!(
+        invalid
+            .diagnostics
+            .iter()
+            .all(
+                |diagnostic| diagnostic.source_id == gdfmt_text::SourceId(u32::MAX)
+                    && diagnostic.span.slice(source).is_ok()
+            )
+    );
+    assert!(
+        invalid
+            .diagnostics
+            .iter()
+            .any(
+                |diagnostic| diagnostic.category == gdfmt_text::DiagnosticCategory::Syntax
+                    && diagnostic.span.start() as usize == source.find(')').unwrap()
+            )
+    );
+}
+
+#[test]
 fn complete_valid_corpus_reparses_preserves_structure_and_is_idempotent() {
     let manifest: serde_json::Value =
         serde_json::from_str(include_str!("../../../tests/compatibility/manifest.json")).unwrap();

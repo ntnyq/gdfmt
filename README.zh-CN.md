@@ -16,6 +16,11 @@ gdfmt 为 `.gd` 文件提供统一的空格、缩进与换行布局，可通过�
 - **融入日常工作流。** 格式化项目、在 CI 中检查、预览差异，或通过 stdin 处理编辑器缓冲区。支持 Git 忽略规则与 `.gdfmtignore`。
 - **保留手动排版。** 使用成对的 `formatter-off` / `formatter-on` 注释，保持指定区域原样。
 
+当前源码已准备为 `0.1.0-rc.1`，尚未创建 tag 或发布。详见
+[候选说明](docs/zh/releases/0.1.0-rc.1.md)和
+[准备证据](docs/zh/research/0.1.0-rc.1-preparation.md)。下面的已发布安装命令仍指向
+现有 registry 版本。
+
 ## 快速开始
 
 使用 Rust 1.88 或更高版本从源码安装，仓库已固定开发工具链。
@@ -37,7 +42,10 @@ gdfmt init              # 创建 .gdfmtrc.json
 
 不传参数时默认格式化当前目录。检查发现语法错误或格式差异时退出码为 `1`，配置、参数或 I/O 错误为 `2`。
 
-使用 `pnpm add @gdfmt/gdfmt@next` 安装 npm 预发布版本。使用方式见 [Node.js API](docs/zh/reference/node.md)。
+安装已发布的预发布版本可运行 `cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked`，
+或在 Node 22.x 的 22.13+、Node 24.x 下运行 `pnpm add @gdfmt/gdfmt@next`。
+Cargo 包名为 `gdfmt_cli`，两种方式提供的命令均为 `gdfmt`。
+库用法与支持的原生平台见 [Node.js API](docs/zh/reference/node.md)。
 
 ## 配置
 
@@ -66,14 +74,20 @@ gdfmt 无需配置即可使用。需要共享项目设置时，创建 `.gdfmtrc.
 - [Node.js API](docs/zh/reference/node.md)
 - [参与贡献](CONTRIBUTING.md)
 - [发布与 CI 自动发布](RELEASING.zh-CN.md)
+- [0.1.0 发布检查清单](RELEASE_CHECKLIST.zh-CN.md)
+- [0.1.0 发布说明（草稿）](docs/zh/releases/0.1.0.md)
 
 提供 Godot 4.3–4.7 语法配置，尚未声明完整 Godot 兼容性；项目分析与运行时行为仍由引擎负责。gdfmt 使用自己的格式化风格，不保证与 gdtoolkit 的 `gdformat` 输出完全一致。
 
 ## WASM 与 VS Code
 
-浏览器包 `@gdfmt/wasm` 提供 `createFormatter()`，用法见 [WASM API](docs/zh/reference/wasm.md)。首次发布前可运行 `pnpm build:wasm`、`pnpm test:wasm` 从源码构建与验收。
+浏览器包 `@gdfmt/wasm` 提供 `createFormatter()`，用法见 [WASM API](docs/zh/reference/wasm.md)。可运行 `pnpm add @gdfmt/wasm@next` 安装，或运行 `pnpm build:wasm`、`pnpm test:wasm` 从源码构建与验收。
 
-`gdfmt --lsp` 通过 stdio 提供格式化服务。运行 `pnpm package:vscode` 构建桌面 VSIX，或运行 `pnpm package:vscode:web` 构建复用 WASM 的 Web VSIX。安装对应版本后将 GDScript 的 `editor.defaultFormatter` 设为 `ntnyq.gdfmt`。详见[编辑器集成](docs/zh/guide/integrations.md)。
+`gdfmt --lsp` 通过 stdio 提供格式化服务。运行 `pnpm package:vscode` 构建桌面 VSIX，或运行 `pnpm package:vscode:web` 构建复用 WASM 的 Web VSIX。桌面安装匹配的原生 VSIX 后，将 GDScript 的 `editor.defaultFormatter` 设为 `ntnyq.gdfmt`。纯浏览器使用现有 Gallery 预发布或受支持的开发路线，并非所有宿主都能安装本地 Web VSIX。详见[编辑器集成](docs/zh/guide/integrations.md)。
+
+源码包及 VSIX 构建需要 Node、仓库声明的 pnpm 版本，并先运行
+`pnpm install --frozen-lockfile`；WASM/Web 构建还需要 wasm-pack 和 WASM Rust
+目标，详见[构建前置条件](CONTRIBUTING.md#wasm-and-editors)。
 
 ## 许可
 

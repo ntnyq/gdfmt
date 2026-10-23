@@ -9,6 +9,8 @@ const englishSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Getting started', link: '/guide/' },
       { text: 'Configuration', link: '/guide/configuration' },
       { text: 'CI and editors', link: '/guide/integrations' },
+      { text: '0.1.0 release notes (draft)', link: '/releases/0.1.0' },
+      { text: '0.1.0-rc.1 (unpublished)', link: '/releases/0.1.0-rc.1' },
     ],
   },
   {
@@ -39,6 +41,8 @@ const chineseSidebar: DefaultTheme.SidebarItem[] = [
       { text: '快速开始', link: '/zh/guide/' },
       { text: '配置', link: '/zh/guide/configuration' },
       { text: 'CI 与编辑器', link: '/zh/guide/integrations' },
+      { text: '0.1.0 发布说明（草稿）', link: '/zh/releases/0.1.0' },
+      { text: '0.1.0-rc.1（未发布）', link: '/zh/releases/0.1.0-rc.1' },
     ],
   },
   {

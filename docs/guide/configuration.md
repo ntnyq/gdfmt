@@ -23,7 +23,8 @@ Save the schema beside your configuration with `gdfmt schema > gdfmtrc.schema.js
 
 Both filenames accept JSONC: `//` line comments, `/* ... */` block comments, and trailing commas in objects and arrays. Explicit `--config` files and files loaded through `extends` use the same parser, regardless of extension. Strings retain comment-like text such as URLs and glob patterns. JSON5 syntax such as single-quoted strings and unquoted keys is not supported.
 
-For example, save this as `.gdfmtrc.jsonc`:
+For example, save the first configuration above as `base.jsonc`, then save this
+child configuration as `.gdfmtrc.jsonc` in the same directory:
 
 ```jsonc
 {
@@ -60,6 +61,16 @@ For example, save this as `.gdfmtrc.jsonc`:
 | format.blankLinesAroundDefinitions | preserve | preserve or integer 0–5                         |
 | format.lambdaBodyStyle             | auto     | auto / multiline                                |
 | format.inlineCommentSpacing        | 1        | Integer 1–4                                     |
+
+Integer fields accept JSON/JSONC numbers with an integer value, including decimal
+and exponent notation: `100`, `100.0` and `1e2` all mean a line width of 100.
+Resolved/serialized configuration uses integer values. Fractions, strings, `null`
+and out-of-range values are rejected; `schemaVersion` still accepts only the value 1.
+
+`lineWidth` is a target at supported break points, not a hard maximum. Long
+expressions and member/call chains, indivisible tokens/type references, retained
+comments/literal contents and protected regions can exceed it. See
+[script formatting](/reference/formatting) for the layout and preservation rules.
 
 ## Layout policies
 
@@ -99,6 +110,9 @@ var points = [
 Literal contents and formatter-off/on regions retain their original bytes regardless of these settings. See [script formatting](/reference/formatting) for validation and protected-region fallback behavior.
 
 ## Discovery, inheritance and overrides
+
+The example below expects `base.json` and `team.json` beside the configuration;
+create those files with `{}` to try it without shared settings.
 
 For each input, gdfmt discovers `.gdfmtrc.json` or `.gdfmtrc.jsonc` from its directory up to `root: true` or the filesystem root. In each directory, `.gdfmtrc.json` takes precedence: when both exist, only `.gdfmtrc.json` is read, and errors in that file do not fall back to `.gdfmtrc.jsonc`. Missing virtual stdin paths use their existing ancestor while retaining the complete filename for matching. An explicit `--config` resolves relative to the working directory and replaces directory JSON/JSONC discovery; its own `extends` still applies. EditorConfig and local ignore files remain active.
 

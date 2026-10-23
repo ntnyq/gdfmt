@@ -13,11 +13,20 @@ const result = formatter.formatSync('var value=1\n', {
 if (result.output !== null) console.log(result.output)
 ```
 
-首次发布前，可从源码运行 `pnpm build:wasm`。构建需要 `wasm-pack` 和 `wasm32-unknown-unknown` Rust 目标。
+运行 `pnpm add @gdfmt/wasm@next` 安装浏览器包；消费该包无需原生平台 addon 或
+Rust。`next` 通道会移动，需要可复现构建时固定精确版本或提交 lockfile。
+
+从仓库源码构建时，先运行 `pnpm install --frozen-lockfile`，再运行
+`pnpm build:wasm`。构建需要 Node 22.x 的 22.13+ 或 Node 24.x、仓库声明的 pnpm
+版本、`wasm-pack` 和 `wasm32-unknown-unknown` Rust 目标，详见
+[构建准备](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#wasm-and-editors)。
 
 ## 加载与打包器
 
 默认加载器获取 ESM 入口旁的 `binding_bg.wasm`。部署完整 `dist`，为 WASM 设置 `application/wasm` MIME 类型；无需线程、共享内存或 COOP/COEP。跨源资源需要允许 CORS。
+
+省略 `wasm` 或传入 `undefined` 时使用默认加载器。显式 `null` 是非法初始化参数，
+会 reject，不会回退到默认加载。
 
 `createFormatter({ wasm })` 接受字符串或 URL、`Response`、`ArrayBuffer`、`Uint8Array` 或预编译的 `WebAssembly.Module`。打包器移动资源时，应复制导出的 `@gdfmt/wasm/gdfmt.wasm`，使用打包器的资源 URL 语法显式传入地址。
 
@@ -67,7 +76,7 @@ const options = formatter.resolveTextOptions([
 const result = formatter.formatSync('var value=1\n', options)
 ```
 
-`parseConfig(source)` 校验不超过 1 MiB 的配置，返回可选的 `root`、`extends`、`language` 和 `format` 字段，拒绝 `overrides` 和 `ignore`（包括空数组）。`resolveTextOptions(layers)` 最多接受 128 层，逐层校验并按数组顺序合并，补齐默认值；它拒绝未展开的 `extends`，宿主需要先加载文件并移除发现元数据。显式的 `false` 和 `0` 会被保留并校验，不会当作缺失值。这两个方法均不读取文件或发现项目。
+`parseConfig(source)` 校验不超过 1 MiB 的配置，返回可选的 `$schema`、`schemaVersion`、`root`、`extends`、`language` 和 `format` 字段，`schemaVersion` 存在时值为 1；拒绝 `overrides` 和 `ignore`（包括空数组）。`resolveTextOptions(layers)` 最多接受 128 层，逐层校验并按数组顺序合并，补齐默认值；它拒绝未展开的 `extends`，宿主需要先加载文件并移除发现元数据。显式的 `false` 和 `0` 会被保留并校验，不会当作缺失值。这两个方法均不读取文件或发现项目。
 
 [VS Code Web 适配器](/zh/guide/integrations#vs-code-web) 通过 Worker 调用这些方法，并用 `vscode.workspace.fs` 加载配置。工作区和配置限制由该适配器负责，不属于纯文本 API。
 

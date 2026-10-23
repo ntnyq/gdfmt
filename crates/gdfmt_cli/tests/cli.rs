@@ -61,6 +61,28 @@ fn jsonc_config_applies_to_stdin_files_and_explain_and_is_preserved_by_init() {
 }
 
 #[test]
+fn integer_number_spellings_resolve_and_format_through_inherited_overrides() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    fs::write(root.join("base.jsonc"), r#"{"schemaVersion":1.0,"format":{"lineWidth":1e2,"indentStyle":"space","indentWidth":4.0,"maxBlankLines":2.0}}"#).unwrap();
+    let config = r#"{"root":true,"extends":["base.jsonc"],"overrides":[{"files":["*.gd"],"format":{"indentWidth":2e0,"maxBlankLines":0.0,"blankLinesAroundDefinitions":0e0,"inlineCommentSpacing":1.0}}]}"#;
+    fs::write(root.join(".gdfmtrc.json"), config).unwrap();
+    let (code, stdout, stderr) = run(&["explain-config", "stdin.gd"], root, b"");
+    assert_eq!(code, 0, "{stderr}");
+    let report: serde_json::Value = serde_json::from_str(&stdout).unwrap();
+    let format = &report["configuration"]["config"]["format"];
+    assert_eq!(format["lineWidth"].as_u64(), Some(100));
+    assert_eq!(format["indentWidth"].as_u64(), Some(2));
+    let (code, stdout, stderr) = run(&["format", "-"], root, b"func run(): return [1,2]\n");
+    assert_eq!(code, 0, "{stderr}");
+    assert_eq!(stdout, "func run():\n  return [1, 2]\n");
+    assert_eq!(
+        fs::read_to_string(root.join(".gdfmtrc.json")).unwrap(),
+        config
+    );
+}
+
+#[test]
 fn protected_regions_share_file_check_diff_and_stdin_behavior() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();
@@ -533,6 +555,61 @@ fn invalid_mode_combinations_and_empty_discovery_have_no_side_effects() {
         assert_eq!(run(&args, temp.path(), b"").0, 2, "{args:?}");
     }
     assert_eq!(fs::read_dir(temp.path()).unwrap().count(), 0);
+}
+
+#[test]
+fn invalid_command_options_use_argument_diagnostics_before_io_or_writes() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    fs::write(root.join("a.gd"), "var x=1\n").unwrap();
+    for mut args in [
+        vec!["--lsp", "schema"],
+        vec!["--lsp"],
+        vec!["schema", "--check"],
+        vec!["lex", "--diff"],
+        vec!["schema", "--config", "missing.json"],
+        vec!["init", "--config", "missing.json"],
+        vec!["format", "-", "a.gd"],
+        vec!["lex", "-", "a.gd"],
+        vec!["--stdin-filepath", "a.txt"],
+    ] {
+        args.push("--reporter=json");
+        let (code, stdout, stderr) = run(&args, root, b"var x=1\n");
+        assert_eq!(code, 2, "{args:?}: {stderr}");
+        assert!(stderr.is_empty(), "{args:?}: {stderr}");
+        let report: serde_json::Value = serde_json::from_str(&stdout).unwrap();
+        assert_eq!(report["command"], "arguments", "{args:?}");
+        assert_eq!(report["diagnostics"][0]["code"], "CLI_ARGUMENT");
+        assert_eq!(report["diagnostics"][0]["category"], "configuration");
+        assert!(report["files"].as_array().unwrap().is_empty());
+        assert!(!root.join(".gdfmtrc.json").exists());
+        assert_eq!(fs::read_to_string(root.join("a.gd")).unwrap(), "var x=1\n");
+    }
+    let (code, stdout, stderr) = run(&["init", "--config", "missing.json"], root, b"");
+    assert_eq!(code, 2);
+    assert!(stdout.is_empty());
+    assert!(stderr.contains("--config cannot be combined"));
+    assert!(!root.join(".gdfmtrc.json").exists());
+}
+
+#[test]
+fn reporter_detection_stops_at_the_option_terminator_and_help_stays_plain_text() {
+    let temp = tempfile::tempdir().unwrap();
+    let (code, stdout, stderr) = run(&["--unknown", "--", "--reporter=json"], temp.path(), b"");
+    assert_eq!(code, 2);
+    assert!(stdout.is_empty());
+    assert!(!stderr.is_empty());
+    for args in [
+        vec!["--help", "--reporter=json"],
+        vec!["--version", "--reporter=json"],
+        vec!["check", "--help", "--reporter=json"],
+    ] {
+        let (code, stdout, stderr) = run(&args, temp.path(), b"");
+        assert_eq!(code, 0);
+        assert!(stderr.is_empty());
+        assert!(stdout.contains("gdfmt"));
+        assert!(serde_json::from_str::<serde_json::Value>(&stdout).is_err());
+    }
 }
 
 #[test]

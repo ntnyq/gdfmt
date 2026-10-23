@@ -65,7 +65,10 @@ comparison because Lark's diagnostic rendering depends on Python's hash seed.
 
 The category classifier is a review aid, not a semantic-equivalence checker. It
 explains whitespace/layout, quotes, parentheses/commas/semicolons and the two
-reviewed inner-class `extends` placements. `comment-trailing-whitespace` identifies
+reviewed inner-class `extends` placements. Only the corresponding class-header
+colon move is normalized; unrelated annotation, dictionary and suite colons
+remain significant, even when mixed with a valid header move.
+`comment-trailing-whitespace` identifies
 gdtoolkit removing spaces/tabs at the end of comments, which gdfmt preserves.
 It rejects other token differences and changed comment content/order. The
 independent Rust gate compares each gdfmt output to its original CST. This does
@@ -100,3 +103,24 @@ reviewed differences, and nine reproduced the pinned gdtoolkit rejections. No
 differences remained unexplained. All 465 pre-existing case fingerprints were
 unchanged. The run without `--record-review` also passed under a different
 `PYTHONHASHSEED`.
+
+The [2026-10-23 pre-0.1.0 review](../../docs/research/0.1.0-project-trials-review.md)
+repeated the complete trial on the alpha.6 working tree and fixed the comparator's
+previously overbroad colon classification, with two regression tests. All 606
+review entries remained unchanged: 2,420 valid layouts, one expected source
+rejection, nine pinned comparator rejections, 67 identical outputs and 529
+explained differences. Post-fix runs with Python hash seeds 23 and 101 passed
+without `--record-review`; the final run used a separate generated-report cache.
+The 14 guard tests, including the real locked Python bridge, also passed.
+
+That review records the tested HEAD, `cleanSource: false`, trial source hash and
+report hashes. Its acceptance receipt and full reports are retained under ignored
+`target/project-trials/release-review-2026-10-23/`. A final release candidate must
+rerun the trial on its own recorded clean revision; this baseline run does not
+close the candidate gate.
+
+The [rc.1 preparation](../../docs/research/0.1.0-rc.1-preparation.md) reran the
+complete trial on the unpublished `0.1.0-rc.1` working tree using the fixed Rust
+toolchain and Python hash seed 109. All 606 reviewed entries remained equal, with
+the same accepted layouts, source/comparator rejections and explained differences.
+This remains dirty-source evidence; the clean-candidate gate stays open.

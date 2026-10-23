@@ -4,6 +4,9 @@ Single-threaded GDScript formatting for browsers and Web Workers. Uses the same
 Rust configuration validation, reparsing, structure and idempotence checks as
 `@gdfmt/gdfmt`, without native addons, filesystem APIs or shared memory.
 
+Install with `pnpm add @gdfmt/wasm@next`; Rust is only needed to build from source.
+Pin an exact version or commit the lockfile when reproducibility matters.
+
 ```js
 import { createFormatter } from '@gdfmt/wasm'
 
@@ -40,8 +43,8 @@ are half-open UTF-8 byte offsets, including BOM and CRLF bytes. The input limit 
 16 MiB. Each formatter owns its WASM instance and memory. After a WASM trap,
 discard it and call `createFormatter()` again; initialization is also retryable.
 
-`parseConfig(source)` parses and validates JSON/JSONC up to 1 MiB, returning
-`root`, `extends`, `language` and `format` fields. It rejects `overrides` and
+`parseConfig(source)` parses and validates JSON/JSONC up to 1 MiB, returning optional
+`$schema`, `schemaVersion: 1`, `root`, `extends`, `language` and `format` fields. It rejects `overrides` and
 `ignore`, including empty arrays. `resolveTextOptions(layers)` merges at most 128
 already loaded language/format layers in order and supplies Rust defaults. The
 host must load relative `extends` itself and strip discovery metadata before

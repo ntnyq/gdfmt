@@ -1,0 +1,172 @@
+{
+  "main": {
+    "required_status_checks": {
+      "strict": true,
+      "checks": [
+        {
+          "context": "engine-conformance (4.3)",
+          "app_id": 15368
+        },
+        {
+          "context": "engine-conformance (4.4)",
+          "app_id": 15368
+        },
+        {
+          "context": "engine-conformance (4.5)",
+          "app_id": 15368
+        },
+        {
+          "context": "engine-conformance (4.6)",
+          "app_id": 15368
+        },
+        {
+          "context": "engine-conformance (4.7)",
+          "app_id": 15368
+        },
+        {
+          "context": "msrv",
+          "app_id": 15368
+        },
+        {
+          "context": "musl (22.13.0)",
+          "app_id": 15368
+        },
+        {
+          "context": "musl (24.0.0)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (22.13.0, macos-15, darwin-arm64, aarch64-apple-darwin)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (22.13.0, macos-15-intel, darwin-x64, x86_64-apple-darwin)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (22.13.0, ubuntu-24.04, linux-x64-gnu, x86_64-unknown-linux-gnu)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (22.13.0, windows-2025, win32-x64-msvc, x86_64-pc-windows-msvc)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (24.0.0, macos-15, darwin-arm64, aarch64-apple-darwin)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (24.0.0, macos-15-intel, darwin-x64, x86_64-apple-darwin)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (24.0.0, ubuntu-24.04, linux-x64-gnu, x86_64-unknown-linux-gnu)",
+          "app_id": 15368
+        },
+        {
+          "context": "native (24.0.0, windows-2025, win32-x64-msvc, x86_64-pc-windows-msvc)",
+          "app_id": 15368
+        },
+        {
+          "context": "parity",
+          "app_id": 15368
+        },
+        {
+          "context": "quality",
+          "app_id": 15368
+        },
+        {
+          "context": "scripts",
+          "app_id": 15368
+        },
+        {
+          "context": "test (macos-latest)",
+          "app_id": 15368
+        },
+        {
+          "context": "test (ubuntu-latest)",
+          "app_id": 15368
+        },
+        {
+          "context": "test (windows-latest)",
+          "app_id": 15368
+        },
+        {
+          "context": "vscode (macos-15, darwin-arm64)",
+          "app_id": 15368
+        },
+        {
+          "context": "vscode (macos-15-intel, darwin-x64)",
+          "app_id": 15368
+        },
+        {
+          "context": "vscode (ubuntu-24.04, linux-x64-gnu)",
+          "app_id": 15368
+        },
+        {
+          "context": "vscode (windows-2025, win32-x64-msvc)",
+          "app_id": 15368
+        },
+        {
+          "context": "vscode-musl",
+          "app_id": 15368
+        },
+        {
+          "context": "vscode-web",
+          "app_id": 15368
+        },
+        {
+          "context": "wasm",
+          "app_id": 15368
+        }
+      ]
+    },
+    "enforce_admins": false,
+    "required_pull_request_reviews": {
+      "dismiss_stale_reviews": true,
+      "require_code_owner_reviews": false,
+      "required_approving_review_count": 0,
+      "require_last_push_approval": false
+    },
+    "restrictions": null,
+    "required_linear_history": false,
+    "allow_force_pushes": false,
+    "allow_deletions": false,
+    "required_conversation_resolution": true,
+    "lock_branch": false
+  },
+  "version_tags": {
+    "name": "Version tags",
+    "target": "tag",
+    "enforcement": "active",
+    "bypass_actors": [
+      {
+        "actor_id": 2,
+        "actor_type": "RepositoryRole",
+        "bypass_mode": "always"
+      },
+      {
+        "actor_id": 5,
+        "actor_type": "RepositoryRole",
+        "bypass_mode": "always"
+      }
+    ],
+    "conditions": {
+      "ref_name": {
+        "include": ["refs/tags/v*"],
+        "exclude": []
+      }
+    },
+    "rules": [
+      {
+        "type": "creation"
+      },
+      {
+        "type": "update"
+      },
+      {
+        "type": "deletion"
+      }
+    ]
+  }
+}

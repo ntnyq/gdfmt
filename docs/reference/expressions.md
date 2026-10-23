@@ -50,7 +50,7 @@ The following table is ordered low to high, checked against the pinned [Godot pa
 
 In particular, `a ** b ** c` means `(a ** b) ** c`; `a ** b is int` means `a ** (b is int)`; the cast in `a if b else c as Node` wraps the entire conditional.
 
-The pinned tokenizer includes a sign in a numeric token when the preceding token cannot end an operand and the sign touches the number. Thus `-2 ** 2` has literal `-2` as its left operand, while `- 2 ** 2` negates the exponentiation. Preserving whitespace and comments matters for future formatting.
+The pinned tokenizer includes a sign in a numeric token when the preceding token cannot end an operand and the sign touches the number. Thus `-2 ** 2` has literal `-2` as its left operand, while `- 2 ** 2` negates the exponentiation. Formatting preserves the spacing required to retain this tokenization and keeps comments attached to the same tokens.
 
 ## Limits and verification
 

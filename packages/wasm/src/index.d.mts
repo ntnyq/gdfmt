@@ -26,11 +26,13 @@ export interface InitOptions {
 export interface Formatter {
   /**
    * Parses one JSON/JSONC configuration layer. Path-based overrides and ignore
-   * rules throw; the host must load extends and decide its discovery boundary.
+   * rules throw, including empty arrays. Input is limited to 1 MiB of UTF-8.
+   * The host must load extends and decide its discovery boundary.
    */
   parseConfig(source: string): TextConfig
   /**
-   * Merges flattened language/format layers and applies shared Rust defaults.
+   * Merges at most 128 flattened language/format layers and applies shared Rust
+   * defaults. Omit absent fields; explicit undefined property values are invalid.
    */
   resolveTextOptions(
     layers: readonly Pick<TextConfig, 'language' | 'format'>[],
@@ -43,6 +45,14 @@ export interface Formatter {
 }
 
 export interface TextConfig {
+  /**
+   * Editor metadata only; the formatter does not fetch this address.
+   */
+  $schema?: string
+  /**
+   * Configuration format version, independent of the package release version.
+   */
+  schemaVersion?: 1
   root?: boolean
   extends?: string[]
   language?: LanguageOptions

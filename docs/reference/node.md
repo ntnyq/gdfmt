@@ -35,7 +35,23 @@ CommonJS exposes the same named functions through `require('@gdfmt/gdfmt')`.
 
 Text options accept `language`, `format` and `sourceId`. Layout defaults and ranges match [configuration](/guide/configuration). Text calls never discover project settings or write files.
 
+`sourceId` defaults to 0 and accepts integers from 0 to 4294967295. Every source
+diagnostic retains that identifier. Options use plain objects with enumerable
+string properties; symbols, non-enumerable properties, cycles, class instances
+and custom `toJSON` conversion are rejected instead of being silently omitted.
+
 Invalid options throw or reject, including unknown fields, `null`, non-JSON values and unpaired Unicode surrogates. Source errors and invariant failures return `output: null`, `changed: false` and structured diagnostics. Successful results contain validated `output` and `changed`. Results use `schemaVersion: 1` and `spanEncoding: 'utf8Bytes'`.
+
+Omit unused option fields: `{ format: undefined }` is rejected rather than silently
+dropping the field. Omitting the entire options argument, or passing `undefined`
+as that argument, uses defaults. Type declarations describe option shapes;
+numeric ranges and JSON-value constraints are checked at runtime.
+
+`output: ''` is a successful empty result. `changed` compares output and input
+bytes and is false when output is null. Diagnostic codes, categories, severities,
+source identifiers and spans are structured data; message wording and thrown
+error messages are human-readable. The result's `schemaVersion` describes the
+JSON result shape, independently of the npm/core release version.
 
 ## Resolve project settings
 
@@ -81,4 +97,6 @@ The package declares Node **22.13+ on 22.x**, or **24.x**, using Node-API 4.
 
 The [recorded artifact matrix](https://github.com/ntnyq/gdfmt/blob/main/tests/npm/acceptance.json) covers these five targets on Node 22.13.0 and 24.0.0. Each release must pass the complete matrix for its own artifacts. Keep optional dependencies enabled: the loader checks OS, CPU, libc, package version and compiled target. Missing, mismatched, corrupt or unsupported native packages produce an error. There is no install-time compilation or additional binary download. Linux glibc artifacts target Ubuntu 24.04; older glibc versions are not validated.
 
-The package's `gdfmt` executable uses the same Rust runner as the standalone [CLI](/reference/cli). `gdfmt/schema.json` exports the configuration JSON Schema.
+The package's `gdfmt` executable uses the same Rust runner as the standalone [CLI](/reference/cli).
+`@gdfmt/gdfmt/schema.json` exports the configuration JSON Schema; for example,
+`import.meta.resolve('@gdfmt/gdfmt/schema.json')` locates it from ESM.

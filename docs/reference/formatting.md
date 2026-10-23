@@ -6,7 +6,7 @@ gdfmt formats complete scripts, including expressions, comments, lambdas, declar
 
 The formatter normalizes operators, calls, arrays, dictionaries, groups, annotations, signatures, declarations, accessors, statements and match patterns. Named functions, classes, branches, loops and accessor bodies use indented multiline suites. Semicolon-separated statements become separate lines while retaining the original semicolon tokens. A lambda with one simple, comment-free statement uses an inline body; other lambdas use a block. Block lambdas inside containers keep their suite indentation relative to the enclosing statement, because continuation columns are not lexer indentation-stack entries. A comma or closing delimiter that ends an inline lambda on a later line, together with its leading comments, also uses the enclosing statement indentation.
 
-Argument, parameter and element lists wrap to `format.lineWidth`. `indentStyle` and `indentWidth` apply to suites and continuation lines. Columns count Unicode scalar values and tab stops. Unbreakable tokens and type references may exceed the width: Godot rejects a newline immediately after a collection type's opening bracket. Parentheses, commas, semicolons, dictionary separator styles, literal spellings and BOMs remain intact. Multiline literal contents retain their exact bytes, including their original line endings and indentation.
+Argument, parameter and element lists wrap toward `format.lineWidth` at supported break points. `indentStyle` and `indentWidth` apply to suites and continuation lines. Columns count Unicode scalar values and tab stops. The width is a target, not a hard maximum: long binary/conditional expressions and member/call chains have no general wrapping, and indivisible tokens, type references, retained comments/literal contents and protected regions may also exceed it. Godot rejects a newline immediately after a collection type's opening bracket. Parentheses, commas, semicolons, dictionary separator styles, literal spellings and BOMs remain intact; the formatter does not add parentheses or backslashes to force a line to fit. Multiline literal contents retain their exact bytes, including their original line endings and indentation.
 
 Own-line comments stay anchored before the next token, inline comments stay after the preceding token, and dangling comments stay inside closing delimiters or at the end of their suite, property or match block. Documentation, region and warning comments retain spelling and order. Annotation order and targets are preserved. Comments force line boundaries without swallowing following code.
 
@@ -51,6 +51,20 @@ Use `gdfmt .` to write changes, `gdfmt --check .` to check without writing, or `
 ## Rust and correctness gates
 
 `gdfmt_formatter` accepts a lossless tree, its parser diagnostics and layout options. Its normal dependencies contain no parser or filesystem code. `gdfmt::format(source, &FormatRequest)` combines parsing and formatting and returns `FormatResult { output, changed, diagnostics }`.
+
+`FormatRequest` supplies parser limits, the Godot profile, source identifier and
+layout options explicitly; it performs no configuration discovery or filesystem
+writes. Its default profile is 4.7, with a 16 MiB source limit, a 100-diagnostic
+budget and a maximum expression depth of 128. Pure Rust layout defaults preserve
+source line endings; hosts can map a resolved configuration through
+`gdfmt_config::format_request` to use the shared host defaults.
+
+`output: Some("")` is valid empty output. `changed` compares writable output and
+input bytes; failures return `None` and `changed: false`. Diagnostics retain the
+request's `SourceId` and use half-open UTF-8 byte spans, including BOM/CRLF bytes.
+Diagnostic messages are human-readable; consume their structured codes, category,
+severity and spans. CLI exit codes and JavaScript argument exceptions belong to
+their host adapters, not the pure Rust result.
 
 The facade returns writable output only if the input has no parser errors, the output reparses with the same profile/limits, normalized node topology and significant token spellings agree, comment text/adjacent tokens/own-line roles/dangling block ownership agree, and a second formatting pass is identical. Failure returns no output and an internal diagnostic. Recovery nodes and error diagnostics are refused independently by the formatter.
 

@@ -23,7 +23,8 @@
 
 两种文件名都支持 JSONC：`//` 行注释、`/* ... */` 块注释，以及对象和数组中的尾随逗号。显式 `--config` 文件和 `extends` 加载的文件也使用相同解析方式，不受后缀限制。字符串中的 URL、glob 等类似注释的内容保持原样。不支持单引号字符串、无引号键名等 JSON5 语法。
 
-例如，将以下内容保存为 `.gdfmtrc.jsonc`：
+例如，将上方第一份配置保存为 `base.jsonc`，再将以下子配置保存为同目录的
+`.gdfmtrc.jsonc`：
 
 ```jsonc
 {
@@ -58,6 +59,14 @@
 | format.blankLinesAroundDefinitions | preserve | preserve 或整数 0–5         |
 | format.lambdaBodyStyle             | auto     | auto / multiline            |
 | format.inlineCommentSpacing        | 1        | 整数 1–4                    |
+
+整数字段接受值为整数的 JSON/JSONC 数字，包括小数和指数写法：`100`、`100.0` 和
+`1e2` 都表示行宽 100。解析后/序列化的配置使用整数值；真正的小数、字符串、
+`null` 和越界值仍会被拒绝，`schemaVersion` 仍只接受值 1。
+
+`lineWidth` 是在受支持断点上的目标宽度，不是硬性上限。长表达式和成员/调用链、
+不可拆分的 token/类型引用、保留的注释/字面量内容及保护区域都可能超宽。
+布局与保留规则见[脚本格式化](/zh/reference/formatting)。
 
 ## 布局策略 {#layout-policies}
 
@@ -97,6 +106,9 @@ var points = [
 字面量内容与 formatter-off/on 区域不受这些设置改写，仍逐字节保留。验证和保护区域回退行为见[脚本格式化](/zh/reference/formatting)。
 
 ## 发现、继承与 overrides {#discovery-inheritance-and-overrides}
+
+下方示例需要配置旁存在 `base.json` 和 `team.json`；没有共享设置时，可先将
+这两个文件的内容设为 `{}` 来试用。
 
 逐个输入从所在目录向上收集 `.gdfmtrc.json` 或 `.gdfmtrc.jsonc`，遇到 `root: true` 或文件系统根停止。每个目录中 `.gdfmtrc.json` 优先；两者同时存在时仅读取 `.gdfmtrc.json`，该文件出错时不会回退到 `.gdfmtrc.jsonc`。stdin 虚拟路径可尚不存在；按现有祖先查找，仍保留完整文件名用于匹配。显式 `--config` 相对工作目录解析，替代目录 JSON/JSONC 发现，但仍展开其 `extends`，并保留 EditorConfig 和本地忽略规则。
 

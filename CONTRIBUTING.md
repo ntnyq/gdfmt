@@ -56,6 +56,11 @@ Add focused regressions to the affected crate. Parser tests should check diagnos
 
 ## WASM and editors
 
+Use Node 22.13+ on 22.x or Node 24.x, the pnpm version declared in the root
+`package.json`, and the pinned Rust toolchain. Run `pnpm install --frozen-lockfile`
+in the repository root before the commands below. Desktop-only builds do not
+need wasm-pack or the WASM target.
+
 ```sh
 rustup target add wasm32-unknown-unknown
 cargo install wasm-pack --version 0.15.0 --locked

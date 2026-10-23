@@ -30,7 +30,11 @@ function encodeOptions(options) {
       object(value, 'option')
       if (
         active.has(value) ||
-        Reflect.ownKeys(value).some(key => typeof key === 'symbol') ||
+        Reflect.ownKeys(value).some(
+          key =>
+            typeof key === 'symbol' ||
+            !Object.prototype.propertyIsEnumerable.call(value, key),
+        ) ||
         'toJSON' in value
       ) {
         throw new TypeError('options must contain only JSON properties')

@@ -31,10 +31,16 @@ gdfmt <命令> [选项]
 | `--config <文件>`          | 使用显式的本地 JSON/JSONC 配置，替代按目录发现配置 |
 | `--stdin-filepath <路径>`  | 从 stdin 读取内容，按虚拟 `.gd` 路径解析配置       |
 | `--reporter <human\|json>` | 选择输出格式，默认为 `human`                       |
+| `--lsp`                    | 通过 stdio 运行格式化语言服务器                    |
 | `-h`、`--help`             | 显示帮助，各子命令也可使用                         |
 | `-V`、`--version`          | 显示版本                                           |
 
 `--check` 与 `--diff` 互斥。`--syntax-only` 属于 `check` 子命令，不能与 `--diff` 同用。格式化模式和 stdin 路径仅用于格式化与检查命令。
+
+`--config` 用于格式化、检查、`lex`、`explain-config` 与 LSP，`init` 和 `schema`
+会拒绝该选项。`--lsp` 不能与子命令、路径、格式化模式、stdin 路径或
+`--reporter=json` 同用，其 stdout 使用带帧头的 JSON-RPC。非法选项组合在读取配置
+或写入文件前失败。
 
 布局选项在[配置文件](/zh/guide/configuration)中设置。指定 `--config` 后，该文件的 `extends`、EditorConfig 与本地忽略规则仍然有效。
 
@@ -57,6 +63,14 @@ gdfmt --diff src --reporter json
 人类可读错误写入 stderr。JSON 报告写入 stdout，成功生成报告时 stderr 为空。报告包含 `schemaVersion: 1`、`spanEncoding: "utf8Bytes"`、命令、状态、文件和诊断。格式化文件条目包含 `changed`，仅检查语法时省略该字段；stdin 结果和差异分别出现在适用条目的 `output`、`diff` 字段中。
 
 诊断 span 使用半开 UTF-8 字节范围 `[start, end)`，不是字符位置或 UTF-16 偏移。虚拟词法 token 的范围宽度为零。`schema` 与 `explain-config` 直接输出 JSON。
+
+帮助和版本请求退出 0，即使指定 `--reporter=json` 仍输出纯文本。其他参数错误在
+`--` 之前选择 JSON reporter 时输出 JSON；`--` 之后的 token 是字面路径。
+`CLI_ARGUMENT` 表示参数解析/选项校验失败，`CONFIG_INVALID` 表示项目配置失败，
+`CLI_IO` 表示路径/文件/流失败。宿主诊断含 `code`、`category`、`severity` 和
+`message`，源码诊断另含 `sourceId` 与 `span`。消息文本面向人类，不应作为解析接口。
+`FMT001` 表示格式化器内部失败；无效保护指令使用 `FMT002` 并退出 1，尽管其诊断
+类别是 `configuration`。
 
 ## 退出码 {#exit-codes}
 

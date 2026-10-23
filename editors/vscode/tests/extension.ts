@@ -1,7 +1,48 @@
 import assert from 'node:assert/strict'
 import * as vscode from 'vscode'
 import { documentEdits, UnsupportedLineEndingsError } from '../src/formatting'
+import { verifyFormattingBoundaries } from './formatting-boundaries'
 import { preservationCases } from './preservation-cases'
+
+async function undoTo(
+  document: vscode.TextDocument,
+  expected: string,
+): Promise<void> {
+  // The command acknowledgement can precede the document-change notification
+  // across the Extension Host boundary. Wait for that change, not a fixed delay.
+  await new Promise<void>((done, reject) => {
+    const subscription = vscode.workspace.onDidChangeTextDocument(event => {
+      if (event.document === document && document.getText() === expected) {
+        clearTimeout(timeout)
+        subscription.dispose()
+        done()
+      }
+    })
+    const timeout = setTimeout(() => {
+      subscription.dispose()
+      reject(
+        new Error(
+          `undo did not restore expected text: ${JSON.stringify(document.getText())}`,
+        ),
+      )
+    }, 5_000)
+    void vscode.commands.executeCommand('undo').then(
+      () => {
+        if (document.getText() === expected) {
+          clearTimeout(timeout)
+          subscription.dispose()
+          done()
+        }
+      },
+      error => {
+        clearTimeout(timeout)
+        subscription.dispose()
+        reject(error)
+      },
+    )
+  })
+  assert.equal(document.getText(), expected)
+}
 
 export async function run(): Promise<void> {
   const extension = vscode.extensions.getExtension('ntnyq.gdfmt')
@@ -63,10 +104,10 @@ export async function run(): Promise<void> {
         '\tvar value=4',
       ),
     )
+    const beforeFormatting = document.getText()
     await vscode.commands.executeCommand('editor.action.formatDocument')
     assert.ok(document.getText().includes('value = 4'))
-    await vscode.commands.executeCommand('undo')
-    assert.ok(document.getText().includes('value=4'))
+    await undoTo(document, beforeFormatting)
   }
   const first = vscode.workspace.workspaceFolders.find(
     folder => folder.name === 'first',
@@ -94,7 +135,7 @@ export async function run(): Promise<void> {
     assert.equal(document.eol, expectedEol)
     await vscode.commands.executeCommand('editor.action.formatDocument')
     assert.equal(document.getText(), after, 'EOL conversion must be idempotent')
-    await vscode.commands.executeCommand('undo')
+    await undoTo(document, before)
     assert.equal(
       document.getText(),
       before,
@@ -152,6 +193,7 @@ export async function run(): Promise<void> {
     content: 'var unsaved=1\n',
   })
   await vscode.window.showTextDocument(untitled)
+  await verifyFormattingBoundaries(untitled)
   await vscode.commands.executeCommand('editor.action.formatDocument')
   assert.equal(untitled.getText(), 'var unsaved = 1\n')
   await vscode.commands.executeCommand('gdfmt.restartServer')
