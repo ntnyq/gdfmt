@@ -10,9 +10,9 @@ Rust workspace 与公开 npm 包使用统一版本。推送 `v版本号` tag 后
 
 ## 当前 0.1.0 准备状态
 
-**当前工作区准备核心 0.1.0 与扩展 0.2.1，均未发布。**
-[正式版准备报告](docs/zh/research/0.1.0-preparation.md)记录版本同步、本地检查与
-剩余关卡。仍需干净提交的完整跨平台 CI 与最终 tag 冻结；账号证据条目保持待办，
+**已准备核心 0.1.0 与扩展 0.2.1，均未发布。**
+[干净源码 CI 报告](docs/zh/research/0.1.0-ci.md)记录版本同步、干净修订试用、
+完整跨平台 CI 与产物演练。PR #3 尚未合并，最终 tag 冻结与账号证据仍待完成，
 Trusted Publishing 的实际发布能力已由 rc.1 验证。本次准备不创建 tag、不写入
 registry，也不上传 Marketplace。
 

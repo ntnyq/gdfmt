@@ -111,10 +111,11 @@ Gallery。上传前重新核对；如果先将 0.2.0 上传为 Gallery 预发布
 
 ## 正式版本与发布准备
 
-**源码准备版本为核心 0.1.0、扩展 0.2.1，尚未发布。** 本地验证与剩余关卡见
-[正式版准备报告](docs/zh/research/0.1.0-preparation.md)。当前工作区尚不是冻结发布
-修订，下面 rc.1 的发布回执保留各自源码身份。默认风格与 API/Schema 契约未改，
-registry 安装仍使用 rc.1；本次未创建正式 tag 或上传 Marketplace。
+**已提交源码为核心 0.1.0、扩展 0.2.1，尚未发布。**
+[PR #3](https://github.com/ntnyq/gdfmt/pull/3)与[干净源码 CI 报告](docs/zh/research/0.1.0-ci.md)
+记录完整分支/PR CI、精确干净修订试用及产物身份；PR 合并与最终 tag 冻结仍待完成。
+rc.1 发布回执保留原源码身份。默认风格和 API/Schema 未变，registry 安装仍使用
+rc.1；本次未创建正式 tag 或上传 Marketplace。
 
 [registry/环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)确认十五个
 包的现有归属及 alpha.6 历史 Trusted Publishing。2026-10-23 读取到
@@ -146,11 +147,14 @@ owner 随后确认配置完成，rc.1 现已通过新发布实际验证十五个
       版本、lockfile、五项原生 optional 依赖和扩展核心版本；`pnpm release:check`、
       `pnpm typecheck` 与全部 32 项发布回归通过。独立数字扩展选定 **0.2.1**，
       高于 rc.1 的 0.2.0，2026-10-24 Gallery 快照尚未占用。
-      [正式版准备报告](docs/zh/research/0.1.0-preparation.md)区分本地未提交验收与
-      剩余的干净源码/完整 CI 关卡。
-- [ ] 提交/审查/合并正式版改动，在精确干净修订通过完整 Rust/npm/宿主 CI 矩阵
-      与固定项目试用，确认提交已在默认分支历史中；按发布指南推送 `v0.1.0` 前，
-      确认预期的 release 环境与 `RELEASE_ENABLED` 设置。
+      [最初准备报告](docs/zh/research/0.1.0-preparation.md)保留未提交源码的历史回执，
+      干净源码 CI 验收见下项。
+- [x] 在 [PR #3](https://github.com/ntnyq/gdfmt/pull/3) 提交并审查正式版准备，完成
+      Rust/npm/宿主的完整分支与 PR CI，在精确干净修订重跑固定项目试用。
+      [CI 报告](docs/zh/research/0.1.0-ci.md)记录十份原生消费者回执、六份 VSIX、
+      八个打包 crate 和验证演练；最终 head 检查记录在 PR 中。
+- [ ] 在另行授权步骤合并 PR #3，核对最终 checkout 干净且提交已在默认分支历史中；
+      推送 `v0.1.0` 前重新确认预期 release 环境与 `RELEASE_ENABLED` 设置。
 
 ## 发布完成检查
 

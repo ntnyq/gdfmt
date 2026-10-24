@@ -11,10 +11,11 @@ Track the first stable release's remaining acceptance work in the
 
 ## Current 0.1.0 readiness
 
-**The working tree prepares core 0.1.0 and extension 0.2.1; neither is published.**
-The [stable preparation report](docs/research/0.1.0-preparation.md) records version
-synchronization, local checks and remaining gates. Clean-commit/full-matrix CI and
-final tag-bound freezing are still required. The account-evidence item remains
+**The prepared source uses core 0.1.0 and extension 0.2.1; neither is published.**
+The [clean-source CI report](docs/research/0.1.0-ci.md) records version
+synchronization, clean-revision project trials, full cross-platform CI and the
+artifact rehearsal. PR #3 remains open; final tag-bound freezing is still required.
+The account-evidence item remains
 open; functional Trusted Publishing was already exercised by rc.1. No new tag,
 registry write or Marketplace upload is part of this preparation.
 
