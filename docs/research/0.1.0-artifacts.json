@@ -1,0 +1,322 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "extensionVersion": "0.2.1",
+  "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+  "cleanSource": true,
+  "published": false,
+  "tagBound": false,
+  "pr": "https://github.com/ntnyq/gdfmt/pull/3",
+  "mergePreviewRevision": "67eb1edef8bdc2f8f7c8ea599845680e0f889612",
+  "ci": {
+    "push": {
+      "rust": 40057927195,
+      "npm": 40057927125,
+      "hosts": 40057927170
+    },
+    "pull_request": {
+      "rust": 40057950114,
+      "npm": 40057950078,
+      "hosts": 40057950264
+    }
+  },
+  "ciJobs": {
+    "push": 29,
+    "pullRequest": 29,
+    "success": 58,
+    "failed": 0
+  },
+  "validationInputs": {
+    "count": 482,
+    "sha256": "f4854aaa412e6dd729e3f34343e9ede8f1a270c263a0b82eb5c8e5656e3fe990"
+  },
+  "trial": {
+    "pythonHashSeed": 163,
+    "scripts": 606,
+    "acceptedScripts": 605,
+    "invariantLayouts": 2420,
+    "expectedSourceRejections": 1,
+    "comparatorRejections": 9,
+    "identical": 67,
+    "explainedDifferences": 529,
+    "unexplainedDifferences": 0,
+    "reports": {
+      "summary.json": "19bbb87512594838e08ac0853a02e6e24acf16f2bb9e5db8eeade5d5cb1069e4",
+      "layouts.json": "08b40458a9c33eb77426c5940664da9b21f606c5f32ae7a2056b059e955871ac",
+      "comparisons.json": "2b3272076a87d8504bce10ef2532b88d43d64148945aad91dea70b97b0821011",
+      "review-candidate.json": "4277df6babe9c1d74237c5af638a2eba458db8d9b320e7519e214a14492d3fa9"
+    }
+  },
+  "ciArtifacts": [
+    {
+      "id": 12545713149,
+      "name": "npm-darwin-arm64-22.13.0",
+      "digest": "sha256:8e79da40093ea1a462276b71a3ae1f6a20f4c05ae6eae834ac1dfb7ef82269c0",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "8e79da40093ea1a462276b71a3ae1f6a20f4c05ae6eae834ac1dfb7ef82269c0"
+    },
+    {
+      "id": 12545764356,
+      "name": "npm-darwin-arm64-24.0.0",
+      "digest": "sha256:f3c78e5affd6b29cc1f51fcd2fc221ebb64f5f5f87bdf92b206bb0d6c8cd6218",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "f3c78e5affd6b29cc1f51fcd2fc221ebb64f5f5f87bdf92b206bb0d6c8cd6218"
+    },
+    {
+      "id": 12546875009,
+      "name": "npm-darwin-x64-22.13.0",
+      "digest": "sha256:f5c6c1679eff74c95ef4eea9e5090756e9d6414950cd6809ec95a305299deab4",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "f5c6c1679eff74c95ef4eea9e5090756e9d6414950cd6809ec95a305299deab4"
+    },
+    {
+      "id": 12546168998,
+      "name": "npm-darwin-x64-24.0.0",
+      "digest": "sha256:ac204ef8a2cb94cb4b91de5826a2c7c75fe291a15dc54d047b70ae7df25c7dde",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "ac204ef8a2cb94cb4b91de5826a2c7c75fe291a15dc54d047b70ae7df25c7dde"
+    },
+    {
+      "id": 12545349214,
+      "name": "npm-linux-x64-gnu-22.13.0",
+      "digest": "sha256:63ade48250e18f0d31e8a8029a62343d9e8d70889a4f82084f17d763ff59ed0d",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "63ade48250e18f0d31e8a8029a62343d9e8d70889a4f82084f17d763ff59ed0d"
+    },
+    {
+      "id": 12545817690,
+      "name": "npm-linux-x64-gnu-24.0.0",
+      "digest": "sha256:52d8d4705ea1a30f6d3dc305fef7c05315cd53028069c76e1cf4700e9fe7668a",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "52d8d4705ea1a30f6d3dc305fef7c05315cd53028069c76e1cf4700e9fe7668a"
+    },
+    {
+      "id": 12545914100,
+      "name": "npm-linux-x64-musl-22.13.0",
+      "digest": "sha256:55766ae4d59115c76cc6c334df7902dc10605151c99075f584fa99a0ee5d9a47",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "55766ae4d59115c76cc6c334df7902dc10605151c99075f584fa99a0ee5d9a47"
+    },
+    {
+      "id": 12545872768,
+      "name": "npm-linux-x64-musl-24.0.0",
+      "digest": "sha256:1aabe6fea248123170da7355adf116cf3846a7e0c10fa27480cad628017beac6",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "1aabe6fea248123170da7355adf116cf3846a7e0c10fa27480cad628017beac6"
+    },
+    {
+      "id": 12545539353,
+      "name": "npm-verified-matrix",
+      "digest": "sha256:ea45841807f89797aa61426976288b4b0cdffe8119dc1e79fc6973e2aae0d90e",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "ea45841807f89797aa61426976288b4b0cdffe8119dc1e79fc6973e2aae0d90e"
+    },
+    {
+      "id": 12545344495,
+      "name": "npm-wasm",
+      "digest": "sha256:93977b9871dbfadd563422c8faa32ae0d3ce8c349f10fea772607490b2a85afd",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927170,
+      "zipSha256": "93977b9871dbfadd563422c8faa32ae0d3ce8c349f10fea772607490b2a85afd"
+    },
+    {
+      "id": 12545598244,
+      "name": "npm-win32-x64-msvc-22.13.0",
+      "digest": "sha256:1a24ce3e1878e455bcc3db9bbf2501f8f2558bf54e5266fbef32ee155fd022a9",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "1a24ce3e1878e455bcc3db9bbf2501f8f2558bf54e5266fbef32ee155fd022a9"
+    },
+    {
+      "id": 12546436389,
+      "name": "npm-win32-x64-msvc-24.0.0",
+      "digest": "sha256:7f38cd1f666ebbe96b35dae9a1d3d28a93f4dce0780d1c41a434a3a7d77fcd7c",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927125,
+      "zipSha256": "7f38cd1f666ebbe96b35dae9a1d3d28a93f4dce0780d1c41a434a3a7d77fcd7c"
+    },
+    {
+      "id": 12546141868,
+      "name": "vscode-darwin-arm64",
+      "digest": "sha256:995584dedc327ac039913bb8f3bf3a56dc6f2acdf69027a376d185ea71588ef4",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927170,
+      "zipSha256": "995584dedc327ac039913bb8f3bf3a56dc6f2acdf69027a376d185ea71588ef4"
+    },
+    {
+      "id": 12545939022,
+      "name": "vscode-darwin-x64",
+      "digest": "sha256:a6a273543f998f51b4c0b90b023b9611093dc3846fff02af439a452b47bfe284",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927170,
+      "zipSha256": "a6a273543f998f51b4c0b90b023b9611093dc3846fff02af439a452b47bfe284"
+    },
+    {
+      "id": 12545734440,
+      "name": "vscode-linux-x64-gnu",
+      "digest": "sha256:5c096f946ab0c0ecbe0f5770308f117de7900803a59c062d13455877572a3d56",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927170,
+      "zipSha256": "5c096f946ab0c0ecbe0f5770308f117de7900803a59c062d13455877572a3d56"
+    },
+    {
+      "id": 12545344375,
+      "name": "vscode-linux-x64-musl",
+      "digest": "sha256:0ab0fa704e36ca67f4b7d6b401efe936292158f33b9feda5841fdda65b03c03c",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927170,
+      "zipSha256": "0ab0fa704e36ca67f4b7d6b401efe936292158f33b9feda5841fdda65b03c03c"
+    },
+    {
+      "id": 12546326987,
+      "name": "vscode-web",
+      "digest": "sha256:861d82a1ef9da31e54183b6d94d7788709596214cdd2827d95767f7585a70360",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927170,
+      "zipSha256": "861d82a1ef9da31e54183b6d94d7788709596214cdd2827d95767f7585a70360"
+    },
+    {
+      "id": 12545199881,
+      "name": "vscode-win32-x64-msvc",
+      "digest": "sha256:8fb316f68f0bdd3604073f3cff4c2c3ead8204c10dc1ada681c5c7ca07861fc3",
+      "revision": "80ac4040857dde8f84cccfbbb7d26f588a1a1567",
+      "runId": 40057927170,
+      "zipSha256": "8fb316f68f0bdd3604073f3cff4c2c3ead8204c10dc1ada681c5c7ca07861fc3"
+    }
+  ],
+  "bundleManifestSha256": {
+    "npm/release.json": "0a67b8e30b78376ebcb285f2bcf69c4758b47627f94188f7ae4e49733a9d14fb",
+    "crates/crates.json": "91d10a3168d2a90e65f9ea8c63b5f1cc371abd180921f49b7e4d9c2071fcc25f",
+    "editors/editors.json": "c1055c3f2cc0826b0d8a1a44d7324ab2ca8d09b1bae0f67affa34603042e9ecd"
+  },
+  "crates": [
+    {
+      "file": "gdfmt-0.1.0.crate",
+      "sha256": "b70217c52090f59eba9f87c5d4210178826885a3aa74401d2105aaa9bbd83f1b"
+    },
+    {
+      "file": "gdfmt_cli-0.1.0.crate",
+      "sha256": "ca157f819e4dafbaa91b10f8a2c7c29fc2504dc258f763f851216d89fe78fa2f"
+    },
+    {
+      "file": "gdfmt_config-0.1.0.crate",
+      "sha256": "cd562d9068c16584a85d6dd417af7f4cc1622f3ccb8612fcfe7d66054a6c4853"
+    },
+    {
+      "file": "gdfmt_formatter-0.1.0.crate",
+      "sha256": "95076534afd99afcbcb384703e5f99c9617c338175dd19397764a804e443ebe6"
+    },
+    {
+      "file": "gdfmt_parser-0.1.0.crate",
+      "sha256": "861bcb9b4fcb5b7872fce74a47544337f52ed4374f6cf8bc4c8c2d52c4cbb4be"
+    },
+    {
+      "file": "gdfmt_syntax-0.1.0.crate",
+      "sha256": "a46fd60b3f43a843ce03b7c1d752adfdf2d15cd24905b0501a04d4e18043434e"
+    },
+    {
+      "file": "gdfmt_text-0.1.0.crate",
+      "sha256": "20aaf1e5d5521c6e58fc6aec3bbd0143269f727ec68e5eefd7fe11fda18839d1"
+    },
+    {
+      "file": "gdfmt_workspace-0.1.0.crate",
+      "sha256": "0eb480cfc2ce9da50d0bd07ce7191d01a66621f1f3d95b719764b0f4ec901329"
+    }
+  ],
+  "npmPackages": [
+    {
+      "name": "@gdfmt/darwin-arm64",
+      "file": "gdfmt-darwin-arm64-0.1.0.tgz",
+      "integrity": "sha512-7AfCR14EjZy+gNtbeG9CtURNCV/RjfDxrYRLujZttL1SM5CHbsC7YeswxIacQ1F6TA8ApoBWH6hOpy32I5z1Kg=="
+    },
+    {
+      "name": "@gdfmt/darwin-x64",
+      "file": "gdfmt-darwin-x64-0.1.0.tgz",
+      "integrity": "sha512-lSbY3u9AMJ7ePuHNdnnD0/x3NiUxR1SEtZyMPHO+psxtljS55ZWyZUCcWhMt5tye8Gpaf/sAenlfVt9pwV8zrw=="
+    },
+    {
+      "name": "@gdfmt/linux-x64-gnu",
+      "file": "gdfmt-linux-x64-gnu-0.1.0.tgz",
+      "integrity": "sha512-8uhggTqQMptYbdiJAuZsnu+ptN4P3MKm47TeQuKdD4DPYnapHYcXJEFPV0kshLXGHLUyP8jwWE6H7CisBhxY6g=="
+    },
+    {
+      "name": "@gdfmt/linux-x64-musl",
+      "file": "gdfmt-linux-x64-musl-0.1.0.tgz",
+      "integrity": "sha512-MFR5P6N3t++nczNv5gSZnVjeNjwCqF7vz03lghIUu9Hb+ycp9/u7lAPo6urq5x488bmsvfPI34oeQKKoWnGXWw=="
+    },
+    {
+      "name": "@gdfmt/win32-x64-msvc",
+      "file": "gdfmt-win32-x64-msvc-0.1.0.tgz",
+      "integrity": "sha512-lSPpTZaqdTZo0okR3M83zWJrWCq2bEaRjaXQoDsoK+1NjMFbI+FClOpG8zgvZE1IIFE1ZGtNjAous04LqY/caA=="
+    },
+    {
+      "name": "@gdfmt/wasm",
+      "file": "gdfmt-wasm-0.1.0.tgz",
+      "integrity": "sha512-36hS6F6y/evGdbJpY34uGZMh6PT7wu7whno+DKKNwTh0fnda0Kd4PPJDmBwQnVyPGyqDKemWtOf6Er3ei0tuFw=="
+    },
+    {
+      "name": "@gdfmt/gdfmt",
+      "file": "gdfmt-0.1.0.tgz",
+      "integrity": "sha512-H4EljQrjfIi3DV4EN2r8VNKE/bHP9etiWzqyLnvEF1kX30nCrnOPnXG4fCAzKWkYTtm7cPkBDUmzxpZ6f60pRQ=="
+    }
+  ],
+  "editors": [
+    {
+      "target": "darwin-arm64",
+      "coreVersion": "0.1.0",
+      "extensionVersion": "0.2.1",
+      "installedVsixPassed": true,
+      "webExtensionHostPassed": null,
+      "nativeSmokePassed": true
+    },
+    {
+      "target": "darwin-x64",
+      "coreVersion": "0.1.0",
+      "extensionVersion": "0.2.1",
+      "installedVsixPassed": true,
+      "webExtensionHostPassed": null,
+      "nativeSmokePassed": true
+    },
+    {
+      "target": "linux-x64-gnu",
+      "coreVersion": "0.1.0",
+      "extensionVersion": "0.2.1",
+      "installedVsixPassed": true,
+      "webExtensionHostPassed": null,
+      "nativeSmokePassed": true
+    },
+    {
+      "target": "linux-x64-musl",
+      "coreVersion": "0.1.0",
+      "extensionVersion": "0.2.1",
+      "installedVsixPassed": null,
+      "webExtensionHostPassed": null,
+      "nativeSmokePassed": true
+    },
+    {
+      "target": "web",
+      "coreVersion": "0.1.0",
+      "extensionVersion": "0.2.1",
+      "installedVsixPassed": null,
+      "webExtensionHostPassed": true,
+      "nativeSmokePassed": null
+    },
+    {
+      "target": "win32-x64-msvc",
+      "coreVersion": "0.1.0",
+      "extensionVersion": "0.2.1",
+      "installedVsixPassed": true,
+      "webExtensionHostPassed": null,
+      "nativeSmokePassed": true
+    }
+  ]
+}

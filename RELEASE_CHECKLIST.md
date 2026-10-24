@@ -139,6 +139,13 @@ version for stable. Web installation and packaged trust differences are explicit
 
 ## Final version and publication readiness
 
+**Committed source: core 0.1.0, extension 0.2.1; unpublished.** [PR #3](https://github.com/ntnyq/gdfmt/pull/3)
+and the [clean-source CI report](docs/research/0.1.0-ci.md) record complete branch/PR
+CI, exact clean-revision project trials and artifact identities. PR merge and the
+final tag-bound release freeze remain pending. Published rc.1 receipts keep their
+own source identity. Defaults/API/Schema are unchanged; registry installation still
+uses rc.1. No stable tag or Marketplace upload was created.
+
 The [registry/environment review](docs/research/0.1.0-registry-readiness-review.md)
 confirms existing ownership and historical alpha.6 Trusted Publishing for all
 fifteen packages. On 2026-10-23, `RELEASE_ENABLED=true` and the `release`
@@ -174,14 +181,21 @@ evidence stays unchecked. Optional Trusted Publishing Only hardening is not a ne
 - [x] Review and retain the pinned npm 11.21.0 runtime and scoped dist-tag
       workaround. This read-only review does not meet the publishing guide's
       removal criteria.
-- [ ] Run `pnpm release:version 0.1.0 --dry-run`, apply the version update, review
-      the synchronized manifests/lockfile/core extension version, and run
-      `pnpm release:check`, `pnpm typecheck` and `pnpm test:release`. Select the
-      independent unused numeric extension version before freezing all six VSIX
-      files (currently 0.2.0 for rc.1, subject to future Gallery availability).
-- [ ] Merge the final release commit, verify a clean checkout and default-branch
-      ancestry, and confirm the intended `RELEASE_ENABLED` setting before pushing
-      `v0.1.0` according to the publishing guide.
+- [x] Run `pnpm release:version 0.1.0 --dry-run`, apply the update and review
+      Cargo/npm versions, the lockfile, five optional native dependencies and
+      extension core version. `pnpm release:check`, `pnpm typecheck` and all
+      32 release regressions passed. Select independent numeric extension **0.2.1**,
+      above rc.1's 0.2.0 and unused in the 2026-10-24 Gallery snapshot. The
+      [initial preparation report](docs/research/0.1.0-preparation.md) preserves
+      historical uncommitted receipts; clean-source CI acceptance is recorded below.
+- [x] Commit and review the stable preparation in [PR #3](https://github.com/ntnyq/gdfmt/pull/3),
+      pass the complete Rust/npm/host branch and PR CI matrices, and rerun pinned
+      project trials on the exact clean revision. The [CI report](docs/research/0.1.0-ci.md)
+      records all ten native consumer receipts, six VSIX targets, eight packaged
+      crates and the validation rehearsal. Final-head checks are recorded in the PR.
+- [ ] Merge PR #3 in a separately authorized step, verify a clean final checkout
+      and default-branch ancestry, and recheck the intended release environment/
+      `RELEASE_ENABLED` setting immediately before pushing `v0.1.0`.
 
 ## Publication completion
 

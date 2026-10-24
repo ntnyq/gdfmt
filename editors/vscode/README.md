@@ -101,6 +101,11 @@ provides all six frozen VSIX targets with numeric extension version `0.2.0` and
 core `0.1.0-rc.1`, marked as prerelease. This release did not upload to Marketplace;
 the previously published Gallery preview is separate from these rc.1 assets.
 
+The prepared source uses core `0.1.0` with numeric extension `0.2.1`. This is
+higher than the rc.1 VSIX version `0.2.0`; the six Gallery targets still listed
+only prerelease `0.1.0` on 2026-10-24. These new versions are not yet available as
+release downloads or Marketplace installs. Recheck availability before uploading.
+
 For core 0.1.0, the recommended delivery baseline is the frozen GitHub Release
 VSIX set. Marketplace already has a prerelease; stable publication needs a new
 numeric extension version and separate acceptance. See the

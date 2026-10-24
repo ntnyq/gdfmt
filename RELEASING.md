@@ -11,6 +11,14 @@ Track the first stable release's remaining acceptance work in the
 
 ## Current 0.1.0 readiness
 
+**The prepared source uses core 0.1.0 and extension 0.2.1; neither is published.**
+The [clean-source CI report](docs/research/0.1.0-ci.md) records version
+synchronization, clean-revision project trials, full cross-platform CI and the
+artifact rehearsal. PR #3 remains open; final tag-bound freezing is still required.
+The account-evidence item remains
+open; functional Trusted Publishing was already exercised by rc.1. No new tag,
+registry write or Marketplace upload is part of this preparation.
+
 **0.1.0-rc.1 is published** on crates.io and npm `next`/`candidate`, with independent
 extension version **0.2.0** and `gdfmtVersion: 0.1.0-rc.1`. All npm `latest` tags
 retain their previous values. Stable 0.1.0 and Marketplace uploads remain outside
@@ -279,6 +287,10 @@ The rc.1 GitHub Release provides six frozen VSIX files with numeric extension
 to the Gallery or change the Marketplace listing. Recheck availability before
 any later upload and rebuild/test/freeze all six variants. If `0.2.0` is uploaded
 as a Gallery prerelease, select another unused numeric version for stable.
+Stable source preparation now selects numeric **0.2.1** with core **0.1.0**; a
+2026-10-24 Gallery read found it unused on all six targets. It is higher than the
+rc.1 VSIX version, and local native/Web archives have no prerelease flag. Recheck
+availability before any upload; the final six-target frozen set is still pending.
 Do not reuse the existing Gallery prerelease version or publish the raw source
 directory. Verify publisher access/authentication, publish the frozen VSIX bytes
 through a separate authorized process, and record each target and installed

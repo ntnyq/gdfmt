@@ -1,7 +1,7 @@
 {
   "name": "gdfmt",
   "displayName": "gdfmt",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "description": "Validated GDScript formatting powered by Rust",
   "categories": [
@@ -102,5 +102,5 @@
       "description": "Web supports URI-based workspaces with bounded JSON/JSONC configuration. Desktop formatting uses local file workspaces."
     }
   },
-  "gdfmtVersion": "0.1.0-rc.1"
+  "gdfmtVersion": "0.1.0"
 }

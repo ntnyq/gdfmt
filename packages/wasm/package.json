@@ -1,6 +1,6 @@
 {
   "name": "@gdfmt/wasm",
-  "version": "0.1.0-rc.1",
+  "version": "0.1.0",
   "description": "Validated GDScript formatting for browsers and Web Workers",
   "license": "MIT",
   "repository": {

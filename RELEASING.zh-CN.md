@@ -10,6 +10,12 @@ Rust workspace 与公开 npm 包使用统一版本。推送 `v版本号` tag 后
 
 ## 当前 0.1.0 准备状态
 
+**已准备核心 0.1.0 与扩展 0.2.1，均未发布。**
+[干净源码 CI 报告](docs/zh/research/0.1.0-ci.md)记录版本同步、干净修订试用、
+完整跨平台 CI 与产物演练。PR #3 尚未合并，最终 tag 冻结与账号证据仍待完成，
+Trusted Publishing 的实际发布能力已由 rc.1 验证。本次准备不创建 tag、不写入
+registry，也不上传 Marketplace。
+
 **0.1.0-rc.1 已发布**到 crates.io 和 npm `next`/`candidate`，独立扩展数字版本
 **0.2.0**，`gdfmtVersion: 0.1.0-rc.1`。全部 npm `latest` 保持原值，本次不发布
 正式版 0.1.0，也不上传 Marketplace。
@@ -298,6 +304,10 @@ rc.1 GitHub Release 已提供六份冻结 VSIX，扩展数字版本 `0.2.0`、�
 不能复用现有 Gallery 预发布版本，也不能直接从源码目录发布。先确认 publisher
 权限/认证，再通过单独授权的流程上传冻结 VSIX，记录逐目标结果和正式安装消费者，
 之后才宣布 Gallery 正式版可用。本轮准备及现有工作流均不执行 Marketplace 上传。
+
+正式版源码准备已选择数字扩展 **0.2.1**、核心 **0.1.0**。2026-10-24 回读六目标
+Gallery，0.2.1 尚未占用，并高于 rc.1 VSIX。本地原生/Web 包不带预发布标记，
+最终六目标冻结仍待完成；实际上传前再次核对可用性。
 
 桌面 `pnpm test:vscode` 还会将 VSIX 安装到隔离临时配置，检查安装后扩展/核心版本、
 内置 server 字节并使用该 server 格式化 stdin。桌面冻结同时要求

@@ -422,7 +422,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt_formatter",
  "gdfmt_parser",
@@ -433,7 +433,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_cli"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "clap",
  "crossbeam-channel",
@@ -452,7 +452,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_config"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt",
  "gdfmt_parser",
@@ -469,7 +469,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_formatter"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt_parser",
  "gdfmt_syntax",
@@ -480,7 +480,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_napi"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt",
  "gdfmt_cli",
@@ -496,7 +496,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_parser"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt_syntax",
  "gdfmt_text",
@@ -507,7 +507,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_syntax"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt_text",
  "rowan",
@@ -517,7 +517,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_text"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "serde",
  "thiserror",
@@ -525,7 +525,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_wasm"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt_config",
  "wasm-bindgen",
@@ -533,7 +533,7 @@ dependencies = [
 
 [[package]]
 name = "gdfmt_workspace"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "ec4rs",
  "gdfmt",
@@ -1579,7 +1579,7 @@ checksum = "3ad82d2a33cdc9674dc7465672f271e096168fcdbe0f799d9e6db8c5892679dc"
 
 [[package]]
 name = "xtask"
-version = "0.1.0-rc.1"
+version = "0.1.0"
 dependencies = [
  "gdfmt",
  "gdfmt_config",

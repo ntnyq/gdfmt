@@ -132,3 +132,10 @@ The [rc.1 publication](../../docs/research/0.1.0-rc.1-publication.md) repeated a
 14 guards and the complete trial on the exact clean tag commit
 `1329b72dc26179921739e4c2342ffa0bf7b7a314`, with Python hash seed 149 and no
 `--record-review`. All 606 review entries and four report hashes were unchanged.
+
+The [stable 0.1.0 CI review](../../docs/research/0.1.0-ci.md) repeated all 14 guards
+and the complete trial on clean source
+`80ac4040857dde8f84cccfbbb7d26f588a1a1567`, with Python hash seed 163 and no
+`--record-review`. All 606 review entries and four report hashes remain unchanged.
+The final PR head and its clean trial are recorded in PR #3; final merge/tag
+revisions still require their own validation.

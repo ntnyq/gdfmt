@@ -5,7 +5,9 @@ gdfmt formats GDScript files from the command line. Start with the defaults, the
 The current published prerelease is **0.1.0-rc.1**, available on crates.io and npm
 `next`; see the [candidate notes](../releases/0.1.0-rc.1.md) and
 [registry acceptance](../research/0.1.0-rc.1-publication.md). Stable 0.1.0 remains
-unreleased. Source builds use the checked-out version.
+unreleased. The prepared source uses core **0.1.0** with extension **0.2.1**;
+see the [clean-source CI report](../research/0.1.0-ci.md). Source builds use
+the checked-out version; the registry commands below still install rc.1.
 
 ## Install from source
 

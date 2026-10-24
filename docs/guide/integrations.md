@@ -62,6 +62,11 @@ provides six frozen VSIX targets, with numeric extension version `0.2.0` and cor
 Recheck Gallery availability before a later stable extension upload; see the
 [distribution review](../research/0.1.0-editor-distribution-review.md).
 
+The prepared source uses core `0.1.0` with numeric extension `0.2.1`, higher than
+the rc.1 VSIX version `0.2.0`. A 2026-10-24 Gallery read still listed only
+prerelease `0.1.0` for all six targets. The new versions remain unpublished;
+see the [clean-source CI report](../research/0.1.0-ci.md).
+
 VSIX filenames use the core version, while the Extensions view shows the numeric
 extension version. Replace `CORE_VERSION` and select the correct suffix:
 

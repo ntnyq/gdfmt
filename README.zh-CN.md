@@ -19,7 +19,9 @@ gdfmt 为 `.gd` 文件提供统一的空格、缩进与换行布局，可通过�
 **0.1.0-rc.1 已发布**到 crates.io 和 npm `next`。详见
 [候选说明](docs/zh/releases/0.1.0-rc.1.md)和
 [发布及 registry 验收](docs/zh/research/0.1.0-rc.1-publication.md)。
-正式版 0.1.0 尚未发布，默认格式化风格不变。
+已准备核心 **0.1.0** 与扩展 **0.2.1**，均未发布，详见
+[干净源码 CI 报告](docs/zh/research/0.1.0-ci.md)。默认格式化风格不变，
+registry 安装仍使用 rc.1。
 
 ## 快速开始
 
