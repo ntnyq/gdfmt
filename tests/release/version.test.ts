@@ -19,6 +19,7 @@ import {
   releaseChannel,
   repositoryRoot,
   validateVersion,
+  workspaceVersion,
 } from '../../scripts/release/project.ts'
 import {
   planVersionUpdate,
@@ -107,6 +108,77 @@ test('dry-run and invalid versions never modify release files', () => {
     ])
       assert.throws(() => planVersionUpdate(root, version))
     assert.equal(readFileSync(path, 'utf8'), original)
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
+
+test('version updates target workspace.package and preserve unrelated versions', () => {
+  const root = fixture()
+  try {
+    const current = checkRelease(root)
+    const next = '999.0.0-rc.1'
+    const cargoPath = join(root, 'Cargo.toml')
+    const comment = `# version = "${current}"\n# [workspace.package]\n`
+    writeFileSync(cargoPath, comment + readFileSync(cargoPath, 'utf8'))
+    const editorPath = join(root, 'editors/vscode/package.json')
+    const editorVersion = readObject(
+      JSON.parse(readFileSync(editorPath, 'utf8')),
+    ).version
+    const plan = planVersionUpdate(root, next)
+    const cargo = plan.get(cargoPath)
+    assert.ok(cargo)
+    assert.ok(cargo.startsWith(comment))
+    assert.equal(workspaceVersion(cargo), next)
+    const originals = new Map(
+      [...plan.keys()].map(path => [path, readFileSync(path, 'utf8')]),
+    )
+    updateVersion(root, next, true)
+    for (const [path, text] of originals)
+      assert.equal(readFileSync(path, 'utf8'), text)
+    updateVersion(root, next)
+    assert.equal(checkRelease(root, `v${next}`), next)
+    const editor = readObject(JSON.parse(readFileSync(editorPath, 'utf8')))
+    assert.equal(editor.version, editorVersion)
+    assert.equal(editor.gdfmtVersion, next)
+    assert.equal(
+      readObject(
+        JSON.parse(
+          readFileSync(join(root, 'packages/wasm/package.json'), 'utf8'),
+        ),
+      ).version,
+      next,
+    )
+  } finally {
+    rmSync(root, { recursive: true, force: true })
+  }
+})
+
+test('release checks reject invalid Marketplace versions and host/core version drift', () => {
+  const root = fixture()
+  try {
+    const path = join(root, 'editors/vscode/package.json')
+    const original = readFileSync(path, 'utf8')
+    const manifest = readObject(JSON.parse(original))
+    for (const version of [
+      '01.0.0',
+      '0.01.0',
+      '0.0.01',
+      '9007199254740992.0.0',
+    ]) {
+      writeFileSync(path, JSON.stringify({ ...manifest, version }))
+      assert.throws(() => checkRelease(root), /SemVer/)
+    }
+    writeFileSync(
+      path,
+      JSON.stringify({ ...manifest, gdfmtVersion: '999.0.0' }),
+    )
+    assert.throws(() => checkRelease(root), /VS Code\/core version mismatch/)
+    writeFileSync(path, original)
+    const wasmPath = join(root, 'packages/wasm/package.json')
+    const wasm = readObject(JSON.parse(readFileSync(wasmPath, 'utf8')))
+    writeFileSync(wasmPath, JSON.stringify({ ...wasm, version: '999.0.0' }))
+    assert.throws(() => checkRelease(root), /Cargo\/WASM version mismatch/)
   } finally {
     rmSync(root, { recursive: true, force: true })
   }

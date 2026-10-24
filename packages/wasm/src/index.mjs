@@ -9,6 +9,7 @@ export async function createFormatter(options = {}) {
   object(options, 'initialization options')
   if (Reflect.ownKeys(options).some(key => key !== 'wasm'))
     throw new TypeError('unknown initialization option')
+  if (options.wasm === null) throw new TypeError('wasm must not be null')
   const bindings = createBindings()
   await bindings.init({
     module_or_path:

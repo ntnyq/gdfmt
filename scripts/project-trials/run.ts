@@ -361,6 +361,30 @@ export function checkGdtoolkitRejection(
   )
 }
 
+function normalizeInnerClassExtends(tokens: readonly string[]): string[] {
+  const normalized = [...tokens]
+  const isIdentifier = (token: string | undefined): boolean =>
+    token !== undefined && /^[\p{L}_][\p{L}\p{N}_]*$/u.test(token)
+  for (let index = 0; index < normalized.length; index++) {
+    if (
+      normalized[index] !== 'class' ||
+      !isIdentifier(normalized[index + 1]) ||
+      normalized[index + 2] !== ':' ||
+      normalized[index + 3] !== 'extends' ||
+      !isIdentifier(normalized[index + 4])
+    )
+      continue
+    let end = index + 5
+    while (normalized[end] === '.' && isIdentifier(normalized[end + 1]))
+      end += 2
+    // Only move the class-header colon past its base type; retain body colons.
+    normalized.splice(index + 2, 1)
+    normalized.splice(end - 1, 0, ':')
+    index = end - 1
+  }
+  return normalized
+}
+
 /**
  * Classifies reviewed policy differences; the Rust facade independently checks
  * the original CST, significant spelling, comment anchors and idempotence.
@@ -383,10 +407,9 @@ export function classify(
         withoutPunctuation(after.tokens),
       )
     ) {
-      punctuation.add(':')
       assert.deepEqual(
-        withoutPunctuation(before.tokens),
-        withoutPunctuation(after.tokens),
+        normalizeInnerClassExtends(withoutPunctuation(before.tokens)),
+        normalizeInnerClassExtends(withoutPunctuation(after.tokens)),
         'unexplained token differences',
       )
       categories.add('inner-class-extends')

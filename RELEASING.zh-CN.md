@@ -6,6 +6,48 @@ Rust workspace 与公开 npm 包使用统一版本。推送 `v版本号` tag 后
 
 仓库变量 **`RELEASE_ENABLED` 必须等于 `true`** 才允许实际发布。没有配置时，tag 只触发验证和产物准备。手动运行工作流的 `publish` 默认关闭。构建、测试和冻结产物不需要 registry token。
 
+首个正式版本的剩余验收工作见 [0.1.0 发布检查清单](RELEASE_CHECKLIST.zh-CN.md)。
+
+## 当前 0.1.0 准备状态
+
+源码候选现为 **0.1.0-rc.1**（npm 渠道 `next`），独立扩展数字版本 **0.2.0**，
+`gdfmtVersion: 0.1.0-rc.1`。候选尚未发布，没有候选 tag 或 registry 上传。
+[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)记录精确提交源码的验收、产物 hash、
+完整项目试用和本地 7 份 npm/8 份 crate/6 份 VSIX bundle 演练，详见
+[候选说明](docs/zh/releases/0.1.0-rc.1.md)。[最初本机准备](docs/zh/research/0.1.0-rc.1-preparation.md)
+保留为非干净源码历史证据。PR #1 尚未合并；发布仍需合并后的干净提交、该提交的
+完整 CI 和绑定 tag 的冻结，本地演练不授权 registry 写入。
+
+[registry 与环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)记录了
+2026-10-23 的初次只读快照及后续分支/tag 保护落实情况。八个 crate 和七个 npm 包均已存在，公开 owner/maintainer
+均为 `ntnyq`，alpha.6 已在
+[发布运行 39749770445 的第 2 次尝试](https://github.com/ntnyq/gdfmt/actions/runs/39749770445/attempts/2)
+通过 Trusted Publishing 发布。下文首次发布步骤供初始配置使用，下一版本无需重做。
+
+`release` environment 已存在并允许 `v*` tag，仓库变量 `RELEASE_ENABLED` 已为
+`true`。`main` 分支保护与已启用的
+[Version tags ruleset](https://github.com/ntnyq/gdfmt/rules/25720774) 已配置并验证，
+预期设置记录在 [repository-protection.json](.github/repository-protection.json)，
+维护者例外见下文。Environment 部署准入与 tag 创建、修改及删除保护仍是不同的控制。
+
+[当前 Trusted Publisher/账号审查](docs/zh/research/0.1.0-trusted-publisher-review.md)
+已逐项查询十五个包：八个 crate 配置读取均返回 403，七个 npm trust 读取均返回
+E401。npm 身份/资料/权限读取也返回 E401，可访问的两个浏览器会话均显示未登录。
+当前绑定、npm 直接发布/dist-tag 权限及账号准备状态仍未验证，不能据此认定
+publisher 缺失或包权限丢失。
+
+owner 随后确认发布配置已完成，此处记录维护者确认，不声明新增了认证 API
+回读。关闭完整 owner 核对条目前，按报告逐包表归档非秘密的绑定/权限及邮箱验证、
+2FA、写权限和旧 token 撤销确认。八个 crate 公开的 `trustpub_only` 均为 `false`；启用该模式是可选加固，
+不新增发布门槛，也不能据此判断现有 token。选定候选版本后，仍需新的成功发布及
+registry 安装消费者验证；旧 alpha.6 运行不能验收当前工作区。
+
+本地只读审查可运行 `pnpm release:check` 和 `pnpm test:release`。GitHub 环境、
+变量、分支、ruleset API 读取和 `npm trust list` 也为只读操作；registry 管理设置
+需要合适的认证。开关已启用时，不要把新 `v*` tag 推送当作只验证；手动工作流保持
+`publish: false` 时仍只验证。后续落实仅修改分支/tag 设置，没有触发运行、创建或
+移动 ref、发布包或移动 dist-tag。
+
 ## 发布范围与顺序
 
 crates.io 按依赖顺序发布：
@@ -47,6 +89,32 @@ npm 需要发布 7 个包：
 4. 首次发布和 Trusted Publisher 配置完成前，不要开启发布开关。完成后，在 **Settings → Secrets and variables → Actions → Variables** 添加 **`RELEASE_ENABLED=true`**。
 
 后续 OIDC 发布无需保存 `NPM_TOKEN`、`CARGO_REGISTRY_TOKEN` 或个人 GitHub token secret。crates.io job 自动交换短期 token，npm 直接使用 OIDC；只有创建 GitHub Release 的 job 获得 `contents: write`。
+
+#### 已落实的分支与 tag 策略
+
+已审查的 REST 请求内容保存在
+[`.github/repository-protection.json`](.github/repository-protection.json)，用于记录
+实际配置；工作流不会自动应用此文件。
+
+- **`main`：**要求 PR、分支保持最新、讨论已解决，以及现有 29 项 CI/npm/宿主
+  检查通过，并绑定 GitHub Actions app（ID `15368`）。要求审批人数为 **0**，
+  不要求 code-owner 或最后一次推送审批，单维护者可以合并检查通过的 PR。禁用
+  force push 和删除。`enforce_admins: false` 保留管理员应急绕过，常规修改仍应
+  通过检查成功的 PR 合并。
+- **`refs/tags/v*`：**已启用的 ruleset **25720774** 限制创建、更新和删除。
+  只有仓库 **Admin（角色 ID 5）**和 **Maintain（角色 ID 2）**具有 `always`
+  绕过权限，单有 Write 权限不足以操作。规则覆盖 `v-recovery-*`，没有排除恢复
+  前缀，也没有向 Actions/app 开放绕过。
+
+维护者可以在不关闭保护的情况下创建发布和恢复 tag。这些例外不表示可以通过
+重指向已发布版本来恢复：保持已发布 tag 不变，保留原冻结 bundle，文档流程需要时
+使用新的恢复 ref。发布 job 用 `--verify-tag` 操作已有 tag，`GITHUB_TOKEN` 无需
+创建 tag 的绕过权限。`release` 环境准入、OIDC 权限和 `RELEASE_ENABLED` 均未改动。
+
+配置前已核对 `main` 提交 `6c11445a329b688f27fd6693a3c6314ffeedce64` 上全部
+29 个检查名称及成功状态。重命名 job 或调整矩阵时，同步修改 JSON 和远端 required
+checks，避免 PR 等待已不存在的名称。通过分支保护/ruleset API 回读及 GraphQL
+角色名称回读验证了配置，没有使用测试 tag、force push、工作流触发或实际发布验证。
 
 ### crates.io
 
@@ -130,8 +198,8 @@ crates.io 首次创建新包允许连续发布 5 个，之后每 10 分钟恢复
 在包含预期修改的工作区中运行：
 
 ```sh
-pnpm release:version 0.1.0-alpha.1 --dry-run
-pnpm release:version 0.1.0-alpha.1
+pnpm release:version 0.1.0-rc.2 --dry-run
+pnpm release:version 0.1.0-rc.2
 pnpm release:check
 pnpm typecheck
 pnpm test:release
@@ -142,18 +210,30 @@ pnpm test:release
 - `Cargo.toml` 中的 workspace 版本；
 - 7 个内部 workspace 依赖的精确版本；
 - `Cargo.lock` 中全部 11 个本地 workspace 包，包括私有适配层和工具；
-- npm 主包版本及 5 个 optionalDependencies 版本。
+- npm 主包、WASM 包版本、5 个 optionalDependencies 版本及 VS Code 的 `gdfmtVersion`。
 
 脚本在修改前后执行一致性检查，后置检查失败时回滚版本文件。它拒绝降级、非法版本和 build metadata，不创建提交或 tag，也不发布。私有根 npm 工具包和文档包保留独立版本。当前 pnpm lockfile 不保存发布包版本，因此不需要修改；如果以后出现对应的锁定版本，脚本会停止，要求先更新同步策略。不要单独使用 `bumpp` 完成跨生态版本更新。
 
-检查版本差异、按需更新发布说明，合并发布提交后推送 tag：
+版本替换定位实际的 `[workspace.package]` 字段，不改动注释中的版本示例。
+VS Code Marketplace 版本是独立的数字 SemVer，不允许前导零或预发布后缀；脚本只更新
+`gdfmtVersion`，需要时应单独递增扩展数字版本。配置与 JSON 结果的
+`schemaVersion: 1` 是格式契约，与 Cargo/npm 发布版本独立。
+
+检查版本差异、按需更新发布说明，并合并发布提交。
+
+已准备 0.1.0 的[英文说明](docs/releases/0.1.0.md)与
+[简体中文说明](docs/zh/releases/0.1.0.md)。请对照最终候选版本复核，发布完成后才
+移除草稿状态。当前工作流使用 GitHub 自动生成的说明；发布完成检查时，将这些
+双语内容整合到最终 GitHub Release 正文。仓库中的说明文件不会自动作为发布正文。
+
+然后创建并推送发布 tag：
 
 ```sh
-git tag -a v0.1.0-alpha.1 -m 'Release 0.1.0-alpha.1'
-git push origin v0.1.0-alpha.1
+git tag -a v0.1.0-rc.2 -m 'Release 0.1.0-rc.2'
+git push origin v0.1.0-rc.2
 ```
 
-正式版本可使用 `0.1.0`，自动进入 `latest`；alpha 发布不会移动 `latest`。
+正式版本可使用 `0.1.0`，自动进入 `latest`；预发布（包括 rc.1）不会移动 `latest`。
 
 ## CI 执行内容
 
@@ -206,6 +286,23 @@ pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/rel
 
 ## WASM 与 VS Code 产物
 
+核心 0.1.0 建议以 GitHub Release 的六份冻结 VSIX 为交付基线，Marketplace
+正式发布独立跟进，不阻塞核心发布。[分发审查](docs/zh/research/0.1.0-editor-distribution-review.md)
+记录两条路线和剩余工作。截至 2026-10-23，公开 Gallery 已列出数字扩展 `0.1.0`
+的六种目标预发布；已检查的 macOS/Web 清单包含核心 `0.1.0-alpha.6`，不是核心正式版。
+
+rc.1 准备已选择扩展数字版本 `0.2.0`，本次只读 Gallery 查询仅列出 `0.1.0`。
+本地 rc.1 VSIX 带预发布标记，内置核心 `0.1.0-rc.1`，尚未上传 Gallery。后续上传前
+重新核对可用性，统一重建、测试和冻结六种变体。如果先将 `0.2.0` 上传为 Gallery
+预发布，正式上传需另选未使用的数字版本。
+不能复用现有 Gallery 预发布版本，也不能直接从源码目录发布。先确认 publisher
+权限/认证，再通过单独授权的流程上传冻结 VSIX，记录逐目标结果和正式安装消费者，
+之后才宣布 Gallery 正式版可用。本轮准备及现有工作流均不执行 Marketplace 上传。
+
+桌面 `pnpm test:vscode` 还会将 VSIX 安装到隔离临时配置，检查安装后扩展/核心版本、
+内置 server 字节并使用该 server 格式化 stdin。桌面冻结同时要求
+`installedVsixPassed: true` 和 Extension Host 验收；Alpine 保留原生 smoke 检查。
+
 `hosts.yml` 安装真实 WASM tarball，在 Node 和 Chromium 中比较五种语言版本的共享 fixtures，并验证无需隔离响应头的 module Worker。冻结要求 `npm-wasm` 回执的提交、干净源码状态和 SHA-512 匹配。`@gdfmt/wasm` 与平台候选包一起先上传，主包最后上传，使用相同的 `next`/`latest` 渠道；需要单独配置其 npm Trusted Publisher。
 
 同一工作流构建五个平台的 VSIX；冻结要求每个平台原生程序的版本检查，以及四个桌面平台的 Extension Host 验收。Alpine 仅进行原生程序 smoke check，因为 Electron 不支持 musl。Linux 桌面额外启用 Godot Tools 验证共存。`editors.json` 记录核心版本、数字扩展版本、提交和 SHA-512；GitHub Release 附加冻结后的 VSIX。流程不会发布到 VS Code Marketplace。
@@ -213,3 +310,9 @@ pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/rel
 `hosts.yml` 还使用同一 WASM 包构建独立的纯浏览器 Web VSIX。冻结要求 Chromium Web Extension Host 回执包含 `webExtensionHostPassed: true` 和 `crossOriginIsolated: false`，并匹配干净的 revision 与精确 SHA-512。六个 VSIX 都作为 GitHub Release 附件，不会自动发布到 Marketplace。本地使用 `pnpm test:vscode:web` 验收；单独执行 `pnpm package:vscode:web` 不会记录验收通过。
 
 `release:version` 同步 WASM npm 版本和插件 `gdfmtVersion`。Marketplace 的数字版本独立维护，发布插件更新前需递增，不能使用 Cargo 的预发布后缀。`gdfmt_wasm` 不参与 crates.io 打包。恢复旧版六包冻结产物时，仍以原始源码 checkout 的发布契约校验，不强制补建 WASM。
+
+原生安装应选择匹配本地/远程扩展宿主的附件，通过 **Extensions: Install from VSIX**
+安装；手动更新或回滚后运行 **gdfmt: Show Version**。纯浏览器 VS Code 1.96.4
+没有本地/远程扩展管理 server 时，不提供该本地 VSIX 入口。现有 Gallery 预发布与
+开发侧载是独立路线；staging Web 宿主验收不能证明最终用户的 Gallery/VSIX 安装，
+详见[安装说明](docs/zh/guide/integrations.md#vs-code)。

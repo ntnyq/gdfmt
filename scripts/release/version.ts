@@ -31,7 +31,11 @@ export function planVersionUpdate(
   const files = new Map<string, string>()
   let dependencyCount = 0
   const updatedCargo = cargo
-    .replace(`version = "${current}"`, `version = "${version}"`)
+    .replace(
+      /^(\[workspace\.package\]\r?\n[\s\S]*?^version = ")[^"\r\n]+("(?=\r?$))/m,
+      (_line: string, prefix: string, suffix: string) =>
+        `${prefix}${version}${suffix}`,
+    )
     .replace(
       /^(gdfmt\w*) = \{ path = "([^"]+)", version = "([^"]+)" \}$/gm,
       (line: string, name: string, path: string, requirement: string) => {
@@ -48,6 +52,11 @@ export function planVersionUpdate(
     dependencyCount,
     publicCrates.length - 1,
     'expected all workspace dependency versions',
+  )
+  assert.equal(
+    workspaceVersion(updatedCargo),
+    version,
+    'workspace version was not updated',
   )
   files.set(cargoPath, updatedCargo)
   const lockPath = resolve(root, 'Cargo.lock')

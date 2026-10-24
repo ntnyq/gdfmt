@@ -91,6 +91,10 @@ const module: WasmModule = await import(pathToFileURL(entry).href)
 await assert.rejects(() =>
   module.createFormatter({ wasm: new Uint8Array([0, 1]) }),
 )
+await assert.rejects(
+  Reflect.apply(module.createFormatter, undefined, [{ wasm: null }]),
+  /wasm must not be null/,
+)
 const raw: {
   createBindings(): {
     init(options: { module_or_path: Uint8Array }): Promise<WebAssembly.Exports>
@@ -150,6 +154,8 @@ for (const options of [
   { format: { lineWidth: Number.NaN } },
   { format: undefined },
   { format: new Date() },
+  Object.defineProperty({}, 'format', { value: { lineWidth: 40 } }),
+  { format: Object.defineProperty({}, 'lineWidth', { value: undefined }) },
   {
     toJSON() {
       return {}
@@ -179,6 +185,10 @@ const exampleOptions = formatter.resolveTextOptions([
 assert.equal(formatSync('var x=1\n', exampleOptions).output, 'var x = 1')
 assert.throws(() => formatter.parseConfig('{"overrides":[]}'))
 assert.throws(() => formatter.parseConfig('{"ignore":[]}'))
+assert.deepEqual(
+  formatter.parseConfig('{"$schema":"schema.json","schemaVersion":1}'),
+  { $schema: 'schema.json', schemaVersion: 1 },
+)
 const hugeSource = '#'.repeat(16 * 1024 * 1024 + 1)
 assert.deepEqual(
   formatSync(hugeSource),

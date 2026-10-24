@@ -254,6 +254,62 @@ test('quote, punctuation and layout policies remain classified', () => {
   )
 })
 
+test('colon changes outside inner-class extends headers remain unexplained', () => {
+  const before: TokenFacts = {
+    tokens: 'var value : int = 1'.split(' '),
+    strings: [],
+    comments: [],
+  }
+  assert.throws(
+    () =>
+      classify('left', 'right', before, {
+        ...before,
+        tokens: 'var value int = 1'.split(' '),
+      }),
+    /unexplained token/,
+  )
+  assert.throws(
+    () =>
+      classify(
+        'left',
+        'right',
+        {
+          ...before,
+          tokens: 'class Inner : extends Node var value : int = 1'.split(' '),
+        },
+        {
+          ...before,
+          tokens: 'class Inner extends Node : var value int = 1'.split(' '),
+        },
+      ),
+    /unexplained token/,
+  )
+})
+
+test('inner-class extends review retains body colons and handles qualified bases', () => {
+  const tokens =
+    'class First : extends Outer . Base var value : int = 1 class Second : extends Node func run ( ) : pass'.split(
+      ' ',
+    )
+  const other =
+    'class First extends Outer . Base : var value : int = 1 class Second extends Node : func run ( ) : pass'.split(
+      ' ',
+    )
+  for (const [before, after] of [
+    [tokens, other],
+    [other, tokens],
+  ])
+    assert.deepEqual(
+      classify(
+        'left',
+        'right',
+        { tokens: before, strings: [], comments: [] },
+        { tokens: after, strings: [], comments: [] },
+      ),
+      ['inner-class-extends', 'layout', 'parentheses-commas-semicolons'],
+    )
+})
+
 test('gdtoolkit rejections must reproduce every pinned diagnostic field', () => {
   const expected = {
     exception: 'UnexpectedCharacters',

@@ -2,6 +2,10 @@
 
 gdfmt formats GDScript files from the command line. Start with the defaults, then commit a configuration file when your project needs shared settings.
 
+The current source candidate is **0.1.0-rc.1, unpublished**; see the
+[candidate notes](../releases/0.1.0-rc.1.md). Source builds use the checked-out
+version; registry commands below use already published packages.
+
 ## Install from source
 
 Use Rust 1.88 or newer. The repository's `rust-toolchain.toml` pins the development toolchain.
@@ -15,7 +19,26 @@ gdfmt --version
 
 Make sure Cargo's binary directory is on your `PATH`. You can also run the CLI directly from the checkout with `cargo run -p gdfmt_cli -- <arguments>`.
 
-Run the npm prerelease with `pnpm dlx @gdfmt/gdfmt@next --version`. The CLI command remains `gdfmt`.
+## Install a published prerelease
+
+Cargo prereleases need an explicit version; the package name differs from the executable:
+
+```sh
+cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked
+gdfmt --version
+```
+
+For npm, use Node 22.13+ on 22.x or Node 24.x and keep optional dependencies enabled:
+
+```sh
+pnpm add -D @gdfmt/gdfmt@next
+pnpm exec gdfmt --version
+```
+
+For a one-off invocation use `pnpm dlx @gdfmt/gdfmt@next --version`. Supported
+native targets and API usage are listed in the [Node reference](/reference/node).
+`next` is a moving prerelease channel; pin an exact version in CI or commit the
+project's lockfile. Source installation above follows the checked-out revision.
 
 ## Format a project
 

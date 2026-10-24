@@ -2,6 +2,10 @@
 
 gdfmt 通过命令行格式化 GDScript 文件。可以直接使用默认设置，需要共享项目风格时再提交配置文件。
 
+当前源码候选为 **0.1.0-rc.1，尚未发布**，详见
+[候选说明](../releases/0.1.0-rc.1.md)。源码构建使用 checkout 的版本；下面的 registry
+命令使用已发布包。
+
 ## 从源码安装
 
 使用 Rust 1.88 或更高版本。仓库中的 `rust-toolchain.toml` 固定了开发工具链。
@@ -15,7 +19,25 @@ gdfmt --version
 
 确保 Cargo 的可执行文件目录已加入 `PATH`。也可以在仓库内通过 `cargo run -p gdfmt_cli -- <参数>` 直接运行 CLI。
 
-使用 `pnpm dlx @gdfmt/gdfmt@next --version` 运行 npm 预发布版本，CLI 命令仍为 `gdfmt`。
+## 安装已发布的预发布版本
+
+Cargo 预发布版本需要显式指定版本，包名与可执行命令不同：
+
+```sh
+cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked
+gdfmt --version
+```
+
+npm 方式需要 Node 22.x 的 22.13+ 或 Node 24.x，并保留 optional dependencies：
+
+```sh
+pnpm add -D @gdfmt/gdfmt@next
+pnpm exec gdfmt --version
+```
+
+单次调用可运行 `pnpm dlx @gdfmt/gdfmt@next --version`。支持的原生平台与 API 用法见
+[Node 参考](/zh/reference/node)。`next` 是会移动的预发布通道；CI 中应固定精确版本，
+或提交项目 lockfile。上方源码安装使用检出的 revision。
 
 ## 格式化项目
 

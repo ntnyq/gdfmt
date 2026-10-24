@@ -6,7 +6,7 @@ gdfmt 格式化完整脚本，覆盖表达式、注释、lambda、声明与语�
 
 格式化器规范运算符、调用、数组、字典、分组、注解、签名、声明、属性访问器、语句和 match 模式的布局。具名函数、类、分支、循环和访问器使用缩进后的多行 suite。分号分隔的语句展开为独立行，同时保留原分号 token。仅有一条简单语句且无注释的 lambda 使用行内函数体，其余使用块布局。容器内块 lambda 的 suite 缩进以外层语句为基准，因为续行列不是 lexer 缩进栈中的层级。在后续行结束行内 lambda 的逗号或闭合分隔符及其前置注释，也使用外层语句的缩进。
 
-参数和元素列表按 `format.lineWidth` 换行，suite 和续行统一使用 `indentStyle`/`indentWidth`。列宽按 Unicode scalar 和 tab stop 计算。不可拆分的 token 与类型引用允许超宽：Godot 会拒绝在集合类型左方括号后立即换行。括号、逗号、分号、字典分隔符风格、字面量词形和 BOM 均保留。多行字面量内容逐字节保留，包括其中的原始换行和缩进。
+参数和元素列表在受支持断点上按 `format.lineWidth` 尝试换行，suite 和续行统一使用 `indentStyle`/`indentWidth`。列宽按 Unicode scalar 和 tab stop 计算。行宽是目标值而非硬性上限：长二元/条件表达式和成员/调用链尚无通用换行，不可拆分的 token、类型引用、保留的注释/字面量内容及保护区域也可能超宽。Godot 会拒绝在集合类型左方括号后立即换行。括号、逗号、分号、字典分隔符风格、字面量词形和 BOM 均保留；格式化器不会为满足行宽而添加括号或反斜杠。多行字面量内容逐字节保留，包括其中的原始换行和缩进。
 
 独立行注释锚定后一个 token，行尾注释锚定前一个 token；悬空注释保留在闭合分隔符内或所属 suite、属性块、match 块末尾。文档、region、warning 注释保留原文和顺序，注解顺序与目标不变。打印器为注释建立换行边界，避免吞掉后续代码。
 
@@ -51,6 +51,16 @@ lint 禁用指令、lint 规则和语义自动修复不属于 formatter 范围�
 ## Rust API 与正确性门禁
 
 `gdfmt_formatter` 接收无损树、同次解析诊断及布局选项，正常依赖不包含 parser 或文件系统。`gdfmt::format(source, &FormatRequest)` 组合解析和格式化，返回 `FormatResult { output, changed, diagnostics }`。
+
+`FormatRequest` 显式提供解析限制、Godot profile、源码标识和布局选项，不发现配置，
+也不写文件。默认 profile 为 4.7，源码限制为 16 MiB，诊断预算为 100，最大表达式深度
+为 128。纯 Rust 布局默认保留源码换行；宿主可以通过 `gdfmt_config::format_request`
+将解析后的配置映射为请求，使用共享的宿主默认值。
+
+`output: Some("")` 是有效的空输出。`changed` 比较可写输出与输入字节；失败时返回
+`None` 和 `changed: false`。诊断保留请求中的 `SourceId`，采用含 BOM/CRLF 字节的
+半开 UTF-8 字节 span。诊断文本面向人类，调用方应使用结构化代码、类别、级别与
+span。CLI 退出码和 JavaScript 参数异常由宿主适配器负责，不属于纯 Rust 结果。
 
 facade 仅在以下条件全部成立时返回可写输出：输入无 parser 错误；输出在相同版本和限制下重解析成功；规范化节点结构及有效 token 原文一致；注释原文、相邻 token、独立行角色及悬空块归属一致；第二次格式化输出完全相同。失败时返回内部诊断且不提供输出。formatter 自身也独立拒绝恢复节点和错误诊断。
 

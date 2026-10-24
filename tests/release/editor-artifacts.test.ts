@@ -39,6 +39,7 @@ test('editor freeze binds all VSIX targets to tested bytes and the clean core re
           godotToolsPassed: target.id === 'linux-x64-gnu',
           nativeSmokePassed: true,
           extensionHostPassed: target.id !== 'linux-x64-musl',
+          installedVsixPassed: target.id !== 'linux-x64-musl',
           published: false,
         }),
       )
@@ -88,6 +89,16 @@ test('editor freeze binds all VSIX targets to tested bytes and the clean core re
     const directory = join(source, `vscode-${targets[0].id}`)
     const receiptPath = join(directory, 'acceptance.json')
     const receipt = readJson(receiptPath)
+    for (const installedVsixPassed of [false, undefined]) {
+      await writeFile(
+        receiptPath,
+        JSON.stringify({ ...receipt, installedVsixPassed }),
+      )
+      await assert.rejects(
+        () => prepareEditors(source, destination),
+        /installed VSIX acceptance/,
+      )
+    }
     await writeFile(
       receiptPath,
       JSON.stringify({ ...receipt, cleanSource: false }),

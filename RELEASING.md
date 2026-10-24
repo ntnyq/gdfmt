@@ -6,6 +6,63 @@ The Rust workspace and public npm packages share one version. A `vVERSION` tag r
 
 Registry writes are disabled until the GitHub repository variable `RELEASE_ENABLED` is exactly `true`. Manual workflow runs default to validation only. No registry credentials are needed to build, test or freeze artifacts.
 
+Track the first stable release's remaining acceptance work in the
+[0.1.0 release checklist](RELEASE_CHECKLIST.md).
+
+## Current 0.1.0 readiness
+
+The source candidate is now **0.1.0-rc.1** (npm channel `next`), with independent
+extension version **0.2.0** and `gdfmtVersion: 0.1.0-rc.1`. The candidate is unpublished; no tag or registry upload exists.
+The [candidate CI report](docs/research/0.1.0-rc.1-ci.md) records exact committed-source
+acceptance, artifact hashes, the full project trial and a local 7-npm/8-crate/6-VSIX
+bundle rehearsal. See the [candidate notes](docs/releases/0.1.0-rc.1.md); the
+[initial local preparation](docs/research/0.1.0-rc.1-preparation.md) remains historical
+dirty-source evidence. PR #1 remains unmerged. Publication still requires a clean
+merged revision, its own complete CI and a tag-bound freeze; the local rehearsal
+does not authorize registry writes.
+
+The [registry and environment review](docs/research/0.1.0-registry-readiness-review.md)
+records the initial read-only snapshot and the branch/tag protection follow-up
+from 2026-10-23. All eight crates and seven npm
+packages already exist under public owner/maintainer `ntnyq`, and alpha.6 was
+published through Trusted Publishing in
+[release run 39749770445, attempt 2](https://github.com/ntnyq/gdfmt/actions/runs/39749770445/attempts/2).
+The bootstrap instructions below apply to initial setup, not to the next release.
+
+The `release` environment exists and permits `v*` tags; the repository variable
+`RELEASE_ENABLED` is already `true`. `main` branch protection and the active
+[Version tags ruleset](https://github.com/ntnyq/gdfmt/rules/25720774) are now
+configured and verified. Their expected settings are recorded in
+[repository-protection.json](.github/repository-protection.json), with maintainer
+exceptions described below. Environment deployment admission remains separate
+from tag creation, modification and deletion protection.
+
+The [current Trusted Publisher/account review](docs/research/0.1.0-trusted-publisher-review.md)
+queried all fifteen packages: eight crate configuration reads returned 403, and
+seven npm trust reads returned E401. npm identity/profile/access reads also
+returned E401; both available browser sessions showed signed-out controls.
+Current bindings, npm direct-publish/dist-tag permissions and account readiness
+remain unverified. These results do not establish missing publishers or lost
+package rights.
+
+The owner subsequently reported that publishing configuration is complete.
+This is owner confirmation, not a new authenticated API readback. Archive the
+non-secret binding/permission and email-verification/2FA/access/token-revocation
+confirmations using the review's package tables before closing the complete
+owner-review item. All eight crates publicly
+report `trustpub_only: false`; enabling that mode is optional hardening, not a
+new release gate or evidence about existing tokens. Recheck the chosen candidate
+with a new successful publication and installed registry consumers; the old
+alpha.6 run does not accept the current working tree.
+
+For a read-only local review, use `pnpm release:check` and `pnpm test:release`.
+GitHub environment, variable, branch and ruleset API reads and `npm trust list`
+are also read-only; registry administration reads require suitable authentication.
+Do not treat a new `v*` tag push as validation only while the gate is enabled.
+A manual workflow run with `publish: false` remains validation only. The
+protection follow-up changed only branch/tag settings; it did not dispatch a run,
+create or move refs, publish packages or move dist-tags.
+
 ## Release units
 
 Rust packages publish in this dependency order:
@@ -45,6 +102,38 @@ In `ntnyq/gdfmt`:
 4. Leave **Settings → Secrets and variables → Actions → Variables → `RELEASE_ENABLED`** unset until bootstrap and Trusted Publisher setup are complete. Set it to **`true`** when ready.
 
 No `NPM_TOKEN`, `CARGO_REGISTRY_TOKEN` or personal GitHub token secret is needed for subsequent releases. The crates.io job exchanges OIDC for a temporary token; npm uses OIDC directly. Only the final GitHub Release job receives `contents: write`.
+
+#### Applied branch and tag policy
+
+The reviewed REST request bodies live in
+[`.github/repository-protection.json`](.github/repository-protection.json).
+They document the applied settings; workflows do not automatically apply this file.
+
+- **`main`:** require a PR, an up-to-date branch, resolved conversations and all
+  29 existing CI/npm/host checks, bound to the GitHub Actions app (ID `15368`).
+  Required approvals are **0**, with no code-owner or last-push approval
+  requirement, so the sole maintainer can merge a passing PR. Force pushes and
+  deletion are disabled. `enforce_admins: false` retains the administrator's
+  emergency bypass; ordinary changes should still use passing PRs.
+- **`refs/tags/v*`:** active ruleset **25720774** restricts creation, update and
+  deletion. Only repository **Admin (role ID 5)** and **Maintain (role ID 2)**
+  have `always` bypass. Write access alone is insufficient. This includes
+  `v-recovery-*`; there is no recovery-pattern exclusion or Actions/app bypass.
+
+These exceptions let maintainers create release and recovery tags without
+turning protection off. They do not make retagging a published version a recovery
+procedure: keep published tags immutable, preserve the original frozen bundle,
+and use a new recovery ref when the documented procedure needs one. Release
+creation uses `--verify-tag` against an existing tag, so `GITHUB_TOKEN` needs no
+tag-creation bypass. `release` environment admission, OIDC permissions and
+`RELEASE_ENABLED` are unchanged.
+
+The 29 required check names were matched to successful checks on `main` at
+`6c11445a329b688f27fd6693a3c6314ffeedce64` before configuration. When renaming
+jobs or changing matrices, update both this JSON and the live required checks
+to avoid leaving PRs waiting for obsolete names. Branch-protection and ruleset
+API readback, plus GraphQL role-name readback, verified the applied policy;
+no test tag, force push, workflow dispatch or publication was used.
 
 ### crates.io
 
@@ -128,8 +217,8 @@ Local npm publication and Trusted Publisher configuration may each require brows
 From a working tree containing the intended changes:
 
 ```sh
-pnpm release:version 0.1.0-alpha.1 --dry-run
-pnpm release:version 0.1.0-alpha.1
+pnpm release:version 0.1.0-rc.2 --dry-run
+pnpm release:version 0.1.0-rc.2
 pnpm release:check
 pnpm typecheck
 pnpm test:release
@@ -144,14 +233,30 @@ The script updates:
 
 It validates before and after the change and rolls back modified version files if post-update validation fails. It rejects downgrades, malformed versions and build metadata. It creates no commits or tags and performs no publication. The private root npm package and documentation package retain their independent tooling versions. The pnpm lockfile currently contains no release package versions, so it stays unchanged; the script fails if release versions become locked and require a new update strategy. Do not use `bumpp` alone for coordinated releases.
 
-Review the version diff, update release notes as needed, and merge the release commit. Then create and push its tag:
+Version replacement targets the actual `[workspace.package]` field, leaving
+commented version examples intact. The VS Code Marketplace version is an
+independent numeric SemVer with no leading zeros or prerelease suffix; the script
+updates only `gdfmtVersion`, so bump the numeric extension version separately when
+needed. Configuration and JSON-result `schemaVersion: 1` are format contracts,
+independent of Cargo/npm release versions.
+
+Review the version diff, update release notes as needed, and merge the release commit.
+
+Prepared 0.1.0 notes are available in [English](docs/releases/0.1.0.md) and
+[Simplified Chinese](docs/zh/releases/0.1.0.md). Recheck them against the final
+candidate and remove the draft status only when publication is complete. The
+current workflow uses GitHub-generated notes; incorporate this bilingual text
+into the final GitHub Release body as part of the publication-completion review.
+These source documents are not automatically used as the release body.
+
+Then create and push the release tag:
 
 ```sh
-git tag -a v0.1.0-alpha.1 -m 'Release 0.1.0-alpha.1'
-git push origin v0.1.0-alpha.1
+git tag -a v0.1.0-rc.2 -m 'Release 0.1.0-rc.2'
+git push origin v0.1.0-rc.2
 ```
 
-Use a stable version such as `0.1.0` to publish to `latest`. Publishing an alpha does not move `latest`.
+Use a stable version such as `0.1.0` to publish to `latest`. Publishing a prerelease, including rc.1, does not move `latest`.
 
 ## What the workflow verifies
 
@@ -164,6 +269,30 @@ Rust publication checks its source manifest, archive VCS metadata and registry S
 The Rust CLI is installed back from crates.io with an exact `=VERSION` requirement after publication. npm installs an exact root version from the registry with an empty cache and prefers fresh metadata. Missing install metadata (`ETARGET`/404) is retried for up to ten minutes because the install index can lag the immutable version endpoint; authentication and other install failures stop immediately. It tests native/WASM API output and CLI version before advancing channels. The npm execution preflight validates Node/npm versions and, inside GitHub Actions, the presence of the OIDC request environment provided by `id-token: write`. It does not use `npm whoami`, which does not validate OIDC permissions. A successful upload of a new version remains the actual proof of the platform's trust configuration. A GitHub Release and artifact attachments are created only after both publisher jobs succeed. The workflow never uses `workflow_run` or `pull_request_target` to publish.
 
 ## WASM and VS Code artifacts
+
+For core 0.1.0, use the six frozen GitHub Release VSIX assets as the delivery
+baseline; Marketplace stable publication is an independent follow-up, not a
+core-release gate. The [distribution review](docs/research/0.1.0-editor-distribution-review.md)
+records both routes and remaining work. Public Gallery metadata on 2026-10-23
+already lists numeric extension `0.1.0` as a six-target prerelease; inspected
+macOS/Web manifests contain core `0.1.0-alpha.6`. It is not a stable core release.
+
+The rc.1 preparation selects numeric extension version `0.2.0`; a fresh read-only
+Gallery query listed only `0.1.0`. Local rc.1 VSIX files carry the prerelease flag
+and core `0.1.0-rc.1`; no Gallery upload has occurred. Recheck availability before
+any later upload and rebuild/test/freeze all six variants. If `0.2.0` is uploaded
+as a Gallery prerelease, select another unused numeric version for stable.
+Do not reuse the existing Gallery prerelease version or publish the raw source
+directory. Verify publisher access/authentication, publish the frozen VSIX bytes
+through a separate authorized process, and record each target and installed
+stable consumer before announcing Gallery stable availability. No Marketplace
+upload is performed by this preparation or the existing workflow.
+
+Desktop `pnpm test:vscode` also installs its VSIX in an isolated temporary
+profile, checks the installed extension/core versions and bundled server bytes,
+and formats stdin with that installed server. Freezing desktop artifacts requires
+`installedVsixPassed: true` alongside Extension Host acceptance; Alpine keeps
+its native smoke check.
 
 The browser workflow installs the actual WASM tarball in Node and Chromium,
 compares all shared fixtures across five profiles, and tests a module Worker
@@ -187,6 +316,14 @@ package. Freeze requires its Chromium Web Extension Host receipt with
 revision and exact SHA-512. All six VSIX files are attached to the GitHub Release;
 none is automatically published to the Marketplace. Local Web validation is
 `pnpm test:vscode:web`; `pnpm package:vscode:web` alone does not record acceptance.
+
+For native installation, select the asset matching the local/remote extension
+host and use **Extensions: Install from VSIX**; check **gdfmt: Show Version** after
+manual updates or rollback. Browser-only VS Code 1.96.4 does not offer this local
+VSIX action without a local/remote extension-management server. Its existing
+Gallery prerelease or developer sideloading are separate routes; staged Web host
+acceptance does not prove end-user Gallery/VSIX installation. See
+[installation details](docs/guide/integrations.md#vs-code).
 
 `release:version` updates the WASM npm version and the extension's `gdfmtVersion`;
 the numeric extension version is maintained independently. `gdfmt_wasm` is excluded

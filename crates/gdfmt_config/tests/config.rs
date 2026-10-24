@@ -200,6 +200,142 @@ fn runtime_and_schema_agree_on_configuration_matrix() {
 }
 
 #[test]
+fn integer_number_spellings_match_schema_in_base_fields_and_overrides() {
+    let schema: serde_json::Value = serde_json::from_str(&schema_json()).unwrap();
+    let validator = jsonschema::validator_for(&schema).unwrap();
+    let check = |field: &str, value: &str, expected: Option<u64>| {
+        for in_override in [false, true] {
+            let source = if in_override {
+                format!(
+                    r#"{{"overrides":[{{"files":["**/*.gd"],"format":{{"{field}":{value}}}}}]}}"#
+                )
+            } else {
+                format!(r#"{{"format":{{"{field}":{value}}}}}"#)
+            };
+            let valid = expected.is_some();
+            assert_eq!(
+                validator.is_valid(&serde_json::from_str(&source).unwrap()),
+                valid,
+                "schema: {source}"
+            );
+            let parsed = parse_config(&source);
+            assert_eq!(parsed.is_ok(), valid, "runtime: {source}");
+            if let Some(expected) = expected {
+                let serialized = serde_json::to_value(parsed.unwrap()).unwrap();
+                let format = if in_override {
+                    &serialized["overrides"][0]["format"]
+                } else {
+                    &serialized["format"]
+                };
+                assert_eq!(format[field].as_u64(), Some(expected), "{source}");
+            } else {
+                let prefix = if in_override {
+                    "overrides[0].format"
+                } else {
+                    "format"
+                };
+                assert_eq!(
+                    parsed.unwrap_err().field,
+                    format!("{prefix}.{field}"),
+                    "{source}"
+                );
+            }
+        }
+    };
+    for (field, min, max, default) in [
+        ("lineWidth", 40_u64, 320, 100),
+        ("indentWidth", 1, 8, 4),
+        ("maxBlankLines", 0, 5, 2),
+        ("inlineCommentSpacing", 1, 4, 1),
+        ("blankLinesAroundDefinitions", 0, 5, 2),
+    ] {
+        for number in [min, max, default] {
+            for value in [
+                number.to_string(),
+                format!("{number}.0"),
+                format!("{number}e0"),
+                format!("{}e-1", number * 10),
+            ] {
+                check(field, &value, Some(number));
+            }
+        }
+        for value in [
+            format!("{default}.5"),
+            format!("{}e0", max + 1),
+            "-1.0".into(),
+            "1e99".into(),
+            "1e-99".into(),
+            "65536.0".into(),
+            "18446744073709551615".into(),
+            "18446744073709551616.0".into(),
+            "null".into(),
+            "true".into(),
+            "\"100\"".into(),
+            "[]".into(),
+            "{}".into(),
+        ] {
+            check(field, &value, None);
+        }
+        if min > 0 {
+            check(field, &format!("{}.0", min - 1), None);
+        } else {
+            check(field, "-0.0", Some(0));
+        }
+    }
+    for (value, valid) in [
+        ("1", true),
+        ("1.0", true),
+        ("1e0", true),
+        ("10e-1", true),
+        ("0.0", false),
+        ("2e0", false),
+        ("1.5", false),
+        ("1e99", false),
+        ("null", false),
+        ("\"1\"", false),
+    ] {
+        let source = format!(r#"{{"schemaVersion":{value}}}"#);
+        assert_eq!(
+            validator.is_valid(&serde_json::from_str(&source).unwrap()),
+            valid,
+            "schema: {source}"
+        );
+        let parsed = parse_config(&source);
+        assert_eq!(parsed.is_ok(), valid, "runtime: {source}");
+        if valid {
+            assert_eq!(parsed.unwrap().resolve().unwrap().schema_version, 1);
+        } else {
+            assert_eq!(parsed.unwrap_err().field, "schemaVersion", "{source}");
+        }
+    }
+}
+
+#[test]
+fn integer_spellings_preserve_defaults_merging_and_duplicate_key_rejection() {
+    let mut config = parse_config(r#"{"schemaVersion":1.0,"format":{"lineWidth":1e2,"indentWidth":4.0,"maxBlankLines":2.0,"inlineCommentSpacing":1e0}}"#).unwrap();
+    assert_eq!(
+        config.resolve().unwrap(),
+        PartialConfig::default().resolve().unwrap()
+    );
+    config.merge(&parse_config(r#"{"format":{"maxBlankLines":0.0,"blankLinesAroundDefinitions":0e0,"finalNewline":false}}"#).unwrap());
+    let resolved = config.resolve().unwrap();
+    assert_eq!(resolved.format.line_width, 100);
+    assert_eq!(resolved.format.max_blank_lines, 0);
+    assert_eq!(
+        resolved.format.blank_lines_around_definitions,
+        gdfmt_config::BlankLinesAroundDefinitions::Count(0)
+    );
+    assert!(!resolved.format.final_newline);
+    for source in [
+        r#"{"schemaVersion":1.0,"schemaVersion":1}"#,
+        r#"{"format":{"lineWidth":100.0,"lineWidth":1e2}}"#,
+        r#"{"overrides":[{"files":[],"format":{"indentWidth":2.0,"indentWidth":4.0}}]}"#,
+    ] {
+        assert!(parse_config(source).is_err(), "{source}");
+    }
+}
+
+#[test]
 fn language_merging_preserves_inheritance_and_uses_shared_parser_profile() {
     use gdfmt_config::LanguageVersion;
     let mut parent = parse_config(r#"{"language":{"godotVersion":"4.3"}}"#).unwrap();

@@ -3,6 +3,32 @@ use gdfmt::{
     TrailingCommaLayout, format,
 };
 
+#[test]
+fn target_line_width_keeps_long_expressions_and_chains_without_token_rewrites() {
+    for source in [
+        "var result = first_value + second_value + third_value + fourth_value + fifth_value + sixth_value + seventh_value\n",
+        "var result = source_object.first_method().second_method().third_method().fourth_method().fifth_method().sixth_method()\n",
+    ] {
+        for line_width in [40, 100] {
+            let request = FormatRequest {
+                format: FormatOptions {
+                    line_width,
+                    ..Default::default()
+                },
+                ..Default::default()
+            };
+            let result = format(source, &request);
+            assert!(result.diagnostics.is_empty(), "{:?}", result.diagnostics);
+            assert_eq!(result.output.as_deref(), Some(source));
+            assert!(!result.changed);
+            assert!(source.trim_end().chars().count() > line_width);
+            let second = format(result.output.as_deref().unwrap(), &request);
+            assert_eq!(second.output.as_deref(), Some(source));
+            assert!(!second.changed);
+        }
+    }
+}
+
 fn layout_cases() -> Vec<FormatOptions> {
     let policies = [
         CollectionLayout::Auto,

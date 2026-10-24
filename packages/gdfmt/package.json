@@ -1,6 +1,6 @@
 {
   "name": "@gdfmt/gdfmt",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-rc.1",
   "description": "Validated Rust GDScript formatter for Node.js and the command line",
   "keywords": [
     "formatter",
@@ -46,11 +46,11 @@
     "access": "public"
   },
   "optionalDependencies": {
-    "@gdfmt/darwin-arm64": "0.1.0-alpha.6",
-    "@gdfmt/darwin-x64": "0.1.0-alpha.6",
-    "@gdfmt/linux-x64-gnu": "0.1.0-alpha.6",
-    "@gdfmt/linux-x64-musl": "0.1.0-alpha.6",
-    "@gdfmt/win32-x64-msvc": "0.1.0-alpha.6"
+    "@gdfmt/darwin-arm64": "0.1.0-rc.1",
+    "@gdfmt/darwin-x64": "0.1.0-rc.1",
+    "@gdfmt/linux-x64-gnu": "0.1.0-rc.1",
+    "@gdfmt/linux-x64-musl": "0.1.0-rc.1",
+    "@gdfmt/win32-x64-msvc": "0.1.0-rc.1"
   },
   "engines": {
     "node": "^22.13.0 || ^24.0.0"

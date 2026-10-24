@@ -15,10 +15,13 @@ if (result.output !== null) console.log(result.output)
 // CommonJS exposes the same named functions via require('@gdfmt/gdfmt').
 const immediate = formatSync('var score=1\n')
 const resolution = await resolveConfig('src/player.gd')
-const configured = await format('var score=1\n', {
-  language: resolution.config.language,
-  format: resolution.config.format,
-})
+if (!resolution.ignored) {
+  const configured = await format('var score=1\n', {
+    language: resolution.config.language,
+    format: resolution.config.format,
+  })
+  if (configured.output !== null) console.log(configured.output)
+}
 ```
 
 `formatSync` runs in the caller; `format` runs parsing, formatting and validation
@@ -30,7 +33,7 @@ to select the original bytes. Strings with unpaired surrogates are rejected befo
 conversion to Rust UTF-8. Omitted options use the same Rust defaults as the CLI;
 unknown fields, explicit null, invalid ranges and non-JSON values are rejected.
 
-`format` also accepts `arrayLayout`, `dictionaryLayout` and `enumLayout`
+The nested `options.format` object also accepts `arrayLayout`, `dictionaryLayout` and `enumLayout`
 (`auto` / `multiline` / `preserve`), `dictionarySpacing` (`compact` / `spaced`),
 `trailingCommaLayout` (`auto` / `multiline`), `blankLinesAroundDefinitions`
 (`preserve` or 0–5), `lambdaBodyStyle` (`auto` / `multiline`) and
@@ -54,7 +57,7 @@ gdfmt --reporter=json check src
 ```
 
 Exit codes: 0 success, 1 source/format findings, 2 host/internal failures. The
-export `gdfmt/schema.json` is the configuration schema generated from Rust.
+export `@gdfmt/gdfmt/schema.json` is the configuration schema generated from Rust.
 
 The native packages target Node **22.13+ on 22.x and 24.x** with Node-API 4:
 macOS arm64/x64, Windows x64 MSVC, Linux x64 glibc/musl. Each root/platform package

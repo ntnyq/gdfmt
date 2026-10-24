@@ -98,6 +98,51 @@ enum Command {
     },
 }
 
+impl Args {
+    fn validate(&self) -> Result<(), &'static str> {
+        if self.lsp {
+            if self.command.is_some() {
+                return Err("--lsp cannot be combined with a subcommand");
+            }
+            if matches!(self.reporter, Reporter::Json) {
+                return Err(
+                    "--reporter=json cannot be combined with --lsp; LSP uses framed JSON-RPC",
+                );
+            }
+        }
+        let formatting = matches!(
+            self.command,
+            None | Some(Command::Format { .. } | Command::Check { .. })
+        );
+        if !formatting && (self.check || self.diff || self.stdin_filepath.is_some()) {
+            return Err("--check, --diff and --stdin-filepath require a formatting/check command");
+        }
+        if self.config.is_some() && matches!(self.command, Some(Command::Init | Command::Schema)) {
+            return Err("--config cannot be combined with init or schema");
+        }
+        let paths = match &self.command {
+            Some(
+                Command::Lex { paths } | Command::Format { paths } | Command::Check { paths, .. },
+            ) => paths,
+            None => &self.paths,
+            _ => return Ok(()),
+        };
+        let from_stdin =
+            self.stdin_filepath.is_some() || paths.iter().any(|path| path == Path::new("-"));
+        if from_stdin && !paths.is_empty() && (paths.len() != 1 || paths[0] != Path::new("-")) {
+            return Err("stdin cannot be combined with file paths");
+        }
+        if self
+            .stdin_filepath
+            .as_ref()
+            .is_some_and(|path| path.extension().is_none_or(|extension| extension != "gd"))
+        {
+            return Err("stdin filepath must have a .gd extension");
+        }
+        Ok(())
+    }
+}
+
 #[derive(Serialize)]
 #[serde(rename_all = "camelCase")]
 struct TokenReport {
@@ -182,8 +227,13 @@ where
     T: Into<OsString> + Clone,
 {
     let arguments: Vec<OsString> = arguments.into_iter().map(Into::into).collect();
-    let requested_json = arguments.iter().any(|arg| arg == "--reporter=json")
-        || arguments
+    let option_arguments: Vec<_> = arguments
+        .iter()
+        .skip(1)
+        .take_while(|arg| *arg != "--")
+        .collect();
+    let requested_json = option_arguments.iter().any(|arg| *arg == "--reporter=json")
+        || option_arguments
             .windows(2)
             .any(|args| args[0] == "--reporter" && args[1] == "json");
     let args = match Args::try_parse_from(&arguments) {
@@ -208,11 +258,20 @@ where
             return if written.is_ok() { code } else { 2 };
         }
     };
+    if let Err(message) = args.validate() {
+        let report = Report::error(
+            "arguments",
+            "CLI_ARGUMENT",
+            DiagnosticCategory::Configuration,
+            message.into(),
+        );
+        let _ = match args.reporter {
+            Reporter::Json => write_json(stdout, &report),
+            Reporter::Human => writeln!(stderr, "{message}"),
+        };
+        return 2;
+    }
     if args.lsp {
-        if args.command.is_some() {
-            let _ = writeln!(stderr, "--lsp cannot be combined with a subcommand");
-            return 2;
-        }
         return match lsp::run(stdin, stdout, cwd, args.config) {
             Ok(code) => code,
             Err(error) => {
@@ -249,15 +308,6 @@ fn execute(
     stderr: &mut dyn Write,
 ) -> Result<i32, WorkspaceError> {
     let io_failure = |error| WorkspaceError::Input(format!("cannot write command output: {error}"));
-    if !matches!(
-        &args.command,
-        None | Some(Command::Format { .. } | Command::Check { .. })
-    ) && (args.check || args.diff || args.stdin_filepath.is_some())
-    {
-        return Err(WorkspaceError::Input(
-            "--check, --diff and --stdin-filepath require a formatting/check command".into(),
-        ));
-    }
     match args.command {
         Some(Command::Schema) => {
             stdout
@@ -316,11 +366,6 @@ fn execute(
         Some(Command::Lex { paths }) => {
             let mut report = Report::new("lex");
             if paths.iter().any(|path| path == Path::new("-")) {
-                if paths.len() != 1 {
-                    return Err(WorkspaceError::Input(
-                        "stdin (-) cannot be combined with file paths".into(),
-                    ));
-                }
                 resolve_config(cwd, cwd, args.config.as_deref())?;
                 let options = LexOptions::default();
                 let mut bytes = Vec::new();
@@ -476,11 +521,6 @@ fn execute_format(
     });
     let mut inputs = Vec::new();
     if from_stdin {
-        if !paths.is_empty() && paths != [PathBuf::from("-")] {
-            return Err(WorkspaceError::Input(
-                "stdin cannot be combined with file paths".into(),
-            ));
-        }
         let path = args.stdin_filepath.as_ref().map(|path| {
             if path.is_absolute() {
                 path.clone()
@@ -488,14 +528,6 @@ fn execute_format(
                 cwd.join(path)
             }
         });
-        if path
-            .as_ref()
-            .is_some_and(|path| path.extension().is_none_or(|extension| extension != "gd"))
-        {
-            return Err(WorkspaceError::Input(
-                "stdin filepath must have a .gd extension".into(),
-            ));
-        }
         let virtual_path = path.clone().unwrap_or_else(|| cwd.join("stdin.gd"));
         let resolution = resolve_config(&virtual_path, cwd, args.config.as_deref())?;
         if resolution.ignored {

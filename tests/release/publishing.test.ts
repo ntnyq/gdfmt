@@ -319,6 +319,22 @@ test('legacy six-package frozen releases remain recoverable against their origin
       repositoryRoot,
       source,
     ])
+    // A version bump may still be uncommitted. Match the synthetic archives to
+    // their source manifests instead of inheriting the clone's older version.
+    for (const file of [
+      'Cargo.toml',
+      'Cargo.lock',
+      'packages/gdfmt/package.json',
+      'editors/vscode/package.json',
+      ...[...publicCrates, ...privateCrates]
+        .filter(name => name !== 'gdfmt_wasm')
+        .map(
+          name => `${name === 'xtask' ? 'xtask' : `crates/${name}`}/Cargo.toml`,
+        ),
+    ]) {
+      mkdirSync(join(source, file, '..'), { recursive: true })
+      copyFileSync(join(repositoryRoot, file), join(source, file))
+    }
     // Model the original source contract without the optional WASM host.
     rmSync(join(source, 'crates/gdfmt_wasm'), { recursive: true, force: true })
     rmSync(join(source, 'packages/wasm'), { recursive: true, force: true })

@@ -196,7 +196,7 @@
           "$ref": "#/$defs/LineEnding"
         },
         "lineWidth": {
-          "description": "Target print width; long indivisible tokens may exceed this value. Default: 100.",
+          "description": "Target width at supported break points, not a hard limit. Default: 100.\nLong expressions/chains, indivisible tokens/types, comments, literal contents\nand protected regions may exceed this value.",
           "type": "integer",
           "format": "uint16",
           "maximum": 320,

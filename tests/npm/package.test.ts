@@ -311,6 +311,9 @@ test('strict invalid options throw synchronously and reject asynchronously witho
     { sourceId: 1n },
     { format: new Date() },
     { [Symbol('hidden')]: true },
+    Object.defineProperty({}, 'unknown', { value: true }),
+    Object.defineProperty({}, 'format', { value: { lineWidth: 40 } }),
+    { format: Object.defineProperty({}, 'lineWidth', { value: undefined }) },
   ]
   for (const options of cases) {
     assert.throws(() =>
@@ -457,6 +460,11 @@ test('npm CLI has byte-identical stdout/stderr, exit codes, writes and host fail
       ['--reporter=json', 'missing.gd'],
       ['--reporter=json', 'ignored.gd'],
       ['--reporter=json', '--check', '--diff'],
+      ['schema', '--check', '--reporter=json'],
+      ['init', '--config', 'missing.json', '--reporter=json'],
+      ['--lsp', 'schema', '--reporter=json'],
+      ['--lsp', '--reporter=json'],
+      ['--unknown', '--', '--reporter=json'],
       ['--config', 'missing.json', '--reporter=json', 'file.gd'],
       ['--stdin-filepath', 'file.gd'],
       ['--stdin-filepath', 'file.gd', '--check'],

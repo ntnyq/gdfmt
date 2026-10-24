@@ -132,6 +132,32 @@ impl Drop for Client {
 }
 
 #[test]
+fn lsp_rejects_range_formatting_without_falling_back_to_document_formatting() {
+    let root = tempdir().unwrap();
+    let mut client = Client::new(root.path());
+    client.initialize(root.path());
+    let uri = "untitled:range";
+    client.open(uri, "var first=1\nvar second=2\n");
+    for method in [
+        "textDocument/rangeFormatting",
+        "textDocument/rangesFormatting",
+    ] {
+        let id = client.send(
+            method,
+            json!({"textDocument": {"uri": uri}, "range": {
+                "start": {"line": 0, "character": 0},
+                "end": {"line": 0, "character": 11}
+            }, "options": {"tabSize": 2, "insertSpaces": true}}),
+        );
+        let response = client.response(id);
+        assert_eq!(response.error.unwrap().code, -32601);
+        assert!(response.result.is_none());
+    }
+    assert_ne!(client.format(uri), json!([]));
+    client.shutdown();
+}
+
+#[test]
 fn lsp_text_formatting_returns_target_eol_and_never_edits_invalid_or_ignored_source() {
     let root = tempdir().unwrap();
     let path = root.path().join("example.gd");
