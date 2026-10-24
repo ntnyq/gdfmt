@@ -11,15 +11,20 @@ Track the first stable release's remaining acceptance work in the
 
 ## Current 0.1.0 readiness
 
-The source candidate is now **0.1.0-rc.1** (npm channel `next`), with independent
-extension version **0.2.0** and `gdfmtVersion: 0.1.0-rc.1`. The candidate is unpublished; no tag or registry upload exists.
-The [candidate CI report](docs/research/0.1.0-rc.1-ci.md) records exact committed-source
-acceptance, artifact hashes, the full project trial and a local 7-npm/8-crate/6-VSIX
-bundle rehearsal. See the [candidate notes](docs/releases/0.1.0-rc.1.md); the
-[initial local preparation](docs/research/0.1.0-rc.1-preparation.md) remains historical
-dirty-source evidence. PR #1 remains unmerged. Publication still requires a clean
-merged revision, its own complete CI and a tag-bound freeze; the local rehearsal
-does not authorize registry writes.
+**0.1.0-rc.1 is published** on crates.io and npm `next`/`candidate`, with independent
+extension version **0.2.0** and `gdfmtVersion: 0.1.0-rc.1`. All npm `latest` tags
+retain their previous values. Stable 0.1.0 and Marketplace uploads remain outside
+this release.
+
+[PR #1](https://github.com/ntnyq/gdfmt/pull/1) was squash-merged into
+`1329b72dc26179921739e4c2342ffa0bf7b7a314`; `v0.1.0-rc.1` binds that commit.
+[Release run 40051909889](https://github.com/ntnyq/gdfmt/actions/runs/40051909889)
+passed all tag-bound checks, freeze and both registry publications.
+[Publication evidence](docs/research/0.1.0-rc.1-publication.md) records the original
+artifact ID/hashes, all fifteen registry payloads, real Rust/npm consumers and
+all 24 GitHub prerelease assets. The [candidate CI report](docs/research/0.1.0-rc.1-ci.md)
+and [initial preparation](docs/research/0.1.0-rc.1-preparation.md) retain their own
+historical source identities; do not relabel those receipts as the release commit.
 
 The [registry and environment review](docs/research/0.1.0-registry-readiness-review.md)
 records the initial read-only snapshot and the branch/tag protection follow-up
@@ -37,31 +42,23 @@ configured and verified. Their expected settings are recorded in
 exceptions described below. Environment deployment admission remains separate
 from tag creation, modification and deletion protection.
 
-The [current Trusted Publisher/account review](docs/research/0.1.0-trusted-publisher-review.md)
-queried all fifteen packages: eight crate configuration reads returned 403, and
-seven npm trust reads returned E401. npm identity/profile/access reads also
-returned E401; both available browser sessions showed signed-out controls.
-Current bindings, npm direct-publish/dist-tag permissions and account readiness
-remain unverified. These results do not establish missing publishers or lost
-package rights.
-
-The owner subsequently reported that publishing configuration is complete.
-This is owner confirmation, not a new authenticated API readback. Archive the
-non-secret binding/permission and email-verification/2FA/access/token-revocation
-confirmations using the review's package tables before closing the complete
-owner-review item. All eight crates publicly
-report `trustpub_only: false`; enabling that mode is optional hardening, not a
-new release gate or evidence about existing tokens. Recheck the chosen candidate
-with a new successful publication and installed registry consumers; the old
-alpha.6 run does not accept the current working tree.
+The [initial Trusted Publisher/account review](docs/research/0.1.0-trusted-publisher-review.md)
+records historical private-configuration read limits. The rc.1 release now proves
+all fifteen functional Trusted Publishers and npm direct-publish/dist-tag rights:
+every crate's public publishing identity matches the release run/commit, and every
+npm package records GitHub Trusted Publishing and provenance. Owner confirmation
+of setup remains recorded; email/2FA and bootstrap-token revocation have not been
+independently read back. Keep that remaining account-evidence item separate from
+the completed candidate publication/consumer gate. Optional Trusted Publishing
+Only hardening is not a new release requirement.
 
 For a read-only local review, use `pnpm release:check` and `pnpm test:release`.
 GitHub environment, variable, branch and ruleset API reads and `npm trust list`
 are also read-only; registry administration reads require suitable authentication.
 Do not treat a new `v*` tag push as validation only while the gate is enabled.
-A manual workflow run with `publish: false` remains validation only. The
-protection follow-up changed only branch/tag settings; it did not dispatch a run,
-create or move refs, publish packages or move dist-tags.
+A manual workflow run with `publish: false` remains validation only. The historical
+protection follow-up changed only branch/tag settings. The later rc.1 tag and
+publication are recorded separately in the publication report.
 
 ## Release units
 
@@ -277,9 +274,9 @@ records both routes and remaining work. Public Gallery metadata on 2026-10-23
 already lists numeric extension `0.1.0` as a six-target prerelease; inspected
 macOS/Web manifests contain core `0.1.0-alpha.6`. It is not a stable core release.
 
-The rc.1 preparation selects numeric extension version `0.2.0`; a fresh read-only
-Gallery query listed only `0.1.0`. Local rc.1 VSIX files carry the prerelease flag
-and core `0.1.0-rc.1`; no Gallery upload has occurred. Recheck availability before
+The rc.1 GitHub Release provides six frozen VSIX files with numeric extension
+`0.2.0` and core `0.1.0-rc.1`, marked as prerelease. This publication did not upload
+to the Gallery or change the Marketplace listing. Recheck availability before
 any later upload and rebuild/test/freeze all six variants. If `0.2.0` is uploaded
 as a Gallery prerelease, select another unused numeric version for stable.
 Do not reuse the existing Gallery prerelease version or publish the raw source

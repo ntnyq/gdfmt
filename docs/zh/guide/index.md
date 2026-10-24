@@ -2,9 +2,9 @@
 
 gdfmt 通过命令行格式化 GDScript 文件。可以直接使用默认设置，需要共享项目风格时再提交配置文件。
 
-当前源码候选为 **0.1.0-rc.1，尚未发布**，详见
-[候选说明](../releases/0.1.0-rc.1.md)。源码构建使用 checkout 的版本；下面的 registry
-命令使用已发布包。
+当前已发布预发布版本为 **0.1.0-rc.1**，可从 crates.io 和 npm `next` 安装，详见
+[候选说明](../releases/0.1.0-rc.1.md)及[registry 验收](../research/0.1.0-rc.1-publication.md)。
+正式版 0.1.0 尚未发布；源码构建使用 checkout 的版本。
 
 ## 从源码安装
 
@@ -24,7 +24,7 @@ gdfmt --version
 Cargo 预发布版本需要显式指定版本，包名与可执行命令不同：
 
 ```sh
-cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked
+cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked
 gdfmt --version
 ```
 

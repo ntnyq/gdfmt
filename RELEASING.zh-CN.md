@@ -10,13 +10,18 @@ Rust workspace 与公开 npm 包使用统一版本。推送 `v版本号` tag 后
 
 ## 当前 0.1.0 准备状态
 
-源码候选现为 **0.1.0-rc.1**（npm 渠道 `next`），独立扩展数字版本 **0.2.0**，
-`gdfmtVersion: 0.1.0-rc.1`。候选尚未发布，没有候选 tag 或 registry 上传。
-[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)记录精确提交源码的验收、产物 hash、
-完整项目试用和本地 7 份 npm/8 份 crate/6 份 VSIX bundle 演练，详见
-[候选说明](docs/zh/releases/0.1.0-rc.1.md)。[最初本机准备](docs/zh/research/0.1.0-rc.1-preparation.md)
-保留为非干净源码历史证据。PR #1 尚未合并；发布仍需合并后的干净提交、该提交的
-完整 CI 和绑定 tag 的冻结，本地演练不授权 registry 写入。
+**0.1.0-rc.1 已发布**到 crates.io 和 npm `next`/`candidate`，独立扩展数字版本
+**0.2.0**，`gdfmtVersion: 0.1.0-rc.1`。全部 npm `latest` 保持原值，本次不发布
+正式版 0.1.0，也不上传 Marketplace。
+
+[PR #1](https://github.com/ntnyq/gdfmt/pull/1) 已 squash 合并为
+`1329b72dc26179921739e4c2342ffa0bf7b7a314`，`v0.1.0-rc.1` 绑定该提交。
+[Release 运行 40051909889](https://github.com/ntnyq/gdfmt/actions/runs/40051909889)
+通过全部 tag 检查、冻结及两个 registry 发布。[发布证据](docs/zh/research/0.1.0-rc.1-publication.md)
+记录原 artifact ID/hash、十五个 registry 包、真实 Rust/npm 消费者及 GitHub 预发布的
+全部 24 个附件。[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)和
+[最初准备](docs/zh/research/0.1.0-rc.1-preparation.md)保留各自历史源码身份，不能
+将旧回执重新标记为发布提交。
 
 [registry 与环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)记录了
 2026-10-23 的初次只读快照及后续分支/tag 保护落实情况。八个 crate 和七个 npm 包均已存在，公开 owner/maintainer
@@ -30,23 +35,18 @@ Rust workspace 与公开 npm 包使用统一版本。推送 `v版本号` tag 后
 预期设置记录在 [repository-protection.json](.github/repository-protection.json)，
 维护者例外见下文。Environment 部署准入与 tag 创建、修改及删除保护仍是不同的控制。
 
-[当前 Trusted Publisher/账号审查](docs/zh/research/0.1.0-trusted-publisher-review.md)
-已逐项查询十五个包：八个 crate 配置读取均返回 403，七个 npm trust 读取均返回
-E401。npm 身份/资料/权限读取也返回 E401，可访问的两个浏览器会话均显示未登录。
-当前绑定、npm 直接发布/dist-tag 权限及账号准备状态仍未验证，不能据此认定
-publisher 缺失或包权限丢失。
-
-owner 随后确认发布配置已完成，此处记录维护者确认，不声明新增了认证 API
-回读。关闭完整 owner 核对条目前，按报告逐包表归档非秘密的绑定/权限及邮箱验证、
-2FA、写权限和旧 token 撤销确认。八个 crate 公开的 `trustpub_only` 均为 `false`；启用该模式是可选加固，
-不新增发布门槛，也不能据此判断现有 token。选定候选版本后，仍需新的成功发布及
-registry 安装消费者验证；旧 alpha.6 运行不能验收当前工作区。
+[最初 Trusted Publisher/账号审查](docs/zh/research/0.1.0-trusted-publisher-review.md)
+记录历史私有配置读取限制。rc.1 已实际证明十五个 Trusted Publisher，以及 npm
+直接发布/dist-tag 权限可用：全部 crate 的公开发布身份匹配本次运行/提交，全部
+npm 包记录 GitHub Trusted Publishing 和 provenance。保留 owner 配置完成确认；
+邮箱/2FA 和首次发布 token 撤销尚未独立回读。将剩余账号证据与已完成的候选发布/
+消费者门槛分开记录，可选 Trusted Publishing Only 加固不新增发布门槛。
 
 本地只读审查可运行 `pnpm release:check` 和 `pnpm test:release`。GitHub 环境、
 变量、分支、ruleset API 读取和 `npm trust list` 也为只读操作；registry 管理设置
 需要合适的认证。开关已启用时，不要把新 `v*` tag 推送当作只验证；手动工作流保持
-`publish: false` 时仍只验证。后续落实仅修改分支/tag 设置，没有触发运行、创建或
-移动 ref、发布包或移动 dist-tag。
+`publish: false` 时仍只验证。历史保护落实仅修改分支/tag 设置；后来的 rc.1 tag
+与实际发布单独记录在发布报告中。
 
 ## 发布范围与顺序
 
@@ -291,8 +291,8 @@ pnpm release:publish:npm --source ../gdfmt-release-source --artifacts target/rel
 记录两条路线和剩余工作。截至 2026-10-23，公开 Gallery 已列出数字扩展 `0.1.0`
 的六种目标预发布；已检查的 macOS/Web 清单包含核心 `0.1.0-alpha.6`，不是核心正式版。
 
-rc.1 准备已选择扩展数字版本 `0.2.0`，本次只读 Gallery 查询仅列出 `0.1.0`。
-本地 rc.1 VSIX 带预发布标记，内置核心 `0.1.0-rc.1`，尚未上传 Gallery。后续上传前
+rc.1 GitHub Release 已提供六份冻结 VSIX，扩展数字版本 `0.2.0`、内置核心
+`0.1.0-rc.1`，带预发布标记。本次未上传 Gallery 或修改 Marketplace 条目。后续上传前
 重新核对可用性，统一重建、测试和冻结六种变体。如果先将 `0.2.0` 上传为 Gallery
 预发布，正式上传需另选未使用的数字版本。
 不能复用现有 Gallery 预发布版本，也不能直接从源码目录发布。先确认 publisher

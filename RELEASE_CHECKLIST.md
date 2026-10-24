@@ -52,16 +52,17 @@ dirty-working-tree evidence; the candidate validation below records the clean rc
 
 ## Candidate validation
 
-The **`0.1.0-rc.1`** source is committed in [PR #1](https://github.com/ntnyq/gdfmt/pull/1),
-with independent extension version **`0.2.0`** and unchanged default style.
-The [candidate CI report](docs/research/0.1.0-rc.1-ci.md) binds acceptance to source
-`5d95932e63a1d5199916466013bf557561279fe5`; its linked artifact evidence records
-clean-source receipts, workflow/artifact IDs and hashes. The final documentation
-follow-up must also pass complete CI on its own PR head, recorded in the PR.
+**`0.1.0-rc.1` is published** on crates.io and npm `next`/`candidate`, with independent
+extension version **`0.2.0`** and unchanged default style. [PR #1](https://github.com/ntnyq/gdfmt/pull/1)
+was squash-merged into `1329b72dc26179921739e4c2342ffa0bf7b7a314`, tagged as
+`v0.1.0-rc.1`. The [publication report](docs/research/0.1.0-rc.1-publication.md)
+records exact tag-bound CI, artifact ID/hashes, fifteen registry payloads and real
+installed Rust/npm consumers. All npm `latest` tags retain their previous values.
 
-The [preparation report](docs/research/0.1.0-rc.1-preparation.md) remains a historical
-`cleanSource: false` WIP snapshot. No tag or publication occurred. Candidate
-acceptance below does not validate final 0.1.0 artifacts at a future tagged revision.
+The [candidate CI report](docs/research/0.1.0-rc.1-ci.md) and
+[initial preparation](docs/research/0.1.0-rc.1-preparation.md) remain historical
+snapshots of their own source revisions. Candidate publication does not validate
+future stable 0.1.0 artifacts. No stable release or Marketplace upload occurred.
 
 - [x] Prepare rc.1 source versions and bilingual candidate notes; review current
       changes, fix the version-dependent legacy recovery test fixture, and run
@@ -91,21 +92,21 @@ acceptance below does not validate final 0.1.0 artifacts at a future tagged revi
       `--record-review`. Attach the summary and tested revision. This is a manual
       0.1.0 acceptance item; the full trial remains optional in ordinary CI.
 
-Clean rc.1 evidence is recorded in the candidate CI report: ten native consumers,
-installed WASM, all six VSIX targets (four desktop installed-VSIX checks), both
-editor hosts, bilingual Playground, eight clean packaged crate builds and all five
-engine profiles. The full project trial retains all 606 review entries and zero
-unexplained differences. Complete `pnpm verify:npm` and a local `pnpm release:prepare`
-rehearsal verified seven npm tarballs, eight crates and six VSIX files. These are
-source-candidate validation artifacts; tag-bound freezing and publication gates
-remain separate.
+The exact release tag passed the full CI, eight packaged crate builds, six VSIX
+targets and complete project trial, retaining all 606 review entries and zero
+unexplained differences. Original frozen artifact `12544141250` contains seven npm
+tarballs, eight crates and six VSIX files. All fifteen registry downloads and all
+24 GitHub assets match its hashes. Linux CI and independent macOS ARM64 registry
+consumers passed; native/WASM parity covers 1,465 cases. Final stable-tag freezing
+and publication gates remain separate.
 
 ## Documentation and release notes
 
 The [bilingual documentation review](docs/research/0.1.0-documentation-review.md)
 was completed for the prior `0.1.0-alpha.6` baseline. The rc.1 preparation updates
-source-candidate labels and rechecks examples, declarations and editor versions;
-public registry commands retain published versions until a real upload.
+source-candidate labels and rechecks examples, declarations and editor versions.
+After rc.1 publication, installation commands use the published rc.1 and point to
+its registry acceptance; stable 0.1.0 remains unreleased.
 
 The 0.1.0 release notes are prepared in [English](docs/releases/0.1.0.md) and
 [Simplified Chinese](docs/zh/releases/0.1.0.md), including host/profile support,
@@ -117,8 +118,8 @@ The [Marketplace/VSIX review](docs/research/0.1.0-editor-distribution-review.md)
 recommends frozen GitHub VSIX delivery for core 0.1.0, with Marketplace stable
 publication tracked independently. Gallery already has numeric extension 0.1.0
 as a six-target prerelease containing alpha.6 in the inspected macOS/Web manifests.
-The rc.1 preparation selects numeric 0.2.0 after a fresh availability check;
-local VSIX files are prereleases and no Gallery upload occurred. Recheck before
+rc.1 selected numeric 0.2.0; six frozen prerelease VSIX files are now available
+on its GitHub Release. No Gallery upload occurred. Recheck before
 uploading; a Gallery prerelease upload of 0.2.0 would require another numeric
 version for stable. Web installation and packaged trust differences are explicit.
 
@@ -145,20 +146,14 @@ environment permits `v*` tags. The subsequent protection work configured `main`
 and active tag ruleset [25720774](https://github.com/ntnyq/gdfmt/rules/25720774),
 with administrator/maintainer exceptions and verified API readback. The applied
 policy is recorded in [.github/repository-protection.json](.github/repository-protection.json).
-The owner subsequently reported that publishing configuration is complete.
-Record this as owner confirmation, separate from the earlier unauthenticated
-query results. Field-by-field authenticated evidence and account-readiness
-confirmations have not been captured in this repository; the checklist item
-below retains that evidence requirement, and candidate publication remains
-a separate gate.
-
-The [per-package trust/account review](docs/research/0.1.0-trusted-publisher-review.md)
-records the earlier eight 403 and seven E401 results, npm account/access failures
-and signed-out sessions. These historical query limits do not contradict the
-owner’s later setup confirmation. Archive authenticated, non-secret evidence of
-all fifteen bindings, both npm permissions and email/2FA/access/token revocation. Public `trustpub_only: false` on all eight crates is optional-hardening
-state, not a new acceptance gate. Keep authenticated review unchecked until
-the actual settings have been read.
+The owner subsequently confirmed setup. rc.1 now exercises all fifteen Trusted
+Publishers and npm direct-publish/dist-tag rights in a successful new release;
+public registry identity, hashes and real consumers are recorded in the
+[publication report](docs/research/0.1.0-rc.1-publication.md). The
+[initial per-package review](docs/research/0.1.0-trusted-publisher-review.md) retains
+historical private-read/session limitations. Email/2FA/access and bootstrap-token
+revocation have not been independently read back, so the remaining owner-account
+evidence stays unchecked. Optional Trusted Publishing Only hardening is not a new gate.
 
 - [x] Complete the read-only ownership, historical Trusted Publishing and
       `release` environment audit for all eight crates and seven npm packages,
@@ -168,13 +163,14 @@ the actual settings have been read.
       29 required checks, administrator emergency bypass and Admin/Maintain
       tag exceptions, including recovery tags. Record the policy and API/role
       readback without publishing or creating refs.
-- [ ] Obtain an authenticated owner review of current Trusted Publisher bindings
-      for all fifteen packages, npm direct-publish/dist-tag permissions, account
-      readiness and bootstrap-token revocation. Resolve mismatches or expired
-      new configurations before candidate publication.
-- [ ] Confirm the chosen candidate's publishing setup with a successful new
-      release and installed registry consumers; historical alpha.6 evidence
-      cannot close this gate.
+- [ ] Archive the remaining authenticated owner-account evidence: email verification,
+      2FA/access and bootstrap-token revocation. rc.1 already proves all fifteen
+      functional Trusted Publishers and npm direct-publish/dist-tag permissions;
+      do not repeat configuration unless those settings change.
+- [x] Confirm the chosen candidate's publishing setup with a successful new
+      release and installed registry consumers. rc.1 run `40051909889` and the
+      publication report record all fifteen payloads, exact installed consumers,
+      `next` promotion and unchanged `latest` tags.
 - [x] Review and retain the pinned npm 11.21.0 runtime and scoped dist-tag
       workaround. This read-only review does not meet the publishing guide's
       removal criteria.
@@ -189,8 +185,9 @@ the actual settings have been read.
 
 ## Publication completion
 
-These items are checked during publication. Preserve the original frozen bundle
-when recovering a partial release.
+These remaining items apply to the final stable 0.1.0 release. rc.1's tag-bound
+freeze, registry consumers and GitHub prerelease are complete in the report above.
+Preserve each release's original frozen bundle when recovering a partial release.
 
 - [ ] Confirm the final tag's full CI matrices and freeze job passed. Record the
       successful run/artifact ID and matching revision, receipts and hashes for
