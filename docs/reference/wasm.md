@@ -15,8 +15,8 @@ const result = formatter.formatSync('var value=1\n', {
 if (result.output !== null) console.log(result.output)
 ```
 
-Install the browser package with `pnpm add @gdfmt/wasm@next`; it has no native
-platform addon and does not require Rust to consume. The `next` channel moves;
+Install the browser package with `pnpm add @gdfmt/wasm@latest`; it has no native
+platform addon and does not require Rust to consume. The `latest` stable channel moves;
 pin an exact version or commit your lockfile for reproducible builds.
 
 To build from a repository checkout, install dependencies with

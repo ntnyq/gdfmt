@@ -1,0 +1,721 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0",
+  "channel": "latest",
+  "published": true,
+  "releaseDate": "2026-10-25",
+  "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+  "tag": "v0.1.0",
+  "pullRequest": 3,
+  "mergeMethod": "squash",
+  "releaseRun": 40118540445,
+  "releaseWorkflowResult": "success",
+  "successfulJobs": 34,
+  "skippedRecoveryJobs": 1,
+  "frozenArtifact": {
+    "id": 12570578153,
+    "name": "release-artifacts-1",
+    "sha256": "6e7606b6c4116db735fe0372e991e2e1941a83d4b246d741571cd4a838f01a2b",
+    "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+  },
+  "bundleManifestSha256": {
+    "npm/release.json": "cbe4b6c89bb34b6b25de5581a9fd3e2de29c03b4d00e591725999d9ec08dfa9f",
+    "crates/crates.json": "d96f0eff2f19723ad70797488ba99d5cdf794801e100105dcebc4d78aa75b226",
+    "editors/editors.json": "888bc0452d60fcda8881aaadb08212f5458261fe964ba219e551e213b78823fb"
+  },
+  "registry": {
+    "version": "0.1.0",
+    "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+    "crates": [
+      {
+        "name": "gdfmt_text",
+        "version": "0.1.0",
+        "sha256": "48d6cb6c6cbbbe2851e97a582df26baa8ad959b8220cc91128e8746ed9fd7a0b",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_syntax",
+        "version": "0.1.0",
+        "sha256": "2c6294ba4efa49799f990dfc2f01310d176689e7812fcd946b7be69769a55ac9",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_parser",
+        "version": "0.1.0",
+        "sha256": "9444553a6195a2286b1d94af05e3268c9f147e8c2cd9f52471ef90c6c0cbca77",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_formatter",
+        "version": "0.1.0",
+        "sha256": "f8558de180e747adb9894a025921d65766d49b68f46f258efeb8013470c5d2a9",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt",
+        "version": "0.1.0",
+        "sha256": "cde09eb5041c28106c4816da0145e142ffb8bd007966795c3e4e97dacf37e2c1",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_config",
+        "version": "0.1.0",
+        "sha256": "9b914385e4df630409af6edd35f19233cfaa5905e47a297d185e0708178b740f",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_workspace",
+        "version": "0.1.0",
+        "sha256": "68b171386625d0a88c0f024de428601df936b2a685a8b5e20d7658ee2433056d",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_cli",
+        "version": "0.1.0",
+        "sha256": "798c10f170ac5586b5515fefa2e247ff738205f87acab83497508a66cc52ba9c",
+        "yanked": false,
+        "vcsRevision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40118540445",
+          "sha": "d98db6b0463d91e6449f2c84dd62026ceb0698cd"
+        },
+        "passed": true
+      }
+    ],
+    "npm": [
+      {
+        "name": "@gdfmt/darwin-arm64",
+        "version": "0.1.0",
+        "integrity": "sha512-7AfCR14EjZy+gNtbeG9CtURNCV/RjfDxrYRLujZttL1SM5CHbsC7YeswxIacQ1F6TA8ApoBWH6hOpy32I5z1Kg==",
+        "tarballSha256": "d973c0c588df28b1daf7f223c890c19f1be7f11759115144dbe3d2deaa96a463",
+        "distTags": {
+          "latest": "0.1.0",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestAdvanced": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fdarwin-arm64@0.1.0",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "817756df-c34e-4200-85cb-ab7a3df589a8"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/darwin-x64",
+        "version": "0.1.0",
+        "integrity": "sha512-lSbY3u9AMJ7ePuHNdnnD0/x3NiUxR1SEtZyMPHO+psxtljS55ZWyZUCcWhMt5tye8Gpaf/sAenlfVt9pwV8zrw==",
+        "tarballSha256": "ddd56d5b792eec38752e8fcb221f0b482420d5c9e6275e2e9ed48eef7eeafc4d",
+        "distTags": {
+          "latest": "0.1.0",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestAdvanced": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fdarwin-x64@0.1.0",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "c504435a-d4e8-429f-b7b8-1df7d0313c44"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/linux-x64-gnu",
+        "version": "0.1.0",
+        "integrity": "sha512-8uhggTqQMptYbdiJAuZsnu+ptN4P3MKm47TeQuKdD4DPYnapHYcXJEFPV0kshLXGHLUyP8jwWE6H7CisBhxY6g==",
+        "tarballSha256": "5842a9053a599bce079bafbe0d5c0d606eeb2c6ba63674dade35217c53d9b59a",
+        "distTags": {
+          "latest": "0.1.0",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestAdvanced": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2flinux-x64-gnu@0.1.0",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "61e2bf38-a5b4-4aa0-8454-b723bb90079e"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/linux-x64-musl",
+        "version": "0.1.0",
+        "integrity": "sha512-MFR5P6N3t++nczNv5gSZnVjeNjwCqF7vz03lghIUu9Hb+ycp9/u7lAPo6urq5x488bmsvfPI34oeQKKoWnGXWw==",
+        "tarballSha256": "55b347f6ed04f14550b366bf5cb13c0eae39e4a55bc53004da67a009faea4aa1",
+        "distTags": {
+          "latest": "0.1.0",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestAdvanced": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2flinux-x64-musl@0.1.0",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "29ed18c4-5f9c-4a6b-ab2f-3eaa8b5c5c6f"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/win32-x64-msvc",
+        "version": "0.1.0",
+        "integrity": "sha512-zWQR0creCluuE5ZxFOAdzBMHzlAQvkVo5XmybT/Qc77ZYutFbpb/12y3C8/CHzIuUAH6SAIuvb7VryjY3uu2mw==",
+        "tarballSha256": "66c5a834a23d2097e2e116147a74162a4ef795b3866794d093660019c765d7ab",
+        "distTags": {
+          "latest": "0.1.0",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestAdvanced": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fwin32-x64-msvc@0.1.0",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "0688b66c-65d0-4a4b-ae49-92f54d28a538"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/wasm",
+        "version": "0.1.0",
+        "integrity": "sha512-36hS6F6y/evGdbJpY34uGZMh6PT7wu7whno+DKKNwTh0fnda0Kd4PPJDmBwQnVyPGyqDKemWtOf6Er3ei0tuFw==",
+        "tarballSha256": "83711a79171714c07db7e994764423febedc0564f46ebb817efe3edb67d1fbc7",
+        "distTags": {
+          "latest": "0.1.0",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0"
+        },
+        "previousLatest": "0.1.0-alpha.5",
+        "latestAdvanced": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fwasm@0.1.0",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "889ed05c-f614-4442-862c-5517e8ab1c44"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/gdfmt",
+        "version": "0.1.0",
+        "integrity": "sha512-H4EljQrjfIi3DV4EN2r8VNKE/bHP9etiWzqyLnvEF1kX30nCrnOPnXG4fCAzKWkYTtm7cPkBDUmzxpZ6f60pRQ==",
+        "tarballSha256": "b1b7de84a9541c3c00525a381b76d19720a686eea5849994fb30bb0d09e1d26a",
+        "distTags": {
+          "latest": "0.1.0",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0"
+        },
+        "previousLatest": "0.1.0-alpha.3",
+        "latestAdvanced": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fgdfmt@0.1.0",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "6b5037fb-78eb-40af-aa5c-ece37900e443"
+        },
+        "passed": true
+      }
+    ]
+  },
+  "consumers": {
+    "rust": {
+      "version": "0.1.0",
+      "registryInstalled": true,
+      "platform": "Darwin",
+      "arch": "arm64",
+      "checks": [
+        {
+          "check": "cargo-consumer-lock",
+          "exitCode": 0,
+          "seconds": 1.54
+        },
+        {
+          "check": "cargo-api-consumer",
+          "exitCode": 0,
+          "seconds": 9.82
+        },
+        {
+          "check": "cargo-install",
+          "exitCode": 0,
+          "seconds": 16.3
+        }
+      ],
+      "packages": [
+        {
+          "name": "gdfmt",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_cli",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_config",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_formatter",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_parser",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_syntax",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_text",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_workspace",
+          "version": "0.1.0",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        }
+      ],
+      "facade": true,
+      "configuration": true,
+      "diagnostics": true,
+      "cliRunner": true,
+      "installedCli": true,
+      "passed": true
+    },
+    "npm": {
+      "version": "0.1.0",
+      "registryInstalled": true,
+      "nodeVersion": "v24.22.1",
+      "platform": "darwin",
+      "arch": "arm64",
+      "fixtureCases": 1465,
+      "esm": true,
+      "commonjs": true,
+      "asyncApi": true,
+      "wasm": true,
+      "configuration": true,
+      "strictValidation": true,
+      "diagnostics": true,
+      "cli": true,
+      "passed": true,
+      "declarations": true,
+      "isolatedFromRepository": true,
+      "installRequested": ["@gdfmt/gdfmt@latest", "@gdfmt/wasm@latest"],
+      "optionalDependenciesEnabled": true,
+      "installedPackages": [
+        {
+          "name": "@gdfmt/gdfmt",
+          "version": "0.1.0",
+          "resolved": "https://registry.npmjs.org/@gdfmt/gdfmt/-/gdfmt-0.1.0.tgz",
+          "integrity": "sha512-H4EljQrjfIi3DV4EN2r8VNKE/bHP9etiWzqyLnvEF1kX30nCrnOPnXG4fCAzKWkYTtm7cPkBDUmzxpZ6f60pRQ=="
+        },
+        {
+          "name": "@gdfmt/wasm",
+          "version": "0.1.0",
+          "resolved": "https://registry.npmjs.org/@gdfmt/wasm/-/wasm-0.1.0.tgz",
+          "integrity": "sha512-36hS6F6y/evGdbJpY34uGZMh6PT7wu7whno+DKKNwTh0fnda0Kd4PPJDmBwQnVyPGyqDKemWtOf6Er3ei0tuFw=="
+        },
+        {
+          "name": "@gdfmt/darwin-arm64",
+          "version": "0.1.0",
+          "resolved": "https://registry.npmjs.org/@gdfmt/darwin-arm64/-/darwin-arm64-0.1.0.tgz",
+          "integrity": "sha512-7AfCR14EjZy+gNtbeG9CtURNCV/RjfDxrYRLujZttL1SM5CHbsC7YeswxIacQ1F6TA8ApoBWH6hOpy32I5z1Kg=="
+        }
+      ]
+    },
+    "ciRustJob": 120947913062,
+    "ciNpmJob": 120948397412
+  },
+  "projectTrial": {
+    "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+    "cleanSource": true,
+    "pythonHashSeed": 173,
+    "scripts": 606,
+    "acceptedScripts": 605,
+    "invariantLayouts": 2420,
+    "expectedSourceRejections": 1,
+    "pinnedComparatorRejections": 9,
+    "identicalOutputs": 67,
+    "explainedDifferences": 529,
+    "unexplainedDifferences": 0,
+    "reviewEntriesUnchanged": 606,
+    "reports": {
+      "summary.json": "19bbb87512594838e08ac0853a02e6e24acf16f2bb9e5db8eeade5d5cb1069e4",
+      "layouts.json": "08b40458a9c33eb77426c5940664da9b21f606c5f32ae7a2056b059e955871ac",
+      "comparisons.json": "2b3272076a87d8504bce10ef2532b88d43d64148945aad91dea70b97b0821011",
+      "review-candidate.json": "4277df6babe9c1d74237c5af638a2eba458db8d9b320e7519e214a14492d3fa9"
+    }
+  },
+  "editors": {
+    "extensionVersion": "0.2.1",
+    "coreVersion": "0.1.0",
+    "stableVsixCount": 6,
+    "prereleaseFlag": false,
+    "receipts": [
+      {
+        "schemaVersion": 1,
+        "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "cleanSource": true,
+        "coreVersion": "0.1.0",
+        "extensionVersion": "0.2.1",
+        "target": "darwin-arm64",
+        "file": "gdfmt-0.1.0-darwin-arm64.vsix",
+        "sha512": "c5b7f56b1c7656d70009ed4aa4c9b0697370b7de2cb12faac5beb8bf98164fa516d2ceb6440e2e604ba2045a5283670d803ca2d1b00d7a7e28ed06d08a255cc2",
+        "nativeSmokePassed": true,
+        "extensionHostPassed": true,
+        "published": false,
+        "installedVsixPassed": true,
+        "godotToolsPassed": false,
+        "vscodeVersion": "1.96.4"
+      },
+      {
+        "schemaVersion": 1,
+        "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "cleanSource": true,
+        "coreVersion": "0.1.0",
+        "extensionVersion": "0.2.1",
+        "target": "darwin-x64",
+        "file": "gdfmt-0.1.0-darwin-x64.vsix",
+        "sha512": "5b05b1b408391656a00bb443f71d4f12e41815c9a81400bc693b1507220c35a84f545b0604234cc083c24a87b0479b196f1b03cf78b45fcf2903a59183472747",
+        "nativeSmokePassed": true,
+        "extensionHostPassed": true,
+        "published": false,
+        "installedVsixPassed": true,
+        "godotToolsPassed": false,
+        "vscodeVersion": "1.96.4"
+      },
+      {
+        "schemaVersion": 1,
+        "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "cleanSource": true,
+        "coreVersion": "0.1.0",
+        "extensionVersion": "0.2.1",
+        "target": "linux-x64-gnu",
+        "file": "gdfmt-0.1.0-linux-x64-gnu.vsix",
+        "sha512": "e5466a11a2b899a313a3696f241d79094e8a1e05866e294e4991cbff76a0f7ea569e446a72904c1d302706b81614c48141cf514a2deb2f887909bfb05604627c",
+        "nativeSmokePassed": true,
+        "extensionHostPassed": true,
+        "published": false,
+        "installedVsixPassed": true,
+        "godotToolsPassed": true,
+        "vscodeVersion": "1.96.4"
+      },
+      {
+        "schemaVersion": 1,
+        "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "cleanSource": true,
+        "coreVersion": "0.1.0",
+        "extensionVersion": "0.2.1",
+        "target": "linux-x64-musl",
+        "file": "gdfmt-0.1.0-linux-x64-musl.vsix",
+        "sha512": "aef602b28e0da4ec96b4e7e132942953f466ad160e73d6f5d167e40bc1fe4a3a5177b887747a9097ae52e66cbc6cf1a70b9957a7d06d2d396e18545b2c4a4067",
+        "nativeSmokePassed": true,
+        "extensionHostPassed": false,
+        "published": false
+      },
+      {
+        "schemaVersion": 1,
+        "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "cleanSource": true,
+        "coreVersion": "0.1.0",
+        "extensionVersion": "0.2.1",
+        "target": "win32-x64-msvc",
+        "file": "gdfmt-0.1.0-win32-x64-msvc.vsix",
+        "sha512": "91a3ca2c6dab10ddadea1511ebf35c521848b348500cc51782e53d667b1a52da64d4a5e4f1484c1c2855a55be59f7010062bc620ecdcc30dfecd5b5ca8142935",
+        "nativeSmokePassed": true,
+        "extensionHostPassed": true,
+        "published": false,
+        "installedVsixPassed": true,
+        "godotToolsPassed": false,
+        "vscodeVersion": "1.96.4"
+      },
+      {
+        "schemaVersion": 1,
+        "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+        "cleanSource": true,
+        "coreVersion": "0.1.0",
+        "extensionVersion": "0.2.1",
+        "target": "web",
+        "file": "gdfmt-0.1.0-web.vsix",
+        "sha512": "10ccc18385f0605cc110d52f045e95e6ffe1f731e64dfedc6a5ab6e23108ba8e2b60a1bbdda5c0803d81231457eacd98b36d976ddee193f3e635bd72cf6de19c",
+        "webExtensionHostPassed": true,
+        "published": false,
+        "browser": "chromium",
+        "crossOriginIsolated": false
+      }
+    ]
+  },
+  "githubRelease": {
+    "id": 422903306,
+    "tag_name": "v0.1.0",
+    "draft": false,
+    "prerelease": false,
+    "assets": [
+      {
+        "name": "crates.json",
+        "size": 1473,
+        "digest": "sha256:d96f0eff2f19723ad70797488ba99d5cdf794801e100105dcebc4d78aa75b226",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/crates.json"
+      },
+      {
+        "name": "editors.json",
+        "size": 3630,
+        "digest": "sha256:888bc0452d60fcda8881aaadb08212f5458261fe964ba219e551e213b78823fb",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/editors.json"
+      },
+      {
+        "name": "gdfmt-0.1.0-darwin-arm64.vsix",
+        "size": 1642639,
+        "digest": "sha256:133df2e4bbf3b150aa674fdf831fb099ecd1673010f857cf459ef91e026d82e3",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0-darwin-arm64.vsix"
+      },
+      {
+        "name": "gdfmt-0.1.0-darwin-x64.vsix",
+        "size": 1728333,
+        "digest": "sha256:be21a9237e28ca1e78e079fea6f94ecaabf13f8922f68bff3d18faed29536ad7",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0-darwin-x64.vsix"
+      },
+      {
+        "name": "gdfmt-0.1.0-linux-x64-gnu.vsix",
+        "size": 1781961,
+        "digest": "sha256:62561b603a2f4a415ad255fc21d8efe1d64cc5970e0ee1a78696d4434d30871b",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0-linux-x64-gnu.vsix"
+      },
+      {
+        "name": "gdfmt-0.1.0-linux-x64-musl.vsix",
+        "size": 1841679,
+        "digest": "sha256:d0a9945c62b3c94ba008a9c51dcaed3cc98c44d7780b08291a9278cd34753a49",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0-linux-x64-musl.vsix"
+      },
+      {
+        "name": "gdfmt-0.1.0-web.vsix",
+        "size": 214810,
+        "digest": "sha256:b9a434595e727bbb03f0365fa9d451d2355089c6d1fe50b37ce7300c8eeee027",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0-web.vsix"
+      },
+      {
+        "name": "gdfmt-0.1.0-win32-x64-msvc.vsix",
+        "size": 1711706,
+        "digest": "sha256:118d3818f0ddf09586e0c2f9343ded5f22d41eeea951da7b2f7aa769bcd89278",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0-win32-x64-msvc.vsix"
+      },
+      {
+        "name": "gdfmt-0.1.0.crate",
+        "size": 5455,
+        "digest": "sha256:cde09eb5041c28106c4816da0145e142ffb8bd007966795c3e4e97dacf37e2c1",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0.crate"
+      },
+      {
+        "name": "gdfmt-0.1.0.tgz",
+        "size": 8037,
+        "digest": "sha256:b1b7de84a9541c3c00525a381b76d19720a686eea5849994fb30bb0d09e1d26a",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-0.1.0.tgz"
+      },
+      {
+        "name": "gdfmt-darwin-arm64-0.1.0.tgz",
+        "size": 1567740,
+        "digest": "sha256:d973c0c588df28b1daf7f223c890c19f1be7f11759115144dbe3d2deaa96a463",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-darwin-arm64-0.1.0.tgz"
+      },
+      {
+        "name": "gdfmt-darwin-x64-0.1.0.tgz",
+        "size": 1655439,
+        "digest": "sha256:ddd56d5b792eec38752e8fcb221f0b482420d5c9e6275e2e9ed48eef7eeafc4d",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-darwin-x64-0.1.0.tgz"
+      },
+      {
+        "name": "gdfmt-linux-x64-gnu-0.1.0.tgz",
+        "size": 1741431,
+        "digest": "sha256:5842a9053a599bce079bafbe0d5c0d606eeb2c6ba63674dade35217c53d9b59a",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-linux-x64-gnu-0.1.0.tgz"
+      },
+      {
+        "name": "gdfmt-linux-x64-musl-0.1.0.tgz",
+        "size": 1747988,
+        "digest": "sha256:55b347f6ed04f14550b366bf5cb13c0eae39e4a55bc53004da67a009faea4aa1",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-linux-x64-musl-0.1.0.tgz"
+      },
+      {
+        "name": "gdfmt-wasm-0.1.0.tgz",
+        "size": 207271,
+        "digest": "sha256:83711a79171714c07db7e994764423febedc0564f46ebb817efe3edb67d1fbc7",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-wasm-0.1.0.tgz"
+      },
+      {
+        "name": "gdfmt-win32-x64-msvc-0.1.0.tgz",
+        "size": 1686578,
+        "digest": "sha256:66c5a834a23d2097e2e116147a74162a4ef795b3866794d093660019c765d7ab",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt-win32-x64-msvc-0.1.0.tgz"
+      },
+      {
+        "name": "gdfmt_cli-0.1.0.crate",
+        "size": 20284,
+        "digest": "sha256:798c10f170ac5586b5515fefa2e247ff738205f87acab83497508a66cc52ba9c",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt_cli-0.1.0.crate"
+      },
+      {
+        "name": "gdfmt_config-0.1.0.crate",
+        "size": 15252,
+        "digest": "sha256:9b914385e4df630409af6edd35f19233cfaa5905e47a297d185e0708178b740f",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt_config-0.1.0.crate"
+      },
+      {
+        "name": "gdfmt_formatter-0.1.0.crate",
+        "size": 14503,
+        "digest": "sha256:f8558de180e747adb9894a025921d65766d49b68f46f258efeb8013470c5d2a9",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt_formatter-0.1.0.crate"
+      },
+      {
+        "name": "gdfmt_parser-0.1.0.crate",
+        "size": 33737,
+        "digest": "sha256:9444553a6195a2286b1d94af05e3268c9f147e8c2cd9f52471ef90c6c0cbca77",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt_parser-0.1.0.crate"
+      },
+      {
+        "name": "gdfmt_syntax-0.1.0.crate",
+        "size": 7933,
+        "digest": "sha256:2c6294ba4efa49799f990dfc2f01310d176689e7812fcd946b7be69769a55ac9",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt_syntax-0.1.0.crate"
+      },
+      {
+        "name": "gdfmt_text-0.1.0.crate",
+        "size": 4446,
+        "digest": "sha256:48d6cb6c6cbbbe2851e97a582df26baa8ad959b8220cc91128e8746ed9fd7a0b",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt_text-0.1.0.crate"
+      },
+      {
+        "name": "gdfmt_workspace-0.1.0.crate",
+        "size": 14575,
+        "digest": "sha256:68b171386625d0a88c0f024de428601df936b2a685a8b5e20d7658ee2433056d",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/gdfmt_workspace-0.1.0.crate"
+      },
+      {
+        "name": "release.json",
+        "size": 6845,
+        "digest": "sha256:cbe4b6c89bb34b6b25de5581a9fd3e2de29c03b4d00e591725999d9ec08dfa9f",
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0/release.json"
+      }
+    ]
+  },
+  "documentationDeployment": {
+    "id": "dpl_4QwQsBqdR3tP1wLPV98riwA7yr89",
+    "target": "production",
+    "state": "READY",
+    "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+    "url": "https://gdfmt.ntnyq.dev",
+    "playgroundFormatting": {
+      "input": "var value=1",
+      "output": "var value = 1\n",
+      "passed": true
+    },
+    "localDocumentationTests": 9,
+    "localDocumentationTypes": true
+  },
+  "marketplaceUploaded": false,
+  "ownerAccountAudit": {
+    "functionalTrustedPublishersVerified": 15,
+    "npmDirectPublishAndDistTagVerified": true,
+    "email2faAndBootstrapTokenRevocationIndependentlyReadBack": false
+  }
+}

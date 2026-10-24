@@ -16,12 +16,11 @@ gdfmt formats `.gd` files with consistent spacing, indentation and line wrapping
 - **Fits your workflow.** Format a project, check it in CI, preview a diff or pipe a buffer through stdin. Git ignore rules and `.gdfmtignore` control file selection.
 - **Preserve intentional layout.** Keep selected regions unchanged with paired `formatter-off` / `formatter-on` comments.
 
-**0.1.0-rc.1 is published** on crates.io and npm `next`. See the
-[candidate notes](docs/releases/0.1.0-rc.1.md) and
-[publication and registry acceptance](docs/research/0.1.0-rc.1-publication.md).
-The prepared source uses core **0.1.0** and extension **0.2.1**; both remain
-unreleased. See the [clean-source CI report](docs/research/0.1.0-ci.md).
-The default formatting style is unchanged; registry installation still uses rc.1.
+**0.1.0 is published** on crates.io and npm `latest`, with six frozen VSIX files
+using extension **0.2.1**. See the [release notes](docs/releases/0.1.0.md) and
+[publication and registry acceptance](docs/research/0.1.0-publication.md).
+The default formatting style and public API/Schema contracts are unchanged from rc.1.
+Marketplace stable publication remains a separate follow-up.
 
 ## Get started
 
@@ -44,8 +43,8 @@ gdfmt init              # Create .gdfmtrc.json
 
 The default command formats the current directory. A check exits with `1` for syntax errors or formatting differences, and `2` for configuration, argument or I/O failures.
 
-For a published prerelease, use `cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked`,
-or `pnpm add @gdfmt/gdfmt@next` with Node 22.13+ on 22.x or Node 24.x.
+For the stable release, use `cargo install gdfmt_cli --version '=0.1.0' --locked`,
+or `pnpm add @gdfmt/gdfmt@latest` with Node 22.13+ on 22.x or Node 24.x.
 The Cargo package is `gdfmt_cli`; both routes install the `gdfmt` command.
 See the [Node.js API](docs/reference/node.md) for library usage and supported native targets.
 
@@ -77,14 +76,14 @@ See [configuration](docs/guide/configuration.md) for all options, inheritance, o
 - [Contributing](CONTRIBUTING.md)
 - [Publishing and CI releases](RELEASING.md)
 - [0.1.0 release checklist](RELEASE_CHECKLIST.md)
-- [0.1.0 release notes (draft)](docs/releases/0.1.0.md)
+- [0.1.0 release notes](docs/releases/0.1.0.md)
 
 Grammar profiles cover Godot 4.3–4.7. Full Godot compatibility is not declared; project analysis and runtime behavior remain the engine's responsibility. gdfmt uses its own formatting style and does not promise identical output to gdtoolkit's `gdformat`.
 
 ## WASM and VS Code
 
 The browser package exposes `createFormatter()` from `@gdfmt/wasm`; see the
-[WASM API](docs/reference/wasm.md). Install with `pnpm add @gdfmt/wasm@next`, or build and test from source with
+[WASM API](docs/reference/wasm.md). Install with `pnpm add @gdfmt/wasm@latest`, or build and test from source with
 `pnpm build:wasm` and `pnpm test:wasm`.
 
 `gdfmt --lsp` provides formatting over stdio. Build a native desktop extension

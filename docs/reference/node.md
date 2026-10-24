@@ -2,7 +2,7 @@
 
 The `@gdfmt/gdfmt` package exposes validated text formatting and explicit project configuration resolution, with ESM, CommonJS and TypeScript declarations.
 
-Install the prerelease with `pnpm add @gdfmt/gdfmt@next`. The matching native package is selected automatically.
+Install the stable release with `pnpm add @gdfmt/gdfmt@latest`. The matching native package is selected automatically.
 
 ## Format text
 

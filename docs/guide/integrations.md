@@ -62,10 +62,11 @@ provides six frozen VSIX targets, with numeric extension version `0.2.0` and cor
 Recheck Gallery availability before a later stable extension upload; see the
 [distribution review](../research/0.1.0-editor-distribution-review.md).
 
-The prepared source uses core `0.1.0` with numeric extension `0.2.1`, higher than
-the rc.1 VSIX version `0.2.0`. A 2026-10-24 Gallery read still listed only
-prerelease `0.1.0` for all six targets. The new versions remain unpublished;
-see the [clean-source CI report](../research/0.1.0-ci.md).
+The [0.1.0 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0)
+provides six frozen stable VSIX files with core `0.1.0` and numeric extension
+`0.2.1`, without the prerelease flag. See the
+[publication report](../research/0.1.0-publication.md). Marketplace was not updated;
+a later Gallery upload still needs its own availability and installation checks.
 
 VSIX filenames use the core version, while the Extensions view shows the numeric
 extension version. Replace `CORE_VERSION` and select the correct suffix:

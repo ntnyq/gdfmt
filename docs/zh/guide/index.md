@@ -2,11 +2,10 @@
 
 gdfmt 通过命令行格式化 GDScript 文件。可以直接使用默认设置，需要共享项目风格时再提交配置文件。
 
-当前已发布预发布版本为 **0.1.0-rc.1**，可从 crates.io 和 npm `next` 安装，详见
-[候选说明](../releases/0.1.0-rc.1.md)及[registry 验收](../research/0.1.0-rc.1-publication.md)。
-正式版 0.1.0 尚未发布。已准备核心 **0.1.0** 与扩展 **0.2.1**，详见
-[干净源码 CI 报告](../research/0.1.0-ci.md)。源码构建使用 checkout 的版本，
-下方 registry 命令仍安装 rc.1。
+当前正式版本为 **0.1.0**，可从 crates.io 和 npm `latest` 安装，详见
+[发布说明](../releases/0.1.0.md)及[registry 验收](../research/0.1.0-publication.md)。
+冻结 VSIX 使用扩展版本 **0.2.1**，Marketplace 正式发布独立跟进。
+源码构建使用 checkout 的版本。
 
 ## 从源码安装
 
@@ -21,24 +20,24 @@ gdfmt --version
 
 确保 Cargo 的可执行文件目录已加入 `PATH`。也可以在仓库内通过 `cargo run -p gdfmt_cli -- <参数>` 直接运行 CLI。
 
-## 安装已发布的预发布版本
+## 安装正式版本
 
-Cargo 预发布版本需要显式指定版本，包名与可执行命令不同：
+固定发布版本，Cargo 包名与可执行命令不同：
 
 ```sh
-cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked
+cargo install gdfmt_cli --version '=0.1.0' --locked
 gdfmt --version
 ```
 
 npm 方式需要 Node 22.x 的 22.13+ 或 Node 24.x，并保留 optional dependencies：
 
 ```sh
-pnpm add -D @gdfmt/gdfmt@next
+pnpm add -D @gdfmt/gdfmt@latest
 pnpm exec gdfmt --version
 ```
 
-单次调用可运行 `pnpm dlx @gdfmt/gdfmt@next --version`。支持的原生平台与 API 用法见
-[Node 参考](/zh/reference/node)。`next` 是会移动的预发布通道；CI 中应固定精确版本，
+单次调用可运行 `pnpm dlx @gdfmt/gdfmt@latest --version`。支持的原生平台与 API 用法见
+[Node 参考](/zh/reference/node)。`latest` 是会移动的正式通道；CI 中应固定精确版本，
 或提交项目 lockfile。上方源码安装使用检出的 revision。
 
 ## 格式化项目

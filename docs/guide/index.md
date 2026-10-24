@@ -2,12 +2,11 @@
 
 gdfmt formats GDScript files from the command line. Start with the defaults, then commit a configuration file when your project needs shared settings.
 
-The current published prerelease is **0.1.0-rc.1**, available on crates.io and npm
-`next`; see the [candidate notes](../releases/0.1.0-rc.1.md) and
-[registry acceptance](../research/0.1.0-rc.1-publication.md). Stable 0.1.0 remains
-unreleased. The prepared source uses core **0.1.0** with extension **0.2.1**;
-see the [clean-source CI report](../research/0.1.0-ci.md). Source builds use
-the checked-out version; the registry commands below still install rc.1.
+The current stable release is **0.1.0**, available on crates.io and npm `latest`.
+See the [release notes](../releases/0.1.0.md) and
+[registry acceptance](../research/0.1.0-publication.md). Frozen VSIX files use
+extension **0.2.1**; Marketplace stable publication remains separate.
+Source builds use the checked-out version.
 
 ## Install from source
 
@@ -22,25 +21,25 @@ gdfmt --version
 
 Make sure Cargo's binary directory is on your `PATH`. You can also run the CLI directly from the checkout with `cargo run -p gdfmt_cli -- <arguments>`.
 
-## Install a published prerelease
+## Install the stable release
 
-Cargo prereleases need an explicit version; the package name differs from the executable:
+Pin the release version; the Cargo package name differs from the executable:
 
 ```sh
-cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked
+cargo install gdfmt_cli --version '=0.1.0' --locked
 gdfmt --version
 ```
 
 For npm, use Node 22.13+ on 22.x or Node 24.x and keep optional dependencies enabled:
 
 ```sh
-pnpm add -D @gdfmt/gdfmt@next
+pnpm add -D @gdfmt/gdfmt@latest
 pnpm exec gdfmt --version
 ```
 
-For a one-off invocation use `pnpm dlx @gdfmt/gdfmt@next --version`. Supported
+For a one-off invocation use `pnpm dlx @gdfmt/gdfmt@latest --version`. Supported
 native targets and API usage are listed in the [Node reference](/reference/node).
-`next` is a moving prerelease channel; pin an exact version in CI or commit the
+`latest` is a moving stable channel; pin an exact version in CI or commit the
 project's lockfile. Source installation above follows the checked-out revision.
 
 ## Format a project

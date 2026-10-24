@@ -1,7 +1,7 @@
 # gdfmt
 
 Rust GDScript formatter with validated output, Node.js APIs and a CLI.
-Install the prerelease with `pnpm add @gdfmt/gdfmt@next`, or run the CLI with `pnpm dlx @gdfmt/gdfmt@next --check .`. See the [language support and limitations](https://github.com/ntnyq/gdfmt/blob/main/docs/reference/compatibility.md).
+Install the stable release with `pnpm add @gdfmt/gdfmt@latest`, or run the CLI with `pnpm dlx @gdfmt/gdfmt@latest --check .`. See the [language support and limitations](https://github.com/ntnyq/gdfmt/blob/main/docs/reference/compatibility.md).
 
 ```js
 import { format, formatSync, resolveConfig } from '@gdfmt/gdfmt'

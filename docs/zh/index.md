@@ -43,7 +43,7 @@ gdfmt .
 gdfmt --check .
 ```
 
-完整安装步骤见[快速开始](/zh/guide/)。npm 预发布版本的包名为 `@gdfmt/gdfmt@next`。
+完整安装步骤见[快速开始](/zh/guide/)。npm 正式版本的包名为 `@gdfmt/gdfmt@latest`。
 
 ## 浏览文档
 

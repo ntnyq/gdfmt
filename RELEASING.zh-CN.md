@@ -10,24 +10,14 @@ Rust workspace 与公开 npm 包使用统一版本。推送 `v版本号` tag 后
 
 ## 当前 0.1.0 准备状态
 
-**已准备核心 0.1.0 与扩展 0.2.1，均未发布。**
-[干净源码 CI 报告](docs/zh/research/0.1.0-ci.md)记录版本同步、干净修订试用、
-完整跨平台 CI 与产物演练。PR #3 尚未合并，最终 tag 冻结与账号证据仍待完成，
-Trusted Publishing 的实际发布能力已由 rc.1 验证。本次准备不创建 tag、不写入
-registry，也不上传 Marketplace。
-
-**0.1.0-rc.1 已发布**到 crates.io 和 npm `next`/`candidate`，独立扩展数字版本
-**0.2.0**，`gdfmtVersion: 0.1.0-rc.1`。全部 npm `latest` 保持原值，本次不发布
-正式版 0.1.0，也不上传 Marketplace。
-
-[PR #1](https://github.com/ntnyq/gdfmt/pull/1) 已 squash 合并为
-`1329b72dc26179921739e4c2342ffa0bf7b7a314`，`v0.1.0-rc.1` 绑定该提交。
-[Release 运行 40051909889](https://github.com/ntnyq/gdfmt/actions/runs/40051909889)
-通过全部 tag 检查、冻结及两个 registry 发布。[发布证据](docs/zh/research/0.1.0-rc.1-publication.md)
-记录原 artifact ID/hash、十五个 registry 包、真实 Rust/npm 消费者及 GitHub 预发布的
-全部 24 个附件。[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)和
-[最初准备](docs/zh/research/0.1.0-rc.1-preparation.md)保留各自历史源码身份，不能
-将旧回执重新标记为发布提交。
+**核心 0.1.0 已正式发布**到 crates.io 与 npm `latest`，GitHub 六份冻结 VSIX
+使用独立扩展 **0.2.1**，不带预发布标记。[PR #3](https://github.com/ntnyq/gdfmt/pull/3)
+已 squash 合并为 `d98db6b0463d91e6449f2c84dd62026ceb0698cd`，tag 为 `v0.1.0`。
+[Release 运行 40118540445](https://github.com/ntnyq/gdfmt/actions/runs/40118540445)
+对该修订完成验证与冻结后发布两个 registry。[发布报告](docs/zh/research/0.1.0-publication.md)
+记录原 bundle、十五个 registry 包、真实消费者与全部 24 个 GitHub 附件。
+源码 CI 演练及 rc.1 报告保留原历史身份。全部七个 npm `next` 保持 rc.1，
+`candidate` 与 `latest` 指向 0.1.0。Marketplace 正式上线及剩余 owner 账号证据独立跟进。
 
 [registry 与环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)记录了
 2026-10-23 的初次只读快照及后续分支/tag 保护落实情况。八个 crate 和七个 npm 包均已存在，公开 owner/maintainer
@@ -305,9 +295,9 @@ rc.1 GitHub Release 已提供六份冻结 VSIX，扩展数字版本 `0.2.0`、�
 权限/认证，再通过单独授权的流程上传冻结 VSIX，记录逐目标结果和正式安装消费者，
 之后才宣布 Gallery 正式版可用。本轮准备及现有工作流均不执行 Marketplace 上传。
 
-正式版源码准备已选择数字扩展 **0.2.1**、核心 **0.1.0**。2026-10-24 回读六目标
-Gallery，0.2.1 尚未占用，并高于 rc.1 VSIX。本地原生/Web 包不带预发布标记，
-最终六目标冻结仍待完成；实际上传前再次核对可用性。
+正式 GitHub Release 已提供数字扩展 **0.2.1**、核心 **0.1.0** 的全部六份冻结
+VSIX，不带预发布标记。本次未上传 Marketplace；后续上传前仍需重查 Gallery
+可用性，详见[发布报告](docs/zh/research/0.1.0-publication.md)。
 
 桌面 `pnpm test:vscode` 还会将 VSIX 安装到隔离临时配置，检查安装后扩展/核心版本、
 内置 server 字节并使用该 server 格式化 stdin。桌面冻结同时要求
