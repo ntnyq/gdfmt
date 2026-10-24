@@ -16,10 +16,10 @@ gdfmt formats `.gd` files with consistent spacing, indentation and line wrapping
 - **Fits your workflow.** Format a project, check it in CI, preview a diff or pipe a buffer through stdin. Git ignore rules and `.gdfmtignore` control file selection.
 - **Preserve intentional layout.** Keep selected regions unchanged with paired `formatter-off` / `formatter-on` comments.
 
-Source preparation is now `0.1.0-rc.1`; it has not been tagged or published. See the
+**0.1.0-rc.1 is published** on crates.io and npm `next`. See the
 [candidate notes](docs/releases/0.1.0-rc.1.md) and
-[committed-source CI evidence](docs/research/0.1.0-rc.1-ci.md). Published installation
-commands below continue to reference the existing registry release.
+[publication and registry acceptance](docs/research/0.1.0-rc.1-publication.md).
+Stable 0.1.0 remains unreleased; the default formatting style is unchanged.
 
 ## Get started
 
@@ -42,7 +42,7 @@ gdfmt init              # Create .gdfmtrc.json
 
 The default command formats the current directory. A check exits with `1` for syntax errors or formatting differences, and `2` for configuration, argument or I/O failures.
 
-For a published prerelease, use `cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked`,
+For a published prerelease, use `cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked`,
 or `pnpm add @gdfmt/gdfmt@next` with Node 22.13+ on 22.x or Node 24.x.
 The Cargo package is `gdfmt_cli`; both routes install the `gdfmt` command.
 See the [Node.js API](docs/reference/node.md) for library usage and supported native targets.

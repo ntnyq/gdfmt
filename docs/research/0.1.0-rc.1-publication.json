@@ -1,0 +1,819 @@
+{
+  "schemaVersion": 1,
+  "version": "0.1.0-rc.1",
+  "channel": "next",
+  "published": true,
+  "releaseDate": "2026-10-24",
+  "revision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+  "tag": "v0.1.0-rc.1",
+  "pullRequest": 1,
+  "mergeMethod": "squash",
+  "releaseRun": 40051909889,
+  "releaseWorkflowResult": "success",
+  "successfulJobs": 34,
+  "skippedRecoveryJobs": 1,
+  "frozenArtifact": {
+    "id": 12544141250,
+    "name": "release-artifacts-1",
+    "sha256": "d17fa6da6786d404219439111020a09ef908211f125165ad8574a671c59377eb",
+    "revision": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+  },
+  "bundleManifestSha256": {
+    "npm/release.json": "fc9c7fc7506f921cb3d8bd4562c61b4de92d3a383ad4ff17f8b49027ce951970",
+    "crates/crates.json": "fe2979c6cf43d72e12c4dc59474ed4c9ef75e68e69d5d2dbee740002a80031ab",
+    "editors/editors.json": "bf153a635b5c281e963cbaab09f605107ceb69a6bec7e02c88ac726d8f7791ab"
+  },
+  "registry": {
+    "version": "0.1.0-rc.1",
+    "revision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+    "crates": [
+      {
+        "name": "gdfmt_text",
+        "version": "0.1.0-rc.1",
+        "sha256": "93b9bd80780267ce206bfb5c48a74c7195ce7d9715b4b31e661eff6eec72cb0a",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_syntax",
+        "version": "0.1.0-rc.1",
+        "sha256": "04f50ea759021cdc64e78c3907bce5ed3b5dd743d7b8001b6f8d0d98058326a2",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_parser",
+        "version": "0.1.0-rc.1",
+        "sha256": "09bbb87047e780c24b3cd358f10cbfd027b8a8029f43b2836c0cb9aba08139d4",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_formatter",
+        "version": "0.1.0-rc.1",
+        "sha256": "90fc9355d532953a9886a7ee94efe112ccd7c9c756fca3c1b9b6ff67a8dad82b",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt",
+        "version": "0.1.0-rc.1",
+        "sha256": "483f88f8b56634233fdd52c18e1b4b2c0183d8cc62c7e41eddb31e09f61d2658",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_config",
+        "version": "0.1.0-rc.1",
+        "sha256": "70719cfece6b3ab9756977f2d491e2444084369911cc0cc42643380c14dc16da",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_workspace",
+        "version": "0.1.0-rc.1",
+        "sha256": "ba835033cb057807f9330e6774ec1ad96e7f793bae8279dca05d641a84d93e21",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      },
+      {
+        "name": "gdfmt_cli",
+        "version": "0.1.0-rc.1",
+        "sha256": "691624ca0023b048507cafd4f55eefd9757cde6789a7168750741552c94f2adc",
+        "yanked": false,
+        "vcsRevision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+        "trustpubData": {
+          "provider": "github",
+          "repository": "ntnyq/gdfmt",
+          "run_id": "40051909889",
+          "sha": "1329b72dc26179921739e4c2342ffa0bf7b7a314"
+        },
+        "passed": true
+      }
+    ],
+    "npm": [
+      {
+        "name": "@gdfmt/darwin-arm64",
+        "version": "0.1.0-rc.1",
+        "integrity": "sha512-gepmNOocyl9ENqvGzzSlJ8tNe2pABp9Polgej0+KjP/A4Tac1dZijHnqS1bnJyB7G/GsRsYdLqbsJSeTAw8Drg==",
+        "tarballSha256": "37ff09f45e0f1329ae44e99f5b93213829fadbd3b4cf7e87d89eb25f2ddb1075",
+        "distTags": {
+          "latest": "0.1.0-alpha.2",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0-rc.1"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestUnchanged": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fdarwin-arm64@0.1.0-rc.1",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "817756df-c34e-4200-85cb-ab7a3df589a8"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/darwin-x64",
+        "version": "0.1.0-rc.1",
+        "integrity": "sha512-B7M+y65YG9UJftuZWoYhuDXSVXMoyYhWNk1OSNneXSHpKDVBZaNqfz9/xgzr5WPCGYnOPAGdcCGlDG2IF66rKw==",
+        "tarballSha256": "38da26cee93f31ea1140a42575a2299ebcf84ec6d63b8b7a446c7934f75024da",
+        "distTags": {
+          "latest": "0.1.0-alpha.2",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0-rc.1"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestUnchanged": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fdarwin-x64@0.1.0-rc.1",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "c504435a-d4e8-429f-b7b8-1df7d0313c44"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/linux-x64-gnu",
+        "version": "0.1.0-rc.1",
+        "integrity": "sha512-Kon2Y4546dcNDJwvRCg2UmTKN30iIHPfAxZ9KgcBq2Enn784j0z1Eu7vlfiomXe8ueej/p8jrBLmVO7iiLHupw==",
+        "tarballSha256": "3bd24883bdde303c19fe6cd35a60329ed9135c652c8b6e6ccdc9b06c022167c9",
+        "distTags": {
+          "latest": "0.1.0-alpha.2",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0-rc.1"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestUnchanged": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2flinux-x64-gnu@0.1.0-rc.1",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "61e2bf38-a5b4-4aa0-8454-b723bb90079e"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/linux-x64-musl",
+        "version": "0.1.0-rc.1",
+        "integrity": "sha512-3k9IdmpQ1qce8iE33Y2t8rwQzlwa2vW5ccooab+lpjowIyQWEayLaCYCOKApRPAaFs2avDDx7lIWPt4M38cJsg==",
+        "tarballSha256": "68695c89ea526953cd666ef564ea093ee5c0afe270f85de8fafe83c17a29cedb",
+        "distTags": {
+          "latest": "0.1.0-alpha.2",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0-rc.1"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestUnchanged": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2flinux-x64-musl@0.1.0-rc.1",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "29ed18c4-5f9c-4a6b-ab2f-3eaa8b5c5c6f"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/win32-x64-msvc",
+        "version": "0.1.0-rc.1",
+        "integrity": "sha512-WBSg5uqgXA6k/HdsF0Me/oPnQi8gDwnifHH/lBnqQqiXzERTc6OqJhWQ5wo8OkFsX0DSVOYcEXCmddNb8a/xVQ==",
+        "tarballSha256": "0bc147ec6d0a291135818ba0d02e1f3d5e33cf1654e73123259d5c74433e5df2",
+        "distTags": {
+          "latest": "0.1.0-alpha.2",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0-rc.1"
+        },
+        "previousLatest": "0.1.0-alpha.2",
+        "latestUnchanged": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fwin32-x64-msvc@0.1.0-rc.1",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "0688b66c-65d0-4a4b-ae49-92f54d28a538"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/wasm",
+        "version": "0.1.0-rc.1",
+        "integrity": "sha512-mUK/Kf6bkn3av2CnMIGxgqLQycQ8w/Ml+l3mvyB8Xets2o/YUh7i/QLPzE0E3CfFM2rDc1Se9mdDKABTYni44Q==",
+        "tarballSha256": "03baf969fe23ef5bc493fc55a2e21fa0ab27b862c21adcb258977a5f161189a1",
+        "distTags": {
+          "latest": "0.1.0-alpha.5",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0-rc.1"
+        },
+        "previousLatest": "0.1.0-alpha.5",
+        "latestUnchanged": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fwasm@0.1.0-rc.1",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "889ed05c-f614-4442-862c-5517e8ab1c44"
+        },
+        "passed": true
+      },
+      {
+        "name": "@gdfmt/gdfmt",
+        "version": "0.1.0-rc.1",
+        "integrity": "sha512-34n4WPUuQdT4n3Mt5FCKu7u6FxuF3XZOXUGR9xc6I+IAPCb/YQRwMUqE45qoa0YWUJKMMSYWUFh460z9Wia3Dg==",
+        "tarballSha256": "64e748849716c539d5701c7a1ec035d62ec8060ff667074755b631ac72a763c3",
+        "distTags": {
+          "latest": "0.1.0-alpha.3",
+          "next": "0.1.0-rc.1",
+          "candidate": "0.1.0-rc.1"
+        },
+        "previousLatest": "0.1.0-alpha.3",
+        "latestUnchanged": true,
+        "attestations": {
+          "url": "https://registry.npmjs.org/-/npm/v1/attestations/@gdfmt%2fgdfmt@0.1.0-rc.1",
+          "provenance": {
+            "predicateType": "https://slsa.dev/provenance/v1"
+          }
+        },
+        "trustedPublisher": {
+          "id": "github",
+          "oidcConfigId": "6b5037fb-78eb-40af-aa5c-ece37900e443"
+        },
+        "passed": true
+      }
+    ]
+  },
+  "consumers": {
+    "rust": {
+      "version": "0.1.0-rc.1",
+      "registryInstalled": true,
+      "rustVersion": "rustc 1.98.0 (88d9e12ae 2026-08-18)",
+      "platform": "Darwin",
+      "arch": "arm64",
+      "checks": [
+        {
+          "check": "cargo-consumer-lock",
+          "exitCode": 0,
+          "seconds": 4.64
+        },
+        {
+          "check": "cargo-api-consumer",
+          "exitCode": 0,
+          "seconds": 17.72
+        }
+      ],
+      "packages": [
+        {
+          "name": "gdfmt_text",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_syntax",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_parser",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_formatter",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_config",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_workspace",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        },
+        {
+          "name": "gdfmt_cli",
+          "version": "0.1.0-rc.1",
+          "source": "registry+https://github.com/rust-lang/crates.io-index"
+        }
+      ],
+      "facade": true,
+      "configuration": true,
+      "diagnostics": true,
+      "cliRunner": true,
+      "installedCli": true,
+      "passed": true
+    },
+    "npm": {
+      "version": "0.1.0-rc.1",
+      "registryInstalled": true,
+      "nodeVersion": "v24.22.1",
+      "platform": "darwin",
+      "arch": "arm64",
+      "fixtureCases": 1465,
+      "esm": true,
+      "commonjs": true,
+      "asyncApi": true,
+      "wasm": true,
+      "configuration": true,
+      "strictValidation": true,
+      "diagnostics": true,
+      "cli": true,
+      "passed": true,
+      "declarations": true,
+      "isolatedFromRepository": true,
+      "installRequested": ["@gdfmt/gdfmt@next", "@gdfmt/wasm@next"],
+      "optionalDependenciesEnabled": true,
+      "installedPackages": [
+        {
+          "name": "@gdfmt/gdfmt",
+          "version": "0.1.0-rc.1",
+          "resolved": "https://registry.npmjs.org/@gdfmt/gdfmt/-/gdfmt-0.1.0-rc.1.tgz",
+          "integrity": "sha512-34n4WPUuQdT4n3Mt5FCKu7u6FxuF3XZOXUGR9xc6I+IAPCb/YQRwMUqE45qoa0YWUJKMMSYWUFh460z9Wia3Dg=="
+        },
+        {
+          "name": "@gdfmt/wasm",
+          "version": "0.1.0-rc.1",
+          "resolved": "https://registry.npmjs.org/@gdfmt/wasm/-/wasm-0.1.0-rc.1.tgz",
+          "integrity": "sha512-mUK/Kf6bkn3av2CnMIGxgqLQycQ8w/Ml+l3mvyB8Xets2o/YUh7i/QLPzE0E3CfFM2rDc1Se9mdDKABTYni44Q=="
+        },
+        {
+          "name": "@gdfmt/darwin-arm64",
+          "version": "0.1.0-rc.1",
+          "resolved": "https://registry.npmjs.org/@gdfmt/darwin-arm64/-/darwin-arm64-0.1.0-rc.1.tgz",
+          "integrity": "sha512-gepmNOocyl9ENqvGzzSlJ8tNe2pABp9Polgej0+KjP/A4Tac1dZijHnqS1bnJyB7G/GsRsYdLqbsJSeTAw8Drg=="
+        }
+      ]
+    },
+    "ciRustJob": 120749118242,
+    "ciNpmJob": 120749605403
+  },
+  "projectTrial": {
+    "revision": "1329b72dc26179921739e4c2342ffa0bf7b7a314",
+    "cleanSource": true,
+    "pythonHashSeed": 149,
+    "reviewEntriesUnchanged": 606,
+    "checks": [
+      {
+        "check": "tag-trial-guards",
+        "exitCode": 0,
+        "seconds": 1.38
+      },
+      {
+        "check": "tag-full-trial",
+        "exitCode": 0,
+        "seconds": 54.1
+      }
+    ],
+    "hashes": {
+      "summary.json": "19bbb87512594838e08ac0853a02e6e24acf16f2bb9e5db8eeade5d5cb1069e4",
+      "layouts.json": "08b40458a9c33eb77426c5940664da9b21f606c5f32ae7a2056b059e955871ac",
+      "comparisons.json": "2b3272076a87d8504bce10ef2532b88d43d64148945aad91dea70b97b0821011",
+      "review-candidate.json": "4277df6babe9c1d74237c5af638a2eba458db8d9b320e7519e214a14492d3fa9"
+    },
+    "summary": {
+      "scripts": 606,
+      "acceptedScripts": 605,
+      "invariantLayouts": 2420,
+      "sourceRejections": {
+        "godot-demos/2d/tween/main.gd": {
+          "exitCode": 0,
+          "stdout": "Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org\n\n",
+          "stderr": "SCRIPT ERROR: Parse Error: Unindent doesn't match the previous indentation level.\n          at: GDScript::reload (res://case.gd:77)\nERROR: Failed to load script \"res://case.gd\" with error \"Parse error\".\n   at: load (modules/gdscript/gdscript_resource_format.cpp:46)\n"
+        }
+      },
+      "gdtoolkitRejections": {
+        "godot-statecharts/addons/godot_state_charts/debug_util.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿## Returns the path of a node in the sc\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "godot-statecharts/addons/godot_state_charts/state_chart_state.gd": {
+          "exception": "UnexpectedToken",
+          "message": "Unexpected token Token('_NL', '# if the event is given it needs to match the event of the transition\\n\\t\\t\\t') at line 266, column 4.",
+          "line": 266,
+          "column": 4,
+          "context": "\t\t\t# if the event is given it needs to matc\n                        ^\n",
+          "expected": ["COLON"]
+        },
+        "godot-statecharts/tests/test_automatic_transition_leaving_compound_state.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "godot-statecharts/tests/test_automatic_transition_on_state_enter.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "godot-statecharts/tests/test_explicit_event_consumption.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "godot-statecharts/tests/test_expression_properties.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "godot-statecharts/tests/test_not_guard.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "godot-statecharts/tests/test_parallel_state_deep_transition.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        },
+        "godot-statecharts/tests/test_pending_transition_cancellation.gd": {
+          "exception": "UnexpectedCharacters",
+          "message": "No terminal matches '﻿' in the current parser context, at line 1 col 1",
+          "line": 1,
+          "column": 1,
+          "context": "﻿extends StateChartTestBase\n^\n",
+          "expected": [
+            "AT",
+            "CLASS",
+            "CLASS_NAME",
+            "CONST",
+            "ENUM",
+            "EXTENDS",
+            "FUNC",
+            "LONG_STRING",
+            "PASS",
+            "REGULAR_STRING",
+            "SIGNAL",
+            "STATIC",
+            "VAR",
+            "_NL"
+          ]
+        }
+      },
+      "identicalToGdtoolkit": 67,
+      "differentFromGdtoolkit": 529,
+      "unexplainedDifferences": 0
+    }
+  },
+  "githubRelease": {
+    "assets": [
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/crates.json",
+        "digest": "sha256:fe2979c6cf43d72e12c4dc59474ed4c9ef75e68e69d5d2dbee740002a80031ab",
+        "name": "crates.json",
+        "size": 1518
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/editors.json",
+        "digest": "sha256:bf153a635b5c281e963cbaab09f605107ceb69a6bec7e02c88ac726d8f7791ab",
+        "name": "editors.json",
+        "size": 3695
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1-darwin-arm64.vsix",
+        "digest": "sha256:5675b5e25ecfd72f201ca99ed18065f46a1147a72f3ab67f9b5aa5bb9ca8a940",
+        "name": "gdfmt-0.1.0-rc.1-darwin-arm64.vsix",
+        "size": 1642631
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1-darwin-x64.vsix",
+        "digest": "sha256:5cc82f5f45e6ecf72e2d7828031ae39d41f4e74eff7f1deacd84437c97d46738",
+        "name": "gdfmt-0.1.0-rc.1-darwin-x64.vsix",
+        "size": 1728195
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1-linux-x64-gnu.vsix",
+        "digest": "sha256:3917c45982374f98f0364d808ae32f92a371f34463d27ea71af24187b577b36a",
+        "name": "gdfmt-0.1.0-rc.1-linux-x64-gnu.vsix",
+        "size": 1781892
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1-linux-x64-musl.vsix",
+        "digest": "sha256:09a49598572a3c09d7ef68319708f882e4307a510ae6d68c6c6b9b9bc169dab4",
+        "name": "gdfmt-0.1.0-rc.1-linux-x64-musl.vsix",
+        "size": 1841450
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1-web.vsix",
+        "digest": "sha256:af56dbece0aeb175e2939094b48b54d067f6b2107920c650d38b0ecbfe1031ed",
+        "name": "gdfmt-0.1.0-rc.1-web.vsix",
+        "size": 214657
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1-win32-x64-msvc.vsix",
+        "digest": "sha256:70acc2e6e5230b2c4b1065ada4fe85547d3486cdb265d3c0078a5e048b497c1a",
+        "name": "gdfmt-0.1.0-rc.1-win32-x64-msvc.vsix",
+        "size": 1711770
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1.crate",
+        "digest": "sha256:483f88f8b56634233fdd52c18e1b4b2c0183d8cc62c7e41eddb31e09f61d2658",
+        "name": "gdfmt-0.1.0-rc.1.crate",
+        "size": 5462
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-0.1.0-rc.1.tgz",
+        "digest": "sha256:64e748849716c539d5701c7a1ec035d62ec8060ff667074755b631ac72a763c3",
+        "name": "gdfmt-0.1.0-rc.1.tgz",
+        "size": 8045
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-darwin-arm64-0.1.0-rc.1.tgz",
+        "digest": "sha256:37ff09f45e0f1329ae44e99f5b93213829fadbd3b4cf7e87d89eb25f2ddb1075",
+        "name": "gdfmt-darwin-arm64-0.1.0-rc.1.tgz",
+        "size": 1567765
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-darwin-x64-0.1.0-rc.1.tgz",
+        "digest": "sha256:38da26cee93f31ea1140a42575a2299ebcf84ec6d63b8b7a446c7934f75024da",
+        "name": "gdfmt-darwin-x64-0.1.0-rc.1.tgz",
+        "size": 1655466
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-linux-x64-gnu-0.1.0-rc.1.tgz",
+        "digest": "sha256:3bd24883bdde303c19fe6cd35a60329ed9135c652c8b6e6ccdc9b06c022167c9",
+        "name": "gdfmt-linux-x64-gnu-0.1.0-rc.1.tgz",
+        "size": 1741457
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-linux-x64-musl-0.1.0-rc.1.tgz",
+        "digest": "sha256:68695c89ea526953cd666ef564ea093ee5c0afe270f85de8fafe83c17a29cedb",
+        "name": "gdfmt-linux-x64-musl-0.1.0-rc.1.tgz",
+        "size": 1747981
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-wasm-0.1.0-rc.1.tgz",
+        "digest": "sha256:03baf969fe23ef5bc493fc55a2e21fa0ab27b862c21adcb258977a5f161189a1",
+        "name": "gdfmt-wasm-0.1.0-rc.1.tgz",
+        "size": 207281
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt-win32-x64-msvc-0.1.0-rc.1.tgz",
+        "digest": "sha256:0bc147ec6d0a291135818ba0d02e1f3d5e33cf1654e73123259d5c74433e5df2",
+        "name": "gdfmt-win32-x64-msvc-0.1.0-rc.1.tgz",
+        "size": 1686903
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt_cli-0.1.0-rc.1.crate",
+        "digest": "sha256:691624ca0023b048507cafd4f55eefd9757cde6789a7168750741552c94f2adc",
+        "name": "gdfmt_cli-0.1.0-rc.1.crate",
+        "size": 20290
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt_config-0.1.0-rc.1.crate",
+        "digest": "sha256:70719cfece6b3ab9756977f2d491e2444084369911cc0cc42643380c14dc16da",
+        "name": "gdfmt_config-0.1.0-rc.1.crate",
+        "size": 15262
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt_formatter-0.1.0-rc.1.crate",
+        "digest": "sha256:90fc9355d532953a9886a7ee94efe112ccd7c9c756fca3c1b9b6ff67a8dad82b",
+        "name": "gdfmt_formatter-0.1.0-rc.1.crate",
+        "size": 14512
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt_parser-0.1.0-rc.1.crate",
+        "digest": "sha256:09bbb87047e780c24b3cd358f10cbfd027b8a8029f43b2836c0cb9aba08139d4",
+        "name": "gdfmt_parser-0.1.0-rc.1.crate",
+        "size": 33759
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt_syntax-0.1.0-rc.1.crate",
+        "digest": "sha256:04f50ea759021cdc64e78c3907bce5ed3b5dd743d7b8001b6f8d0d98058326a2",
+        "name": "gdfmt_syntax-0.1.0-rc.1.crate",
+        "size": 7944
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt_text-0.1.0-rc.1.crate",
+        "digest": "sha256:93b9bd80780267ce206bfb5c48a74c7195ce7d9715b4b31e661eff6eec72cb0a",
+        "name": "gdfmt_text-0.1.0-rc.1.crate",
+        "size": 4459
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/gdfmt_workspace-0.1.0-rc.1.crate",
+        "digest": "sha256:ba835033cb057807f9330e6774ec1ad96e7f793bae8279dca05d641a84d93e21",
+        "name": "gdfmt_workspace-0.1.0-rc.1.crate",
+        "size": 14582
+      },
+      {
+        "browser_download_url": "https://github.com/ntnyq/gdfmt/releases/download/v0.1.0-rc.1/release.json",
+        "digest": "sha256:fc9c7fc7506f921cb3d8bd4562c61b4de92d3a383ad4ff17f8b49027ce951970",
+        "name": "release.json",
+        "size": 6898
+      }
+    ],
+    "draft": false,
+    "id": 422462377,
+    "prerelease": true,
+    "tag_name": "v0.1.0-rc.1"
+  },
+  "stablePublished": false,
+  "marketplaceUploaded": false,
+  "npmLatestUnchanged": true,
+  "ownerAccountAudit": {
+    "functionalTrustedPublishersVerified": 15,
+    "npmDirectPublishAndDistTagVerified": true,
+    "email2faAndBootstrapTokenRevocationIndependentlyReadBack": false
+  }
+}

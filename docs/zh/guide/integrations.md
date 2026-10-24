@@ -52,8 +52,10 @@ VSIX，或运行 `pnpm package:vscode` 构建，通过 **Extensions: Install fro
 0.1.0 建议随核心发布冻结的 VSIX，将 Marketplace 正式发布作为独立后续工作。
 截至 2026-10-23，[Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
 已有扩展数字版本 `0.1.0` 的预发布，内置核心 `0.1.0-alpha.6`；可通过
-**Install Pre-Release Version** 安装预览，它不是最终核心 0.1.0。首个正式扩展版本
-建议 `0.2.0`，以重新核对 Gallery 可用性为准，详见
+**Install Pre-Release Version** 安装预览，它不是最终核心 0.1.0。
+[rc.1 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0-rc.1)已提供
+六份冻结预发布 VSIX，数字扩展版本 `0.2.0`、核心 `0.1.0-rc.1`。本次未上传
+Marketplace；后续正式扩展上传前需重查 Gallery 可用性，详见
 [分发审查](../research/0.1.0-editor-distribution-review.md)。
 
 VSIX 文件名使用核心版本，扩展视图显示数字扩展版本。替换 `CORE_VERSION`，

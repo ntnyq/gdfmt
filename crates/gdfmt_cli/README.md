@@ -2,7 +2,7 @@
 
 The gdfmt command runner and command-line executable.
 
-Install the published prerelease with `cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked`,
+Install the published prerelease with `cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked`,
 then run `gdfmt --help`. Cargo prereleases require an explicit version; the
 executable is named `gdfmt`, while the package is `gdfmt_cli`.
 

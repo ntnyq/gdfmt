@@ -56,8 +56,11 @@ and treat Marketplace stable publication as a separate follow-up. As checked on
 2026-10-23, [Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
 already has extension `0.1.0` as a prerelease with core `0.1.0-alpha.6`. Select
 **Install Pre-Release Version** for that preview; it is not the final core 0.1.0.
-The proposed first stable extension version is `0.2.0`, subject to a fresh Gallery
-availability check. See the [distribution review](../research/0.1.0-editor-distribution-review.md).
+The [rc.1 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0-rc.1)
+provides six frozen VSIX targets, with numeric extension version `0.2.0` and core
+`0.1.0-rc.1`, marked as prerelease. This release did not upload to Marketplace.
+Recheck Gallery availability before a later stable extension upload; see the
+[distribution review](../research/0.1.0-editor-distribution-review.md).
 
 VSIX filenames use the core version, while the Extensions view shows the numeric
 extension version. Replace `CORE_VERSION` and select the correct suffix:

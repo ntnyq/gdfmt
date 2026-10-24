@@ -41,15 +41,15 @@ JavaScript 严格校验、WASM 元数据和版本同步均已补充回归。
 
 ## 候选版本验收
 
-**`0.1.0-rc.1`** 源码已提交到 [PR #1](https://github.com/ntnyq/gdfmt/pull/1)，独立扩展
-数字版本为 **`0.2.0`**，默认风格不变。[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)
-将验收绑定到源码 `5d95932e63a1d5199916466013bf557561279fe5`；关联产物证据记录
-干净源码回执、工作流/artifact ID 和 hash。最终文档提交也必须在自己的 PR head
-通过完整 CI，并记录在 PR。
+**`0.1.0-rc.1` 已发布**到 crates.io 和 npm `next`/`candidate`，独立扩展数字版本
+**`0.2.0`**，默认风格不变。[PR #1](https://github.com/ntnyq/gdfmt/pull/1) 已 squash
+合并为 `1329b72dc26179921739e4c2342ffa0bf7b7a314`，tag 为 `v0.1.0-rc.1`。
+[发布报告](docs/zh/research/0.1.0-rc.1-publication.md)记录精确 tag 的 CI、artifact
+ID/hash、十五个 registry 包和真实 Rust/npm 安装消费者。全部 npm `latest` 保持原值。
 
-[准备报告](docs/zh/research/0.1.0-rc.1-preparation.md)保留为历史
-`cleanSource: false` WIP 快照。没有创建 tag 或发布。下面的候选验收不能替代未来
-最终 0.1.0 tag 提交及其产物的验证。
+[候选 CI 报告](docs/zh/research/0.1.0-rc.1-ci.md)与
+[最初准备](docs/zh/research/0.1.0-rc.1-preparation.md)保留各自源码的历史快照。
+候选发布不能替代未来正式版 0.1.0 产物验收，本次没有发布正式版或上传 Marketplace。
 
 - [x] 准备 rc.1 源码版本及双语候选说明，审查当前改动，修复依赖版本的旧版恢复
       测试夹具，运行本机发布检查；与干净提交/完整矩阵验收分开记录。
@@ -74,17 +74,18 @@ JavaScript 严格校验、WASM 元数据和版本同步均已补充回归。
       的变化，再不带 `--record-review` 重跑，附上摘要与测试提交。这是 0.1.0 的手动
       验收项；普通 CI 中的完整试用仍为可选。
 
-干净 rc.1 证据见候选 CI 报告：十份原生消费者、安装后的 WASM、六个 VSIX 目标
-（四个桌面安装检查）、桌面/Web 宿主、双语 Playground、八个干净 crate 打包编译
-及五组引擎。完整项目试用保持 606 个审查条目不变、零未解释差异。完整
-`pnpm verify:npm` 与本地 `pnpm release:prepare` 演练核验了七份 npm tarball、八份
-crate 和六份 VSIX。这些用于源码候选验收，绑定 tag 的冻结和真实发布门槛独立保留。
+精确发布 tag 通过完整 CI、八个 crate 打包编译、六个 VSIX 目标和完整项目试用，
+606 个审查条目不变、零未解释差异。原冻结 artifact `12544141250` 包含七份 npm
+包、八份 crate 和六份 VSIX；十五个 registry 下载及全部 24 个 GitHub 附件均匹配
+其 hash。Linux CI 和独立 macOS ARM64 真实安装消费者通过，原生/WASM 对比覆盖
+1,465 个 case。最终正式 tag 的冻结及发布门槛独立保留。
 
 ## 文档与发布说明
 
 [双语文档审查](docs/zh/research/0.1.0-documentation-review.md)已针对之前的
 `0.1.0-alpha.6` 基线完成。rc.1 准备更新源码候选标识，复核示例、声明和编辑器
-版本；真实上传前，公开 registry 安装命令保留已发布版本。
+版本；rc.1 发布后，安装命令已改用真实发布的 rc.1 并关联 registry 验收，正式版
+0.1.0 仍未发布。
 
 已准备 0.1.0 的[英文发布说明](docs/releases/0.1.0.md)与
 [简体中文发布说明](docs/zh/releases/0.1.0.md)，覆盖宿主/profile、默认风格、
@@ -94,7 +95,7 @@ crate 和六份 VSIX。这些用于源码候选验收，绑定 tag 的冻结和�
 [Marketplace/VSIX 审查](docs/zh/research/0.1.0-editor-distribution-review.md)建议核心
 0.1.0 以 GitHub 冻结 VSIX 为交付基线，Marketplace 正式发布独立跟踪。Gallery
 已有数字扩展 0.1.0 的六目标预发布，已检查的 macOS/Web 清单内置 alpha.6。
-rc.1 准备已重新核对可用性并选择数字版本 0.2.0，本地 VSIX 为预发布且未上传
+rc.1 选择数字版本 0.2.0，六份冻结预发布 VSIX 已在 GitHub Release 提供，仍未上传
 Gallery。上传前重新核对；如果先将 0.2.0 上传为 Gallery 预发布，正式上传需另选
 数字版本。文档已明确 Web 安装及打包后的信任差异。
 
@@ -116,16 +117,11 @@ Gallery。上传前重新核对；如果先将 0.2.0 上传为 Gallery 预发布
 启用的 tag ruleset [25720774](https://github.com/ntnyq/gdfmt/rules/25720774)，保留
 管理员/维护者例外，并通过 API 回读验证。策略记录在
 [.github/repository-protection.json](.github/repository-protection.json)。
-owner 随后确认发布配置已完成，按维护者确认记录，与此前未认证查询结果区分。
-仓库尚未收录逐字段认证核对证据及账号准备确认；下面的条目保留证据归档要求，
-候选版本实际发布验证仍是独立门槛。
-
-[逐包信任/账号审查](docs/zh/research/0.1.0-trusted-publisher-review.md)记录此前八个
-403、七个 E401、npm 账号/权限查询失败及浏览器未登录状态。这些历史查询限制
-不否定维护者后续的配置完成确认；需归档十五个绑定、两项 npm 权限及邮箱/2FA/
-写权限/token 撤销的不含敏感信息的认证证据。八个 crate 的公开
-`trustpub_only: false` 属于可选加固状态，不新增验收门槛；实际读取设置前，
-继续保留未勾选的已认证核对项。
+owner 随后确认配置完成，rc.1 现已通过新发布实际验证十五个 Trusted Publisher
+及 npm 直接发布/dist-tag 权限，公开 registry 身份、hash 与真实消费者见
+[发布报告](docs/zh/research/0.1.0-rc.1-publication.md)。[最初逐包审查](docs/zh/research/0.1.0-trusted-publisher-review.md)
+保留历史私有读取/会话限制。邮箱/2FA/写权限与首次发布 token 撤销尚未独立回读，
+因此保留剩余 owner 账号证据项；可选 Trusted Publishing Only 加固不新增门槛。
 
 - [x] 完成八个 crate、七个 npm 包（含 `@gdfmt/wasm`）的只读归属、历史
       Trusted Publishing 和 `release` 环境审查，记录证据、逐项当前配置查询结果、
@@ -133,11 +129,12 @@ owner 随后确认发布配置已完成，按维护者确认记录，与此前�
 - [x] 落实并验证 `main` 保护与 `v*` tag ruleset：PR、29 项必需检查、管理员应急
       绕过及 Admin/Maintain tag 例外，覆盖恢复 tag；记录策略及 API/角色回读证据，
       不发布或创建 ref。
-- [ ] 由已登录 owner 核对十五个包当前的 Trusted Publisher 绑定、npm 直接发布/
-      dist-tag 权限、账号准备状态及首次发布 token 撤销情况。候选发布前解决绑定
-      不一致或新配置过期的问题。
-- [ ] 通过选定候选版本的新发布成功及 registry 消费者安装验证发布配置；
-      alpha.6 历史证据不能关闭此项。
+- [ ] 归档剩余已认证 owner 账号证据：邮箱验证、2FA/写权限与首次发布 token 撤销。
+      rc.1 已证明十五个 Trusted Publisher 及 npm 直接发布/dist-tag 权限可用，
+      设置未变时无需重复配置。
+- [x] 通过选定候选的新发布及真实 registry 安装验证发布配置。rc.1 运行
+      `40051909889` 和发布报告记录十五个包、精确安装消费者、`next` 推进及
+      全部 `latest` 保持原值。
 - [x] 审查并保留固定 npm 11.21.0 运行时与 scoped dist-tag 补丁；本轮只读审查
       未满足发布指南中的移除条件。
 - [ ] 运行 `pnpm release:version 0.1.0 --dry-run`，执行版本更新并审查同步后的
@@ -149,7 +146,8 @@ owner 随后确认发布配置已完成，按维护者确认记录，与此前�
 
 ## 发布完成检查
 
-以下条目在发布过程中验收。部分发布失败时保留原冻结 bundle，用于恢复。
+以下剩余条目针对最终正式版 0.1.0。rc.1 的 tag 冻结、registry 消费者及 GitHub
+预发布已在上方报告完成。部分发布失败时，保留对应版本的原冻结 bundle 用于恢复。
 
 - [ ] 确认最终 tag 的完整 CI 矩阵与冻结 job 通过。记录成功运行/artifact ID，
       核对八个 crate 归档、七个 npm tarball、六个 VSIX 的提交、回执与 hash 一致。

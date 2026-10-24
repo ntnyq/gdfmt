@@ -96,9 +96,10 @@ VSIX receipt record the exact core version. Filenames use that core version:
 `target/editors/web/gdfmt-CORE_VERSION-web.vsix`. VSIX files follow the core prerelease status;
 Marketplace publication is a separate maintainer action.
 
-Current source builds use numeric extension version `0.2.0` with core
-`0.1.0-rc.1`, marked as prerelease. These candidate artifacts are unpublished;
-the existing Gallery `0.1.0` prerelease contains the older core.
+The [rc.1 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0-rc.1)
+provides all six frozen VSIX targets with numeric extension version `0.2.0` and
+core `0.1.0-rc.1`, marked as prerelease. This release did not upload to Marketplace;
+the previously published Gallery preview is separate from these rc.1 assets.
 
 For core 0.1.0, the recommended delivery baseline is the frozen GitHub Release
 VSIX set. Marketplace already has a prerelease; stable publication needs a new

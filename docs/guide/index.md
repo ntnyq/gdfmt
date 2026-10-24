@@ -2,9 +2,10 @@
 
 gdfmt formats GDScript files from the command line. Start with the defaults, then commit a configuration file when your project needs shared settings.
 
-The current source candidate is **0.1.0-rc.1, unpublished**; see the
-[candidate notes](../releases/0.1.0-rc.1.md). Source builds use the checked-out
-version; registry commands below use already published packages.
+The current published prerelease is **0.1.0-rc.1**, available on crates.io and npm
+`next`; see the [candidate notes](../releases/0.1.0-rc.1.md) and
+[registry acceptance](../research/0.1.0-rc.1-publication.md). Stable 0.1.0 remains
+unreleased. Source builds use the checked-out version.
 
 ## Install from source
 
@@ -24,7 +25,7 @@ Make sure Cargo's binary directory is on your `PATH`. You can also run the CLI d
 Cargo prereleases need an explicit version; the package name differs from the executable:
 
 ```sh
-cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked
+cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked
 gdfmt --version
 ```
 

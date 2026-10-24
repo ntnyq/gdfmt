@@ -127,3 +127,8 @@ This remains historical dirty-source evidence. The subsequent
 [committed-candidate CI report](../../docs/research/0.1.0-rc.1-ci.md) records the
 clean rc.1 rerun, exact source revision and report hashes; later release revisions
 still require their own acceptance.
+
+The [rc.1 publication](../../docs/research/0.1.0-rc.1-publication.md) repeated all
+14 guards and the complete trial on the exact clean tag commit
+`1329b72dc26179921739e4c2342ffa0bf7b7a314`, with Python hash seed 149 and no
+`--record-review`. All 606 review entries and four report hashes were unchanged.

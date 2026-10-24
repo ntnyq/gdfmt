@@ -16,10 +16,10 @@ gdfmt 为 `.gd` 文件提供统一的空格、缩进与换行布局，可通过�
 - **融入日常工作流。** 格式化项目、在 CI 中检查、预览差异，或通过 stdin 处理编辑器缓冲区。支持 Git 忽略规则与 `.gdfmtignore`。
 - **保留手动排版。** 使用成对的 `formatter-off` / `formatter-on` 注释，保持指定区域原样。
 
-当前源码已准备为 `0.1.0-rc.1`，尚未创建 tag 或发布。详见
+**0.1.0-rc.1 已发布**到 crates.io 和 npm `next`。详见
 [候选说明](docs/zh/releases/0.1.0-rc.1.md)和
-[提交源码的 CI 证据](docs/zh/research/0.1.0-rc.1-ci.md)。下面的已发布安装命令仍指向
-现有 registry 版本。
+[发布及 registry 验收](docs/zh/research/0.1.0-rc.1-publication.md)。
+正式版 0.1.0 尚未发布，默认格式化风格不变。
 
 ## 快速开始
 
@@ -42,7 +42,7 @@ gdfmt init              # 创建 .gdfmtrc.json
 
 不传参数时默认格式化当前目录。检查发现语法错误或格式差异时退出码为 `1`，配置、参数或 I/O 错误为 `2`。
 
-安装已发布的预发布版本可运行 `cargo install gdfmt_cli --version 0.1.0-alpha.6 --locked`，
+安装已发布的预发布版本可运行 `cargo install gdfmt_cli --version '=0.1.0-rc.1' --locked`，
 或在 Node 22.x 的 22.13+、Node 24.x 下运行 `pnpm add @gdfmt/gdfmt@next`。
 Cargo 包名为 `gdfmt_cli`，两种方式提供的命令均为 `gdfmt`。
 库用法与支持的原生平台见 [Node.js API](docs/zh/reference/node.md)。
