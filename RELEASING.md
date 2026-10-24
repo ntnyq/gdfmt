@@ -11,28 +11,17 @@ Track the first stable release's remaining acceptance work in the
 
 ## Current 0.1.0 readiness
 
-**The prepared source uses core 0.1.0 and extension 0.2.1; neither is published.**
-The [clean-source CI report](docs/research/0.1.0-ci.md) records version
-synchronization, clean-revision project trials, full cross-platform CI and the
-artifact rehearsal. PR #3 remains open; final tag-bound freezing is still required.
-The account-evidence item remains
-open; functional Trusted Publishing was already exercised by rc.1. No new tag,
-registry write or Marketplace upload is part of this preparation.
-
-**0.1.0-rc.1 is published** on crates.io and npm `next`/`candidate`, with independent
-extension version **0.2.0** and `gdfmtVersion: 0.1.0-rc.1`. All npm `latest` tags
-retain their previous values. Stable 0.1.0 and Marketplace uploads remain outside
-this release.
-
-[PR #1](https://github.com/ntnyq/gdfmt/pull/1) was squash-merged into
-`1329b72dc26179921739e4c2342ffa0bf7b7a314`; `v0.1.0-rc.1` binds that commit.
-[Release run 40051909889](https://github.com/ntnyq/gdfmt/actions/runs/40051909889)
-passed all tag-bound checks, freeze and both registry publications.
-[Publication evidence](docs/research/0.1.0-rc.1-publication.md) records the original
-artifact ID/hashes, all fifteen registry payloads, real Rust/npm consumers and
-all 24 GitHub prerelease assets. The [candidate CI report](docs/research/0.1.0-rc.1-ci.md)
-and [initial preparation](docs/research/0.1.0-rc.1-preparation.md) retain their own
-historical source identities; do not relabel those receipts as the release commit.
+**Core 0.1.0 is published** on crates.io and npm `latest`; six frozen GitHub
+VSIX files use independent extension **0.2.1**, without the prerelease flag.
+[PR #3](https://github.com/ntnyq/gdfmt/pull/3) was squash-merged into
+`d98db6b0463d91e6449f2c84dd62026ceb0698cd` and tagged `v0.1.0`.
+[Release run 40118540445](https://github.com/ntnyq/gdfmt/actions/runs/40118540445)
+validated and froze that revision before publishing both registries.
+The [publication report](docs/research/0.1.0-publication.md) records the original
+bundle, fifteen registry payloads, real consumers and all 24 GitHub assets.
+The clean-source CI rehearsal and rc.1 reports retain their historical identities.
+All seven npm `next` tags retain rc.1; `candidate` and `latest` point to 0.1.0.
+Marketplace stable rollout and the remaining owner-account evidence stay separate.
 
 The [registry and environment review](docs/research/0.1.0-registry-readiness-review.md)
 records the initial read-only snapshot and the branch/tag protection follow-up
@@ -287,15 +276,13 @@ The rc.1 GitHub Release provides six frozen VSIX files with numeric extension
 to the Gallery or change the Marketplace listing. Recheck availability before
 any later upload and rebuild/test/freeze all six variants. If `0.2.0` is uploaded
 as a Gallery prerelease, select another unused numeric version for stable.
-Stable source preparation now selects numeric **0.2.1** with core **0.1.0**; a
-2026-10-24 Gallery read found it unused on all six targets. It is higher than the
-rc.1 VSIX version, and local native/Web archives have no prerelease flag. Recheck
-availability before any upload; the final six-target frozen set is still pending.
+The stable GitHub Release now provides numeric extension **0.2.1** with core
+**0.1.0** across all six frozen VSIX targets, without a prerelease flag. This
+release did not upload to Marketplace. Recheck Gallery availability before any
+later upload; see the [publication report](docs/research/0.1.0-publication.md).
 Do not reuse the existing Gallery prerelease version or publish the raw source
-directory. Verify publisher access/authentication, publish the frozen VSIX bytes
-through a separate authorized process, and record each target and installed
-stable consumer before announcing Gallery stable availability. No Marketplace
-upload is performed by this preparation or the existing workflow.
+directory. Verify publisher access/authentication, publish frozen VSIX bytes through
+a separately authorized process and verify installed stable consumers for every target.
 
 Desktop `pnpm test:vscode` also installs its VSIX in an isolated temporary
 profile, checks the installed extension/core versions and bundled server bytes,

@@ -2,7 +2,7 @@
 
 `@gdfmt/gdfmt` 包提供经过验证的文本格式化与显式项目配置解析，支持 ESM、CommonJS 和 TypeScript 声明。
 
-使用 `pnpm add @gdfmt/gdfmt@next` 安装预发布版本，对应的原生平台包会自动选择。
+使用 `pnpm add @gdfmt/gdfmt@latest` 安装正式版本，对应的原生平台包会自动选择。
 
 ## 格式化文本
 

@@ -13,8 +13,8 @@ const result = formatter.formatSync('var value=1\n', {
 if (result.output !== null) console.log(result.output)
 ```
 
-运行 `pnpm add @gdfmt/wasm@next` 安装浏览器包；消费该包无需原生平台 addon 或
-Rust。`next` 通道会移动，需要可复现构建时固定精确版本或提交 lockfile。
+运行 `pnpm add @gdfmt/wasm@latest` 安装浏览器包；消费该包无需原生平台 addon 或
+Rust。`latest` 正式通道会移动，需要可复现构建时固定精确版本或提交 lockfile。
 
 从仓库源码构建时，先运行 `pnpm install --frozen-lockfile`，再运行
 `pnpm build:wasm`。构建需要 Node 22.x 的 22.13+ 或 Node 24.x、仓库声明的 pnpm

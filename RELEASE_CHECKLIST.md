@@ -105,14 +105,15 @@ and publication gates remain separate.
 The [bilingual documentation review](docs/research/0.1.0-documentation-review.md)
 was completed for the prior `0.1.0-alpha.6` baseline. The rc.1 preparation updates
 source-candidate labels and rechecks examples, declarations and editor versions.
-After rc.1 publication, installation commands use the published rc.1 and point to
-its registry acceptance; stable 0.1.0 remains unreleased.
+After stable publication, installation commands use 0.1.0 and npm `latest`, with
+[stable registry acceptance](docs/research/0.1.0-publication.md). Historical rc.1
+reports retain their own source and channel identities.
 
 The 0.1.0 release notes are prepared in [English](docs/releases/0.1.0.md) and
 [Simplified Chinese](docs/zh/releases/0.1.0.md), including host/profile support,
 default style, a `gdformat` migration sequence and known limitations. They remain
-drafts until final acceptance and publication; include them in the GitHub Release
-body during the publication-completion review.
+published release notes, included in the stable GitHub Release body after registry
+and frozen-artifact acceptance.
 
 The [Marketplace/VSIX review](docs/research/0.1.0-editor-distribution-review.md)
 recommends frozen GitHub VSIX delivery for core 0.1.0, with Marketplace stable
@@ -139,12 +140,12 @@ version for stable. Web installation and packaged trust differences are explicit
 
 ## Final version and publication readiness
 
-**Committed source: core 0.1.0, extension 0.2.1; unpublished.** [PR #3](https://github.com/ntnyq/gdfmt/pull/3)
-and the [clean-source CI report](docs/research/0.1.0-ci.md) record complete branch/PR
-CI, exact clean-revision project trials and artifact identities. PR merge and the
-final tag-bound release freeze remain pending. Published rc.1 receipts keep their
-own source identity. Defaults/API/Schema are unchanged; registry installation still
-uses rc.1. No stable tag or Marketplace upload was created.
+**Stable 0.1.0 is published**, with independent extension **0.2.1** in the six
+frozen GitHub VSIX files. [PR #3](https://github.com/ntnyq/gdfmt/pull/3) was squash-merged
+and tagged `v0.1.0`. The [publication report](docs/research/0.1.0-publication.md)
+records exact tag-bound CI, the original bundle, registry consumers and hashes.
+All seven npm packages use `latest: 0.1.0`; `next` retains rc.1. Defaults and
+API/Schema are unchanged. Marketplace stable upload remains a separate follow-up.
 
 The [registry/environment review](docs/research/0.1.0-registry-readiness-review.md)
 confirms existing ownership and historical alpha.6 Trusted Publishing for all
@@ -193,25 +194,22 @@ evidence stays unchecked. Optional Trusted Publishing Only hardening is not a ne
       project trials on the exact clean revision. The [CI report](docs/research/0.1.0-ci.md)
       records all ten native consumer receipts, six VSIX targets, eight packaged
       crates and the validation rehearsal. Final-head checks are recorded in the PR.
-- [ ] Merge PR #3 in a separately authorized step, verify a clean final checkout
-      and default-branch ancestry, and recheck the intended release environment/
-      `RELEASE_ENABLED` setting immediately before pushing `v0.1.0`.
+- [x] Squash-merge PR #3; verify the clean release checkout, default-branch ancestry
+      and release environment/`RELEASE_ENABLED` before pushing `v0.1.0`.
 
 ## Publication completion
 
-These remaining items apply to the final stable 0.1.0 release. rc.1's tag-bound
-freeze, registry consumers and GitHub prerelease are complete in the report above.
-Preserve each release's original frozen bundle when recovering a partial release.
+The [stable publication report](docs/research/0.1.0-publication.md) and its
+machine-readable evidence bind all results to `d98db6b0463d91e6449f2c84dd62026ceb0698cd`.
+The original release bundle is preserved for recovery. **27/28 items are complete**;
+only the independent owner-account evidence item remains unchecked.
 
-- [ ] Confirm the final tag's full CI matrices and freeze job passed. Record the
-      successful run/artifact ID and matching revision, receipts and hashes for
-      eight crate archives, seven npm tarballs and six VSIX files.
-- [ ] Verify exact-version crates.io installation and npm native/WASM API and CLI
-      consumers, matching registry integrity, and advancement of all seven npm
-      packages to `latest` before marking the release complete.
-- [ ] Verify the GitHub Release contains the release notes and frozen artifacts;
-      update bilingual installation instructions to the stable channel and
-      confirm the documentation/playground deployment serves the intended version.
+- [x] Pass the final tag’s full CI and freeze job; record the run/artifact identity,
+      source, receipts and hashes for eight crates, seven npm tarballs and six VSIX files.
+- [x] Verify exact-version crates.io installation and npm native/WASM API/CLI
+      consumers, all registry payload integrity and all seven `latest: 0.1.0` tags.
+- [x] Verify the stable GitHub Release notes and all frozen assets; update bilingual
+      installation guidance to stable and verify the documentation/Playground core.
 
 ## Follow-up work outside the 0.1.0 gate
 

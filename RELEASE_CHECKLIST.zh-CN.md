@@ -84,13 +84,13 @@ ID/hash、十五个 registry 包和真实 Rust/npm 安装消费者。全部 npm 
 
 [双语文档审查](docs/zh/research/0.1.0-documentation-review.md)已针对之前的
 `0.1.0-alpha.6` 基线完成。rc.1 准备更新源码候选标识，复核示例、声明和编辑器
-版本；rc.1 发布后，安装命令已改用真实发布的 rc.1 并关联 registry 验收，正式版
-0.1.0 仍未发布。
+版本；正式版发布后，安装命令使用 0.1.0 与 npm `latest`，并关联
+[正式 registry 验收](docs/zh/research/0.1.0-publication.md)。历史 rc.1 报告保留各自身份。
 
 已准备 0.1.0 的[英文发布说明](docs/releases/0.1.0.md)与
 [简体中文发布说明](docs/zh/releases/0.1.0.md)，覆盖宿主/profile、默认风格、
-`gdformat` 迁移步骤和已知限制。最终验收及发布前仍保留草稿状态，发布完成检查时
-将内容整合到 GitHub Release 正文。
+`gdformat` 迁移步骤和已知限制。registry 与冻结产物验收后已移除草稿状态，
+并整合到正式 GitHub Release 正文。
 
 [Marketplace/VSIX 审查](docs/zh/research/0.1.0-editor-distribution-review.md)建议核心
 0.1.0 以 GitHub 冻结 VSIX 为交付基线，Marketplace 正式发布独立跟踪。Gallery
@@ -111,11 +111,11 @@ Gallery。上传前重新核对；如果先将 0.2.0 上传为 Gallery 预发布
 
 ## 正式版本与发布准备
 
-**已提交源码为核心 0.1.0、扩展 0.2.1，尚未发布。**
-[PR #3](https://github.com/ntnyq/gdfmt/pull/3)与[干净源码 CI 报告](docs/zh/research/0.1.0-ci.md)
-记录完整分支/PR CI、精确干净修订试用及产物身份；PR 合并与最终 tag 冻结仍待完成。
-rc.1 发布回执保留原源码身份。默认风格和 API/Schema 未变，registry 安装仍使用
-rc.1；本次未创建正式 tag 或上传 Marketplace。
+**正式版 0.1.0 已发布**，六份 GitHub 冻结 VSIX 使用独立扩展 **0.2.1**。
+[PR #3](https://github.com/ntnyq/gdfmt/pull/3)已 squash 合并并打 tag `v0.1.0`。
+[发布报告](docs/zh/research/0.1.0-publication.md)记录精确 tag CI、原冻结 bundle、
+registry 消费者和 hash。七个 npm 包均为 `latest: 0.1.0`，`next` 保持 rc.1。
+默认风格和 API/Schema 未变，Marketplace 正式上传独立跟进。
 
 [registry/环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)确认十五个
 包的现有归属及 alpha.6 历史 Trusted Publishing。2026-10-23 读取到
@@ -153,20 +153,21 @@ owner 随后确认配置完成，rc.1 现已通过新发布实际验证十五个
       Rust/npm/宿主的完整分支与 PR CI，在精确干净修订重跑固定项目试用。
       [CI 报告](docs/zh/research/0.1.0-ci.md)记录十份原生消费者回执、六份 VSIX、
       八个打包 crate 和验证演练；最终 head 检查记录在 PR 中。
-- [ ] 在另行授权步骤合并 PR #3，核对最终 checkout 干净且提交已在默认分支历史中；
-      推送 `v0.1.0` 前重新确认预期 release 环境与 `RELEASE_ENABLED` 设置。
+- [x] Squash 合并 PR #3，核对发布 checkout 干净且提交已在默认分支历史中；
+      推送 `v0.1.0` 前重新确认 release 环境与 `RELEASE_ENABLED` 设置。
 
 ## 发布完成检查
 
-以下剩余条目针对最终正式版 0.1.0。rc.1 的 tag 冻结、registry 消费者及 GitHub
-预发布已在上方报告完成。部分发布失败时，保留对应版本的原冻结 bundle 用于恢复。
+[正式发布报告](docs/zh/research/0.1.0-publication.md)与机器可读证据将结果绑定至
+`d98db6b0463d91e6449f2c84dd62026ceb0698cd`，原冻结 bundle 保留用于恢复。
+**27/28 项完成**，仅独立的 owner 账号证据项保持未勾选。
 
-- [ ] 确认最终 tag 的完整 CI 矩阵与冻结 job 通过。记录成功运行/artifact ID，
-      核对八个 crate 归档、七个 npm tarball、六个 VSIX 的提交、回执与 hash 一致。
-- [ ] 验证 crates.io 精确版本安装、npm 原生/WASM API 与 CLI 消费者、registry
-      integrity，以及全部七个 npm 包的 `latest` 渠道更新后，再将发布标记为完成。
-- [ ] 确认 GitHub Release 包含发布说明与冻结产物；将双语安装说明更新为正式渠道，
-      并确认文档/Playground 部署使用预期版本。
+- [x] 最终 tag 的完整 CI 与冻结 job 通过，记录运行/artifact 身份、源码、回执和
+      八个 crate、七个 npm tarball、六份 VSIX 的 hash。
+- [x] 验证 crates.io 精确安装、npm 原生/WASM API 与 CLI 消费者、全部 registry
+      内容完整性及七个包的 `latest: 0.1.0`。
+- [x] 核对正式 GitHub Release 说明与全部冻结附件，更新双语正式安装说明，
+      验证文档/Playground 核心版本。
 
 ## 不阻塞 0.1.0 的后续候选工作
 

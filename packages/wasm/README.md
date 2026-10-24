@@ -4,7 +4,7 @@ Single-threaded GDScript formatting for browsers and Web Workers. Uses the same
 Rust configuration validation, reparsing, structure and idempotence checks as
 `@gdfmt/gdfmt`, without native addons, filesystem APIs or shared memory.
 
-Install with `pnpm add @gdfmt/wasm@next`; Rust is only needed to build from source.
+Install with `pnpm add @gdfmt/wasm@latest`; Rust is only needed to build from source.
 Pin an exact version or commit the lockfile when reproducibility matters.
 
 ```js

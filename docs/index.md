@@ -43,7 +43,7 @@ gdfmt .
 gdfmt --check .
 ```
 
-See the [quickstart](/guide/) for installation. The npm prerelease is available as `@gdfmt/gdfmt@next`.
+See the [quickstart](/guide/) for installation. The npm stable release is available as `@gdfmt/gdfmt@latest`.
 
 ## Explore the docs
 
