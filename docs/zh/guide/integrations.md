@@ -58,6 +58,10 @@ VSIX，或运行 `pnpm package:vscode` 构建，通过 **Extensions: Install fro
 Marketplace；后续正式扩展上传前需重查 Gallery 可用性，详见
 [分发审查](../research/0.1.0-editor-distribution-review.md)。
 
+当前工作区准备核心 `0.1.0` 与数字扩展 `0.2.1`，高于 rc.1 VSIX 的 `0.2.0`。
+2026-10-24 回读 Gallery，六目标仍仅列出预发布 `0.1.0`。新版本均未发布，详见
+[正式版准备报告](../research/0.1.0-preparation.md)。
+
 VSIX 文件名使用核心版本，扩展视图显示数字扩展版本。替换 `CORE_VERSION`，
 按宿主选择后缀：
 

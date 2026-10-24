@@ -19,7 +19,9 @@ gdfmt formats `.gd` files with consistent spacing, indentation and line wrapping
 **0.1.0-rc.1 is published** on crates.io and npm `next`. See the
 [candidate notes](docs/releases/0.1.0-rc.1.md) and
 [publication and registry acceptance](docs/research/0.1.0-rc.1-publication.md).
-Stable 0.1.0 remains unreleased; the default formatting style is unchanged.
+The working tree prepares core **0.1.0** and extension **0.2.1**; both remain
+unreleased. See the [stable preparation report](docs/research/0.1.0-preparation.md).
+The default formatting style is unchanged; registry installation still uses rc.1.
 
 ## Get started
 

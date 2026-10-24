@@ -111,6 +111,11 @@ Gallery。上传前重新核对；如果先将 0.2.0 上传为 Gallery 预发布
 
 ## 正式版本与发布准备
 
+**源码准备版本为核心 0.1.0、扩展 0.2.1，尚未发布。** 本地验证与剩余关卡见
+[正式版准备报告](docs/zh/research/0.1.0-preparation.md)。当前工作区尚不是冻结发布
+修订，下面 rc.1 的发布回执保留各自源码身份。默认风格与 API/Schema 契约未改，
+registry 安装仍使用 rc.1；本次未创建正式 tag 或上传 Marketplace。
+
 [registry/环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)确认十五个
 包的现有归属及 alpha.6 历史 Trusted Publishing。2026-10-23 读取到
 `RELEASE_ENABLED=true`，`release` 环境允许 `v*` tag。后续已配置 `main` 保护及
@@ -137,12 +142,15 @@ owner 随后确认配置完成，rc.1 现已通过新发布实际验证十五个
       全部 `latest` 保持原值。
 - [x] 审查并保留固定 npm 11.21.0 运行时与 scoped dist-tag 补丁；本轮只读审查
       未满足发布指南中的移除条件。
-- [ ] 运行 `pnpm release:version 0.1.0 --dry-run`，执行版本更新并审查同步后的
-      manifests、lockfile 与扩展核心版本，再运行 `pnpm release:check`、
-      `pnpm typecheck` 和 `pnpm test:release`。冻结六份 VSIX 前选定独立且未占用的
-      数字扩展版本（rc.1 当前为 0.2.0，后续需重查 Gallery 可用性）。
-- [ ] 合并最终发布提交，确认 checkout 干净且提交已在默认分支历史中；按发布指南
-      推送 `v0.1.0` 前，确认预期的 `RELEASE_ENABLED` 设置。
+- [x] 运行 `pnpm release:version 0.1.0 --dry-run` 并执行更新，审查 Cargo/npm
+      版本、lockfile、五项原生 optional 依赖和扩展核心版本；`pnpm release:check`、
+      `pnpm typecheck` 与全部 32 项发布回归通过。独立数字扩展选定 **0.2.1**，
+      高于 rc.1 的 0.2.0，2026-10-24 Gallery 快照尚未占用。
+      [正式版准备报告](docs/zh/research/0.1.0-preparation.md)区分本地未提交验收与
+      剩余的干净源码/完整 CI 关卡。
+- [ ] 提交/审查/合并正式版改动，在精确干净修订通过完整 Rust/npm/宿主 CI 矩阵
+      与固定项目试用，确认提交已在默认分支历史中；按发布指南推送 `v0.1.0` 前，
+      确认预期的 release 环境与 `RELEASE_ENABLED` 设置。
 
 ## 发布完成检查
 

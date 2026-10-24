@@ -139,6 +139,13 @@ version for stable. Web installation and packaged trust differences are explicit
 
 ## Final version and publication readiness
 
+**Source preparation: core 0.1.0, extension 0.2.1; unpublished.** Local validation
+and remaining gates are recorded in the [stable report](docs/research/0.1.0-preparation.md).
+The current working tree is not a frozen release revision. The published rc.1
+receipts below retain their own source identity; defaults and API/Schema contracts
+are unchanged. Registry installation still uses rc.1. No stable tag or Marketplace
+upload was created during this preparation.
+
 The [registry/environment review](docs/research/0.1.0-registry-readiness-review.md)
 confirms existing ownership and historical alpha.6 Trusted Publishing for all
 fifteen packages. On 2026-10-23, `RELEASE_ENABLED=true` and the `release`
@@ -174,14 +181,17 @@ evidence stays unchecked. Optional Trusted Publishing Only hardening is not a ne
 - [x] Review and retain the pinned npm 11.21.0 runtime and scoped dist-tag
       workaround. This read-only review does not meet the publishing guide's
       removal criteria.
-- [ ] Run `pnpm release:version 0.1.0 --dry-run`, apply the version update, review
-      the synchronized manifests/lockfile/core extension version, and run
-      `pnpm release:check`, `pnpm typecheck` and `pnpm test:release`. Select the
-      independent unused numeric extension version before freezing all six VSIX
-      files (currently 0.2.0 for rc.1, subject to future Gallery availability).
-- [ ] Merge the final release commit, verify a clean checkout and default-branch
-      ancestry, and confirm the intended `RELEASE_ENABLED` setting before pushing
-      `v0.1.0` according to the publishing guide.
+- [x] Run `pnpm release:version 0.1.0 --dry-run`, apply the update and review
+      Cargo/npm versions, the lockfile, five optional native dependencies and
+      extension core version. `pnpm release:check`, `pnpm typecheck` and all
+      32 release regressions passed. Select independent numeric extension **0.2.1**,
+      above rc.1's 0.2.0 and unused in the 2026-10-24 Gallery snapshot. The
+      [stable preparation report](docs/research/0.1.0-preparation.md) distinguishes
+      local uncommitted validation from the remaining clean-source/full CI gate.
+- [ ] Commit/review/merge the stable changes, pass the full Rust/npm/host CI matrix
+      and pinned project trials on the exact clean revision, verify default-branch
+      ancestry, and confirm the intended release environment/`RELEASE_ENABLED`
+      setting before pushing `v0.1.0` according to the publishing guide.
 
 ## Publication completion
 

@@ -4,7 +4,9 @@ gdfmt 通过命令行格式化 GDScript 文件。可以直接使用默认设置�
 
 当前已发布预发布版本为 **0.1.0-rc.1**，可从 crates.io 和 npm `next` 安装，详见
 [候选说明](../releases/0.1.0-rc.1.md)及[registry 验收](../research/0.1.0-rc.1-publication.md)。
-正式版 0.1.0 尚未发布；源码构建使用 checkout 的版本。
+正式版 0.1.0 尚未发布。当前工作区准备核心 **0.1.0** 与扩展 **0.2.1**，详见
+[准备报告](../research/0.1.0-preparation.md)。源码构建使用 checkout 的版本，
+下方 registry 命令仍安装 rc.1。
 
 ## 从源码安装
 
