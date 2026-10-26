@@ -38,7 +38,13 @@ gdfmt --stdin-filepath path/to/current-file.gd
 
 ## VS Code
 
-从项目 [GitHub Releases](https://github.com/ntnyq/gdfmt/releases) 下载匹配的原生
+在桌面或 Web 的扩展视图中安装
+[Marketplace 的 gdfmt](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)。
+正式扩展 **0.2.1** 内置核心 **0.1.0**。桌面 CLI 可运行
+`code --install-extension ntnyq.gdfmt`；从旧预发布显式切换时，选择
+**Switch to Release Version**，或为同一 CLI 命令添加 `--force`。
+
+也可以从项目 [GitHub Releases](https://github.com/ntnyq/gdfmt/releases) 下载匹配的原生
 VSIX，或运行 `pnpm package:vscode` 构建，通过 **Extensions: Install from VSIX**
 安装。插件内置原生程序，无需额外安装 Node。SSH、WSL 和容器场景先连接远程窗口，
 再为远程扩展宿主的平台安装对应产物。
@@ -49,19 +55,27 @@ VSIX，或运行 `pnpm package:vscode` 构建，通过 **Extensions: Install fro
 原生 VSIX 必须匹配扩展宿主的 OS/CPU/libc；WSL、SSH 或容器需要对应宿主的目标，
 产物位于 `target/editors/TARGET/`。
 
-0.1.0 建议随核心发布冻结的 VSIX，将 Marketplace 正式发布作为独立后续工作。
-截至 2026-10-23，[Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
-已有扩展数字版本 `0.1.0` 的预发布，内置核心 `0.1.0-alpha.6`；可通过
-**Install Pre-Release Version** 安装预览，它不是最终核心 0.1.0。
-[rc.1 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0-rc.1)已提供
-六份冻结预发布 VSIX，数字扩展版本 `0.2.0`、核心 `0.1.0-rc.1`。本次未上传
-Marketplace；后续正式扩展上传前需重查 Gallery 可用性，详见
-[分发审查](../research/0.1.0-editor-distribution-review.md)。
-
 [0.1.0 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0)提供
-六份冻结正式 VSIX，核心 `0.1.0`、数字扩展 `0.2.1`，不带预发布标记，详见
-[发布报告](../research/0.1.0-publication.md)。本次未更新 Marketplace，后续 Gallery
-上传仍需单独核对版本可用性与安装验收。
+六份冻结正式 VSIX，核心 `0.1.0`、数字扩展 `0.2.1`，不带预发布标记。同一批
+冻结字节已于 **2026-10-26** 上线 Marketplace，六个目标均通过 Gallery 验证和
+下载完整性核对；实际安装消费者证据见[上线报告](../research/0.1.0-marketplace.md)。
+历史 Marketplace 扩展 `0.1.0` 内置核心 `0.1.0-alpha.6`；仅在 rc.1 GitHub Release
+分发的扩展 `0.2.0` 内置核心 `0.1.0-rc.1`。
+
+### 核心版本与扩展版本
+
+核心版本和扩展版本独立维护。Cargo/npm 包和核心发布 tag 使用核心版本；
+VS Code 扩展视图和 Marketplace 显示数字扩展版本。扩展 manifest 中的
+`gdfmtVersion` 记录内置核心版本，可通过 **gdfmt: Show Version** 查看。
+
+| 分发阶段                        | 扩展版本 | 内置核心        |
+| ------------------------------- | -------- | --------------- |
+| 历史 Marketplace 预发布         | `0.1.0`  | `0.1.0-alpha.6` |
+| rc.1 GitHub VSIX，预发布        | `0.2.0`  | `0.1.0-rc.1`    |
+| 正式 GitHub VSIX 与 Marketplace | `0.2.1`  | `0.1.0`         |
+
+扩展的 `0.2.x` 编号在发布准备阶段就已确定，Marketplace 并不强制要求这次跳号。
+本次上线沿用已经冻结的正式扩展 `0.2.1` VSIX，核心版本仍为 `0.1.0`。
 
 VSIX 文件名使用核心版本，扩展视图显示数字扩展版本。替换 `CORE_VERSION`，
 按宿主选择后缀：
@@ -111,7 +125,7 @@ Web 源码构建还需要 wasm-pack 和 `wasm32-unknown-unknown` Rust 目标。�
 `CORE_VERSION` 是包含预发布后缀的精确 `gdfmtVersion`，与 Marketplace 数字扩展
 版本独立；构建 VSIX 不会发布到 Marketplace。已测试的纯浏览器 VS Code 1.96.4
 在没有本地/远程扩展管理 server 时不提供本地 VSIX 安装入口。可使用现有 Gallery
-预发布、`pnpm test:vscode:web` 的 staging 开发宿主，或
+正式版、`pnpm test:vscode:web` 的 staging 开发宿主，或
 [官方开发侧载方式](https://code.visualstudio.com/api/extension-guides/web-extensions#test-your-web-extension-in-vscode-dev)。
 支持 VSIX 安装的 Web 宿主可使用 Web 产物，不能仅凭开发宿主测试通过就推断安装
 入口可用。默认格式化器与保存设置使用上方配置。Web 版本在独立 Worker 中复用 `@gdfmt/wasm`，

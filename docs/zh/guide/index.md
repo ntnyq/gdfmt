@@ -4,7 +4,8 @@ gdfmt 通过命令行格式化 GDScript 文件。可以直接使用默认设置�
 
 当前正式版本为 **0.1.0**，可从 crates.io 和 npm `latest` 安装，详见
 [发布说明](../releases/0.1.0.md)及[registry 验收](../research/0.1.0-publication.md)。
-冻结 VSIX 使用扩展版本 **0.2.1**，Marketplace 正式发布独立跟进。
+冻结 VSIX 使用扩展版本 **0.2.1**，同一批产物已正式上线
+[Marketplace](../research/0.1.0-marketplace.md)。
 源码构建使用 checkout 的版本。
 
 ## 从源码安装

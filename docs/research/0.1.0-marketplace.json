@@ -1,0 +1,141 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-26",
+  "published": true,
+  "coreVersion": "0.1.0",
+  "extensionVersion": "0.2.1",
+  "revision": "d98db6b0463d91e6449f2c84dd62026ceb0698cd",
+  "tag": "v0.1.0",
+  "coreReleaseRun": 40118540445,
+  "originalFrozenArtifact": 12570578153,
+  "manifestSha256": "888bc0452d60fcda8881aaadb08212f5458261fe964ba219e551e213b78823fb",
+  "marketplace": "https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt",
+  "publisherVerification": {
+    "publisher": "ntnyq",
+    "vsceVerifyPatPassed": true,
+    "sixUploadsSucceeded": true
+  },
+  "galleryAcceptance": {
+    "checkedAt": "2026-10-26T03:55:36.215Z",
+    "complete": true,
+    "targets": [
+      {
+        "target": "darwin-arm64",
+        "galleryTarget": "darwin-arm64",
+        "file": "gdfmt-0.1.0-darwin-arm64.vsix",
+        "sha256": "133df2e4bbf3b150aa674fdf831fb099ecd1673010f857cf459ef91e026d82e3",
+        "sha512": "c5b7f56b1c7656d70009ed4aa4c9b0697370b7de2cb12faac5beb8bf98164fa516d2ceb6440e2e604ba2045a5283670d803ca2d1b00d7a7e28ed06d08a255cc2",
+        "validated": true,
+        "downloadMatchesFrozen": true
+      },
+      {
+        "target": "darwin-x64",
+        "galleryTarget": "darwin-x64",
+        "file": "gdfmt-0.1.0-darwin-x64.vsix",
+        "sha256": "be21a9237e28ca1e78e079fea6f94ecaabf13f8922f68bff3d18faed29536ad7",
+        "sha512": "5b05b1b408391656a00bb443f71d4f12e41815c9a81400bc693b1507220c35a84f545b0604234cc083c24a87b0479b196f1b03cf78b45fcf2903a59183472747",
+        "validated": true,
+        "downloadMatchesFrozen": true
+      },
+      {
+        "target": "linux-x64-gnu",
+        "galleryTarget": "linux-x64",
+        "file": "gdfmt-0.1.0-linux-x64-gnu.vsix",
+        "sha256": "62561b603a2f4a415ad255fc21d8efe1d64cc5970e0ee1a78696d4434d30871b",
+        "sha512": "e5466a11a2b899a313a3696f241d79094e8a1e05866e294e4991cbff76a0f7ea569e446a72904c1d302706b81614c48141cf514a2deb2f887909bfb05604627c",
+        "validated": true,
+        "downloadMatchesFrozen": true
+      },
+      {
+        "target": "linux-x64-musl",
+        "galleryTarget": "alpine-x64",
+        "file": "gdfmt-0.1.0-linux-x64-musl.vsix",
+        "sha256": "d0a9945c62b3c94ba008a9c51dcaed3cc98c44d7780b08291a9278cd34753a49",
+        "sha512": "aef602b28e0da4ec96b4e7e132942953f466ad160e73d6f5d167e40bc1fe4a3a5177b887747a9097ae52e66cbc6cf1a70b9957a7d06d2d396e18545b2c4a4067",
+        "validated": true,
+        "downloadMatchesFrozen": true
+      },
+      {
+        "target": "win32-x64-msvc",
+        "galleryTarget": "win32-x64",
+        "file": "gdfmt-0.1.0-win32-x64-msvc.vsix",
+        "sha256": "118d3818f0ddf09586e0c2f9343ded5f22d41eeea951da7b2f7aa769bcd89278",
+        "sha512": "91a3ca2c6dab10ddadea1511ebf35c521848b348500cc51782e53d667b1a52da64d4a5e4f1484c1c2855a55be59f7010062bc620ecdcc30dfecd5b5ca8142935",
+        "validated": true,
+        "downloadMatchesFrozen": true
+      },
+      {
+        "target": "web",
+        "galleryTarget": "web",
+        "file": "gdfmt-0.1.0-web.vsix",
+        "sha256": "b9a434595e727bbb03f0365fa9d451d2355089c6d1fe50b37ce7300c8eeee027",
+        "sha512": "10ccc18385f0605cc110d52f045e95e6ffe1f731e64dfedc6a5ab6e23108ba8e2b60a1bbdda5c0803d81231457eacd98b36d976ddee193f3e635bd72cf6de19c",
+        "validated": true,
+        "downloadMatchesFrozen": true
+      }
+    ]
+  },
+  "consumers": {
+    "desktop": {
+      "schemaVersion": 1,
+      "checkedAt": "2026-10-26T03:41:54.643Z",
+      "extensionVersion": "0.2.1",
+      "coreVersion": "0.1.0",
+      "vscodeVersion": "1.96.4",
+      "source": "gallery",
+      "web": false,
+      "serverSha256": "8da061aa42b2c8ad976c345ffdc2ce76d61e5dcbb57fc0082280579cccc82f83",
+      "target": "darwin-arm64",
+      "passed": true
+    },
+    "upgrade": {
+      "schemaVersion": 1,
+      "checkedAt": "2026-10-26T03:41:55.894Z",
+      "extensionVersion": "0.2.1",
+      "coreVersion": "0.1.0",
+      "vscodeVersion": "1.96.4",
+      "source": "gallery",
+      "web": false,
+      "upgradeFrom": "0.1.0",
+      "serverSha256": "8da061aa42b2c8ad976c345ffdc2ce76d61e5dcbb57fc0082280579cccc82f83",
+      "target": "darwin-arm64",
+      "passed": true
+    },
+    "web": {
+      "schemaVersion": 1,
+      "checkedAt": "2026-10-26T03:52:05.640Z",
+      "extensionVersion": "0.2.1",
+      "coreVersion": "0.1.0",
+      "vscodeVersion": "1.96.4",
+      "source": "gallery",
+      "web": true,
+      "crossOriginIsolated": false,
+      "browser": "chromium",
+      "webSecurityDisabled": true,
+      "passed": true
+    }
+  },
+  "originalAccountAuditUnchanged": true,
+  "validation": {
+    "releaseTests": 34,
+    "scriptTypes": true,
+    "desktopTypes": true,
+    "webTypes": true,
+    "releaseConfiguration": true,
+    "documentationBuild": true,
+    "diffCheck": true,
+    "resumeCheck": {
+      "pending": 0,
+      "uploaded": 0,
+      "verified": 6,
+      "passed": true
+    }
+  },
+  "scope": {
+    "otherNativeGalleryInstallsTested": false,
+    "persistedVscodeDevProfileTested": false,
+    "webHarnessDisablesWebSecurity": true,
+    "ordinaryWebCIKeepsBrowserSecurity": true,
+    "packagedMarketplaceReadmeStillPrepublication": true
+  }
+}

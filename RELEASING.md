@@ -277,9 +277,9 @@ to the Gallery or change the Marketplace listing. Recheck availability before
 any later upload and rebuild/test/freeze all six variants. If `0.2.0` is uploaded
 as a Gallery prerelease, select another unused numeric version for stable.
 The stable GitHub Release now provides numeric extension **0.2.1** with core
-**0.1.0** across all six frozen VSIX targets, without a prerelease flag. This
-release did not upload to Marketplace. Recheck Gallery availability before any
-later upload; see the [publication report](docs/research/0.1.0-publication.md).
+**0.1.0** across all six frozen VSIX targets, without a prerelease flag. The core
+release did not upload to Marketplace. The same six frozen files were published
+as stable on 2026-10-26; see the [rollout report](docs/research/0.1.0-marketplace.md).
 Do not reuse the existing Gallery prerelease version or publish the raw source
 directory. Verify publisher access/authentication, publish frozen VSIX bytes through
 a separately authorized process and verify installed stable consumers for every target.
@@ -317,7 +317,7 @@ For native installation, select the asset matching the local/remote extension
 host and use **Extensions: Install from VSIX**; check **gdfmt: Show Version** after
 manual updates or rollback. Browser-only VS Code 1.96.4 does not offer this local
 VSIX action without a local/remote extension-management server. Its existing
-Gallery prerelease or developer sideloading are separate routes; staged Web host
+Gallery stable release or developer sideloading are separate routes; staged Web host
 acceptance does not prove end-user Gallery/VSIX installation. See
 [installation details](docs/guide/integrations.md#vs-code).
 
@@ -326,6 +326,64 @@ the numeric extension version is maintained independently. `gdfmt_wasm` is exclu
 from crates.io packaging. Historical six-package frozen releases remain valid
 when recovery selects their original source checkout; the new WASM requirement
 is applied only to source revisions that contain the WASM host.
+
+## Marketplace stable rollout
+
+Core and numeric extension versions are independent: Cargo/npm and release tags
+identify the core; the extension manifest's `version` identifies the Marketplace
+release and `gdfmtVersion` identifies its bundled core. The historical extension
+`0.1.0` prerelease bundles core `0.1.0-alpha.6`, rc.1's GitHub-only extension
+`0.2.0` bundles core `0.1.0-rc.1`, and stable extension `0.2.1` bundles core `0.1.0`.
+The `0.2.x` extension sequence was chosen during preparation, not required by
+Marketplace. The 2026-10-26 rollout reused the accepted stable `0.2.1` VSIX files.
+
+The independent Marketplace publisher uses only the six frozen `editors/` VSIX
+files from an accepted stable core release. Obtain the manifest SHA-256 and full
+source revision from the reviewed release evidence, independently of the downloaded
+bundle. For core 0.1.0 these are recorded in
+[`0.1.0-publication.json`](docs/research/0.1.0-publication.json).
+
+```sh
+pnpm exec vsce verify-pat ntnyq
+pnpm release:publish:marketplace --artifacts PATH_TO_FROZEN_EDITORS --manifest-sha256 REVIEWED_SHA256 --revision REVIEWED_COMMIT
+# Review target/version identities and pending uploads in target/marketplace/publication.json.
+pnpm release:publish:marketplace --artifacts PATH_TO_FROZEN_EDITORS --manifest-sha256 REVIEWED_SHA256 --revision REVIEWED_COMMIT --execute
+```
+
+Authenticate through VSCE's credential store or `VSCE_PAT`; never put a token in
+command arguments, reports or committed files. Public version queries cannot prove
+publisher write permissions; successful publication supplies that evidence.
+The default command is read-only. Execution checks the complete target inventory,
+original clean-source/test receipts, manifest identity and VSIX hashes before any
+upload. It rejects a newer Gallery version, prerelease reuse, unknown targets and
+same-version byte collisions. A partial rollout resumes only missing targets;
+already published targets must match the original SHA-256. Failed writes are
+reconciled with Gallery before proceeding and are never automatically repeated.
+Each published target is downloaded back and compared with the frozen archive.
+Keep the original bundle and report if validation or availability is delayed.
+
+After all six targets are visible, run installed Gallery consumers independently:
+
+```sh
+pnpm test:vscode:marketplace
+pnpm test:vscode:marketplace --upgrade-from 0.1.0
+pnpm test:vscode:marketplace --web
+```
+
+Desktop acceptance uses temporary profiles and a separate test-driver extension.
+It verifies the default stable Gallery install, extension/core identity, the native
+server, activation, formatting and restart. The upgrade command explicitly switches
+an installed historical prerelease to the default stable release; it does not prove
+background automatic updates. The Web command loads the stable Gallery extension
+in the pinned Chromium Web Extension Host through `extensionIds`, with no local
+gdfmt development source and no cross-origin isolation. This verifies Gallery
+resolution and Worker execution in the harness, not a persisted vscode.dev profile.
+As documented by `@vscode/test-web`, external CDN access in this local harness
+uses `--disable-web-security` in its disposable Chromium process. This acceptance
+does not prove production-origin CORS behavior; ordinary `pnpm test:vscode:web`
+continues to test the staged Web extension with browser security enabled.
+Reports are written to `target/marketplace/`. Record which platforms were actually
+installed; downloading all six targets does not establish installation on all hosts.
 
 ## Dry runs and recovery
 

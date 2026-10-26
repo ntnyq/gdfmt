@@ -11,5 +11,5 @@
       "@gdfmt/wasm": ["../../packages/wasm/src/index.d.mts"]
     }
   },
-  "include": ["src/web/**/*.ts", "tests/web/**/*.ts"]
+  "include": ["src/web/**/*.ts", "tests/web/**/*.ts", "tests/marketplace.ts"]
 }

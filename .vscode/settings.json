@@ -24,6 +24,7 @@
     "elif",
     "emnapi",
     "esbuild",
+    "ETARGET",
     "exceedance",
     "feff",
     "gdfmt",

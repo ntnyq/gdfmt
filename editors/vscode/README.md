@@ -12,7 +12,12 @@ and the `wasm32-unknown-unknown` target; see
 [build setup](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#wasm-and-editors).
 Choose a native VSIX for the extension host's OS/CPU/libc, including remote hosts.
 
-Build a local VSIX with `pnpm package:vscode` in the repository root, then run
+Install [gdfmt from Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
+on desktop or Web. Stable extension **0.2.1** bundles core **0.1.0**. Desktop CLI:
+`code --install-extension ntnyq.gdfmt`. To switch from an older prerelease, choose
+**Switch to Release Version**, or add `--force` to that command.
+
+Alternatively, build a local VSIX with `pnpm package:vscode` in the repository root, then run
 **Extensions: Install from VSIX**. Select gdfmt explicitly when Godot Tools or
 another formatter is installed:
 
@@ -60,7 +65,7 @@ workspaces only the bundled program runs, using normal project config discovery.
 Build with `pnpm package:vscode:web`; the Web artifact is under
 `target/editors/web/`. Browser-only VS Code 1.96.4 does not offer local VSIX
 installation without a local/remote extension-management server. Use the existing
-Gallery prerelease or the [documented development/sideloading routes](https://github.com/ntnyq/gdfmt/blob/main/docs/guide/integrations.md#vs-code-web).
+Gallery stable release or the [documented development/sideloading routes](https://github.com/ntnyq/gdfmt/blob/main/docs/guide/integrations.md#vs-code-web).
 No native executable or Node runtime is included. Virtual
 workspaces, unsaved buffers, save formatting, undo, multi-root folders, untitled
 defaults and UTF-16 diagnostics are supported. A failed Worker is replaced on the
@@ -103,11 +108,7 @@ the previously published Gallery preview is separate from these rc.1 assets.
 
 The [0.1.0 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0)
 provides all six frozen stable VSIX files, with core `0.1.0` and numeric extension
-`0.2.1`, without the prerelease flag. Marketplace was not updated. Recheck Gallery
-availability and complete separate installed-consumer acceptance before any upload.
-
-For core 0.1.0, the recommended delivery baseline is the frozen GitHub Release
-VSIX set. Marketplace already has a prerelease; stable publication needs a new
-numeric extension version and separate acceptance. See the
-[distribution review](https://github.com/ntnyq/gdfmt/blob/main/docs/research/0.1.0-editor-distribution-review.md)
+`0.2.1`, without the prerelease flag. The same six frozen files were published to
+Marketplace on **2026-10-26**. See the
+[rollout report](https://github.com/ntnyq/gdfmt/blob/main/docs/research/0.1.0-marketplace.md)
 and [installation/update instructions](https://github.com/ntnyq/gdfmt/blob/main/docs/guide/integrations.md#vs-code).

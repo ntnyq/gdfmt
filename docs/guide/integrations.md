@@ -39,8 +39,15 @@ Pass the buffer to stdin, use stdout as the replacement text only on exit `0`, a
 
 ## VS Code
 
-Install a matching native VSIX from the project's [GitHub Releases](https://github.com/ntnyq/gdfmt/releases),
-or build one with `pnpm package:vscode`. Use **Extensions: Install from VSIX**.
+Install [gdfmt from Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
+on desktop or Web. The stable extension **0.2.1** bundles core **0.1.0**. Desktop
+CLI installation is `code --install-extension ntnyq.gdfmt`. To switch an older
+prerelease explicitly, choose **Switch to Release Version**, or run the same CLI
+command with `--force`.
+
+Alternatively, install a matching native VSIX from the project's
+[GitHub Releases](https://github.com/ntnyq/gdfmt/releases), or build one with
+`pnpm package:vscode`. Use **Extensions: Install from VSIX**.
 The extension bundles its native formatter and needs no separate Node installation.
 For SSH, WSL and containers, connect first and install in that remote window for
 the remote extension host's platform.
@@ -51,22 +58,30 @@ See [build setup](https://github.com/ntnyq/gdfmt/blob/main/CONTRIBUTING.md#wasm-
 Choose the native VSIX for the extension host's OS/CPU/libc; a WSL, SSH or container
 host needs its own matching target. Outputs are under `target/editors/TARGET/`.
 
-The 0.1.0 recommendation is to deliver frozen VSIX assets with the core release
-and treat Marketplace stable publication as a separate follow-up. As checked on
-2026-10-23, [Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
-already has extension `0.1.0` as a prerelease with core `0.1.0-alpha.6`. Select
-**Install Pre-Release Version** for that preview; it is not the final core 0.1.0.
-The [rc.1 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0-rc.1)
-provides six frozen VSIX targets, with numeric extension version `0.2.0` and core
-`0.1.0-rc.1`, marked as prerelease. This release did not upload to Marketplace.
-Recheck Gallery availability before a later stable extension upload; see the
-[distribution review](../research/0.1.0-editor-distribution-review.md).
-
 The [0.1.0 GitHub Release](https://github.com/ntnyq/gdfmt/releases/tag/v0.1.0)
 provides six frozen stable VSIX files with core `0.1.0` and numeric extension
-`0.2.1`, without the prerelease flag. See the
-[publication report](../research/0.1.0-publication.md). Marketplace was not updated;
-a later Gallery upload still needs its own availability and installation checks.
+`0.2.1`, without the prerelease flag. The same frozen bytes were published on
+Marketplace on **2026-10-26**; all six targets passed Gallery validation and
+download-integrity checks. See the [rollout report](../research/0.1.0-marketplace.md)
+for installed-consumer evidence. Historical Marketplace extension `0.1.0` bundles
+core `0.1.0-alpha.6`; rc.1's GitHub-only extension `0.2.0` bundles core `0.1.0-rc.1`.
+
+### Core and extension versions
+
+Core and extension versions are maintained independently. Cargo/npm packages and
+the core release tag use the core version; VS Code's Extensions view and Marketplace
+show the numeric extension version. The extension manifest's `gdfmtVersion` records
+the bundled core version, which **gdfmt: Show Version** reports.
+
+| Distribution stage                 | Extension version | Bundled core    |
+| ---------------------------------- | ----------------- | --------------- |
+| Historical Marketplace prerelease  | `0.1.0`           | `0.1.0-alpha.6` |
+| rc.1 GitHub VSIX, prerelease       | `0.2.0`           | `0.1.0-rc.1`    |
+| Stable GitHub VSIX and Marketplace | `0.2.1`           | `0.1.0`         |
+
+The extension's `0.2.x` numbering was chosen during release preparation;
+Marketplace does not require that jump. This rollout reused the already frozen
+stable `0.2.1` VSIX files. It did not change the core version to `0.2.1`.
 
 VSIX filenames use the core version, while the Extensions view shows the numeric
 extension version. Replace `CORE_VERSION` and select the correct suffix:
@@ -127,7 +142,7 @@ Rust target. Run `pnpm package:vscode:web` to build
 Marketplace extension version. Building a VSIX does not publish it to Marketplace.
 The tested browser-only VS Code 1.96.4 does not expose the local VSIX installation
 action without a local/remote extension-management server. Use the existing Gallery
-prerelease, the staged development host via `pnpm test:vscode:web`, or
+stable release, the staged development host via `pnpm test:vscode:web`, or
 [official developer sideloading](https://code.visualstudio.com/api/extension-guides/web-extensions#test-your-web-extension-in-vscode-dev).
 A Web host that supports VSIX installation can use the Web asset; do not infer
 support merely from a successful development-host test. Use the same default

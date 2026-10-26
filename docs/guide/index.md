@@ -5,7 +5,7 @@ gdfmt formats GDScript files from the command line. Start with the defaults, the
 The current stable release is **0.1.0**, available on crates.io and npm `latest`.
 See the [release notes](../releases/0.1.0.md) and
 [registry acceptance](../research/0.1.0-publication.md). Frozen VSIX files use
-extension **0.2.1**; Marketplace stable publication remains separate.
+extension **0.2.1**, also available as a stable [Marketplace release](../research/0.1.0-marketplace.md).
 Source builds use the checked-out version.
 
 ## Install from source

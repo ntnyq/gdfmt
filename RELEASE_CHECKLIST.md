@@ -145,7 +145,8 @@ frozen GitHub VSIX files. [PR #3](https://github.com/ntnyq/gdfmt/pull/3) was squ
 and tagged `v0.1.0`. The [publication report](docs/research/0.1.0-publication.md)
 records exact tag-bound CI, the original bundle, registry consumers and hashes.
 All seven npm packages use `latest: 0.1.0`; `next` retains rc.1. Defaults and
-API/Schema are unchanged. Marketplace stable upload remains a separate follow-up.
+API/Schema are unchanged. The same six frozen VSIX files were published as stable
+on 2026-10-26; see the [Marketplace rollout](docs/research/0.1.0-marketplace.md).
 
 The [registry/environment review](docs/research/0.1.0-registry-readiness-review.md)
 confirms existing ownership and historical alpha.6 Trusted Publishing for all
@@ -211,6 +212,13 @@ only the independent owner-account evidence item remains unchecked.
 - [x] Verify the stable GitHub Release notes and all frozen assets; update bilingual
       installation guidance to stable and verify the documentation/Playground core.
 
+Independent follow-up completed on 2026-10-26: Marketplace extension **0.2.1**
+uses the original six frozen VSIX files. All six targets passed Gallery validation
+and download-integrity checks; macOS ARM64 fresh/preview-to-stable consumers and
+the Chromium Gallery harness passed. The [rollout report](docs/research/0.1.0-marketplace.md)
+records the exact scope and Web harness limitation. The 27/28 core gate count is
+unchanged; owner-account evidence remains independent.
+
 ## Follow-up work outside the 0.1.0 gate
 
 - Repeatable performance/memory baselines and budgets, continuous fuzzing, and
@@ -218,9 +226,8 @@ only the independent owner-account evidence item remains unchecked.
 - Additional native platforms or Bun, Deno and general WASI hosts.
 - Additional editor capabilities such as range formatting, or broader Web
   configuration support.
-- Marketplace stable rollout after publisher/authentication checks, a fresh
-  numeric version, six-target publication/recovery and installed Gallery acceptance;
-  the existing prerelease listing remains distinct from the final core release.
+- Refresh the Marketplace README in a future extension version, broaden installed
+  Gallery host coverage and verify a persisted vscode.dev profile.
 
 These are follow-up candidates, not commitments for 0.1.0. Lint rules, semantic
 auto-fixes, project analysis and runtime validation remain outside the formatter's

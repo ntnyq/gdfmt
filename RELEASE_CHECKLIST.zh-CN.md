@@ -115,7 +115,8 @@ Gallery。上传前重新核对；如果先将 0.2.0 上传为 Gallery 预发布
 [PR #3](https://github.com/ntnyq/gdfmt/pull/3)已 squash 合并并打 tag `v0.1.0`。
 [发布报告](docs/zh/research/0.1.0-publication.md)记录精确 tag CI、原冻结 bundle、
 registry 消费者和 hash。七个 npm 包均为 `latest: 0.1.0`，`next` 保持 rc.1。
-默认风格和 API/Schema 未变，Marketplace 正式上传独立跟进。
+默认风格和 API/Schema 未变。同一批六份冻结 VSIX 已于 2026-10-26 正式上线，
+详见 [Marketplace 上线记录](docs/zh/research/0.1.0-marketplace.md)。
 
 [registry/环境审查](docs/zh/research/0.1.0-registry-readiness-review.md)确认十五个
 包的现有归属及 alpha.6 历史 Trusted Publishing。2026-10-23 读取到
@@ -169,13 +170,19 @@ owner 随后确认配置完成，rc.1 现已通过新发布实际验证十五个
 - [x] 核对正式 GitHub Release 说明与全部冻结附件，更新双语正式安装说明，
       验证文档/Playground 核心版本。
 
+独立后续工作于 2026-10-26 完成：Marketplace 扩展 **0.2.1** 沿用原始六份冻结
+VSIX。六个目标均通过 Gallery 验证和下载完整性检查；macOS ARM64 全新安装、
+预发布转正式版，以及 Chromium Gallery 测试宿主均通过。
+[上线报告](docs/zh/research/0.1.0-marketplace.md)记录实际范围及 Web 测试宿主限制。
+核心门槛仍为 27/28，owner 账号证据独立跟进。
+
 ## 不阻塞 0.1.0 的后续候选工作
 
 - 可复现的性能/内存基准与预算、持续 fuzz，以及更广的真实项目覆盖。
 - 更多原生平台，或 Bun、Deno 与通用 WASI 宿主。
 - 范围格式化等编辑器能力，或更完整的 Web 配置支持。
-- Marketplace 正式上线：完成 publisher/认证检查、新数字版本、六目标发布/恢复及
-  Gallery 安装验收；现有预发布条目与最终核心版本保持区分。
+- 后续扩展版本刷新 Marketplace README，扩大 Gallery 实际安装宿主覆盖，
+  并验证持久化的 vscode.dev 用户配置。
 
 以上是后续候选方向，不是 0.1.0 的交付承诺。lint 规则、语义自动修复、项目分析和
 运行时验证仍不属于 formatter 当前范围，详见[兼容性说明](docs/zh/reference/compatibility.md)。

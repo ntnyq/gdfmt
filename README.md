@@ -20,7 +20,8 @@ gdfmt formats `.gd` files with consistent spacing, indentation and line wrapping
 using extension **0.2.1**. See the [release notes](docs/releases/0.1.0.md) and
 [publication and registry acceptance](docs/research/0.1.0-publication.md).
 The default formatting style and public API/Schema contracts are unchanged from rc.1.
-Marketplace stable publication remains a separate follow-up.
+The same six VSIX files are published on [Marketplace](https://marketplace.visualstudio.com/items?itemName=ntnyq.gdfmt)
+as stable extension **0.2.1**; see the [rollout report](docs/research/0.1.0-marketplace.md).
 
 ## Get started
 
@@ -88,9 +89,9 @@ The browser package exposes `createFormatter()` from `@gdfmt/wasm`; see the
 
 `gdfmt --lsp` provides formatting over stdio. Build a native desktop extension
 with `pnpm package:vscode`, or a browser-only VSIX with `pnpm package:vscode:web`.
-Install the matching native VSIX on desktop and set `editor.defaultFormatter` to
-`ntnyq.gdfmt` for GDScript. Browser-only installation uses the existing Gallery
-prerelease or a supported developer route; local Web VSIX installation is not
+Install `ntnyq.gdfmt` from Marketplace on desktop or Web and set
+`editor.defaultFormatter` to `ntnyq.gdfmt` for GDScript. Frozen matching VSIX files
+are also available; local Web VSIX installation is not
 available in every host. See [editor integration](docs/guide/integrations.md).
 Source package/VSIX builds require Node, the repository's pnpm version and
 `pnpm install --frozen-lockfile`; WASM/Web builds also require wasm-pack and the
