@@ -140,6 +140,19 @@ impl LosslessTree {
         SyntaxNode::new_root(self.green.clone())
     }
     pub fn text(&self) -> String {
-        self.root().text().to_string()
+        // Source reconstruction needs no parent-aware red cursors. Walking
+        // borrowed green children avoids allocating a cursor for every element.
+        let mut source = String::with_capacity(u32::from(self.green.text_len()) as usize);
+        let mut pending = vec![self.green.children()];
+        while let Some(children) = pending.last_mut() {
+            match children.next() {
+                Some(rowan::NodeOrToken::Node(node)) => pending.push(node.children()),
+                Some(rowan::NodeOrToken::Token(token)) => source.push_str(token.text()),
+                None => {
+                    pending.pop();
+                }
+            }
+        }
+        source
     }
 }

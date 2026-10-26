@@ -18,6 +18,7 @@ workspace = true
 [dependencies]
 gdfmt_syntax.workspace = true
 gdfmt_text.workspace = true
+rowan.workspace = true
 thiserror.workspace = true
 
 [dev-dependencies]

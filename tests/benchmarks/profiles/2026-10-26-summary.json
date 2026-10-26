@@ -1,0 +1,62 @@
+{
+  "schemaVersion": 1,
+  "method": "Sum of per-file median milliseconds over three in-process measurements per stage; 594 inputs from 2026-10-26-macos-arm64.json; exploratory, not paired CLI timing",
+  "stages": {
+    "before": {
+      "parse_ms": 79.530418,
+      "layout_ms": 239.844299,
+      "reparse_ms": 76.583546,
+      "structure_ms": 185.723829,
+      "second_layout_ms": 237.739082,
+      "facade_ms": 980.097329
+    },
+    "green-text": {
+      "parse_ms": 79.855794,
+      "layout_ms": 175.63067,
+      "reparse_ms": 76.749585,
+      "structure_ms": 139.237557,
+      "second_layout_ms": 175.277926,
+      "facade_ms": 705.365862
+    },
+    "directives": {
+      "parse_ms": 80.703959,
+      "layout_ms": 153.242962,
+      "reparse_ms": 78.010786,
+      "structure_ms": 140.047172,
+      "second_layout_ms": 155.280301,
+      "facade_ms": 629.27691
+    },
+    "streaming-structure": {
+      "parse_ms": 85.524759,
+      "layout_ms": 168.72149,
+      "reparse_ms": 83.18313,
+      "structure_ms": 125.757593,
+      "second_layout_ms": 171.451966,
+      "facade_ms": 659.43549
+    },
+    "after": {
+      "parse_ms": 78.87971,
+      "layout_ms": 139.984411,
+      "reparse_ms": 76.16695,
+      "structure_ms": 122.321552,
+      "second_layout_ms": 140.130289,
+      "facade_ms": 570.453704
+    }
+  },
+  "sampling": {
+    "tool": "macOS sample",
+    "intervalMs": 1,
+    "durationSeconds": 5,
+    "before": {
+      "activeRootSamples": 3361,
+      "losslessTreeTextInclusiveSamples": 1010,
+      "formatterRegionsInclusiveSamples": 973
+    },
+    "after": {
+      "activeRootSamples": 3055,
+      "losslessTreeTextInclusiveSamples": 151,
+      "formatterRegionsInclusiveSamples": 85
+    },
+    "note": "Inclusive counts overlap and must not be added; raw symbolized call graphs remain in target/benchmarks/core-before.sample.txt and core-after.sample.txt"
+  }
+}

@@ -393,6 +393,81 @@ fn invalid_sources_and_recovery_trees_never_produce_output() {
 }
 
 #[test]
+fn structural_validation_checks_topology_even_when_all_source_tokens_match() {
+    use gdfmt_syntax::{LosslessTree, Token};
+    let source = "func run():\n\treturn [1, 2]\n";
+    let parsed = parse(source, &ParseOptions::default());
+    assert!(!parsed.has_errors());
+    let nested = parsed.tree.unwrap();
+    let tokens: Vec<_> = nested
+        .root()
+        .descendants_with_tokens()
+        .filter_map(|element| element.into_token())
+        .map(|token| Token {
+            kind: token.kind(),
+            span: gdfmt_syntax::directives::span(&token),
+        })
+        .collect();
+    let flat = LosslessTree::from_tokens(source, &tokens).unwrap();
+    assert_eq!(nested.text(), flat.text());
+    assert!(!structurally_equivalent(&nested, &flat));
+    assert!(!structurally_equivalent(&flat, &nested));
+}
+
+#[test]
+fn structural_validation_retains_literal_spelling_and_comment_ownership_checks() {
+    let sources = [
+        "var value = [1, 2] # note\n",
+        "var  value=[1,2] # note\n",
+        "var value = [1, 3] # note\n",
+        "var value = [1, 2] # changed\n",
+        "var value = [1, # note\n2]\n",
+        "var value = [1,\n# note\n2]\n",
+    ];
+    let trees: Vec<_> = sources
+        .iter()
+        .map(|source| {
+            let parsed = parse(source, &ParseOptions::default());
+            assert!(!parsed.has_errors());
+            parsed.tree.unwrap()
+        })
+        .collect();
+    for (left, before) in trees.iter().enumerate() {
+        for (right, after) in trees.iter().enumerate() {
+            assert_eq!(
+                structurally_equivalent(before, after),
+                left == right || (left < 2 && right < 2),
+                "{left}/{right}"
+            );
+        }
+    }
+}
+
+#[test]
+fn long_comment_runs_keep_suite_anchors_across_line_endings_and_dedents() {
+    let comments: String = (0..128)
+        .map(|index| format!("\t# 中文 marker {index}\n"))
+        .collect();
+    let source = format!(
+        "func first():\n\tvar label = \"中文\"\n\tpass\n{comments}\nfunc second():\n\tpass\n\t# eof\n"
+    );
+    let before = parse(&source, &ParseOptions::default());
+    assert!(!before.has_errors());
+    let before = before.tree.unwrap();
+    for equivalent in [source.replace('\n', "\r\n"), source.replace('\t', "    ")] {
+        let parsed = parse(&equivalent, &ParseOptions::default());
+        assert!(!parsed.has_errors());
+        assert!(structurally_equivalent(&before, &parsed.tree.unwrap()));
+    }
+    for marker in ["\t# 中文 marker 64", "\t# eof"] {
+        let changed = source.replacen(marker, marker.trim_start(), 1);
+        let parsed = parse(&changed, &ParseOptions::default());
+        assert!(!parsed.has_errors());
+        assert!(!structurally_equivalent(&before, &parsed.tree.unwrap()));
+    }
+}
+
+#[test]
 fn collection_layouts_are_independent_and_empty_lists_stay_compact() {
     use gdfmt_formatter::{CollectionLayout, DictionarySpacing};
     let source = "var a = [1,2]\nvar d = {name=1, 'other'=2}\nenum E {A,B,}\nvar empty = [[],{}]\n";

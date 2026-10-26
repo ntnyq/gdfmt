@@ -1,17 +1,18 @@
 //! Private layout algebra. Groups choose a flat or broken layout using the
 //! remaining line, including the documents following the group.
 use crate::FormatOptions;
+use std::borrow::Cow;
 
 #[derive(Debug)]
-pub(crate) enum Doc {
-    Text(String),
-    Concat(Vec<Doc>),
-    Group(Box<Doc>),
-    Indent(Box<Doc>),
+pub(crate) enum Doc<'a> {
+    Text(Cow<'a, str>),
+    Concat(Vec<Doc<'a>>),
+    Group(Box<Doc<'a>>),
+    Indent(Box<Doc<'a>>),
     /// Visual continuation indentation does not enter the lexer suite stack.
-    ContinuationIndent(Box<Doc>),
+    ContinuationIndent(Box<Doc<'a>>),
     /// A delimiter ending an inline lambda must use the enclosing suite column.
-    StatementIndent(Box<Doc>),
+    StatementIndent(Box<Doc<'a>>),
     Line(&'static str),
     HardLine,
     /// Start a line unless already at its beginning.
@@ -19,15 +20,38 @@ pub(crate) enum Doc {
     LineSuffix(String),
 }
 
-impl Doc {
-    pub(crate) fn text(text: impl Into<String>) -> Self {
+impl<'a> Doc<'a> {
+    pub(crate) fn text(text: impl Into<Cow<'a, str>>) -> Self {
         Self::Text(text.into())
     }
     pub(crate) fn concat(parts: impl IntoIterator<Item = Self>) -> Self {
-        Self::Concat(parts.into_iter().collect())
+        let mut parts = parts.into_iter().filter(|part| match part {
+            Self::Text(text) => !text.is_empty(),
+            Self::Concat(parts) => !parts.is_empty(),
+            _ => true,
+        });
+        let Some(first) = parts.next() else {
+            return Self::Concat(Vec::new());
+        };
+        let Some(second) = parts.next() else {
+            return first;
+        };
+        Self::Concat([first, second].into_iter().chain(parts).collect())
     }
     pub(crate) fn group(self) -> Self {
         Self::Group(Box::new(self))
+    }
+    pub(crate) fn concat_vec(mut parts: Vec<Self>) -> Self {
+        parts.retain(|part| match part {
+            Self::Text(text) => !text.is_empty(),
+            Self::Concat(parts) => !parts.is_empty(),
+            _ => true,
+        });
+        match parts.len() {
+            0 => Self::Concat(Vec::new()),
+            1 => parts.pop().unwrap(),
+            _ => Self::Concat(parts),
+        }
     }
     pub(crate) fn indent(self) -> Self {
         Self::Indent(Box::new(self))
@@ -50,7 +74,7 @@ struct Frame<'a> {
     level: usize,
     statement_level: usize,
     mode: Mode,
-    doc: &'a Doc,
+    doc: &'a Doc<'a>,
 }
 
 pub(crate) fn columns(text: &str, start: usize, tab_width: usize) -> usize {
@@ -110,7 +134,7 @@ fn fits(
 }
 
 pub(crate) fn print(
-    doc: &Doc,
+    doc: &Doc<'_>,
     options: &FormatOptions,
     start_column: usize,
     base_indent: &str,
@@ -130,7 +154,7 @@ pub(crate) fn print(
         match frame.doc {
             Doc::Text(text) => {
                 if !text.is_empty() {
-                    if text == " " && (line_start || !suffixes.is_empty()) {
+                    if text.as_ref() == " " && (line_start || !suffixes.is_empty()) {
                         continue;
                     }
                     if !suffixes.is_empty() {
@@ -222,12 +246,54 @@ pub(crate) fn print(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn owned_concatenation_reuses_its_buffer_and_keeps_layout_controls() {
+        let mut parts = Vec::with_capacity(16);
+        parts.push(Doc::text("a"));
+        parts.push(Doc::text(""));
+        parts.push(Doc::Line(""));
+        parts.push(Doc::text("b"));
+        let buffer = parts.as_ptr();
+        let doc = Doc::concat_vec(parts);
+        assert!(matches!(&doc, Doc::Concat(parts) if parts.as_ptr() == buffer));
+        assert_eq!(print(&doc.group(), &options(1), 0, "", "\n"), "a\nb");
+    }
+    #[test]
+    fn source_text_is_borrowed_while_generated_text_can_be_owned() {
+        let source = String::from("中文 literal");
+        let borrowed = Doc::text(source.as_str());
+        assert!(matches!(&borrowed, Doc::Text(text) if text.as_ptr() == source.as_ptr()));
+        assert_eq!(print(&borrowed, &options(100), 0, "", "\n"), source);
+        let generated = Doc::text(format!("generated: {source}"));
+        assert_eq!(
+            print(&generated, &options(100), 0, "", "\n"),
+            "generated: 中文 literal"
+        );
+    }
     fn options(width: usize) -> FormatOptions {
         FormatOptions {
             line_width: width,
             indent: "  ".into(),
             ..Default::default()
         }
+    }
+    #[test]
+    fn token_wrappers_elide_empty_concats_but_retain_empty_break_opportunities() {
+        let token = Doc::concat([
+            Doc::concat([]),
+            Doc::concat([Doc::text("token"), Doc::concat([])]),
+            Doc::text(""),
+        ]);
+        assert!(matches!(&token, Doc::Text(text) if text == "token"));
+        assert_eq!(print(&token, &options(1), 0, "", "\n"), "token");
+        let breakable = Doc::concat([
+            Doc::text("a"),
+            Doc::concat([Doc::text(""), Doc::Line("")]),
+            Doc::text("b"),
+        ])
+        .group();
+        assert_eq!(print(&breakable, &options(1), 0, "", "\n"), "a\nb");
+        assert_eq!(print(&breakable, &options(2), 0, "", "\n"), "ab");
     }
     #[test]
     fn fitting_includes_following_text_and_nested_groups_choose_independently() {

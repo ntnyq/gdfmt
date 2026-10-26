@@ -130,6 +130,11 @@ Each invocation checks one exact engine; repeat for all five profiles when chang
 
 The syntax inventory and explicit upstream-test exclusions live in `tests/compatibility/syntax-coverage.json`. Pinned third-party project trials and reviewed gdtoolkit differences have their own [reproduction instructions](tests/project-trials/README.md). Keep those records current when their inputs or output change.
 
+For optional CLI performance comparisons with gdformat, GDQuest GDScript Formatter
+and gdstyle, see the [benchmark setup, methodology and recorded results](tests/benchmarks/README.md).
+Run `pnpm bench` after preparing the release binaries and corpus, and
+`pnpm test:bench` to check the benchmark harness without installing comparators.
+
 ## Node.js packages
 
 Use Node 22.13+ on 22.x or Node 24.x, with pnpm:

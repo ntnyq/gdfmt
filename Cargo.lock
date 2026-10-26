@@ -474,6 +474,7 @@ dependencies = [
  "gdfmt_parser",
  "gdfmt_syntax",
  "gdfmt_text",
+ "rowan",
  "serde_json",
  "thiserror",
 ]

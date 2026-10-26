@@ -16,6 +16,7 @@
     "../tests/npm/**/*.test.ts",
     "../tests/release/**/*.test.ts",
     "../tests/project-trials/**/*.test.ts",
+    "../tests/benchmarks/**/*.test.ts",
     "../vitest.config.ts",
     "../tests/vscode-web/**/*.test.ts",
     "../tests/docs/**/*.test.ts"

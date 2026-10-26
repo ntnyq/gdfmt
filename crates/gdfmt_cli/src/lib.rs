@@ -500,6 +500,147 @@ enum FormatMode {
     SyntaxOnly,
 }
 
+struct FormatInput {
+    path: PathBuf,
+    source: String,
+    config: gdfmt_config::ResolvedConfig,
+}
+
+fn format_worker_count(files: usize, largest_source: usize, available: usize) -> usize {
+    // Bound aggregate working memory and avoid thread startup for editor-sized requests.
+    if files < 8 || largest_source > 256 * 1024 {
+        1
+    } else {
+        available.clamp(1, 4)
+    }
+}
+
+fn format_input(
+    args: &Args,
+    mode: FormatMode,
+    read_only: bool,
+    from_stdin: bool,
+    index: usize,
+    input: FormatInput,
+) -> (i32, FileReport) {
+    let FormatInput {
+        path,
+        source,
+        config,
+    } = input;
+    let mut code = 0;
+    let source_id = SourceId(u32::try_from(index).expect("input count checked before formatting"));
+    let request = format_request(&config, source_id);
+    let result = if mode == FormatMode::SyntaxOnly {
+        let parsed = gdfmt_parser::parse(&source, &request.parse);
+        gdfmt::FormatResult {
+            output: None,
+            changed: false,
+            diagnostics: parsed.diagnostics,
+        }
+    } else {
+        gdfmt::format(&source, &request)
+    };
+    let mut file = FileReport {
+        path: path.clone(),
+        source_id,
+        tokens: vec![],
+        diagnostics: result.diagnostics,
+        changed: (mode != FormatMode::SyntaxOnly).then_some(result.changed),
+        output: None,
+        diff: None,
+    };
+    let failed = file
+        .diagnostics
+        .iter()
+        .any(|diagnostic| diagnostic.severity == Severity::Error);
+    if failed {
+        code = code.max(
+            if file
+                .diagnostics
+                .iter()
+                .any(|diagnostic| diagnostic.category == DiagnosticCategory::Internal)
+            {
+                2
+            } else {
+                1
+            },
+        );
+    } else if let Some(output) = result.output {
+        if read_only && result.changed {
+            code = code.max(1);
+        }
+        if args.diff && result.changed {
+            file.diff = Some(unified_diff(&path, &source, &output));
+        }
+        if from_stdin && !read_only {
+            file.output = Some(output);
+        } else if !read_only
+            && result.changed
+            && let Err(error) = write_source(&path, &source, &output)
+        {
+            code = 2;
+            file.diagnostics.push(Diagnostic {
+                code: "CLI_IO".into(),
+                category: DiagnosticCategory::Io,
+                severity: Severity::Error,
+                message: error.to_string(),
+                source_id,
+                span: Span::empty(0),
+            });
+        }
+    }
+    (code, file)
+}
+
+fn format_inputs(
+    args: &Args,
+    mode: FormatMode,
+    read_only: bool,
+    from_stdin: bool,
+    inputs: Vec<FormatInput>,
+    workers: usize,
+) -> Result<Vec<(i32, FileReport)>, WorkspaceError> {
+    u32::try_from(inputs.len().saturating_sub(1))
+        .map_err(|_| WorkspaceError::Input("too many input files".into()))?;
+    if workers == 1 {
+        return Ok(inputs
+            .into_iter()
+            .enumerate()
+            .map(|(index, input)| format_input(args, mode, read_only, from_stdin, index, input))
+            .collect());
+    }
+    let jobs = std::sync::Mutex::new(inputs.into_iter().enumerate());
+    let (sender, receiver) = std::sync::mpsc::channel();
+    {
+        let work = || loop {
+            // Release the queue lock before any parsing, validation or I/O.
+            let job = jobs.lock().expect("format queue lock").next();
+            let Some((index, input)) = job else { break };
+            let report = format_input(args, mode, read_only, from_stdin, index, input);
+            sender
+                .send((index, report))
+                .expect("format receiver remains alive");
+        };
+        std::thread::scope(|scope| {
+            for _ in 1..workers {
+                if std::thread::Builder::new()
+                    .spawn_scoped(scope, work)
+                    .is_err()
+                {
+                    // The main worker drains remaining jobs if thread creation fails.
+                    break;
+                }
+            }
+            work();
+        });
+    }
+    drop(sender);
+    let mut reports: Vec<_> = receiver.into_iter().collect();
+    reports.sort_unstable_by_key(|(index, _)| *index);
+    Ok(reports.into_iter().map(|(_, report)| report).collect())
+}
+
 fn execute_format(
     args: &Args,
     paths: &[PathBuf],
@@ -548,11 +689,11 @@ fn execute_format(
         }
         let source = String::from_utf8(bytes)
             .map_err(|error| WorkspaceError::Input(format!("stdin: invalid UTF-8: {error}")))?;
-        inputs.push((
-            path.unwrap_or_else(|| PathBuf::from("<stdin>")),
+        inputs.push(FormatInput {
+            path: path.unwrap_or_else(|| PathBuf::from("<stdin>")),
             source,
             config,
-        ));
+        });
     } else {
         let files = discover_files_with_config(paths, cwd, args.config.as_deref())?;
         // Preflight all configurations and source reads before any replacement.
@@ -565,77 +706,27 @@ fn execute_format(
             .collect::<Result<Vec<_>, _>>()?;
         for (path, config) in files.into_iter().zip(configs) {
             let source = read_source(&path)?;
-            inputs.push((path, source, config));
+            inputs.push(FormatInput {
+                path,
+                source,
+                config,
+            });
         }
     }
-    let mut code = 0;
-    for (index, (path, source, config)) in inputs.into_iter().enumerate() {
-        let source_id = SourceId(
-            u32::try_from(index)
-                .map_err(|_| WorkspaceError::Input("too many input files".into()))?,
-        );
-        let request = format_request(&config, source_id);
-        let result = if mode == FormatMode::SyntaxOnly {
-            let parsed = gdfmt_parser::parse(&source, &request.parse);
-            gdfmt::FormatResult {
-                output: None,
-                changed: false,
-                diagnostics: parsed.diagnostics,
-            }
-        } else {
-            gdfmt::format(&source, &request)
-        };
-        let mut file = FileReport {
-            path: path.clone(),
-            source_id,
-            tokens: vec![],
-            diagnostics: result.diagnostics,
-            changed: (mode != FormatMode::SyntaxOnly).then_some(result.changed),
-            output: None,
-            diff: None,
-        };
-        let failed = file
-            .diagnostics
-            .iter()
-            .any(|diagnostic| diagnostic.severity == Severity::Error);
-        if failed {
-            code = code.max(
-                if file
-                    .diagnostics
-                    .iter()
-                    .any(|diagnostic| diagnostic.category == DiagnosticCategory::Internal)
-                {
-                    2
-                } else {
-                    1
-                },
-            );
-        } else if let Some(output) = result.output {
-            if read_only && result.changed {
-                code = code.max(1);
-            }
-            if args.diff && result.changed {
-                file.diff = Some(unified_diff(&path, &source, &output));
-            }
-            if from_stdin && !read_only {
-                file.output = Some(output);
-            } else if !read_only
-                && result.changed
-                && let Err(error) = write_source(&path, &source, &output)
-            {
-                code = 2;
-                file.diagnostics.push(Diagnostic {
-                    code: "CLI_IO".into(),
-                    category: DiagnosticCategory::Io,
-                    severity: Severity::Error,
-                    message: error.to_string(),
-                    source_id,
-                    span: Span::empty(0),
-                });
-            }
-        }
-        report.files.push(file);
-    }
+    let available = if inputs.len() >= 8 {
+        std::thread::available_parallelism().map_or(1, |count| count.get())
+    } else {
+        1
+    };
+    let largest_source = inputs
+        .iter()
+        .map(|input| input.source.len())
+        .max()
+        .unwrap_or(0);
+    let workers = format_worker_count(inputs.len(), largest_source, available);
+    let files = format_inputs(args, mode, read_only, from_stdin, inputs, workers)?;
+    let code = files.iter().map(|(code, _)| *code).max().unwrap_or(0);
+    report.files = files.into_iter().map(|(_, file)| file).collect();
     if code != 0 {
         report.status = "error";
     }
@@ -734,4 +825,47 @@ fn file_report(path: PathBuf, source: &str, result: LexResult, source_id: Source
 fn write_json(writer: &mut dyn Write, report: &Report) -> std::io::Result<()> {
     serde_json::to_writer_pretty(&mut *writer, report)?;
     writeln!(writer)
+}
+
+#[cfg(test)]
+mod format_worker_tests {
+    use super::*;
+
+    #[test]
+    fn small_requests_and_large_sources_remain_serial_and_workers_are_bounded() {
+        assert_eq!(format_worker_count(1, 100, 64), 1);
+        assert_eq!(format_worker_count(7, 100, 64), 1);
+        assert_eq!(format_worker_count(8, 256 * 1024, 64), 4);
+        assert_eq!(format_worker_count(8, 256 * 1024 + 1, 64), 1);
+        assert_eq!(format_worker_count(100, 100, 2), 2);
+        assert_eq!(format_worker_count(100, 100, 1), 1);
+    }
+
+    #[test]
+    fn worker_results_keep_input_order_source_ids_and_read_only_behavior() {
+        let args = Args::try_parse_from(["gdfmt"]).unwrap();
+        let inputs = (0..8)
+            .map(|index| FormatInput {
+                path: PathBuf::from(format!("case_{index}.gd")),
+                source: if index == 0 {
+                    (0..1000)
+                        .map(|number| format!("var value_{number}= {number}\n"))
+                        .collect()
+                } else {
+                    format!("var value_{index}= {index}\n")
+                },
+                config: PartialConfig::default().resolve().unwrap(),
+            })
+            .collect();
+        let reports = format_inputs(&args, FormatMode::Check, true, false, inputs, 4).unwrap();
+        assert_eq!(reports.len(), 8);
+        for (index, (code, file)) in reports.iter().enumerate() {
+            assert_eq!(*code, 1);
+            assert_eq!(file.path, PathBuf::from(format!("case_{index}.gd")));
+            assert_eq!(file.source_id.0 as usize, index);
+            assert_eq!(file.changed, Some(true));
+            assert!(file.diagnostics.is_empty());
+            assert!(file.output.is_none());
+        }
+    }
 }

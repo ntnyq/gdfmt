@@ -201,7 +201,11 @@ impl<'a> Layout<'a> {
         })
     }
 
-    fn leading(&self, token: &SyntaxToken) -> Doc {
+    fn source_text(&self, token: &SyntaxToken) -> &'a str {
+        let range = token.text_range();
+        &self.source[u32::from(range.start()) as usize..u32::from(range.end()) as usize]
+    }
+    fn leading(&self, token: &SyntaxToken) -> Doc<'a> {
         Doc::concat(
             self.leading
                 .get(&start(token))
@@ -210,23 +214,23 @@ impl<'a> Layout<'a> {
                 .map(|comment| self.comment(comment)),
         )
     }
-    fn comment(&self, comment: &SyntaxToken) -> Doc {
+    fn comment(&self, comment: &SyntaxToken) -> Doc<'a> {
         Doc::concat([
             Doc::EnsureLine,
             self.blank_lines(comment),
-            Doc::text(comment.text()),
+            Doc::text(self.source_text(comment)),
             Doc::HardLine,
         ])
     }
-    fn blank_lines(&self, token: &SyntaxToken) -> Doc {
+    fn blank_lines(&self, token: &SyntaxToken) -> Doc<'a> {
         Doc::concat(
             (0..self.blanks.get(&start(token)).copied().unwrap_or(0)).map(|_| Doc::HardLine),
         )
     }
-    fn token_text(&self, token: &SyntaxToken) -> Doc {
-        Doc::concat([Doc::text(token.text()), self.suffix(token)])
+    fn token_text(&self, token: &SyntaxToken) -> Doc<'a> {
+        Doc::concat([Doc::text(self.source_text(token)), self.suffix(token)])
     }
-    fn suffix(&self, token: &SyntaxToken) -> Doc {
+    fn suffix(&self, token: &SyntaxToken) -> Doc<'a> {
         let mut docs = Vec::new();
         if self.continuations.contains(&start(token)) {
             docs.push(Doc::LineSuffix(" \\".into()));
@@ -237,37 +241,35 @@ impl<'a> Layout<'a> {
                 " ".repeat(usize::from(self.options.inline_comment_spacing))
             )));
         }
-        Doc::concat(docs)
+        Doc::concat_vec(docs)
     }
-    fn token(&self, token: &SyntaxToken) -> Doc {
+    fn token(&self, token: &SyntaxToken) -> Doc<'a> {
         Doc::concat([
             self.leading(token),
             self.blank_lines(token),
             self.token_text(token),
         ])
     }
-    fn parts(&self, node: &SyntaxNode) -> Vec<SyntaxElement> {
-        node.children_with_tokens()
-            .filter(|element| match element {
-                SyntaxElement::Node(_) => true,
-                SyntaxElement::Token(token) => significant(token),
-            })
-            .collect()
+    fn parts(&self, node: &SyntaxNode) -> impl Iterator<Item = SyntaxElement> {
+        node.children_with_tokens().filter(|element| match element {
+            SyntaxElement::Node(_) => true,
+            SyntaxElement::Token(token) => significant(token),
+        })
     }
-    fn element(&self, element: &SyntaxElement) -> Doc {
+    fn element(&self, element: &SyntaxElement) -> Doc<'a> {
         match element {
             SyntaxElement::Node(node) => self.node(node),
             SyntaxElement::Token(token) => self.token(token),
         }
     }
-    fn sequence(&self, parts: &[SyntaxElement]) -> Doc {
+    fn sequence(&self, parts: &[SyntaxElement]) -> Doc<'a> {
         Doc::concat(
             parts
                 .iter()
                 .flat_map(|element| [Doc::EnsureLine, self.element(element)]),
         )
     }
-    fn dangling(&self, node: &SyntaxNode) -> Doc {
+    fn dangling(&self, node: &SyntaxNode) -> Doc<'a> {
         let first = node
             .descendants_with_tokens()
             .filter_map(SyntaxElement::into_token)
@@ -280,7 +282,7 @@ impl<'a> Layout<'a> {
                 .map(|comment| self.comment(comment)),
         )
     }
-    fn delimited(&self, parts: &[SyntaxElement], kind: K) -> Doc {
+    fn delimited(&self, parts: &[SyntaxElement], kind: K) -> Doc<'a> {
         let (Some(open), Some(close)) = (parts.first(), parts.last()) else {
             return Doc::text("");
         };
@@ -364,16 +366,16 @@ impl<'a> Layout<'a> {
             } else {
                 leading
             });
-            Doc::text(token.text())
+            Doc::text(self.source_text(token))
         } else {
             self.element(close)
         };
         let group = Doc::concat([
             self.element(open),
             if block_lambda {
-                Doc::concat(body)
+                Doc::concat_vec(body)
             } else {
-                Doc::concat(body).continuation_indent()
+                Doc::concat_vec(body).continuation_indent()
             },
             boundary(),
             if lambda_end {
@@ -391,7 +393,7 @@ impl<'a> Layout<'a> {
         ])
     }
 
-    fn generic(&self, parts: &[SyntaxElement]) -> Doc {
+    fn generic(&self, parts: &[SyntaxElement]) -> Doc<'a> {
         let mut docs = Vec::new();
         for (index, element) in parts.iter().enumerate() {
             if index > 0
@@ -405,10 +407,10 @@ impl<'a> Layout<'a> {
             }
             docs.push(self.element(element));
         }
-        Doc::concat(docs)
+        Doc::concat_vec(docs)
     }
 
-    fn with_delimiters(&self, parts: &[SyntaxElement], kind: K) -> Doc {
+    fn with_delimiters(&self, parts: &[SyntaxElement], kind: K) -> Doc<'a> {
         let open = parts
             .iter()
             .position(|part| matches!(part.kind(), K::LeftParen | K::LeftBracket | K::LeftBrace));
@@ -426,8 +428,23 @@ impl<'a> Layout<'a> {
         }
     }
 
-    pub(super) fn node(&self, node: &SyntaxNode) -> Doc {
+    pub(super) fn node(&self, node: &SyntaxNode) -> Doc<'a> {
         let parts = self.parts(node);
+        if matches!(
+            node.kind(),
+            K::CallExpr
+                | K::MemberExpr
+                | K::NodeExpr
+                | K::LiteralExpr
+                | K::NameExpr
+                | K::SelfExpr
+                | K::SuperExpr
+        ) {
+            // These nodes concatenate children without neighbor-dependent
+            // spacing. Avoid a temporary child vector for every leaf/wrapper.
+            return Doc::concat(parts.map(|part| self.element(&part)));
+        }
+        let parts: Vec<_> = parts.collect();
         match node.kind() {
             K::SourceFile | K::ExpressionRoot => {
                 let mut docs = Vec::new();
@@ -445,7 +462,7 @@ impl<'a> Layout<'a> {
                 if self.final_newline {
                     docs.push(Doc::EnsureLine);
                 }
-                Doc::concat(docs)
+                Doc::concat_vec(docs)
             }
             K::ArrayExpr
             | K::DictionaryExpr
@@ -473,8 +490,8 @@ impl<'a> Layout<'a> {
                 }
                 let mut body = vec![self.sequence(&parts[1..])];
                 body.push(self.dangling(node));
-                docs.push(Doc::concat(body).indent());
-                Doc::concat(docs)
+                docs.push(Doc::concat_vec(body).indent());
+                Doc::concat_vec(docs)
             }
             K::LambdaExpr if !self.inline_lambda(node) => {
                 Doc::concat([self.generic(&parts), Doc::EnsureLine])
@@ -490,7 +507,7 @@ impl<'a> Layout<'a> {
                 }
                 Doc::concat([
                     self.generic(&parts[..colon]),
-                    Doc::concat([Doc::concat(accessors), self.dangling(node)]).indent(),
+                    Doc::concat([Doc::concat_vec(accessors), self.dangling(node)]).indent(),
                 ])
             }
             K::MatchStmt => {
@@ -536,12 +553,10 @@ impl<'a> Layout<'a> {
             }
             K::BinaryExpr | K::TernaryExpr | K::CastExpr | K::TypeTestExpr => {
                 Doc::concat(parts.iter().enumerate().flat_map(|(index, part)| {
-                    let mut docs = Vec::new();
-                    if index > 0 {
-                        docs.push(Doc::text(" "));
-                    }
-                    docs.push(self.element(part));
-                    docs
+                    [
+                        Doc::text(if index == 0 { "" } else { " " }),
+                        self.element(part),
+                    ]
                 }))
             }
             K::UnaryExpr | K::AwaitExpr => {
@@ -561,15 +576,8 @@ impl<'a> Layout<'a> {
                     }
                 }
                 docs.extend(parts.iter().skip(1).map(|part| self.element(part)));
-                Doc::concat(docs)
+                Doc::concat_vec(docs)
             }
-            K::CallExpr
-            | K::MemberExpr
-            | K::NodeExpr
-            | K::LiteralExpr
-            | K::NameExpr
-            | K::SelfExpr
-            | K::SuperExpr => Doc::concat(parts.iter().map(|part| self.element(part))),
             _ => self.generic(&parts),
         }
     }

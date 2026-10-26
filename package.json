@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "bench": "tsx scripts/benchmarks/run.ts",
     "build:npm": "tsx scripts/npm/build.ts",
     "build:vscode": "tsx scripts/vscode/build.ts",
     "build:vscode:web": "tsx scripts/vscode/build-web.ts",
@@ -20,6 +21,7 @@
     "release:publish:marketplace": "tsx scripts/release/marketplace.ts",
     "release:publish:npm": "tsx scripts/release/publish-npm.ts",
     "release:version": "tsx scripts/release/version.ts",
+    "test:bench": "tsx --test tests/benchmarks/*.test.ts",
     "test:docs": "pnpm docs:build && tsx --test tests/docs/*.test.ts",
     "test:npm": "tsx scripts/npm/check-package.ts",
     "test:release": "tsx --test tests/release/*.test.ts",

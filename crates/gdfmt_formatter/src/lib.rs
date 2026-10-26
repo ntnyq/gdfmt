@@ -1,7 +1,7 @@
 //! CST-based layout with token-anchored comments and validation helpers.
 mod doc;
 
-use gdfmt_syntax::{LosslessTree, SyntaxKind as K, SyntaxNode};
+use gdfmt_syntax::{LosslessTree, SyntaxKind as K};
 use gdfmt_text::{Diagnostic, Severity};
 use thiserror::Error;
 
@@ -268,90 +268,134 @@ fn preserve_regions(
 
 mod layout;
 
-#[derive(Debug, PartialEq, Eq)]
-enum Shape {
-    Enter(K),
-    Leave,
-    Token(K, String),
-}
-fn shape(node: &SyntaxNode, output: &mut Vec<Shape>) {
-    output.push(Shape::Enter(node.kind()));
-    for element in node.children_with_tokens() {
-        match element {
-            gdfmt_syntax::SyntaxElement::Node(node) => shape(&node, output),
-            gdfmt_syntax::SyntaxElement::Token(token)
-                if !token.kind().is_trivia() && !token.kind().is_virtual() =>
-            {
-                output.push(Shape::Token(token.kind(), token.text().into()))
+fn same_shape(left: &rowan::GreenNodeData, right: &rowan::GreenNodeData) -> bool {
+    use gdfmt_syntax::GdscriptLanguage;
+    use rowan::{Language, NodeOrToken};
+    let kind = GdscriptLanguage::kind_from_raw;
+    if kind(left.kind()) != kind(right.kind()) {
+        return false;
+    }
+    let significant =
+        |element: &NodeOrToken<&rowan::GreenNodeData, &rowan::GreenTokenData>| match element {
+            NodeOrToken::Node(_) => true,
+            NodeOrToken::Token(token) => {
+                let kind = kind(token.kind());
+                !kind.is_trivia() && !kind.is_virtual()
             }
-            _ => {}
+        };
+    let mut right = right.children().filter(significant);
+    // Compare borrowed spellings and node boundaries directly instead of
+    // materializing two full shape vectors and a String per significant token.
+    for left in left.children().filter(significant) {
+        match (left, right.next()) {
+            (NodeOrToken::Node(left), Some(NodeOrToken::Node(right)))
+                if same_shape(left, right) => {}
+            (NodeOrToken::Token(left), Some(NodeOrToken::Token(right)))
+                if kind(left.kind()) == kind(right.kind()) && left.text() == right.text() => {}
+            _ => return false,
         }
     }
-    output.push(Shape::Leave);
+    right.next().is_none()
 }
 /// Compare node topology, significant token spellings and comment attachments.
 /// Trivia may move between CST nodes, but each comment retains adjacent tokens,
 /// its own-line/suffix role and any dangling suite owner. Parentheses, commas,
 /// semicolons and signed-number tokens remain significant.
 pub fn structurally_equivalent(left: &LosslessTree, right: &LosslessTree) -> bool {
-    let mut before = Vec::new();
-    let mut after = Vec::new();
-    shape(&left.root(), &mut before);
-    shape(&right.root(), &mut after);
-    before == after && comment_associations(left) == comment_associations(right)
+    if !same_shape(&left.root().green(), &right.root().green()) {
+        return false;
+    }
+    let before = CommentAnchors::new(left);
+    let after = CommentAnchors::new(right);
+    before.iter().eq(after.iter())
 }
 
-fn comment_associations(tree: &LosslessTree) -> Vec<(usize, bool, Option<usize>, String)> {
-    let source = tree.text();
-    let tokens: Vec<_> = tree
-        .root()
-        .descendants_with_tokens()
-        .filter_map(|element| element.into_token())
-        .filter(|token| !token.kind().is_trivia() && !token.kind().is_virtual())
-        .collect();
-    let mut preceding_tokens = 0;
-    let mut previous_owner = None;
-    tree.root()
-        .descendants_with_tokens()
-        .filter_map(|element| element.into_token())
-        .filter_map(|token| {
-            if !token.kind().is_trivia() && !token.kind().is_virtual() {
-                preceding_tokens += 1;
-                previous_owner = None;
-            }
-            if token.kind() != K::Comment {
-                return None;
-            }
-            let prefix = &source[..u32::from(token.text_range().start()) as usize];
-            let own_line = prefix
-                .rsplit('\n')
-                .next()
-                .unwrap_or_default()
-                .trim_start_matches('\u{feff}')
-                .trim()
-                .is_empty();
-            let owner = own_line
-                .then(|| {
-                    layout::comment_owner(
-                        &token,
-                        &source,
-                        tokens
-                            .get(preceding_tokens)
-                            .map(|token| u32::from(token.text_range().start())),
-                    )
+struct CommentAnchors {
+    source: String,
+    anchors: Vec<CommentAnchor>,
+}
+
+struct CommentAnchor {
+    preceding_tokens: usize,
+    own_line: bool,
+    owner: Option<usize>,
+    span: gdfmt_text::Span,
+}
+
+impl CommentAnchors {
+    fn new(tree: &LosslessTree) -> Self {
+        let tokens: Vec<_> = tree
+            .root()
+            .descendants_with_tokens()
+            .filter_map(|element| element.into_token())
+            .collect();
+        let significant: Vec<_> = tokens
+            .iter()
+            .filter(|token| !token.kind().is_trivia() && !token.kind().is_virtual())
+            .map(|token| u32::from(token.text_range().start()))
+            .collect();
+        let source = tree.text();
+        let mut preceding_tokens = 0;
+        let mut previous_owner = None;
+        let anchors = tokens
+            .iter()
+            .filter_map(|token| {
+                if !token.kind().is_trivia() && !token.kind().is_virtual() {
+                    preceding_tokens += 1;
+                    previous_owner = None;
+                }
+                if token.kind() != K::Comment {
+                    return None;
+                }
+                let prefix = &source[..u32::from(token.text_range().start()) as usize];
+                let own_line = prefix
+                    .rsplit('\n')
+                    .next()
+                    .unwrap_or_default()
+                    .trim_start_matches('\u{feff}')
+                    .trim()
+                    .is_empty();
+                let owner = own_line
+                    .then(|| {
+                        layout::comment_owner(
+                            token,
+                            &source,
+                            significant.get(preceding_tokens).copied(),
+                        )
+                    })
+                    .flatten();
+                let owner = if own_line {
+                    layout::ordered_owner(owner, &mut previous_owner)
+                } else {
+                    None
+                };
+                let owner = owner.and_then(|offset| {
+                    // Offsets are ordered; partition_point also retains the first
+                    // match if a caller-built tree has zero-width significant tokens.
+                    let index = significant.partition_point(|start| *start < offset);
+                    (significant.get(index) == Some(&offset)).then_some(index)
+                });
+                Some(CommentAnchor {
+                    preceding_tokens,
+                    own_line,
+                    owner,
+                    span: gdfmt_syntax::directives::span(token),
                 })
-                .flatten();
-            let owner = if own_line {
-                layout::ordered_owner(owner, &mut previous_owner)
-            } else {
-                None
-            };
-            let owner = owner.and_then(|offset| {
-                tokens
-                    .iter()
-                    .position(|token| u32::from(token.text_range().start()) == offset)
-            });
-            Some((preceding_tokens, own_line, owner, token.text().into()))
+            })
+            .collect();
+        // Release token cursors before constructing the other tree's anchors;
+        // only source bytes and compact comment metadata survive comparison.
+        Self { source, anchors }
+    }
+
+    fn iter(&self) -> impl Iterator<Item = (usize, bool, Option<usize>, &str)> {
+        self.anchors.iter().map(|anchor| {
+            (
+                anchor.preceding_tokens,
+                anchor.own_line,
+                anchor.owner,
+                anchor.span.slice(&self.source).expect("comment token span"),
+            )
         })
-        .collect()
+    }
 }

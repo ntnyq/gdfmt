@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "method": "Exploratory serial in-process measurements: sum of per-file medians over three measurements; 594 unchanged inputs. CLI bounded-worker results are separate.",
+  "phases": {
+    "before": {
+      "parse_ms": 74.569331,
+      "layout_ms": 133.686969,
+      "reparse_ms": 72.715575,
+      "structure_ms": 117.243883,
+      "second_layout_ms": 132.759918,
+      "facade_ms": 539.764415
+    },
+    "after": {
+      "parse_ms": 78.939592,
+      "layout_ms": 125.94549,
+      "reparse_ms": 76.724745,
+      "structure_ms": 64.745237,
+      "second_layout_ms": 123.956407,
+      "facade_ms": 479.867999
+    }
+  },
+  "experiments": {
+    "borrowedVsOwnedDoc": {
+      "borrowed": [
+        524.308125, 538.819625, 727.639875, 644.993875, 501.944375, 507.186917,
+        505.386917, 510.507916
+      ],
+      "owned": [
+        736.635166, 592.424917, 524.304834, 613.36275, 570.788417, 533.363042,
+        513.442583, 507.478084
+      ]
+    },
+    "rejectedParserCache": {
+      "cached": [
+        491.5055, 505.803292, 560.799083, 496.678708, 472.825334, 486.410959,
+        476.555459, 469.115042
+      ],
+      "uncached": [
+        482.652875, 478.261125, 476.294208, 474.382792, 470.940708, 471.991416,
+        470.335417, 473.803125
+      ]
+    },
+    "rejectedCursorRetention": {
+      "retained": {
+        "samplesMs": [515.891417, 508.563834, 503.979083, 524.04225],
+        "medianMs": 512.2276255,
+        "maxResidentBytes": 11157504
+      },
+      "released": {
+        "samplesMs": [537.672791, 523.910667, 552.484042, 539.829875],
+        "medianMs": 538.7513329999999,
+        "maxResidentBytes": 11517952
+      }
+    }
+  },
+  "decisions": {
+    "borrowedDoc": "retained; modest exploratory benefit, not claimed as an isolated speedup",
+    "parserCache": "reverted; no measured benefit",
+    "cursorRetention": "reverted; immutable Rowan cursors do not use the mutable cursor cache, and the small unpaired trial did not justify retention"
+  },
+  "cliRssObservation": {
+    "previous": {
+      "maxResidentBytes": 12435456,
+      "binarySha256": "b4f6f67f6a6b9184597d4abb4b3975774e72f3635adb623dab317c2ce96b6c86"
+    },
+    "new-core-serial": {
+      "maxResidentBytes": 12222464,
+      "binarySha256": "dc01825d8383abc726cf4ae19daca82d53467dfdc1b7a6791a78a210a29e2834"
+    },
+    "new-bounded-workers": {
+      "maxResidentBytes": 13991936,
+      "binarySha256": "ec3dca5f0eab6759a56764ffca4ca2f1a0500de93af49038936227e7bc7c0d0a"
+    }
+  },
+  "cliRssMethod": "One macOS time -l --check observation per executable on 594 flat, hash-verified sources; RSS only, not a timing comparison.",
+  "largestSourceBytes": 67016
+}

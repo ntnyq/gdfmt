@@ -12,6 +12,15 @@ pub fn span(token: &SyntaxToken) -> Span {
 
 pub fn comments(tree: &LosslessTree) -> Vec<(Span, String)> {
     let source = tree.text();
+    comments_in_source(tree, &source)
+}
+
+fn comments_in_source(tree: &LosslessTree, source: &str) -> Vec<(Span, String)> {
+    // Every recognized directive contains this exact prefix. A match still
+    // needs token and standalone-line checks, including matches in literals.
+    if !source.contains("gdfmt:") {
+        return Vec::new();
+    }
     tree.root()
         .descendants_with_tokens()
         .filter_map(|element| element.into_token())
@@ -58,7 +67,7 @@ pub fn formatter_regions(tree: &LosslessTree) -> Result<Vec<Span>, Vec<Span>> {
     let mut open = None;
     let mut regions = Vec::new();
     let mut errors = Vec::new();
-    for (span, body) in comments(tree) {
+    for (span, body) in comments_in_source(tree, &source) {
         match body.as_str() {
             "formatter-off" if open.is_none() => open = Some(span),
             "formatter-on" if open.is_some() => {

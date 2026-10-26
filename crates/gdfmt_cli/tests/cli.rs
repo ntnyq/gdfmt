@@ -18,6 +18,91 @@ fn run(args: &[&str], cwd: &Path, mut input: &[u8]) -> (i32, String, String) {
 }
 
 #[test]
+fn batch_workers_preserve_invalid_sources_protected_bytes_and_report_order() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    fs::write(root.join(".gdfmtrc.json"), r#"{"root":true}"#).unwrap();
+    let mut expected = Vec::new();
+    for index in 0..8 {
+        let source = if index == 3 {
+            "var broken = [1, )\n".to_owned()
+        } else {
+            format!(
+                "func run_{index}():\n\t# gdfmt:formatter-off\n\tvar values=  [1,2]\n\t# gdfmt:formatter-on\n\treturn  values\n"
+            )
+        };
+        let formatted = gdfmt::format(&source, &gdfmt::FormatRequest::default()).output;
+        fs::write(root.join(format!("case_{index}.gd")), &source).unwrap();
+        expected.push(formatted.unwrap_or(source));
+    }
+    let (code, stdout, stderr) = run(&["format", "--reporter", "json", "."], root, b"");
+    assert_eq!(code, 1, "{stderr}");
+    let report: serde_json::Value = serde_json::from_str(&stdout).unwrap();
+    let files = report["files"].as_array().unwrap();
+    assert_eq!(files.len(), 8);
+    for (index, (file, expected)) in files.iter().zip(expected).enumerate() {
+        assert!(
+            file["path"]
+                .as_str()
+                .unwrap()
+                .ends_with(&format!("case_{index}.gd"))
+        );
+        assert_eq!(
+            fs::read_to_string(root.join(format!("case_{index}.gd"))).unwrap(),
+            expected
+        );
+    }
+}
+
+#[test]
+fn batch_configuration_errors_are_preflighted_before_workers_can_write() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    fs::write(root.join(".gdfmtrc.json"), r#"{"root":true}"#).unwrap();
+    for index in 0..8 {
+        fs::write(root.join(format!("case_{index}.gd")), "var value=1\n").unwrap();
+    }
+    fs::create_dir(root.join("z-invalid")).unwrap();
+    fs::write(root.join("z-invalid/.gdfmtrc.json"), "{").unwrap();
+    fs::write(root.join("z-invalid/last.gd"), "var value=1\n").unwrap();
+    assert_eq!(run(&["format", "."], root, b"").0, 2);
+    for index in 0..8 {
+        assert_eq!(
+            fs::read_to_string(root.join(format!("case_{index}.gd"))).unwrap(),
+            "var value=1\n"
+        );
+    }
+}
+
+#[test]
+#[cfg(unix)]
+fn batch_workers_retain_hardlink_write_guards_and_continue_other_files() {
+    let temp = tempfile::tempdir().unwrap();
+    let root = temp.path();
+    fs::write(root.join(".gdfmtrc.json"), r#"{"root":true}"#).unwrap();
+    for index in 0..8 {
+        fs::write(root.join(format!("case_{index}.gd")), "var value=1\n").unwrap();
+    }
+    fs::hard_link(root.join("case_0.gd"), root.join("alias.txt")).unwrap();
+    let (code, _, stderr) = run(&["format", "."], root, b"");
+    assert_eq!(code, 2, "{stderr}");
+    assert_eq!(
+        fs::read_to_string(root.join("case_0.gd")).unwrap(),
+        "var value=1\n"
+    );
+    assert_eq!(
+        fs::read_to_string(root.join("alias.txt")).unwrap(),
+        "var value=1\n"
+    );
+    for index in 1..8 {
+        assert_eq!(
+            fs::read_to_string(root.join(format!("case_{index}.gd"))).unwrap(),
+            "var value = 1\n"
+        );
+    }
+}
+
+#[test]
 fn jsonc_config_applies_to_stdin_files_and_explain_and_is_preserved_by_init() {
     let temp = tempfile::tempdir().unwrap();
     let root = temp.path();
