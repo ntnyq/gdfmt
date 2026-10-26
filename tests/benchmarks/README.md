@@ -1,8 +1,9 @@
 # Formatter CLI benchmarks
 
-The [second profiling and optimization report](OPTIMIZATION-2.md) records the
-latest core and bounded-batch changes, safety validation and paired measurements.
-The [first optimization report](OPTIMIZATION.md) remains the previous baseline.
+The [third profiling and optimization report](OPTIMIZATION-3.md) records the
+latest layout construction and tree traversal changes, safety validation and
+paired measurements. The [second report](OPTIMIZATION-2.md) covers the previous
+core and bounded-batch changes; the [first report](OPTIMIZATION.md) is also retained.
 
 This optional benchmark compares gdfmt with three independent GDScript formatters:
 

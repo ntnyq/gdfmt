@@ -36,7 +36,11 @@ impl<'a> Doc<'a> {
         let Some(second) = parts.next() else {
             return first;
         };
-        Self::Concat([first, second].into_iter().chain(parts).collect())
+        let mut docs = Vec::with_capacity(2 + parts.size_hint().1.unwrap_or(0));
+        docs.push(first);
+        docs.push(second);
+        docs.extend(parts);
+        Self::Concat(docs)
     }
     pub(crate) fn group(self) -> Self {
         Self::Group(Box::new(self))
@@ -87,14 +91,16 @@ pub(crate) fn columns(text: &str, start: usize, tab_width: usize) -> usize {
     })
 }
 
-fn fits(
+fn fits<'a>(
     mut column: usize,
     width: usize,
-    first: Frame<'_>,
-    rest: &[Frame<'_>],
+    first: Frame<'a>,
+    rest: &[Frame<'a>],
     tab_width: usize,
+    pending: &mut Vec<Frame<'a>>,
 ) -> bool {
-    let mut pending = vec![first];
+    pending.clear();
+    pending.push(first);
     let mut rest = rest.iter().rev();
     loop {
         if column > width {
@@ -133,6 +139,41 @@ fn fits(
     }
 }
 
+struct Indentation<'a> {
+    base: &'a str,
+    unit: &'a str,
+    text: String,
+    level: usize,
+    column: usize,
+    tab_width: usize,
+}
+
+impl<'a> Indentation<'a> {
+    fn new(base: &'a str, options: &'a FormatOptions) -> Self {
+        Self {
+            base,
+            unit: &options.indent,
+            text: base.into(),
+            level: 0,
+            column: columns(base, 0, options.tab_width),
+            tab_width: options.tab_width,
+        }
+    }
+
+    fn at(&mut self, level: usize) -> (&str, usize) {
+        if self.level != level {
+            self.text.clear();
+            self.text.push_str(self.base);
+            for _ in 0..level {
+                self.text.push_str(self.unit);
+            }
+            self.column = columns(&self.text, 0, self.tab_width);
+            self.level = level;
+        }
+        (&self.text, self.column)
+    }
+}
+
 pub(crate) fn print(
     doc: &Doc<'_>,
     options: &FormatOptions,
@@ -147,6 +188,8 @@ pub(crate) fn print(
         doc,
     }];
     let mut output = String::new();
+    let mut fit_pending = Vec::new();
+    let mut indentation = Indentation::new(base_indent, options);
     let mut column = start_column;
     let mut suffixes = String::new();
     let mut line_start = false;
@@ -164,10 +207,9 @@ pub(crate) fn print(
                         line_start = true;
                     }
                     if line_start {
-                        let indentation =
-                            format!("{base_indent}{}", options.indent.repeat(frame.level));
-                        output.push_str(&indentation);
-                        column = columns(&indentation, 0, options.tab_width);
+                        let (indent, indent_column) = indentation.at(frame.level);
+                        output.push_str(indent);
+                        column = indent_column;
                         line_start = false;
                     }
                     output.push_str(text);
@@ -214,6 +256,7 @@ pub(crate) fn print(
                         flat,
                         &pending,
                         options.tab_width,
+                        &mut fit_pending,
                     ) {
                     Mode::Flat
                 } else {
@@ -233,8 +276,7 @@ pub(crate) fn print(
                 output.push_str(&suffixes);
                 suffixes.clear();
                 output.push_str(newline);
-                let indentation = format!("{base_indent}{}", options.indent.repeat(frame.level));
-                column = columns(&indentation, 0, options.tab_width);
+                column = indentation.at(frame.level).1;
                 line_start = true;
             }
         }
@@ -358,5 +400,37 @@ mod tests {
             "unbreakable"
         );
         assert_eq!(columns("\t中😀", 0, 4), 6);
+    }
+
+    #[test]
+    fn reused_fit_stack_discards_unvisited_frames_after_early_exit() {
+        let large = Doc::concat([Doc::text("too wide"), Doc::HardLine, Doc::text("tail")]);
+        let small = Doc::text("中😀");
+        let frame = |doc| Frame {
+            level: 0,
+            statement_level: 0,
+            mode: Mode::Flat,
+            doc,
+        };
+        let mut scratch = Vec::new();
+        assert!(!fits(0, 2, frame(&large), &[], 4, &mut scratch));
+        assert!(fits(0, 2, frame(&small), &[], 4, &mut scratch));
+        assert!(!fits(1, 2, frame(&small), &[], 4, &mut scratch));
+    }
+
+    #[test]
+    fn reused_indentation_handles_dedents_base_columns_and_mixed_tabs() {
+        let options = FormatOptions {
+            indent: " \t".into(),
+            tab_width: 4,
+            ..Default::default()
+        };
+        let mut indentation = Indentation::new("\t ", &options);
+        for level in [0, 3, 3, 1, 0, 2, 0] {
+            let expected = format!("\t {}", options.indent.repeat(level));
+            let (text, column) = indentation.at(level);
+            assert_eq!(text, expected);
+            assert_eq!(column, columns(&expected, 0, options.tab_width));
+        }
     }
 }

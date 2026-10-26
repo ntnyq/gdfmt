@@ -354,6 +354,33 @@ fn explicit_continuation_comments_at_token_boundaries_remain_stable() {
 }
 
 #[test]
+fn caller_built_error_nodes_and_tokens_are_rejected_without_diagnostics() {
+    use gdfmt_syntax::{GdscriptLanguage, LosslessTree, SyntaxKind as K};
+    use rowan::{GreenNodeBuilder, Language};
+    for error_kind in [K::ErrorNode, K::Error] {
+        for as_node in [false, true] {
+            let mut builder = GreenNodeBuilder::new();
+            builder.start_node(GdscriptLanguage::kind_to_raw(K::SourceFile));
+            builder.start_node(GdscriptLanguage::kind_to_raw(K::CallExpr));
+            if as_node {
+                builder.start_node(GdscriptLanguage::kind_to_raw(error_kind));
+                builder.token(GdscriptLanguage::kind_to_raw(K::Number), "1");
+                builder.finish_node();
+            } else {
+                builder.token(GdscriptLanguage::kind_to_raw(error_kind), "bad");
+            }
+            builder.finish_node();
+            builder.finish_node();
+            let tree = LosslessTree::from_green(builder.finish());
+            assert_eq!(
+                format(&tree, &[], &FormatOptions::default()),
+                Err(FormatError::InvalidSyntax)
+            );
+        }
+    }
+}
+
+#[test]
 fn invalid_sources_and_recovery_trees_never_produce_output() {
     for source in [
         "var x = [1, )\n",

@@ -129,9 +129,7 @@ pub fn format_with_regions(
     if diagnostics
         .iter()
         .any(|diagnostic| diagnostic.severity == Severity::Error)
-        || root
-            .descendants_with_tokens()
-            .any(|element| matches!(element.kind(), K::ErrorNode | K::Error))
+        || contains_errors(&root.green())
     {
         return Err(FormatError::InvalidSyntax);
     }
@@ -149,7 +147,7 @@ pub fn format_with_regions(
         LineEnding::Preserve => preserved_newline,
     };
     let printer = layout::Layout::new(&root, &source, options);
-    let output = doc::print(&printer.node(&root), options, 0, "", newline);
+    let output = doc::print(&printer.document(&root), options, 0, "", newline);
     if root.kind() == K::SourceFile {
         let mut output = output.trim_end_matches(['\r', '\n']).to_owned();
         if options.final_newline && !output.is_empty() {
@@ -267,6 +265,17 @@ fn preserve_regions(
 }
 
 mod layout;
+
+fn contains_errors(node: &rowan::GreenNodeData) -> bool {
+    use gdfmt_syntax::GdscriptLanguage;
+    use rowan::{Language, NodeOrToken};
+    let kind = GdscriptLanguage::kind_from_raw;
+    matches!(kind(node.kind()), K::ErrorNode | K::Error)
+        || node.children().any(|child| match child {
+            NodeOrToken::Node(node) => contains_errors(node),
+            NodeOrToken::Token(token) => matches!(kind(token.kind()), K::ErrorNode | K::Error),
+        })
+}
 
 fn same_shape(left: &rowan::GreenNodeData, right: &rowan::GreenNodeData) -> bool {
     use gdfmt_syntax::GdscriptLanguage;

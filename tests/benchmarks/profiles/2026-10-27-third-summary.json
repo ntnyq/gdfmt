@@ -1,0 +1,84 @@
+{
+  "schemaVersion": 1,
+  "method": "594 unchanged sources; sums of per-file medians over three staged measurements. Dedicated serial full-facade A/B alternates old/new processes for six rounds, discards the first batch in each process and retains four batches per process. Default FormatRequest; stages and sampling are exploratory, separate from CLI medians.",
+  "phases": {
+    "before": {
+      "parse_ms": 81.034754,
+      "layout_ms": 130.666208,
+      "reparse_ms": 78.892429,
+      "structure_ms": 65.972279,
+      "second_layout_ms": 125.726157,
+      "facade_ms": 501.161099
+    },
+    "after": {
+      "parse_ms": 74.682766,
+      "layout_ms": 77.637777,
+      "reparse_ms": 73.014546,
+      "structure_ms": 62.680244,
+      "second_layout_ms": 75.362422,
+      "facade_ms": 381.520059
+    }
+  },
+  "sampling": {
+    "before": {
+      "rawFileSha256": "3e772893aee3210c6d37cbf14928b7ae5eba06cb0634419fc86298f6027ad355",
+      "samples": 5404,
+      "topmostFrameCategories": {
+        "other": 2669,
+        "docBuild": 1059,
+        "commentLayout": 577,
+        "docPrint": 416,
+        "structure": 683
+      }
+    },
+    "after": {
+      "rawFileSha256": "f87d642b48cf2cae8171876564ccc07d191a84309adb35fc4ad7af9da9fffe48",
+      "samples": 5685,
+      "topmostFrameCategories": {
+        "other": 2845,
+        "commentLayout": 768,
+        "docBuild": 738,
+        "docPrint": 380,
+        "syntaxGuard": 41,
+        "structure": 913
+      }
+    }
+  },
+  "samplingMethod": "Eight-second macOS sample runs, 1 ms requested interval. Classify each stack sample by its topmost named layout/new, layout/node, doc/print or structure frame; nested recursion is not double counted. Other includes parsing, inlined guards, drops and system work. Proportions reflect a changing workload mix, not absolute phase latency.",
+  "serialFullFacadeMs": {
+    "before": [
+      510.555458, 483.119833, 488.267666, 476.243958, 478.891375, 499.875709,
+      569.004375, 595.175916, 603.355625, 492.016375, 483.723875, 511.470041,
+      475.114292, 487.944417, 485.003541, 482.381, 485.073541, 474.017417,
+      472.819, 471.23075, 473.173542, 479.029542, 492.937375, 480.071125
+    ],
+    "after": [
+      400.494458, 394.146125, 406.638, 389.4265, 391.0055, 381.3485, 383.863042,
+      396.591625, 393.710875, 389.479, 389.0865, 397.933625, 423.429916,
+      400.519833, 399.02675, 386.110167, 384.752792, 388.242791, 400.366375,
+      393.483917, 391.029166, 382.086958, 383.485125, 393.625167
+    ]
+  },
+  "cliRssObservation": {
+    "before": {
+      "maxResidentBytes": 13877248,
+      "binarySha256": "ec3dca5f0eab6759a56764ffca4ca2f1a0500de93af49038936227e7bc7c0d0a"
+    },
+    "after": {
+      "maxResidentBytes": 13910016,
+      "binarySha256": "addbda81dabfcb59f319ab04263c85cc4197b585a6242707e5d58a60f29cee30"
+    }
+  },
+  "cliRssMethod": "One macOS time -l --check observation per executable, 594 hash-verified flat inputs unchanged after execution. RSS only; not a benchmark across input sizes.",
+  "harnessSha256": "2a7950699b0023d468603f3b176f38783f314a88d753ac769e1d3516d6241faa",
+  "sourceSha256": {
+    "crates/gdfmt_formatter/src/lib.rs": "26087e6b0fffb87eced999c8461b891545fbdf7b78dc4d06b6fb72429d544f71",
+    "crates/gdfmt_formatter/src/layout.rs": "8383f87e654f631886b496aed98ff67237e0ce96f6d5f5eda4f6d40b19807a22",
+    "crates/gdfmt_formatter/src/layout/tree.rs": "7a46991a10ea3546c201ac8d63ea8980519bc38d2ae65e082b5f5d00f28ddc17",
+    "crates/gdfmt_formatter/src/doc.rs": "1dbb149a5e77f2b8816e0fd0994d30c9bc5116a8761aaedfc6a0532617b2c4f6",
+    "crates/gdfmt_formatter/tests/format.rs": "fc711f5d9911fec0544de1443125f07b2bbcda526e0b0530f974a0d0b0a498b1"
+  },
+  "sourceRevision": "32ce4c85cee375490a032127c3628c6ff00e4b46",
+  "sourceDirty": true,
+  "supplementalWriteProbe": "2026-10-27-third-write-repeat.json"
+}

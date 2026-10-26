@@ -2,6 +2,9 @@
 //! independent of comment attachment. Comments are anchored to adjacent tokens.
 use std::collections::{BTreeMap, BTreeSet};
 
+mod tree;
+use tree::{Element, Node, Token};
+
 use gdfmt_syntax::{SyntaxElement, SyntaxKind as K, SyntaxNode, SyntaxToken};
 
 use crate::{
@@ -180,35 +183,51 @@ impl<'a> Layout<'a> {
         }
     }
 
-    fn inline_lambda(&self, node: &SyntaxNode) -> bool {
+    pub(super) fn document(&self, root: &SyntaxNode) -> Doc<'a> {
+        self.node(&Node::new(&root.green()))
+    }
+
+    fn inline_lambda(&self, node: &Node) -> bool {
         self.options.lambda_body_style == LambdaBodyStyle::Auto && inline_lambda(node)
     }
 
-    fn ends_in_inline_lambda(&self, element: &SyntaxElement) -> bool {
-        let Some(node) = element.as_node() else {
-            return false;
-        };
-        let last = |node: &SyntaxNode| {
-            node.descendants_with_tokens()
-                .filter_map(SyntaxElement::into_token)
-                .filter(significant)
-                .last()
-                .map(|token| token.text_range().end())
-        };
-        let end = last(node);
-        node.descendants().any(|lambda| {
-            lambda.kind() == K::LambdaExpr && self.inline_lambda(&lambda) && last(&lambda) == end
-        })
+    fn contains_block_lambda(&self, node: &Node<'_>) -> bool {
+        (node.kind() == K::LambdaExpr && !self.inline_lambda(node))
+            || node
+                .children()
+                .any(|child| self.contains_block_lambda(&child))
     }
 
-    fn source_text(&self, token: &SyntaxToken) -> &'a str {
+    fn ends_in_inline_lambda(&self, element: &Element<'_>) -> bool {
+        fn ending(layout: &Layout<'_>, node: &Node<'_>) -> Option<bool> {
+            for child in node.children_reversed() {
+                // Only the final significant child's ancestor path can end
+                // here. Traverse it once, skipping trailing trivia/empty nodes.
+                let ending = match child {
+                    Element::Node(child) => ending(layout, &child),
+                    Element::Token(token) => token.significant().then_some(false),
+                };
+                if let Some(ending) = ending {
+                    return Some(
+                        ending || (node.kind() == K::LambdaExpr && layout.inline_lambda(node)),
+                    );
+                }
+            }
+            None
+        }
+        element
+            .as_node()
+            .is_some_and(|node| ending(self, node) == Some(true))
+    }
+
+    fn source_text(&self, token: &Token) -> &'a str {
         let range = token.text_range();
         &self.source[u32::from(range.start()) as usize..u32::from(range.end()) as usize]
     }
-    fn leading(&self, token: &SyntaxToken) -> Doc<'a> {
+    fn leading(&self, token: &Token) -> Doc<'a> {
         Doc::concat(
             self.leading
-                .get(&start(token))
+                .get(&token.start())
                 .into_iter()
                 .flatten()
                 .map(|comment| self.comment(comment)),
@@ -217,25 +236,26 @@ impl<'a> Layout<'a> {
     fn comment(&self, comment: &SyntaxToken) -> Doc<'a> {
         Doc::concat([
             Doc::EnsureLine,
-            self.blank_lines(comment),
-            Doc::text(self.source_text(comment)),
+            self.blank_lines(start(comment)),
+            Doc::text(
+                &self.source[u32::from(comment.text_range().start()) as usize
+                    ..u32::from(comment.text_range().end()) as usize],
+            ),
             Doc::HardLine,
         ])
     }
-    fn blank_lines(&self, token: &SyntaxToken) -> Doc<'a> {
-        Doc::concat(
-            (0..self.blanks.get(&start(token)).copied().unwrap_or(0)).map(|_| Doc::HardLine),
-        )
+    fn blank_lines(&self, offset: u32) -> Doc<'a> {
+        Doc::concat((0..self.blanks.get(&offset).copied().unwrap_or(0)).map(|_| Doc::HardLine))
     }
-    fn token_text(&self, token: &SyntaxToken) -> Doc<'a> {
+    fn token_text(&self, token: &Token) -> Doc<'a> {
         Doc::concat([Doc::text(self.source_text(token)), self.suffix(token)])
     }
-    fn suffix(&self, token: &SyntaxToken) -> Doc<'a> {
+    fn suffix(&self, token: &Token) -> Doc<'a> {
         let mut docs = Vec::new();
-        if self.continuations.contains(&start(token)) {
+        if self.continuations.contains(&token.start()) {
             docs.push(Doc::LineSuffix(" \\".into()));
         }
-        if let Some(comment) = self.trailing.get(&start(token)) {
+        if let Some(comment) = self.trailing.get(&token.start()) {
             docs.push(Doc::LineSuffix(format!(
                 "{}{comment}",
                 " ".repeat(usize::from(self.options.inline_comment_spacing))
@@ -243,46 +263,43 @@ impl<'a> Layout<'a> {
         }
         Doc::concat_vec(docs)
     }
-    fn token(&self, token: &SyntaxToken) -> Doc<'a> {
+    fn token(&self, token: &Token) -> Doc<'a> {
         Doc::concat([
             self.leading(token),
-            self.blank_lines(token),
+            self.blank_lines(token.start()),
             self.token_text(token),
         ])
     }
-    fn parts(&self, node: &SyntaxNode) -> impl Iterator<Item = SyntaxElement> {
+    fn parts<'tree>(&self, node: &'tree Node<'tree>) -> impl Iterator<Item = Element<'tree>> {
         node.children_with_tokens().filter(|element| match element {
-            SyntaxElement::Node(_) => true,
-            SyntaxElement::Token(token) => significant(token),
+            Element::Node(_) => true,
+            Element::Token(token) => token.significant(),
         })
     }
-    fn element(&self, element: &SyntaxElement) -> Doc<'a> {
+    fn element(&self, element: &Element) -> Doc<'a> {
         match element {
-            SyntaxElement::Node(node) => self.node(node),
-            SyntaxElement::Token(token) => self.token(token),
+            Element::Node(node) => self.node(node),
+            Element::Token(token) => self.token(token),
         }
     }
-    fn sequence(&self, parts: &[SyntaxElement]) -> Doc<'a> {
+    fn sequence(&self, parts: &[Element]) -> Doc<'a> {
         Doc::concat(
             parts
                 .iter()
                 .flat_map(|element| [Doc::EnsureLine, self.element(element)]),
         )
     }
-    fn dangling(&self, node: &SyntaxNode) -> Doc<'a> {
-        let first = node
-            .descendants_with_tokens()
-            .filter_map(SyntaxElement::into_token)
-            .find(significant);
+    fn dangling(&self, node: &Node) -> Doc<'a> {
+        let first = node.first_significant_token();
         Doc::concat(
             first
-                .and_then(|token| self.dangling.get(&start(&token)))
+                .and_then(|token| self.dangling.get(&token.start()))
                 .into_iter()
                 .flatten()
                 .map(|comment| self.comment(comment)),
         )
     }
-    fn delimited(&self, parts: &[SyntaxElement], kind: K) -> Doc<'a> {
+    fn delimited(&self, parts: &[Element], kind: K) -> Doc<'a> {
         let (Some(open), Some(close)) = (parts.first(), parts.last()) else {
             return Doc::text("");
         };
@@ -292,7 +309,7 @@ impl<'a> Layout<'a> {
         if parts.len() == 2
             && close
                 .as_token()
-                .is_none_or(|token| !self.leading.contains_key(&start(token)))
+                .is_none_or(|token| !self.leading.contains_key(&token.start()))
         {
             return Doc::concat(parts.iter().map(|part| self.element(part)));
         }
@@ -303,8 +320,14 @@ impl<'a> Layout<'a> {
             _ => CollectionLayout::Auto,
         };
         let multiline_source = || {
-            let first = open.as_token().map(start).unwrap_or_default() as usize;
-            let last = close.as_token().map(start).unwrap_or(first as u32) as usize;
+            let first = open
+                .as_token()
+                .map(|token| token.start())
+                .unwrap_or_default() as usize;
+            let last = close
+                .as_token()
+                .map(|token| token.start())
+                .unwrap_or(first as u32) as usize;
             self.source[first..last].contains('\n')
         };
         let force = parts.len() > 2
@@ -329,10 +352,10 @@ impl<'a> Layout<'a> {
         // A lambda suite's indentation belongs to its enclosing statement.
         // Continuation indentation is not a lexer indentation-stack entry, so
         // dedenting a block lambda to that column can be invalid GDScript.
-        let block_lambda = parts.iter().filter_map(SyntaxElement::as_node).any(|node| {
-            node.descendants()
-                .any(|node| node.kind() == K::LambdaExpr && !self.inline_lambda(&node))
-        });
+        let block_lambda = parts
+            .iter()
+            .filter_map(Element::as_node)
+            .any(|node| self.contains_block_lambda(node));
         let mut body = if block_lambda {
             Vec::new()
         } else {
@@ -393,7 +416,7 @@ impl<'a> Layout<'a> {
         ])
     }
 
-    fn generic(&self, parts: &[SyntaxElement]) -> Doc<'a> {
+    fn generic(&self, parts: &[Element]) -> Doc<'a> {
         let mut docs = Vec::new();
         for (index, element) in parts.iter().enumerate() {
             if index > 0
@@ -410,7 +433,7 @@ impl<'a> Layout<'a> {
         Doc::concat_vec(docs)
     }
 
-    fn with_delimiters(&self, parts: &[SyntaxElement], kind: K) -> Doc<'a> {
+    fn with_delimiters(&self, parts: &[Element], kind: K) -> Doc<'a> {
         let open = parts
             .iter()
             .position(|part| matches!(part.kind(), K::LeftParen | K::LeftBracket | K::LeftBrace));
@@ -428,7 +451,7 @@ impl<'a> Layout<'a> {
         }
     }
 
-    pub(super) fn node(&self, node: &SyntaxNode) -> Doc<'a> {
+    fn node(&self, node: &Node) -> Doc<'a> {
         let parts = self.parts(node);
         if matches!(
             node.kind(),
@@ -564,7 +587,7 @@ impl<'a> Layout<'a> {
                 if let Some(first) = parts.first() {
                     docs.push(self.element(first));
                 }
-                if let Some(first) = parts.first().and_then(SyntaxElement::as_token) {
+                if let Some(first) = parts.first().and_then(Element::as_token) {
                     let operand = node.children().next().and_then(|node| node.first_token());
                     if first.kind() == K::Keyword
                         || (matches!(first.kind(), K::Plus | K::Minus)
@@ -596,19 +619,20 @@ pub(super) fn ordered_owner(owner: Option<u32>, previous: &mut Option<Option<u32
     owner
 }
 
-fn inline_lambda(node: &SyntaxNode) -> bool {
+fn inline_lambda(node: &Node<'_>) -> bool {
     let Some(suite) = node.children().find(|node| node.kind() == K::Suite) else {
         return false;
     };
-    let statements: Vec<_> = suite.children().collect();
-    statements.len() == 1
+    let mut statements = suite.children();
+    let Some(statement) = statements.next() else {
+        return false;
+    };
+    statements.next().is_none()
         && !matches!(
-            statements[0].kind(),
+            statement.kind(),
             K::IfStmt | K::ForStmt | K::WhileStmt | K::MatchStmt
         )
-        && !suite
-            .descendants_with_tokens()
-            .any(|element| matches!(element.kind(), K::Comment | K::LambdaExpr))
+        && !suite.contains_comment_or_lambda()
 }
 
 /// Comment-only lines do not emit indentation tokens. At the end of a suite,
@@ -647,7 +671,7 @@ pub(super) fn comment_owner(token: &SyntaxToken, source: &str, next: Option<u32>
         })
 }
 
-fn space_between(left: &SyntaxElement, right: &SyntaxElement) -> bool {
+fn space_between(left: &Element<'_>, right: &Element<'_>) -> bool {
     let a = left.kind();
     let b = right.kind();
     if matches!(
@@ -672,4 +696,77 @@ fn space_between(left: &SyntaxElement, right: &SyntaxElement) -> bool {
         return b != K::Equal;
     }
     true
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use gdfmt_parser::{ParseOptions, parse};
+
+    fn reference_inline_lambda(node: &SyntaxNode) -> bool {
+        let Some(suite) = node.children().find(|node| node.kind() == K::Suite) else {
+            return false;
+        };
+        let statements: Vec<_> = suite.children().collect();
+        statements.len() == 1
+            && !matches!(
+                statements[0].kind(),
+                K::IfStmt | K::ForStmt | K::WhileStmt | K::MatchStmt
+            )
+            && !suite
+                .descendants_with_tokens()
+                .any(|element| matches!(element.kind(), K::Comment | K::LambdaExpr))
+    }
+
+    #[test]
+    fn lambda_tail_path_matches_full_subtree_reference() {
+        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
+            .join("../../tests/compatibility/fixtures");
+        let mut checked = 0;
+        for entry in std::fs::read_dir(fixtures).unwrap() {
+            let path = entry.unwrap().path();
+            if path.extension().is_none_or(|extension| extension != "gd") {
+                continue;
+            }
+            let source = std::fs::read_to_string(&path).unwrap();
+            let parsed = parse(&source, &ParseOptions::default());
+            if parsed.has_errors() {
+                continue;
+            }
+            let root = parsed.tree.unwrap().root();
+            let green = root.green();
+            for style in [LambdaBodyStyle::Auto, LambdaBodyStyle::Multiline] {
+                let options = FormatOptions {
+                    lambda_body_style: style,
+                    ..Default::default()
+                };
+                let layout = Layout::new(&root, &source, &options);
+                for (red, borrowed) in root.descendants().zip(Node::new(&green).descendants()) {
+                    let last = |node: &SyntaxNode| {
+                        node.descendants_with_tokens()
+                            .filter_map(SyntaxElement::into_token)
+                            .filter(significant)
+                            .last()
+                            .map(|token| token.text_range().end())
+                    };
+                    let end = last(&red);
+                    let expected = style == LambdaBodyStyle::Auto
+                        && red.descendants().any(|lambda| {
+                            lambda.kind() == K::LambdaExpr
+                                && reference_inline_lambda(&lambda)
+                                && last(&lambda) == end
+                        });
+                    assert_eq!(
+                        layout.ends_in_inline_lambda(&Element::Node(borrowed)),
+                        expected,
+                        "{}: {:?}",
+                        path.display(),
+                        red.text_range()
+                    );
+                    checked += 1;
+                }
+            }
+        }
+        assert!(checked > 1000);
+    }
 }
